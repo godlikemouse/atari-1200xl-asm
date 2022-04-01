@@ -1,3 +1,6 @@
+; hardware.asm
+;   Contains hardware related memory locations
+
 SDLSTL = $0230  ; Display list starting address
 CHBAS  = $02f4  ; CHaracter BAse Register
 COLOR0 = $02c4	; Color for %01

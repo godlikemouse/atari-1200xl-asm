@@ -1,3 +1,6 @@
+; tile.asm
+;   Map tile and related functionality
+
 ;
 ; store on tile
 ;

@@ -1,3 +1,6 @@
+; item.asm
+;	Game pickup items
+
 ;
 ; display screen items
 ;	shows picked up items at the top of the screen

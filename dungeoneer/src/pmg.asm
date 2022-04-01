@@ -1,3 +1,6 @@
+; pmg.asm
+;	Player Missile Graphics (PMG) specific routines
+
 ;
 ; setup colors
 ;
