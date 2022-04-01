@@ -7,10 +7,10 @@ clean:
 	rm -f *.lab *.lst *.obx
 
 build:
-	${CC} ${FLAGS} main.asm
+	${CC} ${FLAGS} src/dungeoneer.asm -o:dungeoneer.xex
 
 run:
-	atari800 -run main.obx
+	atari800 -run dungeoneer.xex
 
 runalt:
 	./altirra main.obx > /dev/null 2>&1 &
