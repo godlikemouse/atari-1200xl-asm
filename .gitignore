@@ -1,0 +1,4 @@
+#ignore generated files
+*.obx
+*.lab
+*.lst

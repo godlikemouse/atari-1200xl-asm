@@ -1,0 +1,3 @@
+#!/bin/sh
+
+wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Altirra/Altirra.exe $1
