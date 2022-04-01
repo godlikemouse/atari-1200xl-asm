@@ -54,7 +54,7 @@ carry_tileptrh
 .proc store_tiley
 	lda POSY
 	sec
-	sbc #16
+	sbc #24
 	lsr
 	lsr
 	lsr
@@ -76,6 +76,6 @@ carry_tileptrh
 ;  if true, acc == 1, else acc == 0
 .proc tile_is_key
     lda ONTILE
-    between #$c0, #$c2
+    between #$40, #$48
     rts
 .endp

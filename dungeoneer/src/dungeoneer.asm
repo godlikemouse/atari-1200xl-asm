@@ -26,6 +26,10 @@ TILEPTRH=$c6 ; the tile pointer high byte
 ITEMS=$d0 ; the picked up player items
 TMP0=$e0 ; volatile temp storage 0
 TMP1=$e1 ; volatile temp storage 1
+TMP2=$e2 ; volatile temp storage 2
+TMP3=$e3 ; volatile temp storage 3
+TMP4=$e4 ; volatile temp storage 4
+TMP5=$e5 ; volatile temp storage 5
 
 	setup_screen()
 	setup_colors()

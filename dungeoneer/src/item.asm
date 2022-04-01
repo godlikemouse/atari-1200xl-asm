@@ -3,8 +3,17 @@
 ;	shows picked up items at the top of the screen
 .proc display_screen_items
 
-	; key 0
-	display_screen_key $1, #192, $0
+	; key 1
+	display_screen_key #1, #$40, $0
+
+	; key 2
+	display_screen_key #2, #$42, $2
+
+	; key 2
+	display_screen_key #4, #$44, $4
+
+	; key 2
+	display_screen_key #8, #$46, $6
 
 	rts
 .endp
@@ -13,12 +22,13 @@
 ; display screen key
 ; 	displays keys at the top of the screen
 ;	charset_idx, index of the character to use
-;	screen_idx, left to right position in ITEM_SCREEN
 ;	item_idx, the bit index in ITEMS
+;	screen_idx, left to right position in ITEM_SCREEN
 .macro display_screen_key item_idx, charset_idx, screen_idx
+
     lda ITEMS
-	and
-    cmp :item_idx
+	and :item_idx
+	cmp :item_idx
 	bne done
 
     ldx :charset_idx
@@ -48,7 +58,9 @@ done
     tile_is_key()
     cmp #1
     bne not_key
-    sta ITEMS
+	get_item_bit()
+    ora ITEMS
+	sta ITEMS
 
     remove_playfield_item()
 	display_screen_items()
@@ -85,4 +97,34 @@ done
     lda #0
     sta (TILEPTRL), y
     rts
+.endp
+
+;
+; get item bit
+;   retrives the item bit mask for an ONTILE item
+;   stores bit in acc
+.proc get_item_bit
+
+	; stort inital address and bit values
+	mva #1 TMP2
+	mva #$40 TMP3
+	mva #$42 TMP4
+	mva #8 TMP5
+loop
+	; check to see if item exists
+	lda ONTILE
+	between TMP3, TMP4
+	cmp #1
+	beq done
+	; if not, shift left increase address and continue
+	lda TMP2
+	asl
+	sta TMP2
+	adb TMP3 #2
+	adb TMP4 #2
+	dec TMP5
+	bne loop
+done
+	lda TMP2
+	rts
 .endp
