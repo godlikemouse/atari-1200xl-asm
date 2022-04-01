@@ -1,3 +1,6 @@
+; buffer.asm
+;	handles offscreen buffering for quick switching of graphical elements
+
 ;
 ; clear pmg buffer
 ;

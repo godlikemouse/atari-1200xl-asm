@@ -15,7 +15,7 @@ for row in row_list:
 
 colors = ["00", "11", "01", "10", "11"]
 
-f = open("../gfx.asm", "w")
+f = open("../src/data/charset.data", "w")
 char = 0
 #f.write("\t.local gfx\n")
 f.write("\torg CHARSET\n")

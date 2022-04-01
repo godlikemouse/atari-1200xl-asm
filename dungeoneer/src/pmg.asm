@@ -1,4 +1,31 @@
 ;
+; setup colors
+;
+.proc setup_colors
+black=$00
+gray=$06
+light_gray=$0a
+green=$c4
+brown=$24
+peach=$3c
+blue=$80
+
+	; character set colors
+	mva #gray COLOR0        ; %01
+	mva #light_gray COLOR1  ; %10
+	mva #brown COLOR2       ; %11
+	mva #green COLOR3       ; %11 (inverse)
+	mva #black COLOR4       ; %00
+
+	; player-missile colors
+	mva #brown PCOLR0
+	mva #peach PCOLR1
+	mva #blue  PCOLR2
+	mva #black PCOLR3
+	rts
+.endp
+
+;
 ; clear pmg
 ;
 .proc clear_pmg

@@ -1,6 +1,6 @@
-; Adventure - An Adventure in Atari 8-bit assembly
-; Assemble: mads -l -t main.asm
+; Dungeoneer - A simple game in Atari 8-bit assembly
 
+; References:
 ; ATASCII Table: https://www.atariwiki.org/wiki/attach/Atari%20ATASCII%20Table/ascii_atascii_table.pdf
 ; ATASCII 0-31 screen code 64-95
 ; ATASCII 32-95 screen code 0-63
@@ -14,22 +14,24 @@ SCREEN=$3000 ; screen buffer
 CHARSET=$4000 ; character set address
 PMG=$5000 ; player missile graphics buffer
 PMG_OFFSCRN=$5500 ; player missile graphics offscreen
+ITEM_SCREEN=$6000 ; item screen buffer
 
-POSX=$c0
-POSY=$c1
-TILEX=$c2
-TILEY=$c3
-ONTILE=$c4
-TILEPTRL=$c5
-TILEPTRH=$c6
-ITEMS=$d0
-TMP0=$e0
-TMP1=$e1
+POSX=$c0 ; player x position on screen
+POSY=$c1 ; player y position on screen
+TILEX=$c2 ; the x tile position
+TILEY=$c3 ; the y tile position
+ONTILE=$c4 ; the current player tile
+TILEPTRL=$c5 ; the tile pointer low byte
+TILEPTRH=$c6 ; the tile pointer high byte
+ITEMS=$d0 ; the picked up player items
+TMP0=$e0 ; volatile temp storage 0
+TMP1=$e1 ; volatile temp storage 1
 
 	setup_screen()
 	setup_colors()
 	mva #>CHARSET CHBAS
 	setup_pmg()
+	display_screen_items()
 	display_map()
 	clear_pmg()
 	draw_player()
@@ -56,36 +58,9 @@ main_loop
 	icl "buffer.asm"
 	icl "util.asm"
 	icl "item.asm"
-	icl "gfx.asm"
+	icl "data/charset.data"
 	icl "data/player.data"
 	icl "data/map.data"
-
-;
-; setup colors
-;
-.proc setup_colors
-black=$00
-gray=$06
-light_gray=$0a
-green=$c4
-brown=$24
-peach=$3c
-blue=$80
-
-	; character set colors
-	mva #gray COLOR0        ; %01
-	mva #light_gray COLOR1  ; %10
-	mva #brown COLOR2       ; %11
-	mva #green COLOR3       ; %11 (inverse)
-	mva #black COLOR4       ; %00
-
-	; player-missile colors
-	mva #brown PCOLR0
-	mva #peach PCOLR1
-	mva #blue  PCOLR2
-	mva #black PCOLR3
-	rts
-.endp
 
 ;
 ; display map

@@ -1,9 +1,13 @@
+; dlist.asm
+;	handles the display list for screen elements
+
 ;
 ; setup display list for screen
 ;
 .proc setup_screen
 
-blank8=$70 ; eight blank lines
+blank8=$70 ; 8 blank lines
+blank7=$60 ; 7 blank lines
 LMS=$40 ; Load Memory Scan (LMS)
 JVB=$41 ; Jump while vertical blank (JVB)
 
@@ -15,8 +19,9 @@ antic2=2 ; ANTIC mode 2
 
 ; display list
 dlist
-	.byte blank8, blank8, blank8
-	.byte antic5 + LMS, <screen, >screen
+	.byte blank8, blank8, blank7
+	.byte antic5 + LMS, <item_screen, >item_screen
+	.byte antic5 + LMS, <SCREEN, >SCREEN
 	.byte antic5, antic5, antic5, antic5, antic5, antic5
 	.byte antic5, antic5, antic5, antic5, antic5
 	.byte JVB, <dlist, >dlist
