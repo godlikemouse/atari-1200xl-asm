@@ -67,6 +67,7 @@ done
 
     remove_playfield_item()
 	display_screen_items()
+	play_key_sound()
 not_key
 
     rts

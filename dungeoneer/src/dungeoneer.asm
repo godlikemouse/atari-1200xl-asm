@@ -30,7 +30,13 @@ TMP2=$e2 ; volatile temp storage 2
 TMP3=$e3 ; volatile temp storage 3
 TMP4=$e4 ; volatile temp storage 4
 TMP5=$e5 ; volatile temp storage 5
+BGM_COUNTER=$f0
+BGM_DATA_INDEX=$f1
+BGM_NOTE_SUSTAIN=$f2
+BGM_NOTE_SILENCE=$f3
 
+
+	setup_sound()
 	setup_screen()
 	setup_colors()
 	mva #>CHARSET CHBAS
@@ -44,6 +50,18 @@ TMP5=$e5 ; volatile temp storage 5
 	clear_buffer()
 	setup_buffer()
 	reverse_buffer()
+
+	;enable interrupt
+    ldy #<interrupt
+    ldx #>interrupt
+    lda #7
+    jsr SETVBV
+
+interrupt
+	lda #<play_background_music
+	sta VVBLKD
+	lda #>play_background_music
+	sta VVBLKD+1
 
 main_loop
 
@@ -62,8 +80,10 @@ main_loop
 	icl "buffer.asm"
 	icl "util.asm"
 	icl "item.asm"
+	icl "sound.asm"
 	icl "data/charset.data"
 	icl "data/player.data"
+	icl "data/music.data"
 	icl "data/map.data"
 
 ;
