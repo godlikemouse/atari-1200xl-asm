@@ -13,6 +13,7 @@ loop
 	sta PMG_OFFSCRN,x
 	dex
 	bne loop
+
 	rts
 .endp
 
@@ -107,6 +108,7 @@ loop
 	inx
 	cpx #8
 	bne loop
+
 	rts
 .endp
 
@@ -131,5 +133,6 @@ loop
 	inx
 	cpx #8
 	bne loop
+
 	rts
 .endp

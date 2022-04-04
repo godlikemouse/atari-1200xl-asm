@@ -11,11 +11,12 @@
 	org $0600
 
 SCREEN=$3000 ; screen buffer
-CHARSET=$4000 ; character set address
+ITEM_SCREEN=$4000 ; item screen buffer
 PMG=$5000 ; player missile graphics buffer
 PMG_OFFSCRN=$5500 ; player missile graphics offscreen
-ITEM_SCREEN=$6000 ; item screen buffer
-
+TILESET1=$6000 ; tileset1 sprite address
+TILESET2=$6400 ; tileset2 sprite address
+TILESET3=$6800 ; tileset3 sprite address
 POSX=$c0 ; player x position on screen
 POSY=$c1 ; player y position on screen
 TILEX=$c2 ; the x tile position
@@ -23,6 +24,7 @@ TILEY=$c3 ; the y tile position
 ONTILE=$c4 ; the current player tile
 TILEPTRL=$c5 ; the tile pointer low byte
 TILEPTRH=$c6 ; the tile pointer high byte
+TILESPRITE=$c7 ; the tile sprite index
 ITEMS=$d0 ; the picked up player items
 TMP0=$e0 ; volatile temp storage 0
 TMP1=$e1 ; volatile temp storage 1
@@ -34,12 +36,17 @@ BGM_COUNTER=$f0
 BGM_DATA_INDEX=$f1
 BGM_NOTE_SUSTAIN=$f2
 BGM_NOTE_SILENCE=$f3
+SFX1=$f4
+SFX1_COUNTER=$f5
+SFX1_DATA_INDEX=$f5
+SFX1_NOTE_SUSTAIN=$f6
+SFX1_NOTE_SILENCE=$f7
 
 
 	setup_sound()
 	setup_screen()
 	setup_colors()
-	mva #>CHARSET CHBAS
+	mva #>TILESET1 CHBAS
 	setup_pmg()
 	display_screen_items()
 	display_map()
@@ -51,26 +58,19 @@ BGM_NOTE_SILENCE=$f3
 	setup_buffer()
 	reverse_buffer()
 
-	;enable interrupt
-    ldy #<interrupt
-    ldx #>interrupt
+	; enable interrupt
+    ldy #<vvblkd_interrupt
+    ldx #>vvblkd_interrupt
     lda #7
     jsr SETVBV
 
-interrupt
-	lda #<play_background_music
+vvblkd_interrupt
+	lda #<vvblkd_chain
 	sta VVBLKD
-	lda #>play_background_music
+	lda #>vvblkd_chain
 	sta VVBLKD+1
 
-main_loop
-
-	read_joystick()
-
-	;movement delay loop
-	delay #255, #12
-
-	jmp main_loop
+	jmp *
 
 	icl "hardware.asm"
 	icl "dlist.asm"
@@ -81,16 +81,19 @@ main_loop
 	icl "util.asm"
 	icl "item.asm"
 	icl "sound.asm"
-	icl "data/charset.data"
+	icl "data/tileset.data"
 	icl "data/player.data"
-	icl "data/music.data"
+	icl "data/sound.data"
 	icl "data/map.data"
 
 ;
 ; display map
 ;
 .proc display_map
+
 	ldx #0
+	lda #$ff
+	sta TILESPRITE
 
 loop
 	mva map,x SCREEN,x
@@ -109,5 +112,47 @@ loop
 	inx
 	cpx #40
 	bne loop
+	rts
+.endp
+
+.local vvblkd_chain
+	; save stack
+	pha
+	txa
+	pha
+
+	read_joystick()
+	animate_tilesprite()
+	play_background_music()
+	play_sfx SFX1, AF1C
+
+
+	; restore stack
+	pla
+	tax
+	pla
+
+	jmp XITVBV
+.endl
+
+.proc animate_tilesprite
+	inc TILESPRITE
+	ldx TILESPRITE
+
+	cpx #10
+	bne done
+	ldx #$ff
+	stx TILESPRITE
+
+	adb CHBAS #4
+	lda CHBAS
+	cmp #>TILESET1+12
+	beq reset
+
+	sta CHBAS
+	jmp done
+reset
+	mva #>TILESET1 CHBAS
+done
 	rts
 .endp

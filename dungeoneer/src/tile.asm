@@ -5,6 +5,11 @@
 ; store on tile
 ;
 .proc store_ontile
+    ; store stack
+    pha
+    tya
+    pha
+
     ; calculate screen tile offset
     lda #>SCREEN
     sta TILEPTRH
@@ -26,6 +31,11 @@ cont
 done
     lda (TILEPTRL),y
     sta ONTILE
+
+    ; restore stack
+    pla
+    tay
+    pla
 
     rts
 
@@ -70,7 +80,7 @@ carry_tileptrh
 ;   if true, acc == 1, else acc == 0
 .proc tile_is_block
     lda ONTILE
-    between #$20, #$40
+    between #$10, #$12
     rts
 .endp
 
@@ -79,6 +89,6 @@ carry_tileptrh
 ;  if true, acc == 1, else acc == 0
 .proc tile_is_key
     lda ONTILE
-    between #$40, #$48
+    between #$20, #$28
     rts
 .endp

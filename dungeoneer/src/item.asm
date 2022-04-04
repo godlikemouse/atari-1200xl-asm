@@ -7,16 +7,16 @@
 .proc display_screen_items
 
 	; key 1
-	display_screen_key #1, #$40, $0
+	display_screen_key #1, #$20, $0
 
 	; key 2
-	display_screen_key #2, #$42, $2
+	display_screen_key #2, #$22, $2
 
 	; key 2
-	display_screen_key #4, #$44, $4
+	display_screen_key #4, #$24, $4
 
 	; key 2
-	display_screen_key #8, #$46, $6
+	display_screen_key #8, #$26, $6
 
 	rts
 .endp
@@ -111,8 +111,8 @@ done
 
 	; stort inital address and bit values
 	mva #1 TMP2
-	mva #$40 TMP3
-	mva #$42 TMP4
+	mva #$20 TMP3
+	mva #$22 TMP4
 	mva #8 TMP5
 loop
 	; check to see if item exists
