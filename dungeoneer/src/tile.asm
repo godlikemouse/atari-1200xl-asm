@@ -40,10 +40,7 @@ done
     rts
 
 carry_tileptrh
-    clc
-    lda TILEPTRH
-    adc #1
-    sta TILEPTRH
+    adb TILEPTRH #1
     lda TILEPTRL
     jmp cont
 .endp

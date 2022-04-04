@@ -57,7 +57,7 @@ done
 
 ;
 ; read joystick
-;
+;	handle player movement
 .proc read_joystick
 UP=$0e
 DOWN=$0d

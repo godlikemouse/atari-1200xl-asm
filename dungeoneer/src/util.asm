@@ -37,35 +37,3 @@ done
     tax
     lda TMP0
 .endm
-
-;
-; dual nop delay loop
-;   itr1, number of first loop iterations
-;   itr2, number of second loop iterations
-.macro delay itr1, itr2
-    ; store stack
-    pha
-    txa
-    pha
-    tya
-    pha
-
-    ldx :itr1
-    ldy :itr2
-itr1_loop
-itr2_loop
-    nop
-    dex
-    bne itr2_loop
-
-    nop
-    dey
-    bne itr1_loop
-
-    ; restore stack
-    pla
-    tay
-    pla
-    tax
-    pla
-.endm

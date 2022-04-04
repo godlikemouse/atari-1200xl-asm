@@ -8,6 +8,9 @@
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
+; TODO: write player sprite engine
+; TODO: change player single point collision to bounding box
+
 	org $0600
 
 SCREEN=$3000 ; screen buffer
@@ -115,26 +118,20 @@ loop
 	rts
 .endp
 
+;
+; vvblkd chain
+;	method chains for VVBLKD interupts
 .local vvblkd_chain
-	; save stack
-	pha
-	txa
-	pha
-
 	read_joystick()
 	animate_tilesprite()
 	play_background_music()
 	play_sfx SFX1, AF1C
-
-
-	; restore stack
-	pla
-	tax
-	pla
-
 	jmp XITVBV
 .endl
 
+;
+; animate tilesprite
+; 	animate map tile sprites
 .proc animate_tilesprite
 	inc TILESPRITE
 	ldx TILESPRITE
