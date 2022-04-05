@@ -22,9 +22,8 @@ blue=$80
 
 	; player-missile colors
 	mva #brown PCOLR0
-	mva #peach PCOLR1
-	mva #blue  PCOLR2
-	mva #black PCOLR3
+	mva #blue PCOLR1
+	mva #peach PCOLR2
 	rts
 .endp
 
@@ -35,7 +34,6 @@ blue=$80
 pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
-pmg_p3 = PMG + $380
 
 	ldx #$80
 	lda #0
@@ -44,7 +42,6 @@ loop
 	sta pmg_p0,x
 	sta pmg_p1,x
 	sta pmg_p2,x
-	sta pmg_p3,x
 	dex
 	bne loop
 	rts
@@ -57,7 +54,6 @@ loop
 pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
-pmg_p3 = PMG + $380
 
 ; clear bottom player row
 	ldy #8
@@ -70,7 +66,6 @@ loop_bottom
 	sta pmg_p0,x
 	sta pmg_p1,x
 	sta pmg_p2,x
-	sta pmg_p3,x
 	inx
 	dey
 	bne loop_bottom
@@ -86,7 +81,6 @@ loop_top
 	sta pmg_p0,x
 	sta pmg_p1,x
 	sta pmg_p2,x
-	sta pmg_p3,x
 	inx
 	dey
 	bne loop_top
@@ -101,7 +95,6 @@ loop_top
 pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
-pmg_p3 = PMG + $280
 
 	ldx #0
 	ldy POSY
@@ -110,7 +103,6 @@ loop
 	mva player_data,x pmg_p0,y
 	mva player_data+8,x pmg_p1,y
 	mva player_data+16,x pmg_p2,y
-	mva player_data+24,x pmg_p3,y
 	iny
 	inx
 	cpx #8
@@ -126,13 +118,11 @@ loop
 	mva #46 SDMCTL ; single line resolution
 	mva #3 GRACTL ; enable PMG
 	mva #1 GRPRIOR ; give players priority
-	lda #$40
-	sta POSY
+	mva #$40 POSY
 	lda #$80
 	sta POSX
 	sta HPOSP0
 	sta HPOSP1
 	sta HPOSP2
-	sta HPOSP3
 	rts
 .endp

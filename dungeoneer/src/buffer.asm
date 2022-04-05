@@ -24,7 +24,6 @@ loop
 pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
-pmg_p3 = PMG + $380
 
 	ldy POSY
 	ldx #0
@@ -34,13 +33,11 @@ loop
 	mva pmg_p0,y PMG_OFFSCRN,x
 	mva pmg_p1,y PMG_OFFSCRN+$08,x
 	mva pmg_p2,y PMG_OFFSCRN+$10,x
-	mva pmg_p3,y PMG_OFFSCRN+$18,x
 
 	; copy player offscreen to reverse player offscreen
 	mva PMG_OFFSCRN,x PMG_OFFSCRN+$20,x
 	mva PMG_OFFSCRN+$08,x PMG_OFFSCRN+$28,x
 	mva PMG_OFFSCRN+$10,x PMG_OFFSCRN+$30,x
-	mva PMG_OFFSCRN+$18,x PMG_OFFSCRN+$38,x
 
 	iny
 	inx
@@ -66,8 +63,6 @@ reverse_loop
 	rol PMG_OFFSCRN+$48,x
 	ror PMG_OFFSCRN+$30,x
 	rol PMG_OFFSCRN+$50,x
-	ror PMG_OFFSCRN+$38,x
-	rol PMG_OFFSCRN+$58,x
 	dey
 	bne reverse_loop
 
@@ -77,8 +72,6 @@ reverse_loop
 	sta PMG_OFFSCRN+$28,x
 	lda PMG_OFFSCRN+$50,x
 	sta PMG_OFFSCRN+$30,x
-	lda PMG_OFFSCRN+$58,x
-	sta PMG_OFFSCRN+$38,x
 
 	inx
 	cpx #8
@@ -94,7 +87,6 @@ reverse_loop
 pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
-pmg_p3 = PMG + $380
 
 	ldx #0
 	ldy POSY
@@ -103,7 +95,6 @@ loop
 	mva PMG_OFFSCRN+$20,x pmg_p0,y
 	mva PMG_OFFSCRN+$28,x pmg_p1,y
 	mva PMG_OFFSCRN+$30,x pmg_p2,y
-	mva PMG_OFFSCRN+$38,x pmg_p3,y
 	iny
 	inx
 	cpx #8
@@ -119,7 +110,6 @@ loop
 pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
-pmg_p3 = PMG + $380
 
 	ldx #0
 	ldy POSY
@@ -128,7 +118,6 @@ loop
 	mva PMG_OFFSCRN,x pmg_p0,y
 	mva PMG_OFFSCRN+$8,x pmg_p1,y
 	mva PMG_OFFSCRN+$10,x pmg_p2,y
-	mva PMG_OFFSCRN+$18,x pmg_p3,y
 	iny
 	inx
 	cpx #8
