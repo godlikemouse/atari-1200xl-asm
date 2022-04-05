@@ -5,12 +5,25 @@
 ; can move left
 ;
 .proc can_move_left
-	store_ontile()
+dx=TMP2
+dy=TMP3
+	; bounding box check
+
+	; top left
+	poke_position #-1, #0
 	tile_is_block()
 	cmp #1
-	beq done
+	beq block
+
+	; bottom left
+	poke_position #-1, #8
+	tile_is_block()
+	cmp #1
+	beq block
+
+	; move player
 	dec POSX
-done
+block
 	rts
 .endp
 
@@ -18,12 +31,25 @@ done
 ; can move right
 ;
 .proc can_move_right
-	store_ontile()
+dx=TMP2
+dy=TMP3
+	; bounding box check
+
+	; top right
+	poke_position #9, #0
 	tile_is_block()
 	cmp #1
-	beq done
+	beq block
+
+	;bottom right
+	poke_position #9, #8
+	tile_is_block()
+	cmp #1
+	beq block
+
+	; move player
 	inc POSX
-done
+block
 	rts
 .endp
 
@@ -31,13 +57,26 @@ done
 ; can move up
 ;
 .proc can_move_up
-	store_ontile()
+dx=TMP2
+dy=TMP3
+	; bounding box check
+
+	; top left
+	poke_position #0 #-1
 	tile_is_block()
 	cmp #1
-	beq done
+	beq block
+
+	; top right
+	poke_position #8 #-1
+	tile_is_block()
+	cmp #1
+	beq block
+
+	; move player
 	dec POSY
 	clear_player_vertical()
-done
+block
 	rts
 .endp
 
@@ -45,13 +84,25 @@ done
 ; can move down
 ;
 .proc can_move_down
-	store_ontile()
+dx=TMP2
+dy=TMP3
+	; bounding box check
+
+	; bottom left
+	poke_position #0, #9
 	tile_is_block()
 	cmp #1
-	beq done
+	beq block
+
+	; bottom right
+	poke_position #8, #9
+	tile_is_block()
+	cmp #1
+	beq block
+
 	inc POSY
 	clear_player_vertical()
-done
+block
 	rts
 .endp
 
@@ -76,67 +127,25 @@ RIGHT=$07
 	rts
 
 move_left
-	; advance x position
-	; determine next tile
-	dec POSX
-	adb POSY #4
-	store_tilex()
-	store_tiley()
-	; restore position
-	sbb POSY #4
-	inc POSX
-	; validate movement for block tiles
 	can_move_left()
 	copy_player_left()
 	pickup_item()
 	jmp store_posx
 
 move_right
-	; advance x position
-	; determine next tile
-	adb POSX #9
-	adb POSY #4
-	store_tilex()
-	store_tiley()
-	; restore position
-	sbb POSX #9
-	sbb POSY #4
-	; validate movement for block tiles
 	can_move_right()
 	copy_player_right()
 	pickup_item()
 	jmp store_posx
 
 move_up
-	; advance y position
-	; determine next tile
-	dec POSY
-	adb POSX #4
-	store_tilex()
-	store_tiley()
-	; restore position
-	sbb POSX #4
-	inc POSY
-	; validate movement for block tiles
 	can_move_up()
-	;clear_pmg()
 	copy_player_left()
 	pickup_item()
 	rts
 
 move_down
-	; advance y position
-	; determine next tile
-	adb POSY #9
-	adb POSX #4
-	store_tilex()
-	store_tiley()
-	; restore position
-	sbb POSX #4
-	sbb POSY #9
-	; validate movement for block tiles
 	can_move_down()
-	;clear_pmg()
 	copy_player_right()
 	pickup_item()
 	rts

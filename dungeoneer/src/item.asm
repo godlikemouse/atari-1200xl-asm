@@ -45,32 +45,43 @@ done
 ; pickup item
 ;   determines if collision is with a pickup item
 .proc pickup_item
-    ; center position for pickup
-    adb POSX #4
-    adb POSY #4
-    store_tilex()
-    store_tiley()
-    ; restore position
-    sbb POSX #4
-    sbb POSY #4
+dx=TMP2
+dy=TMP3
+	; bounding box for pickup
 
-    ; determine item hit
-    store_ontile()
+	; top left
+	poke_position #0, #0
+	tile_is_item()
+	cmp #1
+	beq pickup
 
-    ; is item a key
-    tile_is_key()
-    cmp #1
-    bne not_key
+	; top right
+	poke_position #7, #1
+	tile_is_item()
+	cmp #1
+	beq pickup
+
+	; bottom right
+	poke_position #7, #7
+	tile_is_item()
+	cmp #1
+	beq pickup
+
+	; bottom left
+	poke_position #0, #7
+	tile_is_item()
+	cmp #1
+	beq pickup
+	rts
+pickup
 	get_item_bit()
-    ora ITEMS
+	ora ITEMS
 	sta ITEMS
 
     remove_playfield_item()
 	display_screen_items()
 	play_key_sound()
-not_key
-
-    rts
+	rts
 .endp
 
 ;

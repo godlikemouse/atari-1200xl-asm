@@ -9,7 +9,6 @@
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
 ; TODO: write player sprite engine
-; TODO: change player single point collision to bounding box
 
 	org $0600
 
@@ -49,7 +48,7 @@ SFX1_NOTE_SILENCE=$f7
 	setup_sound()
 	setup_screen()
 	setup_colors()
-	mva #>TILESET1 CHBAS
+	setup_tileset()
 	setup_pmg()
 	display_screen_items()
 	display_map()
@@ -88,6 +87,14 @@ vvblkd_interrupt
 	icl "data/player.data"
 	icl "data/sound.data"
 	icl "data/map.data"
+
+;
+; setup tileset
+;
+.proc setup_tileset
+	mva #>TILESET1 CHBAS
+	rts
+.endp
 
 ;
 ; display map

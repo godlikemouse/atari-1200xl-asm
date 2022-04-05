@@ -5,11 +5,6 @@
 ; store on tile
 ;
 .proc store_ontile
-    ; store stack
-    pha
-    tya
-    pha
-
     ; calculate screen tile offset
     lda #>SCREEN
     sta TILEPTRH
@@ -26,17 +21,10 @@ lookup_loop
 cont
     dey
     bne lookup_loop
-
     ldy TILEX
 done
     lda (TILEPTRL),y
     sta ONTILE
-
-    ; restore stack
-    pla
-    tay
-    pla
-
     rts
 
 carry_tileptrh
@@ -88,4 +76,31 @@ carry_tileptrh
     lda ONTILE
     between #$20, #$28
     rts
+.endp
+
+;
+; tile is an item
+;   if true, acc == 1, else acc == 0
+.proc tile_is_item
+    tile_is_key()
+    ; implied cmp #1
+done
+    rts
+.endp
+
+;
+; poke position
+;	temporarily advances POSX, POSY and stores TILEX, TILEY and ONTILE
+;	uses TMP2 (x), TMP3 (y)
+.proc poke_position (.byte dx+1, dy+1) .var
+dx mva #0 TMP2
+dy mva #0 TMP3
+	adb POSX TMP2
+	adb POSY TMP3
+	store_tilex()
+	store_tiley()
+	store_ontile()
+	sbb POSX TMP2
+	sbb POSY TMP3
+	rts
 .endp
