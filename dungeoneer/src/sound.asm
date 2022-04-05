@@ -1,3 +1,9 @@
+; sound.asm
+;	Background music and sound effect functionality
+
+;
+; setup sound system
+;
 .proc setup_sound
 	mva #0 BGM_COUNTER
 	mva #0 BGM_DATA_INDEX

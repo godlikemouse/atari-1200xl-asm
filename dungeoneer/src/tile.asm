@@ -2,6 +2,68 @@
 ;   Map tile and related functionality
 
 ;
+; setup tileset
+;
+.proc setup_tileset
+	mva #>TILESET1 CHBAS
+	rts
+.endp
+
+;
+; display tileset
+;
+.proc display_tileset
+
+	ldx #0
+	lda #$ff
+	sta TILESPRITE
+
+loop
+	mva map,x SCREEN,x
+	mva map+40,x SCREEN+40,x
+	mva map+80,x SCREEN+80,x
+	mva map+120,x SCREEN+120,x
+	mva map+160,x SCREEN+160,x
+	mva map+200,x SCREEN+200,x
+	mva map+240,x SCREEN+240,x
+	mva map+280,x SCREEN+280,x
+	mva map+320,x SCREEN+320,x
+	mva map+360,x SCREEN+360,x
+	mva map+400,x SCREEN+400,x
+	mva map+440,x SCREEN+440,x
+
+	inx
+	cpx #40
+	bne loop
+	rts
+.endp
+
+;
+; animate tilesprite
+; 	animate map tile sprites
+.proc animate_tilesprite
+	inc TILESPRITE
+	ldx TILESPRITE
+
+	cpx #10
+	bne done
+	ldx #$ff
+	stx TILESPRITE
+
+	adb CHBAS #4
+	lda CHBAS
+	cmp #>TILESET1+12
+	beq reset
+
+	sta CHBAS
+	jmp done
+reset
+	mva #>TILESET1 CHBAS
+done
+	rts
+.endp
+
+;
 ; store on tile
 ;
 .proc store_ontile

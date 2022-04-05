@@ -44,14 +44,14 @@ SFX1_DATA_INDEX=$f5
 SFX1_NOTE_SUSTAIN=$f6
 SFX1_NOTE_SILENCE=$f7
 
-
+	; main setup
 	setup_sound()
 	setup_screen()
 	setup_colors()
 	setup_tileset()
 	setup_pmg()
 	display_screen_items()
-	display_map()
+	display_tileset()
 	clear_pmg()
 	draw_player()
 	store_tilex()
@@ -59,18 +59,7 @@ SFX1_NOTE_SILENCE=$f7
 	clear_buffer()
 	setup_buffer()
 	reverse_buffer()
-
-	; enable interrupt
-    ldy #<vvblkd_interrupt
-    ldx #>vvblkd_interrupt
-    lda #7
-    jsr SETVBV
-
-vvblkd_interrupt
-	lda #<vvblkd_chain
-	sta VVBLKD
-	lda #>vvblkd_chain
-	sta VVBLKD+1
+	enable_interrupts()
 
 	jmp *
 
@@ -82,81 +71,9 @@ vvblkd_interrupt
 	icl "buffer.asm"
 	icl "util.asm"
 	icl "item.asm"
+	icl "interrupt.asm"
 	icl "sound.asm"
-	icl "data/tileset.data"
-	icl "data/player.data"
-	icl "data/sound.data"
-	icl "data/map.data"
-
-;
-; setup tileset
-;
-.proc setup_tileset
-	mva #>TILESET1 CHBAS
-	rts
-.endp
-
-;
-; display map
-;
-.proc display_map
-
-	ldx #0
-	lda #$ff
-	sta TILESPRITE
-
-loop
-	mva map,x SCREEN,x
-	mva map+40,x SCREEN+40,x
-	mva map+80,x SCREEN+80,x
-	mva map+120,x SCREEN+120,x
-	mva map+160,x SCREEN+160,x
-	mva map+200,x SCREEN+200,x
-	mva map+240,x SCREEN+240,x
-	mva map+280,x SCREEN+280,x
-	mva map+320,x SCREEN+320,x
-	mva map+360,x SCREEN+360,x
-	mva map+400,x SCREEN+400,x
-	mva map+440,x SCREEN+440,x
-
-	inx
-	cpx #40
-	bne loop
-	rts
-.endp
-
-;
-; vvblkd chain
-;	method chains for VVBLKD interupts
-.local vvblkd_chain
-	read_joystick()
-	animate_tilesprite()
-	play_background_music()
-	play_sfx SFX1, AF1C
-	jmp XITVBV
-.endl
-
-;
-; animate tilesprite
-; 	animate map tile sprites
-.proc animate_tilesprite
-	inc TILESPRITE
-	ldx TILESPRITE
-
-	cpx #10
-	bne done
-	ldx #$ff
-	stx TILESPRITE
-
-	adb CHBAS #4
-	lda CHBAS
-	cmp #>TILESET1+12
-	beq reset
-
-	sta CHBAS
-	jmp done
-reset
-	mva #>TILESET1 CHBAS
-done
-	rts
-.endp
+	icl "data/tileset.asm"
+	icl "data/player.asm"
+	icl "data/sound.asm"
+	icl "data/map.asm"
