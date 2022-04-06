@@ -15,8 +15,8 @@ PCOLR2 = $2c2 	; Color for Player-Missile 2
 PCOLR3 = $2c3 	; Color for Player-Missile 3
 GRACTL = $d01d  ; Enable/disable PMG
 PMBASE = $d407  ; Player Missile Graphics Base address
-GRPRIOR = $026f  ; Player-Missile Priority
-SDMCTL = $022f   ; PM Resolution 46 ($2E) = double line resolution
+GRPRIOR = $026f ; Player-Missile Priority
+SDMCTL = $022f  ; PM Resolution 46 ($2E) = double line resolution
 HPOSP0 = $d000  ; Horizontal position of player 0
 HPOSP1 = $d001  ; Horizontal position of player 1
 HPOSP2 = $d002  ; Horizontal position of player 2
@@ -30,18 +30,18 @@ XITVBV = $e462
 VTIMR1 = $0210 ; Virtual Timer 1
 
 ; joystick
-PACTL=$d302 ; joystick port control
-STICK0=$0278 ; joystick port 0
+PACTL = $d302  ; joystick port control
+STICK0 = $0278 ; joystick port 0
 
 ; sound system
-AF1C=$d200 ; FFFFFFFF ; F=Frequency
-AC1C=$d201 ; NNNvVVVV ; N=Noise, v=Volume only, V=Volume
-AF2C=$d202 ; FFFFFFFF ; F=Frequency
-AC2C=$d203 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
-AF3C=$d204 ; FFFFFFFF ; F=Frequency
-AC3C=$d205 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
-AF4C=$d206 ; FFFFFFFF ; F=Frequency
-AC4C=$d207 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
+AF1C = $d200 ; FFFFFFFF ; F=Frequency
+AC1C = $d201 ; NNNvVVVV ; N=Noise, v=Volume only, V=Volume
+AF2C = $d202 ; FFFFFFFF ; F=Frequency
+AC2C = $d203 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
+AF3C = $d204 ; FFFFFFFF ; F=Frequency
+AC3C = $d205 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
+AF4C = $d206 ; FFFFFFFF ; F=Frequency
+AC4C = $d207 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
 ; N=17bit to 9bit poly-counter
 ; 1234=Clocks and Joins
 ;   1 Channel 1 clock to 1.79Mhz
@@ -50,4 +50,4 @@ AC4C=$d207 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
 ;   4 Join channels 3-4 16bit frequency
 ; HH=Channel 1, Channel 2 Highpass Filters
 ; S=64Khz to 15kHz
-AUDCTL=$d208 ; N1234HHS
+AUDCTL = $d208 ; N1234HHS

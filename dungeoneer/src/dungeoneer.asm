@@ -34,15 +34,15 @@ TMP2=$e2 ; volatile temp storage 2
 TMP3=$e3 ; volatile temp storage 3
 TMP4=$e4 ; volatile temp storage 4
 TMP5=$e5 ; volatile temp storage 5
-BGM_COUNTER=$f0
-BGM_DATA_INDEX=$f1
-BGM_NOTE_SUSTAIN=$f2
-BGM_NOTE_SILENCE=$f3
-SFX1=$f4
-SFX1_COUNTER=$f5
-SFX1_DATA_INDEX=$f5
-SFX1_NOTE_SUSTAIN=$f6
-SFX1_NOTE_SILENCE=$f7
+BGM_COUNTER=$f0 ; background music counter
+BGM_DATA_INDEX=$f1 ; background music data index
+BGM_NOTE_SUSTAIN=$f2 ; background music note sustain
+BGM_NOTE_SILENCE=$f3 ; background music note silence
+SFX1=$f4 ; sound effect 1
+SFX1_COUNTER=$f5 ; sound effect counter
+SFX1_DATA_INDEX=$f5 ; sound effect data index
+SFX1_NOTE_SUSTAIN=$f6 ; sound effect note sustain
+SFX1_NOTE_SILENCE=$f7 ; sound effect note silence
 
 	; main setup
 	setup_sound()

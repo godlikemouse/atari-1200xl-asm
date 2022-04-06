@@ -13,24 +13,25 @@
 ; display tileset
 ;
 .proc display_tileset
+level_map=level1_map.map
 
 	ldx #0
 	lda #$ff
 	sta TILESPRITE
 
 loop
-	mva map,x SCREEN,x
-	mva map+40,x SCREEN+40,x
-	mva map+80,x SCREEN+80,x
-	mva map+120,x SCREEN+120,x
-	mva map+160,x SCREEN+160,x
-	mva map+200,x SCREEN+200,x
-	mva map+240,x SCREEN+240,x
-	mva map+280,x SCREEN+280,x
-	mva map+320,x SCREEN+320,x
-	mva map+360,x SCREEN+360,x
-	mva map+400,x SCREEN+400,x
-	mva map+440,x SCREEN+440,x
+	mva level_map,x SCREEN,x
+	mva level_map+40,x SCREEN+40,x
+	mva level_map+80,x SCREEN+80,x
+	mva level_map+120,x SCREEN+120,x
+	mva level_map+160,x SCREEN+160,x
+	mva level_map+200,x SCREEN+200,x
+	mva level_map+240,x SCREEN+240,x
+	mva level_map+280,x SCREEN+280,x
+	mva level_map+320,x SCREEN+320,x
+	mva level_map+360,x SCREEN+360,x
+	mva level_map+400,x SCREEN+400,x
+	mva level_map+440,x SCREEN+440,x
 
 	inx
 	cpx #40
@@ -157,6 +158,7 @@ done
 .proc poke_position (.byte dx+1, dy+1) .var
 dx mva #0 TMP2
 dy mva #0 TMP3
+
 	adb POSX TMP2
 	adb POSY TMP3
 	store_tilex()

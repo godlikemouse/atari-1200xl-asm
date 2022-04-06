@@ -16,7 +16,7 @@ frames = int(height / width)
 
 colors = ["00", "11", "01", "10", "11"]
 
-f = open("../src/data/tileset.data", "w")
+f = open("../src/data/tileset.asm", "w")
 f.write("\t.local " + localname + "\n")
 
 row_offset = 0
