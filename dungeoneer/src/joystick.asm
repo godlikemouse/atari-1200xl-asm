@@ -128,25 +128,31 @@ RIGHT=$07
 
 move_left
 	can_move_left()
-	copy_player_left()
+	;copy_player_left()
+	animate_player_left()
 	pickup_item()
 	jmp store_posx
 
 move_right
 	can_move_right()
-	copy_player_right()
+	animate_player_right()
+	;copy_player_right()
 	pickup_item()
 	jmp store_posx
 
 move_up
 	can_move_up()
-	copy_player_left()
+	;copy_player_left()
+	draw_player()
+	animate_player_left()
 	pickup_item()
 	rts
 
 move_down
 	can_move_down()
-	copy_player_right()
+	;copy_player_right()
+	draw_player()
+	animate_player_right()
 	pickup_item()
 	rts
 

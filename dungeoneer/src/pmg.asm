@@ -92,12 +92,19 @@ loop_top
 ; draw player
 ;
 .proc draw_player
-
 pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
 
-	ldx #0
+	;ldx #0
+
+	;
+	ldx PLAYANIM_OFFSET
+	txa
+	add #8
+	sta TMP6
+	;
+
 	ldy POSY
 
 loop
@@ -106,8 +113,15 @@ loop
 	mva player_data+16,x pmg_p2,y
 	iny
 	inx
-	cpx #8
+
+	;
+	txa
+	cmp TMP6
 	bne loop
+	;
+
+	;cpx #8
+	;bne loop
 	rts
 .endp
 
@@ -126,4 +140,73 @@ loop
 	sta HPOSP1
 	sta HPOSP2
 	rts
+.endp
+
+;
+; animate player right
+;
+.proc animate_player_right
+
+    jmp check
+
+reset
+    mva #$0 PLAYANIM_OFFSET
+    draw_player()
+
+check
+    lda PLAYANIM_OFFSET
+    between #$0, #$30
+    cmp #1
+    bne reset
+
+    ldx PLAYER_SPRITE
+    inx
+    stx PLAYER_SPRITE
+    cpx #5
+    bne done
+
+    mva #0 PLAYER_SPRITE
+    draw_player()
+    adb PLAYANIM_OFFSET #$18
+    cmp #$30
+    bne done
+
+    mva #0 PLAYANIM_OFFSET
+done
+    rts
+.endp
+
+;
+; animate player left
+;
+.proc animate_player_left
+
+    jmp check
+
+reset
+    mva #$60 PLAYANIM_OFFSET
+    draw_player()
+
+check
+    lda PLAYANIM_OFFSET
+    between #$60, #$90
+    cmp #1
+    bne reset
+
+timer
+    ldx PLAYER_SPRITE
+    inx
+    stx PLAYER_SPRITE
+    cpx #5
+    bne done
+
+    mva #0 PLAYER_SPRITE
+    draw_player()
+    adb PLAYANIM_OFFSET #$18
+    cmp #$90
+    bne done
+
+    mva #$60 PLAYANIM_OFFSET
+done
+    rts
 .endp

@@ -27,7 +27,8 @@ ONTILE=$c4 ; the current player tile
 TILEPTRL=$c5 ; the tile pointer low byte
 TILEPTRH=$c6 ; the tile pointer high byte
 TILESPRITE=$c7 ; the tile sprite index
-PLAYANIM_OFFSET=$c8 ; the player animation offset
+PLAYER_SPRITE=$c8 ; the player sprite index
+PLAYANIM_OFFSET=$c9 ; the player animation offset
 ITEMS=$d0 ; the picked up player items
 TMP0=$e0 ; volatile temp storage 0
 TMP1=$e1 ; volatile temp storage 1
@@ -35,6 +36,7 @@ TMP2=$e2 ; volatile temp storage 2
 TMP3=$e3 ; volatile temp storage 3
 TMP4=$e4 ; volatile temp storage 4
 TMP5=$e5 ; volatile temp storage 5
+TMP6=$e6
 BGM_COUNTER=$f0 ; background music counter
 BGM_DATA_INDEX=$f1 ; background music data index
 BGM_NOTE_SUSTAIN=$f2 ; background music note sustain
@@ -57,9 +59,6 @@ SFX1_NOTE_SILENCE=$f7 ; sound effect note silence
 	draw_player()
 	store_tilex()
 	store_tiley()
-	clear_buffer()
-	setup_buffer()
-	reverse_buffer()
 	enable_interrupts()
 
 	jmp *
@@ -69,7 +68,6 @@ SFX1_NOTE_SILENCE=$f7 ; sound effect note silence
 	icl "pmg.asm"
 	icl "joystick.asm"
 	icl "tile.asm"
-	icl "buffer.asm"
 	icl "util.asm"
 	icl "item.asm"
 	icl "interrupt.asm"
