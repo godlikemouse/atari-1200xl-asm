@@ -96,14 +96,11 @@ pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
 
-	;ldx #0
-
-	;
+	; load animation offset and set limit
 	ldx PLAYANIM_OFFSET
 	txa
 	add #8
 	sta TMP6
-	;
 
 	ldy POSY
 
@@ -114,14 +111,10 @@ loop
 	iny
 	inx
 
-	;
+	; verify offset limit
 	txa
 	cmp TMP6
 	bne loop
-	;
-
-	;cpx #8
-	;bne loop
 	rts
 .endp
 
