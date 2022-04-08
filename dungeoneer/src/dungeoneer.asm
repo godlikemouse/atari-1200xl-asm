@@ -27,6 +27,7 @@ ONTILE=$c4 ; the current player tile
 TILEPTRL=$c5 ; the tile pointer low byte
 TILEPTRH=$c6 ; the tile pointer high byte
 TILESPRITE=$c7 ; the tile sprite index
+PLAYANIM_OFFSET=$c8 ; the player animation offset
 ITEMS=$d0 ; the picked up player items
 TMP0=$e0 ; volatile temp storage 0
 TMP1=$e1 ; volatile temp storage 1

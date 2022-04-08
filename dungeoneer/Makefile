@@ -2,7 +2,7 @@ CC=mads
 FLAGS=-l -t
 OUTFILE=dungeoneer.xex
 
-all: clean generate_tiles build	run
+all: clean generate_tiles generate_player build	run
 
 clean:
 	rm -f *.lab *.lst *.obx
@@ -18,3 +18,6 @@ runalt:
 
 generate_tiles:
 	cd art && ./tileset.py tileset.png tile_gfx
+
+generate_player:
+	cd art && ./player.py

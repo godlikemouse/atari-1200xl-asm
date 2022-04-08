@@ -21,8 +21,8 @@ blue=$80
 	mva #black COLOR4       ; %00
 
 	; player-missile colors
-	mva #brown PCOLR0
-	mva #blue PCOLR1
+	mva #blue PCOLR0
+	mva #brown PCOLR1
 	mva #peach PCOLR2
 	rts
 .endp
@@ -92,6 +92,7 @@ loop_top
 ; draw player
 ;
 .proc draw_player
+
 pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
