@@ -55,36 +55,19 @@ pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
 
-; clear bottom player row
-	ldy #8
+	; clear top and bottom player row
 	lda POSY
+	tay
+	dey
 	add #8
 	tax
 	lda #0
-
-loop_bottom
 	sta pmg_p0,x
 	sta pmg_p1,x
 	sta pmg_p2,x
-	inx
-	dey
-	bne loop_bottom
-
-; clear top player row
-	ldy #8
-	lda POSY
-	sub #8
-	tax
-	lda #0
-
-loop_top
-	sta pmg_p0,x
-	sta pmg_p1,x
-	sta pmg_p2,x
-	inx
-	dey
-	bne loop_top
-
+	sta pmg_p0,y
+	sta pmg_p1,y
+	sta pmg_p2,y
 	rts
 .endp
 
