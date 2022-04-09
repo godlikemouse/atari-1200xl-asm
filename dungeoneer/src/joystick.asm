@@ -114,6 +114,7 @@ UP=$0e
 DOWN=$0d
 LEFT=$0b
 RIGHT=$07
+NONE=$0f
 
 	lda STICK0
 	cmp #LEFT
@@ -124,11 +125,12 @@ RIGHT=$07
 	beq move_up
 	cmp #DOWN
 	beq move_down
+	cmp #NONE
+	beq move_none
 	rts
 
 move_left
 	can_move_left()
-	;copy_player_left()
 	animate_player_left()
 	pickup_item()
 	jmp store_posx
@@ -136,13 +138,11 @@ move_left
 move_right
 	can_move_right()
 	animate_player_right()
-	;copy_player_right()
 	pickup_item()
 	jmp store_posx
 
 move_up
 	can_move_up()
-	;copy_player_left()
 	draw_player()
 	animate_player_left()
 	pickup_item()
@@ -150,10 +150,13 @@ move_up
 
 move_down
 	can_move_down()
-	;copy_player_right()
 	draw_player()
 	animate_player_right()
 	pickup_item()
+	rts
+
+move_none
+	animate_player_reset()
 	rts
 
 store_posx

@@ -186,3 +186,21 @@ timer
 done
     rts
 .endp
+
+;
+; animate player reset
+;	resets the player back to the first animation frame
+.proc animate_player_reset
+	mva #0 PLAYER_SPRITE
+	lda PLAYANIM_OFFSET
+	between #$0, #$30
+    cmp #1
+	bne left
+	mva #$0 PLAYANIM_OFFSET
+	jmp draw
+left
+	mva #$60 PLAYANIM_OFFSET
+draw
+	draw_player()
+	rts
+.endp

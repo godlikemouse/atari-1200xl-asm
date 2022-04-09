@@ -2,7 +2,7 @@ CC=mads
 FLAGS=-l -t
 OUTFILE=dungeoneer.xex
 
-all: clean generate_tiles build	run
+all: clean generate_tiles build	runalt
 
 clean:
 	rm -f *.lab *.lst *.obx
