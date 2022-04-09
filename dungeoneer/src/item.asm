@@ -22,6 +22,24 @@
 .endp
 
 ;
+; display player lives
+;
+.proc display_player_lives
+	ldx #$27
+	ldy PLAYER_LIVES
+lives
+	lda #47
+	sta ITEM_SCREEN, x
+	sub #1
+	dex
+	sta ITEM_SCREEN, x
+	dex
+	dey
+	bne lives
+	rts
+.endp
+
+;
 ; display screen key
 ; 	displays keys at the top of the screen
 ;	charset_idx, index of the character to use

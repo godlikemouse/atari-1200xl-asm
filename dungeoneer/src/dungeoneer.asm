@@ -8,6 +8,7 @@
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
+; TODO: add lives to item screen
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction
 ; TODO: add end of level interaction
@@ -33,6 +34,7 @@ TILESPRITE=$c7 ; the tile sprite index
 PLAYER_SPRITE=$c8 ; the player sprite index
 PLAYANIM_OFFSET=$c9 ; the player animation offset
 ITEMS=$d0 ; the picked up player items
+PLAYER_LIVES=$d1 ; the player lives
 TMP0=$e0 ; volatile temp storage 0
 TMP1=$e1 ; volatile temp storage 1
 TMP2=$e2 ; volatile temp storage 2
@@ -51,12 +53,14 @@ SFX1_NOTE_SUSTAIN=$f6 ; sound effect note sustain
 SFX1_NOTE_SILENCE=$f7 ; sound effect note silence
 
 	; main setup
+	mva #3 PLAYER_LIVES
 	setup_sound()
 	setup_screen()
 	setup_colors()
 	setup_tileset()
 	setup_pmg()
 	display_screen_items()
+	display_player_lives()
 	display_tileset()
 	clear_pmg()
 	draw_player()
