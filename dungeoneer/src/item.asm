@@ -25,9 +25,13 @@
 ; display player lives
 ;
 .proc display_player_lives
+	clear_player_lives()
+
 	ldx #$27
 	ldy PLAYER_LIVES
-lives
+	cpy #0
+	beq done
+loop
 	lda #47
 	sta ITEM_SCREEN, x
 	sub #1
@@ -35,7 +39,22 @@ lives
 	sta ITEM_SCREEN, x
 	dex
 	dey
-	bne lives
+	bne loop
+done
+	rts
+.endp
+
+.proc clear_player_lives
+	ldx #$27
+	ldy #6
+	lda #0
+loop
+	sta ITEM_SCREEN, x
+	dex
+	sta ITEM_SCREEN, x
+	dex
+	dey
+	bne loop
 	rts
 .endp
 
@@ -159,5 +178,32 @@ loop
 	bne loop
 done
 	lda TMP2
+	rts
+.endp
+
+;
+; check player death
+;	checks for player death state
+.proc check_player_death
+	tile_is_death()
+	cmp #1
+	bne done
+	dec PLAYER_LIVES
+	check_game_over()
+	reset_player()
+	display_player_lives()
+done
+	rts
+.endp
+
+;
+; check game over
+;	checks for game over state
+.proc check_game_over
+	lda PLAYER_LIVES
+	cmp #0
+	bne done
+	display_game_over()
+done
 	rts
 .endp

@@ -109,12 +109,7 @@ loop
 	mva #46 SDMCTL ; single line resolution
 	mva #3 GRACTL ; enable PMG
 	mva #1 GRPRIOR ; give players priority
-	mva #$40 POSY
-	lda #$80
-	sta POSX
-	sta HPOSP0
-	sta HPOSP1
-	sta HPOSP2
+	reset_player()
 	rts
 .endp
 
@@ -202,5 +197,10 @@ left
 	mva #$60 PLAYANIM_OFFSET
 draw
 	draw_player()
+	rts
+.endp
+
+.proc display_game_over
+	setup_game_over()
 	rts
 .endp

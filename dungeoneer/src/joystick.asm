@@ -146,17 +146,21 @@ move_up
 	draw_player()
 	animate_player_left()
 	pickup_item()
-	rts
+	jmp post_move
 
 move_down
 	can_move_down()
 	draw_player()
 	animate_player_right()
 	pickup_item()
-	rts
+	jmp post_move
 
 move_none
 	animate_player_reset()
+	rts
+
+post_move
+	check_player_death()
 	rts
 
 store_posx
@@ -165,5 +169,16 @@ store_posx
 	stx HPOSP1
 	stx HPOSP2
 	stx HPOSP3
+	jmp post_move
+.endp
+
+.proc reset_player
+	mva #$40 POSY
+	lda #$80
+	sta POSX
+	sta HPOSP0
+	sta HPOSP1
+	sta HPOSP2
+	clear_pmg()
 	rts
 .endp

@@ -152,6 +152,15 @@ done
 .endp
 
 ;
+; tile is death
+;	if true, acc == 1, else acc == 0
+.proc tile_is_death
+	lda ONTILE
+	between #62, #64
+	rts
+.endp
+
+;
 ; poke position
 ;	temporarily advances POSX, POSY and stores TILEX, TILEY and ONTILE
 ;	uses TMP2 (x), TMP3 (y)

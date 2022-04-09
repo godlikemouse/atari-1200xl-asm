@@ -8,11 +8,12 @@
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
-; TODO: add lives to item screen
+; TODO: add bounding box for contact with death items
+; TODO: create real game over screen
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction
 ; TODO: add end of level interaction
-; TODO: implement joystick nw, ne, sw, se - nw 10,sw 9,ne 6,se 5
+; TODO: implement joystick nw 10, sw 9, ne 6, se 5
 
 	org $0600
 
@@ -55,7 +56,7 @@ SFX1_NOTE_SILENCE=$f7 ; sound effect note silence
 	; main setup
 	mva #3 PLAYER_LIVES
 	setup_sound()
-	setup_screen()
+	setup_game()
 	setup_colors()
 	setup_tileset()
 	setup_pmg()
