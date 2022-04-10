@@ -160,7 +160,6 @@ move_none
 	rts
 
 post_move
-	check_player_death()
 	rts
 
 store_posx
@@ -172,6 +171,9 @@ store_posx
 	jmp post_move
 .endp
 
+;
+; reset player
+;
 .proc reset_player
 	mva #$40 POSY
 	lda #$80

@@ -91,24 +91,29 @@ dy=TMP3
 	tile_is_item()
 	cmp #1
 	beq pickup
+	check_player_death()
 
 	; top right
 	poke_position #7, #1
 	tile_is_item()
 	cmp #1
 	beq pickup
+	check_player_death()
 
 	; bottom right
 	poke_position #7, #7
 	tile_is_item()
 	cmp #1
 	beq pickup
+	check_player_death()
 
 	; bottom left
 	poke_position #0, #7
 	tile_is_item()
 	cmp #1
 	beq pickup
+	check_player_death()
+
 	rts
 pickup
 	get_item_bit()

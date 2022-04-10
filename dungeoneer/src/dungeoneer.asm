@@ -8,7 +8,7 @@
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
-; TODO: add bounding box for contact with death items
+; TODO: add menu tileset
 ; TODO: create real game over screen
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction
@@ -24,6 +24,7 @@ PMG_OFFSCRN=$5500 ; player missile graphics offscreen
 TILESET1=$6000 ; tileset1 sprite address
 TILESET2=$6400 ; tileset2 sprite address
 TILESET3=$6800 ; tileset3 sprite address
+MENU_TILESET=$7000 ; menu tileset address
 POSX=$c0 ; player x position on screen
 POSY=$c1 ; player y position on screen
 TILEX=$c2 ; the x tile position
@@ -54,7 +55,6 @@ SFX1_NOTE_SUSTAIN=$f6 ; sound effect note sustain
 SFX1_NOTE_SILENCE=$f7 ; sound effect note silence
 
 	; main setup
-	mva #3 PLAYER_LIVES
 	setup_sound()
 	setup_game()
 	setup_colors()
