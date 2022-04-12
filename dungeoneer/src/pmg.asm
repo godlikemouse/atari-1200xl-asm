@@ -204,10 +204,29 @@ draw
 ; display game over
 ;
 .proc display_gameover
-	setup_gameover()
+	setup_menu_screen()
 	setup_menu_tileset()
 	display_gameover_map()
 	stop_background_music()
 	mva #0 GRACTL
+	rts
+.endp
+
+;
+; display main menu
+;
+.proc display_mainmenu
+	setup_menu_screen()
+	setup_menu_tileset()
+	display_mainmenu_map()
+	mva #90 POSX
+	ldx POSX
+	stx HPOSP0
+	stx HPOSP1
+	stx HPOSP2
+	stx HPOSP3
+	mva #48 POSY
+	clear_pmg()
+	draw_player()
 	rts
 .endp

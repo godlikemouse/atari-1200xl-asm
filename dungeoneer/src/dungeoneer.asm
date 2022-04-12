@@ -5,8 +5,9 @@
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
 ; TODO: optimize player sprite set
-; TODO: play game over music
 ; TODO: add death sound
+; TODO: play game over music
+; TODO: add menu screen
 ; TODO: clean reset player after death
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction
@@ -17,8 +18,7 @@
 
 SCREEN=$3000 ; screen buffer
 ITEM_SCREEN=$4000 ; item screen buffer
-GAMEOVER_SCREEN=$4028 ; game over screen address
-MENU_SCREEN=$4400 ; menu screen address
+MENU_SCREEN=$4028 ; game over / main menu screen address
 PMG=$5000 ; player missile graphics buffer
 PMG_OFFSCRN=$5500 ; player missile graphics offscreen
 GAME_TILESET1=$6000 ; tileset1 sprite address
@@ -63,7 +63,7 @@ SFX1_NOTE_SILENCE=$f9 ; sound effect note silence
 
 	; main setup
 	setup_sound()
-	setup_game()
+	setup_game_screen()
 	setup_colors()
 	setup_tileset()
 	setup_pmg()
@@ -75,6 +75,7 @@ SFX1_NOTE_SILENCE=$f9 ; sound effect note silence
 	store_tilex()
 	store_tiley()
 	enable_interrupts()
+	;display_mainmenu()
 
 	jmp *
 
@@ -93,3 +94,4 @@ SFX1_NOTE_SILENCE=$f9 ; sound effect note silence
 	icl "data/sound.asm"
 	icl "data/map.asm"
 	icl "data/gameover.asm"
+	icl "data/mainmenu.asm"

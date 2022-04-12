@@ -4,7 +4,7 @@
 ;
 ; setup display list for screen
 ;
-.proc setup_game
+.proc setup_game_screen
 
 blank8=$70 ; 8 blank lines
 blank7=$60 ; 7 blank lines
@@ -29,9 +29,9 @@ dlist
 .endp
 
 ;
-; setup game over
-; 	temporary game over screen
-.proc setup_gameover
+; setup game over / menu screen
+;
+.proc setup_menu_screen
 
 blank8=$70 ; 8 blank lines
 LMS=$40 ; Load Memory Scan (LMS)
@@ -45,7 +45,7 @@ antic5=5 ; ANTIC mode 5
 ; display list
 dlist
 	.byte blank8, blank8, blank8
-	.byte antic5 + LMS, <GAMEOVER_SCREEN, >GAMEOVER_SCREEN
+	.byte antic5 + LMS, <MENU_SCREEN, >MENU_SCREEN
 	.byte antic5, antic5, antic5, antic5, antic5, antic5
 	.byte antic5, antic5, antic5, antic5, antic5
 	.byte JVB, <dlist, >dlist

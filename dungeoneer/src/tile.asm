@@ -200,6 +200,9 @@ dy mva #0 TMP3
 	rts
 .endp
 
+;
+; display game over map
+;
 .proc display_gameover_map
 map=gameover.map
 
@@ -211,18 +214,51 @@ map=gameover.map
 	mva #1 TILESPRITE_ENABLE
 
 loop
-	mva map,x GAMEOVER_SCREEN,x
-	mva map+40,x GAMEOVER_SCREEN+40,x
-	mva map+80,x GAMEOVER_SCREEN+80,x
-	mva map+120,x GAMEOVER_SCREEN+120,x
-	mva map+160,x GAMEOVER_SCREEN+160,x
-	mva map+200,x GAMEOVER_SCREEN+200,x
-	mva map+240,x GAMEOVER_SCREEN+240,x
-	mva map+280,x GAMEOVER_SCREEN+280,x
-	mva map+320,x GAMEOVER_SCREEN+320,x
-	mva map+360,x GAMEOVER_SCREEN+360,x
-	mva map+400,x GAMEOVER_SCREEN+400,x
-	mva map+440,x GAMEOVER_SCREEN+440,x
+	mva map,x MENU_SCREEN,x
+	mva map+40,x MENU_SCREEN+40,x
+	mva map+80,x MENU_SCREEN+80,x
+	mva map+120,x MENU_SCREEN+120,x
+	mva map+160,x MENU_SCREEN+160,x
+	mva map+200,x MENU_SCREEN+200,x
+	mva map+240,x MENU_SCREEN+240,x
+	mva map+280,x MENU_SCREEN+280,x
+	mva map+320,x MENU_SCREEN+320,x
+	mva map+360,x MENU_SCREEN+360,x
+	mva map+400,x MENU_SCREEN+400,x
+	mva map+440,x MENU_SCREEN+440,x
+
+	inx
+	cpx #40
+	bne loop
+	rts
+.endp
+
+;
+; display main menu map
+;
+.proc display_mainmenu_map
+map=mainmenu.map
+
+	ldx #0
+	lda #$ff
+	sta TILESPRITE
+	stx TILESPRITE_INDEX
+	stx ENABLE_INPUT
+	stx TILESPRITE_ENABLE
+
+loop
+	mva map,x MENU_SCREEN,x
+	mva map+40,x MENU_SCREEN+40,x
+	mva map+80,x MENU_SCREEN+80,x
+	mva map+120,x MENU_SCREEN+120,x
+	mva map+160,x MENU_SCREEN+160,x
+	mva map+200,x MENU_SCREEN+200,x
+	mva map+240,x MENU_SCREEN+240,x
+	mva map+280,x MENU_SCREEN+280,x
+	mva map+320,x MENU_SCREEN+320,x
+	mva map+360,x MENU_SCREEN+360,x
+	mva map+400,x MENU_SCREEN+400,x
+	mva map+440,x MENU_SCREEN+440,x
 
 	inx
 	cpx #40
