@@ -25,7 +25,7 @@ vvblkd_interrupt
 	read_joystick()
 	animate_tilesprite()
 	play_background_music()
-    ; key collection sfx
 	play_sfx SFX1, AF1C
+    play_sfx SFX2, AF2C
 	jmp XITVBV
 .endl

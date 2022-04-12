@@ -209,6 +209,7 @@ draw
 	display_gameover_map()
 	stop_background_music()
 	mva #0 GRACTL
+	play_gameover_sound()
 	rts
 .endp
 

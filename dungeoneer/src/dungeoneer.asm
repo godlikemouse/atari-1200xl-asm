@@ -55,11 +55,22 @@ BGM_DATA_INDEX=$f1 ; background music data index
 BGM_NOTE_SUSTAIN=$f2 ; background music note sustain
 BGM_NOTE_SILENCE=$f3 ; background music note silence
 BGM_ENABLE=$f4 ; enable background music
-SFX1=$f5 ; sound effect 1
-SFX1_COUNTER=$f6 ; sound effect counter
-SFX1_DATA_INDEX=$f7 ; sound effect data index
-SFX1_NOTE_SUSTAIN=$f8 ; sound effect note sustain
-SFX1_NOTE_SILENCE=$f9 ; sound effect note silence
+BGM_ADDRL=$f5
+BGM_ADDRH=$f6
+SFX1=$f7 ; sound effect 1
+SFX1_ADDRL=$f8
+SFX1_ADDRH=$f9
+SFX1_COUNTER=$fa ; sound effect counter
+SFX1_DATA_INDEX=$fb ; sound effect data index
+SFX1_NOTE_SUSTAIN=$fc ; sound effect note sustain
+SFX1_NOTE_SILENCE=$fd ; sound effect note silence
+SFX2=$fe ; sound effect 1
+SFX2_ADDRL=$ff
+SFX2_ADDRH=$100
+SFX2_COUNTER=$101 ; sound effect counter
+SFX2_DATA_INDEX=$102 ; sound effect data index
+SFX2_NOTE_SUSTAIN=$103 ; sound effect note sustain
+SFX2_NOTE_SILENCE=$104 ; sound effect note silence
 
 	; main setup
 	setup_sound()

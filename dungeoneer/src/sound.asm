@@ -8,6 +8,10 @@
 	mva #0 BGM_COUNTER
 	mva #0 BGM_DATA_INDEX
 	mva #1 BGM_ENABLE
+
+	mva #<background_music BGM_ADDRL
+	mva #>background_music BGM_ADDRH
+
 	;N1234HHS
 	mva #%00000000 AUDCTL
 	rts
@@ -36,26 +40,26 @@ note_still_playing
 	jmp done
 play_note
 	mva #0 BGM_COUNTER
-	ldx BGM_DATA_INDEX
-	mva background_music,x FREQCTRL
+	ldy BGM_DATA_INDEX
+	mva (BGM_ADDRL),y FREQCTRL
 
 	; load audio control
-	inx
-	mva background_music,x CHANNEL
+	iny
+	mva (BGM_ADDRL),y CHANNEL
 
 	; load note sustain
-	inx
-	mva background_music,x BGM_NOTE_SUSTAIN
+	iny
+	mva (BGM_ADDRL),y BGM_NOTE_SUSTAIN
 
 	; load note silence interval
-	inx
-	mva background_music,x BGM_NOTE_SILENCE
+	iny
+	mva (BGM_ADDRL),y BGM_NOTE_SILENCE
 
 	; prepare next note
-	inx
-	stx BGM_DATA_INDEX
+	iny
+	sty BGM_DATA_INDEX
 
-	lda background_music,x
+	lda (BGM_ADDRL),y
 	cmp #0 ; end play
 	bne done
 
@@ -81,20 +85,22 @@ CHANNEL=FREQCTRL+1
 ; 	play sound effects
 .macro play_sfx reg, ctrl
 SFX=:reg
-COUNTER=:reg+1
-INDEX=:reg+2
-SUSTAIN=:reg+3
-SILENCE=:reg+4
+SOUND=:reg+1
+COUNTER=:reg+3
+INDEX=:reg+4
+SUSTAIN=:reg+5
+SILENCE=:reg+6
 FREQCTRL=:ctrl
 CHANNEL=:ctrl+1
 
 	; play sfx?
 	lda SFX
-	cmp #0
-	beq done
+	cmp #1
+	bne done
 
 	inc COUNTER
 	ldx COUNTER
+
 	cpx SUSTAIN ; note sustain
 	bcc note_still_playing
 	mva #0 CHANNEL ; mute
@@ -104,40 +110,69 @@ note_still_playing
 	jmp done
 play_note
 	mva #0 COUNTER
-	ldx INDEX
-	mva key_pickup_sfx,x FREQCTRL
+	ldy INDEX
+
+	; verify not at end
+	lda (SOUND),y
+	cmp #0
+	beq complete
+
+	; verify not silence
+	cmp #1
+	bne continue_play_note
+
+	; mute channel for silence
+	mva #0 CHANNEL
+	iny
+	jmp continue_sustain
+
+continue_play_note
+	mva (SOUND),y FREQCTRL
 
 	; load audio control
-	inx
-	mva key_pickup_sfx,x CHANNEL
+	iny
+	mva (SOUND),y CHANNEL
 
+continue_sustain
 	; load note sustain
-	inx
-	mva key_pickup_sfx,x SUSTAIN
+	iny
+	mva (SOUND),y SUSTAIN
 
 	; load note silence interval
-	inx
-	mva key_pickup_sfx,x SILENCE
+	iny
+	mva (SOUND),y SILENCE
 
 	; prepare next note
-	inx
-	stx INDEX
+	iny
+	sty INDEX
+	jmp done
 
-	lda key_pickup_sfx,x
-	cmp #0 ; end play
-	bne done
-
+complete
 	mva #0 CHANNEL
 	mva #0 COUNTER
 	mva #0 INDEX
 	mva #0 SFX
+
 done
 
 .endm
 
 .proc play_key_sound
-	mva #0 SFX1_COUNTER
-	mva #0 SFX1_DATA_INDEX
+	lda #0
+	sta SFX1_COUNTER
+	sta SFX1_DATA_INDEX
+	mva #<key_pickup_sfx SFX1_ADDRL
+	mva #>key_pickup_sfx SFX1_ADDRH
+	mva #1 SFX1
+	rts
+.endp
+
+.proc play_gameover_sound
+	lda #0
+	sta SFX1_COUNTER
+	sta SFX1_DATA_INDEX
+	mva #<gameover_sfx SFX1_ADDRL
+	mva #>gameover_sfx SFX1_ADDRH
 	mva #1 SFX1
 	rts
 .endp
