@@ -9,8 +9,7 @@
 	mva #0 BGM_DATA_INDEX
 	mva #1 BGM_ENABLE
 
-	mva #<background_music BGM_ADDRL
-	mva #>background_music BGM_ADDRH
+	mwa #background_music BGM_ADDRL
 
 	;N1234HHS
 	mva #%00000000 AUDCTL
@@ -77,6 +76,14 @@ CHANNEL=FREQCTRL+1
 	lda #0
 	sta BGM_ENABLE
 	sta CHANNEL
+	rts
+.endp
+
+;
+; enable background music
+;
+.proc enable_background_music
+	mva #1 BGM_ENABLE
 	rts
 .endp
 
@@ -157,22 +164,26 @@ done
 
 .endm
 
+;
+; play key pickup sound
+;
 .proc play_key_sound
 	lda #0
 	sta SFX1_COUNTER
 	sta SFX1_DATA_INDEX
-	mva #<key_pickup_sfx SFX1_ADDRL
-	mva #>key_pickup_sfx SFX1_ADDRH
+	mwa #key_pickup_sfx SFX1_ADDRL
 	mva #1 SFX1
 	rts
 .endp
 
+;
+; play game over sound
+;
 .proc play_gameover_sound
 	lda #0
 	sta SFX1_COUNTER
 	sta SFX1_DATA_INDEX
-	mva #<gameover_sfx SFX1_ADDRL
-	mva #>gameover_sfx SFX1_ADDRH
+	mwa #gameover_sfx SFX1_ADDRL
 	mva #1 SFX1
 	rts
 .endp

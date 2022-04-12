@@ -29,9 +29,7 @@ level_map=level1_map.map
 	lda #$ff
 	sta TILESPRITE
 	stx TILESPRITE_INDEX
-	lda #1
-	sta ENABLE_INPUT
-	sta TILESPRITE_ENABLE
+	mva #1 TILESPRITE_ENABLE
 
 loop
 	mva level_map,x SCREEN,x
@@ -210,7 +208,6 @@ map=gameover.map
 	lda #$ff
 	sta TILESPRITE
 	stx TILESPRITE_INDEX
-	stx ENABLE_INPUT
 	mva #1 TILESPRITE_ENABLE
 
 loop
@@ -243,7 +240,6 @@ map=mainmenu.map
 	lda #$ff
 	sta TILESPRITE
 	stx TILESPRITE_INDEX
-	stx ENABLE_INPUT
 	stx TILESPRITE_ENABLE
 
 loop

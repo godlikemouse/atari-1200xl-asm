@@ -202,7 +202,7 @@ draw
 
 ;
 ; display game over
-;
+;	displays the game over screen
 .proc display_gameover
 	setup_menu_screen()
 	setup_menu_tileset()
@@ -210,24 +210,128 @@ draw
 	stop_background_music()
 	mva #0 GRACTL
 	play_gameover_sound()
+	mva #2 DISPLAY_TYPE
 	rts
 .endp
 
 ;
 ; display main menu
-;
+;	displays the main menu screen
 .proc display_mainmenu
+	stop_background_music()
 	setup_menu_screen()
 	setup_menu_tileset()
 	display_mainmenu_map()
+	mva #0 DISPLAY_TYPE
+	mva #0 MENU_SELECTION
+	rts
+.endp
+
+;
+; display game
+; 	displays the game screen
+.proc display_game
+	setup_game_screen()
+	setup_tileset()
+	setup_pmg()
+	display_screen_items()
+	display_player_lives()
+	display_game_map()
+	clear_pmg()
+	draw_player()
+	store_tilex()
+	store_tiley()
+	mva #1 DISPLAY_TYPE
+	enable_background_music()
+	rts
+.endp
+
+;
+; draw main menu
+;	handles selection / animation of main menu
+.proc draw_mainmenu
+play_item=MENU_SCREEN + 160 + 16
+exit_item=MENU_SCREEN + 240 + 16
+
+	lda DISPLAY_TYPE
+	cmp #0
+	bne exit
+
+	lda MENU_SELECTION
+	cmp #0
+	bne select_exit
+	highlight_menu_item #<play_item, #>play_item
+	restore_menu_item #<exit_item, #>exit_item
+	mva #48 POSY
+	jmp done
+
+select_exit
+	highlight_menu_item #<exit_item, #>exit_item
+	restore_menu_item #<play_item, #>play_item
+	mva #64 POSY
+
+done
 	mva #90 POSX
 	ldx POSX
 	stx HPOSP0
 	stx HPOSP1
 	stx HPOSP2
 	stx HPOSP3
-	mva #48 POSY
 	clear_pmg()
 	draw_player()
+
+exit
+	rts
+.endp
+
+;
+; highlight a menu item
+;
+.proc highlight_menu_item (.byte addrl+1, addrh+1) .var
+addrl mva #0 TMP0
+addrh mva #0 TMP1
+
+	ldy #0
+
+loop
+	clc
+	lda (TMP0),y
+	cmp #128
+	bcc less_than
+	jmp continue
+
+less_than
+	adb (TMP0),y #128
+
+continue
+	iny
+	cpy #8
+	bne loop
+	rts
+.endp
+
+;
+; restore menu item
+;
+.proc restore_menu_item (.byte addrl+1, addrh+1) .var
+addrl mva #0 TMP0
+addrh mva #0 TMP1
+
+	ldy #0
+
+loop
+	clc
+	lda (TMP0),y
+	cmp #128
+	bcs greater_than
+	jmp continue
+
+greater_than
+	sbb (TMP0),y #128
+
+continue
+	iny
+	cpy #8
+	bne loop
 	rts
 .endp

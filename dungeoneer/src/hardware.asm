@@ -32,6 +32,7 @@ VTIMR1 = $0210 ; Virtual Timer 1
 ; joystick
 PACTL = $d302  ; joystick port control
 STICK0 = $0278 ; joystick port 0
+BTN0 = $0284 ; joystock port 0 button
 
 ; sound system
 AF1C = $d200 ; FFFFFFFF ; F=Frequency

@@ -22,8 +22,10 @@ vvblkd_interrupt
 ; vvblkd chain
 ;	method chains for VVBLKD interupts
 .local vvblkd_chain
-	read_joystick()
+	read_game_joystick()
+    read_mainmenu_joystick()
 	animate_tilesprite()
+    draw_mainmenu()
 	play_background_music()
 	play_sfx SFX1, AF1C
     play_sfx SFX2, AF2C

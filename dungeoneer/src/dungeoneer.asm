@@ -6,8 +6,6 @@
 
 ; TODO: optimize player sprite set
 ; TODO: add death sound
-; TODO: play game over music
-; TODO: add menu screen
 ; TODO: clean reset player after death
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction
@@ -42,7 +40,10 @@ PLAYER_SPRITE=$cb ; the player sprite index
 PLAYANIM_OFFSET=$cc ; the player animation offset
 ITEMS=$d0 ; the picked up player items
 PLAYER_LIVES=$d1 ; the player lives
-ENABLE_INPUT=$d2 ; enable user controls
+SCOREL=$d2 ; player score low byte
+SCOREH=$d3 ; player score high byte
+MENU_SELECTION=$d4 ; selected menu item
+DISPLAY_TYPE=$d5 ; screen display type
 TMP0=$e0 ; volatile temp storage 0
 TMP1=$e1 ; volatile temp storage 1
 TMP2=$e2 ; volatile temp storage 2
@@ -74,19 +75,10 @@ SFX2_NOTE_SILENCE=$104 ; sound effect note silence
 
 	; main setup
 	setup_sound()
-	setup_game_screen()
 	setup_colors()
-	setup_tileset()
-	setup_pmg()
-	display_screen_items()
-	display_player_lives()
-	display_game_map()
-	clear_pmg()
-	draw_player()
-	store_tilex()
-	store_tiley()
+	display_game()
 	enable_interrupts()
-	;display_mainmenu()
+	display_mainmenu()
 
 	jmp *
 

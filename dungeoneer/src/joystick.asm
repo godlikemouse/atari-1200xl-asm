@@ -107,16 +107,16 @@ block
 .endp
 
 ;
-; read joystick
+; read game joystick
 ;	handle player movement
-.proc read_joystick
+.proc read_game_joystick
 UP=$0e
 DOWN=$0d
 LEFT=$0b
 RIGHT=$07
 NONE=$0f
 
-	lda ENABLE_INPUT
+	lda DISPLAY_TYPE
 	cmp #1
 	bne done
 
@@ -173,6 +173,45 @@ store_posx
 	stx HPOSP2
 	stx HPOSP3
 	jmp done
+.endp
+
+;
+; read main menu joystick
+;	handle menu selection
+.proc read_mainmenu_joystick
+UP=$0e
+DOWN=$0d
+
+	lda DISPLAY_TYPE
+	cmp #0
+	bne done
+
+	lda STICK0
+	cmp #UP
+	beq move_up
+	cmp #DOWN
+	beq move_down
+
+	lda BTN0
+	cmp #0
+	beq button_pressed
+
+	jmp done
+
+move_up
+	mva #0 MENU_SELECTION
+	jmp done
+
+move_down
+	mva #1 MENU_SELECTION
+	jmp done
+
+button_pressed
+	display_game()
+	jmp done
+
+done
+	rts
 .endp
 
 ;
