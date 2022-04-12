@@ -116,6 +116,10 @@ LEFT=$0b
 RIGHT=$07
 NONE=$0f
 
+	lda ENABLE_INPUT
+	cmp #1
+	bne done
+
 	lda STICK0
 	cmp #LEFT
 	beq move_left
@@ -146,20 +150,20 @@ move_up
 	draw_player()
 	animate_player_left()
 	pickup_item()
-	jmp post_move
+	jmp done
 
 move_down
 	can_move_down()
 	draw_player()
 	animate_player_right()
 	pickup_item()
-	jmp post_move
+	jmp done
 
 move_none
 	animate_player_reset()
 	rts
 
-post_move
+done
 	rts
 
 store_posx
@@ -168,7 +172,7 @@ store_posx
 	stx HPOSP1
 	stx HPOSP2
 	stx HPOSP3
-	jmp post_move
+	jmp done
 .endp
 
 ;
