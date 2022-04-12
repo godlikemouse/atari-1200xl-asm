@@ -5,19 +5,30 @@
 ; setup tileset
 ;
 .proc setup_tileset
-	mva #>TILESET1 CHBAS
+	mva #>GAME_TILESET1 TILESET_ADDRESS
+	mva TILESET_ADDRESS CHBAS
 	rts
 .endp
 
 ;
-; display tileset
+; setup menu tileset
 ;
-.proc display_tileset
+.proc setup_menu_tileset
+	mva #>MENU_TILESET1 TILESET_ADDRESS
+	mva TILESET_ADDRESS CHBAS
+	rts
+.endp
+
+;
+; display game map
+;
+.proc display_game_map
 level_map=level1_map.map
 
 	ldx #0
 	lda #$ff
 	sta TILESPRITE
+	stx TILESPRITE_INDEX
 
 loop
 	mva level_map,x SCREEN,x
@@ -45,21 +56,25 @@ loop
 .proc animate_tilesprite
 	inc TILESPRITE
 	ldx TILESPRITE
+	ldy TILESPRITE_INDEX
 
 	cpx #10
 	bne done
 	ldx #$ff
 	stx TILESPRITE
 
+	iny
+	sty TILESPRITE_INDEX
+
 	adb CHBAS #4
-	lda CHBAS
-	cmp #>TILESET1+12
+	cpy #3
 	beq reset
 
 	sta CHBAS
 	jmp done
 reset
-	mva #>TILESET1 CHBAS
+	mva TILESET_ADDRESS CHBAS
+	mva #0 TILESPRITE_INDEX
 done
 	rts
 .endp
@@ -175,5 +190,33 @@ dy mva #0 TMP3
 	store_ontile()
 	sbb POSX TMP2
 	sbb POSY TMP3
+	rts
+.endp
+
+.proc display_gameover_map
+map=gameover.map
+
+	ldx #0
+	lda #$ff
+	sta TILESPRITE
+	stx TILESPRITE_INDEX
+
+loop
+	mva map,x GAMEOVER_SCREEN,x
+	mva map+40,x GAMEOVER_SCREEN+40,x
+	mva map+80,x GAMEOVER_SCREEN+80,x
+	mva map+120,x GAMEOVER_SCREEN+120,x
+	mva map+160,x GAMEOVER_SCREEN+160,x
+	mva map+200,x GAMEOVER_SCREEN+200,x
+	mva map+240,x GAMEOVER_SCREEN+240,x
+	mva map+280,x GAMEOVER_SCREEN+280,x
+	mva map+320,x GAMEOVER_SCREEN+320,x
+	mva map+360,x GAMEOVER_SCREEN+360,x
+	mva map+400,x GAMEOVER_SCREEN+400,x
+	mva map+440,x GAMEOVER_SCREEN+440,x
+
+	inx
+	cpx #40
+	bne loop
 	rts
 .endp

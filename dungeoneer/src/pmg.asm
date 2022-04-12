@@ -200,7 +200,12 @@ draw
 	rts
 .endp
 
-.proc display_game_over
-	setup_game_over()
+;
+; display game over
+;
+.proc display_gameover
+	setup_gameover()
+	setup_menu_tileset()
+	display_gameover_map()
 	rts
 .endp

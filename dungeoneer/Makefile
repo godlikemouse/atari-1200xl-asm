@@ -17,7 +17,8 @@ runalt:
 	./altirra ${OUTFILE} > /dev/null 2>&1 &
 
 generate_tiles:
-	cd art && ./tileset.py tileset.png tile_gfx
+	cd art && ./tileset.py game_tileset tileset_data
+	cd art && ./tileset.py menu_tileset menu_data
 
 generate_player:
 	cd art && ./player.py

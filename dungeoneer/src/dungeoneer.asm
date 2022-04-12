@@ -8,6 +8,7 @@
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
+; TODO: stop background music on game over, play game over music
 ; TODO: optimize player sprite set
 ; TODO: add menu tileset
 ; TODO: create real game over screen
@@ -20,12 +21,15 @@
 
 SCREEN=$3000 ; screen buffer
 ITEM_SCREEN=$4000 ; item screen buffer
+GAMEOVER_SCREEN=$4028
 PMG=$5000 ; player missile graphics buffer
 PMG_OFFSCRN=$5500 ; player missile graphics offscreen
-TILESET1=$6000 ; tileset1 sprite address
-TILESET2=$6400 ; tileset2 sprite address
-TILESET3=$6800 ; tileset3 sprite address
-MENU_TILESET=$7000 ; menu tileset address
+GAME_TILESET1=$6000 ; tileset1 sprite address
+GAME_TILESET2=$6400 ; tileset2 sprite address
+GAME_TILESET3=$6800 ; tileset3 sprite address
+MENU_TILESET1=$7000 ; menu tileset address
+MENU_TILESET2=$7400 ; menu tileset address
+MENU_TILESET3=$7800 ; menu tileset address
 POSX=$c0 ; player x position on screen
 POSY=$c1 ; player y position on screen
 TILEX=$c2 ; the x tile position
@@ -33,9 +37,11 @@ TILEY=$c3 ; the y tile position
 ONTILE=$c4 ; the current player tile
 TILEPTRL=$c5 ; the tile pointer low byte
 TILEPTRH=$c6 ; the tile pointer high byte
-TILESPRITE=$c7 ; the tile sprite index
-PLAYER_SPRITE=$c8 ; the player sprite index
-PLAYANIM_OFFSET=$c9 ; the player animation offset
+TILESPRITE=$c7 ; the tile sprite counter
+TILESPRITE_INDEX=$c8
+TILESET_ADDRESS=$c9 ; the animating tileset address
+PLAYER_SPRITE=$ca ; the player sprite index
+PLAYANIM_OFFSET=$cb ; the player animation offset
 ITEMS=$d0 ; the picked up player items
 PLAYER_LIVES=$d1 ; the player lives
 TMP0=$e0 ; volatile temp storage 0
@@ -63,7 +69,7 @@ SFX1_NOTE_SILENCE=$f7 ; sound effect note silence
 	setup_pmg()
 	display_screen_items()
 	display_player_lives()
-	display_tileset()
+	display_game_map()
 	clear_pmg()
 	draw_player()
 	store_tilex()
@@ -81,7 +87,9 @@ SFX1_NOTE_SILENCE=$f7 ; sound effect note silence
 	icl "item.asm"
 	icl "interrupt.asm"
 	icl "sound.asm"
-	icl "data/tileset.asm"
+	icl "data/game_tileset.asm"
+	icl "data/menu_tileset.asm"
 	icl "data/player.asm"
 	icl "data/sound.asm"
 	icl "data/map.asm"
+	icl "data/gameover.asm"

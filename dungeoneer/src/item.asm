@@ -208,7 +208,7 @@ done
 	lda PLAYER_LIVES
 	cmp #0
 	bne done
-	display_game_over()
+	display_gameover()
 done
 	rts
 .endp

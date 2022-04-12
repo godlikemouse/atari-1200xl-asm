@@ -10,13 +10,13 @@ tile_height = 8
 filename = sys.argv[1]
 localname = sys.argv[2]
 
-img = png.Reader(filename=filename)
+img = png.Reader(filename=filename + ".png")
 (width, height, rows, info) = img.read()
 frames = int(height / width)
 
 colors = ["00", "11", "01", "10", "11"]
 
-f = open("../src/data/tileset.asm", "w")
+f = open("../src/data/" + filename + ".asm", "w")
 f.write("\t.local " + localname + "\n")
 
 row_offset = 0
@@ -28,7 +28,7 @@ for row in row_list:
 
 for frame in range(frames):
 
-    f.write("\torg tileset" + str(frame+1) + "\n")
+    f.write("\torg " + filename + str(frame+1) + "\n")
     char = 0
 
     for row in range(int(width / tile_height)):

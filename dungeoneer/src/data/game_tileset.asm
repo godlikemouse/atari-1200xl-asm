@@ -1,5 +1,5 @@
-	.local tile_gfx
-	org tileset1
+	.local tileset_data
+	org game_tileset1
 	; char 0
 	.byte %00000000
 	.byte %00000000
@@ -1152,7 +1152,7 @@
 	.byte %00000000
 	.byte %00000000
 	.byte %00000000
-	org tileset2
+	org game_tileset2
 	; char 0
 	.byte %00000000
 	.byte %00000000
@@ -2305,7 +2305,7 @@
 	.byte %00000000
 	.byte %00000000
 	.byte %00000000
-	org tileset3
+	org game_tileset3
 	; char 0
 	.byte %00000000
 	.byte %00000000
