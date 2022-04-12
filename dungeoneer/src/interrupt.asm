@@ -26,6 +26,9 @@ vvblkd_interrupt
     read_mainmenu_joystick()
 	animate_tilesprite()
     draw_mainmenu()
+    draw_intro()
+    draw_gameover()
+    
 	play_background_music()
 	play_sfx SFX1, AF1C
     play_sfx SFX2, AF2C

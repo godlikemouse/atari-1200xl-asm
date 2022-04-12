@@ -20,38 +20,6 @@
 .endp
 
 ;
-; display game map
-;
-.proc display_game_map
-level_map=level1_map.map
-
-	ldx #0
-	lda #$ff
-	sta TILESPRITE
-	stx TILESPRITE_INDEX
-	mva #1 TILESPRITE_ENABLE
-
-loop
-	mva level_map,x SCREEN,x
-	mva level_map+40,x SCREEN+40,x
-	mva level_map+80,x SCREEN+80,x
-	mva level_map+120,x SCREEN+120,x
-	mva level_map+160,x SCREEN+160,x
-	mva level_map+200,x SCREEN+200,x
-	mva level_map+240,x SCREEN+240,x
-	mva level_map+280,x SCREEN+280,x
-	mva level_map+320,x SCREEN+320,x
-	mva level_map+360,x SCREEN+360,x
-	mva level_map+400,x SCREEN+400,x
-	mva level_map+440,x SCREEN+440,x
-
-	inx
-	cpx #40
-	bne loop
-	rts
-.endp
-
-;
 ; animate tilesprite
 ; 	animate map tile sprites
 .proc animate_tilesprite
@@ -199,16 +167,16 @@ dy mva #0 TMP3
 .endp
 
 ;
-; display game over map
+; display main menu map
 ;
-.proc display_gameover_map
-map=gameover.map
+.proc display_mainmenu_map
+map=mainmenu.map
 
 	ldx #0
 	lda #$ff
 	sta TILESPRITE
 	stx TILESPRITE_INDEX
-	mva #1 TILESPRITE_ENABLE
+	stx TILESPRITE_ENABLE
 
 loop
 	mva map,x MENU_SCREEN,x
@@ -231,16 +199,76 @@ loop
 .endp
 
 ;
-; display main menu map
+; display game intro map
 ;
-.proc display_mainmenu_map
-map=mainmenu.map
+.proc display_game_intro_map
+map=level1_map.intro
+
+	ldx #0
+
+loop
+	mva map,x MENU_SCREEN,x
+	mva map+40,x MENU_SCREEN+40,x
+	mva map+80,x MENU_SCREEN+80,x
+	mva map+120,x MENU_SCREEN+120,x
+	mva map+160,x MENU_SCREEN+160,x
+	mva map+200,x MENU_SCREEN+200,x
+	mva map+240,x MENU_SCREEN+240,x
+	mva map+280,x MENU_SCREEN+280,x
+	mva map+320,x MENU_SCREEN+320,x
+	mva map+360,x MENU_SCREEN+360,x
+	mva map+400,x MENU_SCREEN+400,x
+	mva map+440,x MENU_SCREEN+440,x
+	inx
+	cpx #40
+	bne loop
+	
+	rts
+.endp
+
+;
+; display game map
+;
+.proc display_game_map
+level_map=level1_map.map
 
 	ldx #0
 	lda #$ff
 	sta TILESPRITE
 	stx TILESPRITE_INDEX
-	stx TILESPRITE_ENABLE
+	mva #1 TILESPRITE_ENABLE
+
+loop
+	mva level_map,x SCREEN,x
+	mva level_map+40,x SCREEN+40,x
+	mva level_map+80,x SCREEN+80,x
+	mva level_map+120,x SCREEN+120,x
+	mva level_map+160,x SCREEN+160,x
+	mva level_map+200,x SCREEN+200,x
+	mva level_map+240,x SCREEN+240,x
+	mva level_map+280,x SCREEN+280,x
+	mva level_map+320,x SCREEN+320,x
+	mva level_map+360,x SCREEN+360,x
+	mva level_map+400,x SCREEN+400,x
+	mva level_map+440,x SCREEN+440,x
+
+	inx
+	cpx #40
+	bne loop
+	rts
+.endp
+
+;
+; display game over map
+;
+.proc display_gameover_map
+map=gameover.map
+
+	ldx #0
+	lda #$ff
+	sta TILESPRITE
+	stx TILESPRITE_INDEX
+	mva #1 TILESPRITE_ENABLE
 
 loop
 	mva map,x MENU_SCREEN,x

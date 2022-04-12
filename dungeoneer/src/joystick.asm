@@ -117,7 +117,7 @@ RIGHT=$07
 NONE=$0f
 
 	lda DISPLAY_TYPE
-	cmp #1
+	cmp #2
 	bne done
 
 	lda STICK0
@@ -207,7 +207,7 @@ move_down
 	jmp done
 
 button_pressed
-	display_game()
+	display_game_intro()
 	jmp done
 
 done

@@ -201,20 +201,6 @@ draw
 .endp
 
 ;
-; display game over
-;	displays the game over screen
-.proc display_gameover
-	setup_menu_screen()
-	setup_menu_tileset()
-	display_gameover_map()
-	stop_background_music()
-	mva #0 GRACTL
-	play_gameover_sound()
-	mva #2 DISPLAY_TYPE
-	rts
-.endp
-
-;
 ; display main menu
 ;	displays the main menu screen
 .proc display_mainmenu
@@ -222,8 +208,22 @@ draw
 	setup_menu_screen()
 	setup_menu_tileset()
 	display_mainmenu_map()
+	mva #3 GRACTL
 	mva #0 DISPLAY_TYPE
 	mva #0 MENU_SELECTION
+	rts
+.endp
+
+;
+; display game intro
+;	displays the game intro screen
+.proc display_game_intro
+	stop_background_music()
+	setup_menu_screen()
+	setup_menu_tileset()
+	display_game_intro_map()
+	mva #1 DISPLAY_TYPE
+	mva #0 INTRO_POSITION
 	rts
 .endp
 
@@ -231,6 +231,7 @@ draw
 ; display game
 ; 	displays the game screen
 .proc display_game
+	setup_sound()
 	setup_game_screen()
 	setup_tileset()
 	setup_pmg()
@@ -241,8 +242,22 @@ draw
 	draw_player()
 	store_tilex()
 	store_tiley()
-	mva #1 DISPLAY_TYPE
+	mva #2 DISPLAY_TYPE
 	enable_background_music()
+	rts
+.endp
+
+;
+; display game over
+;	displays the game over screen
+.proc display_gameover
+	setup_menu_screen()
+	setup_menu_tileset()
+	display_gameover_map()
+	stop_background_music()
+	mva #0 GRACTL
+	play_gameover_sound()
+	mva #3 DISPLAY_TYPE
 	rts
 .endp
 
@@ -281,6 +296,56 @@ done
 	draw_player()
 
 exit
+	rts
+.endp
+
+;
+; draw intro
+;
+.proc draw_intro
+
+	lda DISPLAY_TYPE
+	cmp #1
+	bne done
+
+	lda INTRO_POSITION
+	sta POSX
+	sta HPOSP0
+	sta HPOSP1
+	sta HPOSP2
+	sta HPOSP3
+	inc INTRO_POSITION
+
+	clear_pmg()
+	draw_player()
+	animate_player_right()
+
+	lda INTRO_POSITION
+	cmp #210
+	bne done
+	mva #0 INTRO_POSITION
+	display_game()
+done
+	rts
+.endp
+
+;
+; draw gameover
+;
+.proc draw_gameover
+
+	lda DISPLAY_TYPE
+	cmp #3
+	bne done
+
+	inc GAMEOVER_POSITION
+	lda GAMEOVER_POSITION
+	cmp #255
+	bne done
+
+	mva #0 GAMEOVER_POSITION
+	display_mainmenu()
+done
 	rts
 .endp
 
