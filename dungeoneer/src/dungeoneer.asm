@@ -1,17 +1,13 @@
 ; Dungeoneer - A simple game in Atari 8-bit assembly
 
 ; References:
-; ATASCII Table: https://www.atariwiki.org/wiki/attach/Atari%20ATASCII%20Table/ascii_atascii_table.pdf
-; ATASCII 0-31 screen code 64-95
-; ATASCII 32-95 screen code 0-63
-; ATASCII 96-127 screen code 96-127
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
-; TODO: stop background music on game over, play game over music
 ; TODO: optimize player sprite set
-; TODO: add menu tileset
-; TODO: create real game over screen
+; TODO: play game over music
+; TODO: add death sound
+; TODO: clean reset player after death
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction
 ; TODO: add end of level interaction
@@ -21,7 +17,7 @@
 
 SCREEN=$3000 ; screen buffer
 ITEM_SCREEN=$4000 ; item screen buffer
-GAMEOVER_SCREEN=$4028
+GAMEOVER_SCREEN=$4028 ; game over screen address
 PMG=$5000 ; player missile graphics buffer
 PMG_OFFSCRN=$5500 ; player missile graphics offscreen
 GAME_TILESET1=$6000 ; tileset1 sprite address
@@ -38,7 +34,7 @@ ONTILE=$c4 ; the current player tile
 TILEPTRL=$c5 ; the tile pointer low byte
 TILEPTRH=$c6 ; the tile pointer high byte
 TILESPRITE=$c7 ; the tile sprite counter
-TILESPRITE_INDEX=$c8
+TILESPRITE_INDEX=$c8 ; the tile sprite index (0, 1, 2)
 TILESET_ADDRESS=$c9 ; the animating tileset address
 PLAYER_SPRITE=$ca ; the player sprite index
 PLAYANIM_OFFSET=$cb ; the player animation offset
@@ -55,11 +51,12 @@ BGM_COUNTER=$f0 ; background music counter
 BGM_DATA_INDEX=$f1 ; background music data index
 BGM_NOTE_SUSTAIN=$f2 ; background music note sustain
 BGM_NOTE_SILENCE=$f3 ; background music note silence
-SFX1=$f4 ; sound effect 1
-SFX1_COUNTER=$f5 ; sound effect counter
-SFX1_DATA_INDEX=$f5 ; sound effect data index
-SFX1_NOTE_SUSTAIN=$f6 ; sound effect note sustain
-SFX1_NOTE_SILENCE=$f7 ; sound effect note silence
+BGM_ENABLE=$f4 ; enable background music
+SFX1=$f5 ; sound effect 1
+SFX1_COUNTER=$f6 ; sound effect counter
+SFX1_DATA_INDEX=$f7 ; sound effect data index
+SFX1_NOTE_SUSTAIN=$f8 ; sound effect note sustain
+SFX1_NOTE_SILENCE=$f9 ; sound effect note silence
 
 	; main setup
 	setup_sound()

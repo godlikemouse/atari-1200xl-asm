@@ -7,6 +7,7 @@
 .proc setup_sound
 	mva #0 BGM_COUNTER
 	mva #0 BGM_DATA_INDEX
+	mva #1 BGM_ENABLE
 	;N1234HHS
 	mva #%00000000 AUDCTL
 	rts
@@ -18,6 +19,11 @@
 .proc play_background_music
 FREQCTRL=AF4C
 CHANNEL=FREQCTRL+1
+
+	lda BGM_ENABLE
+	cmp #1
+	bne done
+
 	inc BGM_COUNTER
 	ldx BGM_COUNTER
 
@@ -55,6 +61,18 @@ play_note
 
 	mva #0 BGM_DATA_INDEX
 done
+	rts
+.endp
+
+;
+; stop background music
+;
+.proc stop_background_music
+FREQCTRL=AF4C
+CHANNEL=FREQCTRL+1
+	lda #0
+	sta BGM_ENABLE
+	sta CHANNEL
 	rts
 .endp
 

@@ -207,5 +207,7 @@ draw
 	setup_gameover()
 	setup_menu_tileset()
 	display_gameover_map()
+	stop_background_music()
+	mva #0 GRACTL
 	rts
 .endp
