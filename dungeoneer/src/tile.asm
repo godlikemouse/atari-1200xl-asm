@@ -171,29 +171,12 @@ dy mva #0 TMP3
 ;
 .proc display_mainmenu_map
 map=mainmenu.map
+	mva #$ff TILESPRITE
+	lda #0
+	sta TILESPRITE_INDEX
+	sta TILESPRITE_ENABLE
 
-	ldx #0
-	lda #$ff
-	sta TILESPRITE
-	stx TILESPRITE_INDEX
-	stx TILESPRITE_ENABLE
-
-loop
-	mva map,x MENU_SCREEN,x
-	mva map+40,x MENU_SCREEN+40,x
-	mva map+80,x MENU_SCREEN+80,x
-	mva map+120,x MENU_SCREEN+120,x
-	mva map+160,x MENU_SCREEN+160,x
-	mva map+200,x MENU_SCREEN+200,x
-	mva map+240,x MENU_SCREEN+240,x
-	mva map+280,x MENU_SCREEN+280,x
-	mva map+320,x MENU_SCREEN+320,x
-	mva map+360,x MENU_SCREEN+360,x
-	mva map+400,x MENU_SCREEN+400,x
-	mva map+440,x MENU_SCREEN+440,x
-	inx
-	cpx #40
-	bne loop
+	render_map #<map, #>map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp
 
@@ -202,26 +185,7 @@ loop
 ;
 .proc display_game_intro_map
 map=level1_map.intro
-
-	ldx #0
-
-loop
-	mva map,x MENU_SCREEN,x
-	mva map+40,x MENU_SCREEN+40,x
-	mva map+80,x MENU_SCREEN+80,x
-	mva map+120,x MENU_SCREEN+120,x
-	mva map+160,x MENU_SCREEN+160,x
-	mva map+200,x MENU_SCREEN+200,x
-	mva map+240,x MENU_SCREEN+240,x
-	mva map+280,x MENU_SCREEN+280,x
-	mva map+320,x MENU_SCREEN+320,x
-	mva map+360,x MENU_SCREEN+360,x
-	mva map+400,x MENU_SCREEN+400,x
-	mva map+440,x MENU_SCREEN+440,x
-	inx
-	cpx #40
-	bne loop
-
+	render_map #<map, #>map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp
 
@@ -229,31 +193,13 @@ loop
 ; display game map
 ;
 .proc display_game_map
-level_map=level1_map.map
+map=level1_map.map
 
-	ldx #0
-	lda #$ff
-	sta TILESPRITE
-	stx TILESPRITE_INDEX
+	mva #$ff TILESPRITE
+	mva #0 TILESPRITE_INDEX
 	mva #1 TILESPRITE_ENABLE
 
-loop
-	mva level_map,x GAME_SCREEN,x
-	mva level_map+40,x GAME_SCREEN+40,x
-	mva level_map+80,x GAME_SCREEN+80,x
-	mva level_map+120,x GAME_SCREEN+120,x
-	mva level_map+160,x GAME_SCREEN+160,x
-	mva level_map+200,x GAME_SCREEN+200,x
-	mva level_map+240,x GAME_SCREEN+240,x
-	mva level_map+280,x GAME_SCREEN+280,x
-	mva level_map+320,x GAME_SCREEN+320,x
-	mva level_map+360,x GAME_SCREEN+360,x
-	mva level_map+400,x GAME_SCREEN+400,x
-	mva level_map+440,x GAME_SCREEN+440,x
-
-	inx
-	cpx #40
-	bne loop
+	render_map #<map, #>map, #<GAME_SCREEN, #>GAME_SCREEN
 	rts
 .endp
 
@@ -263,28 +209,41 @@ loop
 .proc display_gameover_map
 map=gameover.map
 
-	ldx #0
-	lda #$ff
-	sta TILESPRITE
-	stx TILESPRITE_INDEX
+	mva #$ff TILESPRITE
+	mva #0 TILESPRITE_INDEX
 	mva #1 TILESPRITE_ENABLE
 
-loop
-	mva map,x MENU_SCREEN,x
-	mva map+40,x MENU_SCREEN+40,x
-	mva map+80,x MENU_SCREEN+80,x
-	mva map+120,x MENU_SCREEN+120,x
-	mva map+160,x MENU_SCREEN+160,x
-	mva map+200,x MENU_SCREEN+200,x
-	mva map+240,x MENU_SCREEN+240,x
-	mva map+280,x MENU_SCREEN+280,x
-	mva map+320,x MENU_SCREEN+320,x
-	mva map+360,x MENU_SCREEN+360,x
-	mva map+400,x MENU_SCREEN+400,x
-	mva map+440,x MENU_SCREEN+440,x
+	render_map #<gameover.map, #>gameover.map, #<MENU_SCREEN, #>MENU_SCREEN
+	rts
+.endp
 
-	inx
-	cpx #40
+;
+; render map
+;	renders map data to destination screen
+.proc render_map(.byte mapl+1, maph+1, screenl+1, screenh+1) .var
+mapl mva #0 TMP0
+maph mva #0 TMP1
+screenl mva #0 TMP2
+screenh mva #0 TMP3
+
+map=TMP0
+screen=TMP2
+map2=TMP4
+screen2=TMP6
+
+	; setup 240 byte offset src/dest
+	mwa map map2
+	mwa screen screen2
+	adw map2 #240
+	adw screen2 #240
+
+	ldy #0
+loop
+	mva (map),y (screen),y
+	mva (map2),y (screen2),y
+
+	iny
+	cpy #240
 	bne loop
 	rts
 .endp
