@@ -243,7 +243,7 @@ draw
 	store_tilex()
 	store_tiley()
 	mva #2 DISPLAY_TYPE
-	enable_background_music()
+	play_background_music()
 	rts
 .endp
 
@@ -262,9 +262,9 @@ draw
 .endp
 
 ;
-; draw main menu
+; render main menu
 ;	handles selection / animation of main menu
-.proc draw_mainmenu
+.proc render_mainmenu
 play_item=MENU_SCREEN + 160 + 16
 exit_item=MENU_SCREEN + 240 + 16
 
@@ -300,9 +300,9 @@ exit
 .endp
 
 ;
-; draw intro
+; render intro
 ;
-.proc draw_intro
+.proc render_intro
 
 	lda DISPLAY_TYPE
 	cmp #1
@@ -330,9 +330,9 @@ done
 .endp
 
 ;
-; draw gameover
+; render gameover
 ;
-.proc draw_gameover
+.proc render_gameover
 
 	lda DISPLAY_TYPE
 	cmp #3

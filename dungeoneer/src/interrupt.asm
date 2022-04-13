@@ -24,13 +24,15 @@ vvblkd_interrupt
 .local vvblkd_chain
 	read_game_joystick()
     read_mainmenu_joystick()
+
 	animate_tilesprite()
-    draw_mainmenu()
-    draw_intro()
-    draw_gameover()
+
+    render_mainmenu()
+    render_intro()
+    render_gameover()
+	render_background_music()
+	render_sfx SFX1, AF1C
+    render_sfx SFX2, AF2C
     
-	play_background_music()
-	play_sfx SFX1, AF1C
-    play_sfx SFX2, AF2C
 	jmp XITVBV
 .endl

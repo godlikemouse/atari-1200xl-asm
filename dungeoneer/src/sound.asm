@@ -17,9 +17,9 @@
 .endp
 
 ;
-; play background music
+; render background music
 ;
-.proc play_background_music
+.proc render_background_music
 FREQCTRL=AF4C
 CHANNEL=FREQCTRL+1
 
@@ -82,15 +82,17 @@ CHANNEL=FREQCTRL+1
 ;
 ; enable background music
 ;
-.proc enable_background_music
+.proc play_background_music
+	mva #0 BGM_COUNTER
+	mva #0 BGM_DATA_INDEX
 	mva #1 BGM_ENABLE
 	rts
 .endp
 
 ;
-; play sfx
-; 	play sound effects
-.macro play_sfx reg, ctrl
+; render sfx
+; 	render sound effects
+.macro render_sfx reg, ctrl
 SFX=:reg
 SOUND=:reg+1
 COUNTER=:reg+3
