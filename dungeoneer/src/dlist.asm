@@ -22,7 +22,7 @@ antic2=2 ; ANTIC mode 2
 dlist
 	.byte blank8, blank8, blank7
 	.byte antic5 + LMS, <item_screen, >item_screen
-	.byte antic5 + LMS, <SCREEN, >SCREEN
+	.byte antic5 + LMS, <GAME_SCREEN, >GAME_SCREEN
 	.byte antic5, antic5, antic5, antic5, antic5, antic5
 	.byte antic5, antic5, antic5, antic5, antic5
 	.byte JVB, <dlist, >dlist

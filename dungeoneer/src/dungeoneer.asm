@@ -14,7 +14,7 @@
 
 	org $0600
 
-SCREEN=$3000 ; screen buffer
+GAME_SCREEN=$3000 ; game screen buffer
 ITEM_SCREEN=$4000 ; item screen buffer
 MENU_SCREEN=$4028 ; game over / main menu screen address
 PMG=$5000 ; player missile graphics buffer

@@ -57,9 +57,9 @@ done
 ;
 .proc store_ontile
     ; calculate screen tile offset
-    lda #>SCREEN
+    lda #>GAME_SCREEN
     sta TILEPTRH
-    lda #<SCREEN
+    lda #<GAME_SCREEN
     sta TILEPTRL
 
     ldy TILEY
@@ -191,7 +191,6 @@ loop
 	mva map+360,x MENU_SCREEN+360,x
 	mva map+400,x MENU_SCREEN+400,x
 	mva map+440,x MENU_SCREEN+440,x
-
 	inx
 	cpx #40
 	bne loop
@@ -222,7 +221,7 @@ loop
 	inx
 	cpx #40
 	bne loop
-	
+
 	rts
 .endp
 
@@ -239,18 +238,18 @@ level_map=level1_map.map
 	mva #1 TILESPRITE_ENABLE
 
 loop
-	mva level_map,x SCREEN,x
-	mva level_map+40,x SCREEN+40,x
-	mva level_map+80,x SCREEN+80,x
-	mva level_map+120,x SCREEN+120,x
-	mva level_map+160,x SCREEN+160,x
-	mva level_map+200,x SCREEN+200,x
-	mva level_map+240,x SCREEN+240,x
-	mva level_map+280,x SCREEN+280,x
-	mva level_map+320,x SCREEN+320,x
-	mva level_map+360,x SCREEN+360,x
-	mva level_map+400,x SCREEN+400,x
-	mva level_map+440,x SCREEN+440,x
+	mva level_map,x GAME_SCREEN,x
+	mva level_map+40,x GAME_SCREEN+40,x
+	mva level_map+80,x GAME_SCREEN+80,x
+	mva level_map+120,x GAME_SCREEN+120,x
+	mva level_map+160,x GAME_SCREEN+160,x
+	mva level_map+200,x GAME_SCREEN+200,x
+	mva level_map+240,x GAME_SCREEN+240,x
+	mva level_map+280,x GAME_SCREEN+280,x
+	mva level_map+320,x GAME_SCREEN+320,x
+	mva level_map+360,x GAME_SCREEN+360,x
+	mva level_map+400,x GAME_SCREEN+400,x
+	mva level_map+440,x GAME_SCREEN+440,x
 
 	inx
 	cpx #40

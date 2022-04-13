@@ -3,6 +3,6 @@
 if [[ `uname -r` =~ ^.*microsoft.*$ ]]; then
 	../../../Altirra64.exe $1
 else
-	wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Altirra/Altirra.exe $1
+	wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Altirra/Altirra.exe /singleinstance $1
 fi
 
