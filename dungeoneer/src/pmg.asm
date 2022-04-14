@@ -211,6 +211,7 @@ draw
 	mva #3 GRACTL
 	mva #0 DISPLAY_TYPE
 	mva #0 MENU_SELECTION
+	mva #$0 PLAYANIM_OFFSET
 	rts
 .endp
 

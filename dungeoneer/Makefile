@@ -1,6 +1,7 @@
 CC=mads
-FLAGS=-l -t
-OUTFILE=dungeoneer.xex
+NAME=dungeoneer
+FLAGS=-l:${NAME}.lst -t:${NAME}.lab
+OUTFILE=${NAME}.xex
 
 all: clean generate_tiles build	run
 
@@ -8,7 +9,7 @@ clean:
 	rm -f *.lab *.lst *.obx
 
 build:
-	${CC} ${FLAGS} src/dungeoneer.asm -o:${OUTFILE}
+	${CC} ${FLAGS} src/${NAME}.asm -o:${OUTFILE}
 
 run:
 	atari800 -vsync -run ${OUTFILE}
