@@ -31,8 +31,8 @@ vvblkd_interrupt
     render_intro()
     render_gameover()
 	render_background_music()
-	render_sfx SFX1, AF1C
-    render_sfx SFX2, AF2C
-    
+    render_sfx #<SFX1, #>SFX1, #<AF1C, #>AF1C
+    render_sfx #<SFX2, #>SFX2, #<AF2C, #>AF2C
+
 	jmp XITVBV
 .endl
