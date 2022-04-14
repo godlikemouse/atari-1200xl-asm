@@ -130,10 +130,8 @@ check
     cmp #1
     bne reset
 
-    ldx PLAYER_SPRITE
-    inx
-    stx PLAYER_SPRITE
-    cpx #5
+	adb PLAYER_SPRITE #1
+	cmp #5
     bne done
 
     mva #0 PLAYER_SPRITE
@@ -155,29 +153,27 @@ done
     jmp check
 
 reset
-    mva #$60 PLAYANIM_OFFSET
+    mva #$30 PLAYANIM_OFFSET
     draw_player()
 
 check
     lda PLAYANIM_OFFSET
-    between #$60, #$90
+    between #$30, #$60
     cmp #1
     bne reset
 
 timer
-    ldx PLAYER_SPRITE
-    inx
-    stx PLAYER_SPRITE
-    cpx #5
+	adb PLAYER_SPRITE #1
+	cmp #5
     bne done
 
     mva #0 PLAYER_SPRITE
     draw_player()
     adb PLAYANIM_OFFSET #$18
-    cmp #$90
+    cmp #$60
     bne done
 
-    mva #$60 PLAYANIM_OFFSET
+	mva #$30 PLAYANIM_OFFSET
 done
     rts
 .endp
@@ -194,7 +190,7 @@ done
 	mva #$0 PLAYANIM_OFFSET
 	jmp draw
 left
-	mva #$60 PLAYANIM_OFFSET
+	mva #$30 PLAYANIM_OFFSET
 draw
 	draw_player()
 	rts
@@ -360,7 +356,6 @@ addrh mva #0 TMP1
 	ldy #0
 
 loop
-	clc
 	lda (TMP0),y
 	cmp #128
 	bcc less_than
@@ -386,7 +381,6 @@ addrh mva #0 TMP1
 	ldy #0
 
 loop
-	clc
 	lda (TMP0),y
 	cmp #128
 	bcs greater_than

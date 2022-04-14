@@ -193,6 +193,9 @@ done
 	tile_is_death()
 	cmp #1
 	bne done
+	mwa #death_sfx SFX1_ADDRL
+	mva #1 SFX1
+	
 	dec PLAYER_LIVES
 	check_game_over()
 	reset_player()

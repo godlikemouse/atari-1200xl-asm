@@ -4,8 +4,6 @@
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
-; TODO: optimize player sprite set
-; TODO: add death sound
 ; TODO: clean reset player after death
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction

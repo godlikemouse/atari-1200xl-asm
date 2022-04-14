@@ -3,7 +3,7 @@ NAME=dungeoneer
 FLAGS=-l:${NAME}.lst -t:${NAME}.lab
 OUTFILE=${NAME}.xex
 
-all: clean generate_tiles build	run
+all: clean generate_tiles generate_player build	run
 
 clean:
 	rm -f *.lab *.lst *.obx
