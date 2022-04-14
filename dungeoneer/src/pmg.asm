@@ -220,7 +220,7 @@ draw
 	setup_menu_tileset()
 	display_game_intro_map()
 	mva #1 DISPLAY_TYPE
-	mva #0 INTRO_POSITION
+	mva #50 INTRO_POSITION
 	rts
 .endp
 
@@ -318,7 +318,7 @@ exit
 	animate_player_right()
 
 	lda INTRO_POSITION
-	cmp #210
+	cmp #200
 	bne done
 	mva #0 INTRO_POSITION
 	display_game()
