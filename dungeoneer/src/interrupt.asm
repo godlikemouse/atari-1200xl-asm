@@ -1,6 +1,9 @@
 ; interrupt.asm
 ;   Contains interrupt related functionality
 
+;
+; eanble interrupts
+;   sets up the interrupt chain
 .proc enable_interrupts
     ; enable interrupt
     ldy #<vvblkd_interrupt

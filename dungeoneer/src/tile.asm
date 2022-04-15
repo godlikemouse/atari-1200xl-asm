@@ -183,8 +183,6 @@ map=mainmenu.map
 .proc display_game_intro_map
 map=level1_map.intro
 
-	enable_tilesprite_animation()
-
 	render_map #<map, #>map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp
@@ -195,8 +193,6 @@ map=level1_map.intro
 .proc display_game_map
 map=level1_map.map
 
-	enable_tilesprite_animation()
-
 	render_map #<map, #>map, #<GAME_SCREEN, #>GAME_SCREEN
 	rts
 .endp
@@ -206,8 +202,6 @@ map=level1_map.map
 ;
 .proc display_gameover_map
 map=gameover.map
-
-	enable_tilesprite_animation()
 
 	render_map #<gameover.map, #>gameover.map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts

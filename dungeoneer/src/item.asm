@@ -7,16 +7,16 @@
 .proc display_screen_items
 
 	; key 1
-	display_screen_key #1, #$20, $0
+	display_screen_key #1, #$20, #$0
 
 	; key 2
-	display_screen_key #2, #$22, $2
+	display_screen_key #2, #$22, #$2
 
 	; key 3
-	display_screen_key #4, #$24, $4
+	display_screen_key #4, #$24, #$4
 
 	; key 4
-	display_screen_key #8, #$26, $6
+	display_screen_key #8, #$26, #$6
 	rts
 .endp
 
@@ -32,11 +32,9 @@
 	beq done
 loop
 	lda #47
-	sta ITEM_SCREEN, x
+	sta ITEM_SCREEN, x-
 	sub #1
-	dex
-	sta ITEM_SCREEN, x
-	dex
+	sta ITEM_SCREEN, x-
 	dey
 	bne loop
 done
@@ -48,10 +46,8 @@ done
 	ldy #6
 	lda #0
 loop
-	sta ITEM_SCREEN, x
-	dex
-	sta ITEM_SCREEN, x
-	dex
+	sta ITEM_SCREEN, x-
+	sta ITEM_SCREEN, x-
 	dey
 	bne loop
 	rts
@@ -63,19 +59,29 @@ loop
 ;	charset_idx, index of the character to use
 ;	item_idx, the bit index in ITEMS
 ;	screen_idx, left to right position in ITEM_SCREEN
-.macro display_screen_key item_idx, charset_idx, screen_idx
+.proc display_screen_key (.byte item_idx+1, charset_idx+1, screen_idx+1) .var
+item_idx mva #0 TMP0
+charset_idx mva #0 TMP1
+screen_idx mva #0 TMP2
 
-    lda ITEMS
-	and :item_idx
-	cmp :item_idx
+item_index=TMP0
+charset_index=TMP1
+screen_index=TMP2
+
+	lda ITEMS
+	and item_index
+	cmp item_index
 	bne done
 
-    ldx :charset_idx
-	stx ITEM_SCREEN + :screen_idx
-	inx
-	stx ITEM_SCREEN + :screen_idx + 1
+	lda charset_index
+	ldy screen_index
+	sta ITEM_SCREEN,y+
+	add #1
+	sta ITEM_SCREEN,y
+
 done
-.endm
+	rts
+.endp
 
 ;
 ; display player score

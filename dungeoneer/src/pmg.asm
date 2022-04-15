@@ -237,6 +237,7 @@ draw
 	display_screen_items()
 	display_player_score()
 	display_player_lives()
+	enable_tilesprite_animation()
 	display_game_map()
 	clear_pmg()
 	draw_player()
@@ -251,11 +252,12 @@ draw
 ; display game over
 ;	displays the game over screen
 .proc display_gameover
+	clear_pmg()
 	setup_menu_screen()
 	setup_menu_tileset()
+	enable_tilesprite_animation()
 	display_gameover_map()
 	stop_background_music()
-	mva #0 GRACTL
 	play_gameover_sound()
 	mva #3 DISPLAY_TYPE
 	rts
