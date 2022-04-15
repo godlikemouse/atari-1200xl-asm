@@ -4,6 +4,7 @@
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
+; TODO: add player score
 ; TODO: clean reset player after death
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction
@@ -38,8 +39,8 @@ PLAYER_SPRITE=$cb ; the player sprite index
 PLAYANIM_OFFSET=$cc ; the player animation offset
 ITEMS=$d0 ; the picked up player items
 PLAYER_LIVES=$d1 ; the player lives
-SCOREL=$d2 ; player score low byte
-SCOREH=$d3 ; player score high byte
+PLAYER_SCOREL=$d2 ; player score low byte
+PLAYER_SCOREH=$d3 ; player score high byte
 MENU_SELECTION=$d4 ; selected menu item
 DISPLAY_TYPE=$d5 ; screen display type
 INTRO_POSITION=$d6 ; intro screen player x position
@@ -85,7 +86,6 @@ SFX2_NOTE_SILENCE=$104 ; sound effect note silence
 	; main setup
 	setup_sound()
 	setup_colors()
-	display_game()
 	enable_interrupts()
 	display_mainmenu()
 
@@ -104,6 +104,6 @@ SFX2_NOTE_SILENCE=$104 ; sound effect note silence
 	icl "data/menu_tileset.asm"
 	icl "data/player.asm"
 	icl "data/sound.asm"
-	icl "data/map.asm"
-	icl "data/gameover.asm"
-	icl "data/mainmenu.asm"
+	icl "display/map.asm"
+	icl "display/gameover.asm"
+	icl "display/mainmenu.asm"

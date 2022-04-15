@@ -200,6 +200,7 @@ draw
 ; display main menu
 ;	displays the main menu screen
 .proc display_mainmenu
+	setup_pmg()
 	stop_background_music()
 	setup_menu_screen()
 	setup_menu_tileset()
@@ -228,11 +229,13 @@ draw
 ; display game
 ; 	displays the game screen
 .proc display_game
+	mwa #0 PLAYER_SCOREL
 	setup_sound()
 	setup_game_screen()
 	setup_tileset()
 	setup_pmg()
 	display_screen_items()
+	display_player_score()
 	display_player_lives()
 	display_game_map()
 	clear_pmg()

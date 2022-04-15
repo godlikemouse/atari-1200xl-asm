@@ -12,12 +12,11 @@
 	; key 2
 	display_screen_key #2, #$22, $2
 
-	; key 2
+	; key 3
 	display_screen_key #4, #$24, $4
 
-	; key 2
+	; key 4
 	display_screen_key #8, #$26, $6
-
 	rts
 .endp
 
@@ -77,6 +76,31 @@ loop
 	stx ITEM_SCREEN + :screen_idx + 1
 done
 .endm
+
+;
+; display player score
+;
+.proc display_player_score
+
+	; display on screen
+	ldy #20
+	ldx #4
+
+loop
+
+	; NXXX
+	lda #0
+	add #96
+	sta ITEM_SCREEN,y
+	add #1
+	iny
+	sta ITEM_SCREEN,y
+	iny
+	dex
+	bne loop
+
+	rts
+.endp
 
 ;
 ; pickup item
@@ -195,7 +219,7 @@ done
 	bne done
 	mwa #death_sfx SFX1_ADDRL
 	mva #1 SFX1
-	
+
 	dec PLAYER_LIVES
 	check_game_over()
 	reset_player()

@@ -37,3 +37,30 @@ done
     tax
     lda TMP0
 .endm
+
+;
+; multiply
+;   multiply v1 * v2, result in acc
+.macro mul v1, v2
+
+    ldx :v2
+    lda :v1
+loop
+    add :v1
+    dex
+    cpx #1
+    bne loop
+.endm
+
+; multiply .word
+;   multiply v1 * v2, result in TMP4
+.macro mulw v1, v2
+
+    mwa :v2 TMP6
+    mwa :v1 TMP4
+loop
+    adw TMP4 :v1
+    sbw TMP6 #1
+    cpw TMP6 #1
+    bne loop
+.endm

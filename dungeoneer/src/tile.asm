@@ -171,10 +171,7 @@ dy mva #0 TMP3
 ;
 .proc display_mainmenu_map
 map=mainmenu.map
-	mva #$ff TILESPRITE
-	lda #0
-	sta TILESPRITE_INDEX
-	sta TILESPRITE_ENABLE
+	enable_tilesprite_animation()
 
 	render_map #<map, #>map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
@@ -185,6 +182,9 @@ map=mainmenu.map
 ;
 .proc display_game_intro_map
 map=level1_map.intro
+
+	enable_tilesprite_animation()
+
 	render_map #<map, #>map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp
@@ -195,9 +195,7 @@ map=level1_map.intro
 .proc display_game_map
 map=level1_map.map
 
-	mva #$ff TILESPRITE
-	mva #0 TILESPRITE_INDEX
-	mva #1 TILESPRITE_ENABLE
+	enable_tilesprite_animation()
 
 	render_map #<map, #>map, #<GAME_SCREEN, #>GAME_SCREEN
 	rts
@@ -209,9 +207,7 @@ map=level1_map.map
 .proc display_gameover_map
 map=gameover.map
 
-	mva #$ff TILESPRITE
-	mva #0 TILESPRITE_INDEX
-	mva #1 TILESPRITE_ENABLE
+	enable_tilesprite_animation()
 
 	render_map #<gameover.map, #>gameover.map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
@@ -245,5 +241,23 @@ loop
 	iny
 	cpy #240
 	bne loop
+	rts
+.endp
+
+;
+; enable tile sprite animation
+;
+.proc enable_tilesprite_animation
+	mva #$ff TILESPRITE
+	mva #0 TILESPRITE_INDEX
+	mva #1 TILESPRITE_ENABLE
+	rts
+.endp
+
+;
+; disable tile sprite animation
+;
+.proc disable_tilesprite_animation
+	mva #0 TILESPRITE_ENABLE
 	rts
 .endp
