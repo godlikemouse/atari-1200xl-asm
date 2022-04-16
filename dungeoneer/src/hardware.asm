@@ -23,26 +23,26 @@ HPOSP2 = $d002  ; Horizontal position of player 2
 HPOSP3 = $d003  ; Horizontal position of player 3
 WSYNC = $d40a   ; Wait Sync
 
-VVBLKD = $0224 ; Vertical Blank Interrupt Return
-SETVBV = $e45c ; Set Vertical Blank Interrupt Vector
-XITVBV = $e462
+VVBLKD = $0224  ; Vertical Blank Interrupt Return
+SETVBV = $e45c  ; Set Vertical Blank Interrupt Vector
+XITVBV = $e462  ; Vertical Blank Interrupt Exit
 
-VTIMR1 = $0210 ; Virtual Timer 1
+VTIMR1 = $0210  ; Virtual Timer 1
 
 ; joystick
-PACTL = $d302  ; joystick port control
-STICK0 = $0278 ; joystick port 0
-BTN0 = $0284 ; joystock port 0 button
+PACTL = $d302   ; joystick port control
+STICK0 = $0278  ; joystick port 0
+BTN0 = $0284    ; joystock port 0 button
 
 ; sound system
-AF1C = $d200 ; FFFFFFFF ; F=Frequency
-AC1C = $d201 ; NNNvVVVV ; N=Noise, v=Volume only, V=Volume
-AF2C = $d202 ; FFFFFFFF ; F=Frequency
-AC2C = $d203 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
-AF3C = $d204 ; FFFFFFFF ; F=Frequency
-AC3C = $d205 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
-AF4C = $d206 ; FFFFFFFF ; F=Frequency
-AC4C = $d207 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
+AF1C = $d200    ; FFFFFFFF ; F=Frequency
+AC1C = $d201    ; NNNvVVVV ; N=Noise, v=Volume only, V=Volume
+AF2C = $d202    ; FFFFFFFF ; F=Frequency
+AC2C = $d203    ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
+AF3C = $d204    ; FFFFFFFF ; F=Frequency
+AC3C = $d205    ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
+AF4C = $d206    ; FFFFFFFF ; F=Frequency
+AC4C = $d207    ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
 ; N=17bit to 9bit poly-counter
 ; 1234=Clocks and Joins
 ;   1 Channel 1 clock to 1.79Mhz
@@ -51,4 +51,4 @@ AC4C = $d207 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
 ;   4 Join channels 3-4 16bit frequency
 ; HH=Channel 1, Channel 2 Highpass Filters
 ; S=64Khz to 15kHz
-AUDCTL = $d208 ; N1234HHS
+AUDCTL = $d208  ; N1234HHS
