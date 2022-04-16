@@ -130,11 +130,47 @@ carry_tileptrh
 .endp
 
 ;
+; tile is chest
+;	if true, acc == 1, else acc == 0
+.proc tile_is_chest
+	lda ONTILE
+	between #$28, #$2a
+	rts
+.endp
+
+;
+; tile is coin
+;	if true, acc == 1, else acc == 0
+.proc tile_is_coin
+	lda ONTILE
+	between #$2a, #$2c
+	rts
+.endp
+
+;
 ; tile is an item
 ;   if true, acc == 1, else acc == 0
 .proc tile_is_item
     tile_is_key()
-    ; implied cmp #1
+	cmp #1
+	bne not_key
+	jmp done
+
+not_key
+	tile_is_chest()
+	cmp #1
+	bne not_chest
+	add_score #$00, #$20
+	lda #1
+	jmp done
+
+not_chest
+	tile_is_coin()
+	cmp #1
+	bne done
+	add_score #$00, #$05
+	lda #1
+
 done
     rts
 .endp
