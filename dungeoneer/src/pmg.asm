@@ -225,11 +225,16 @@ draw
 	rts
 .endp
 
+.proc new_game
+	mwa #0 PLAYER_SCOREL
+	mwa #0 ITEMS
+	rts
+.endp
+
 ;
 ; display game
 ; 	displays the game screen
 .proc display_game
-	mwa #0 PLAYER_SCOREL
 	setup_sound()
 	setup_game_screen()
 	setup_tileset()

@@ -207,6 +207,13 @@ move_down
 	jmp done
 
 button_pressed
+	lda MENU_SELECTION
+	cmp #0
+	beq start_new_game
+	jmp done
+
+start_new_game
+	new_game()
 	display_game_intro()
 	jmp done
 
