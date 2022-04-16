@@ -8,6 +8,7 @@
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction
 ; TODO: add end of level interaction
+; TODO: add transfer tile functionality
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5
 
 	org $0600
@@ -65,18 +66,18 @@ BGM_DATA_INDEX=$f1 ; background music data index
 BGM_NOTE_SUSTAIN=$f2 ; background music note sustain
 BGM_NOTE_SILENCE=$f3 ; background music note silence
 BGM_ENABLE=$f4 ; enable background music
-BGM_ADDRL=$f5
-BGM_ADDRH=$f6
+BGM_ADDRL=$f5 ; background music address low
+BGM_ADDRH=$f6 ; background music address high
 SFX1=$f7 ; sound effect 1
-SFX1_ADDRL=$f8
-SFX1_ADDRH=$f9
+SFX1_ADDRL=$f8 ; sfx1 address low
+SFX1_ADDRH=$f9 ; sfx1 address high
 SFX1_COUNTER=$fa ; sound effect counter
 SFX1_DATA_INDEX=$fb ; sound effect data index
 SFX1_NOTE_SUSTAIN=$fc ; sound effect note sustain
 SFX1_NOTE_SILENCE=$fd ; sound effect note silence
 SFX2=$fe ; sound effect 1
-SFX2_ADDRL=$ff
-SFX2_ADDRH=$100
+SFX2_ADDRL=$ff ; sfx2 address low
+SFX2_ADDRH=$100 ; sfx2 address high
 SFX2_COUNTER=$101 ; sound effect counter
 SFX2_DATA_INDEX=$102 ; sound effect data index
 SFX2_NOTE_SUSTAIN=$103 ; sound effect note sustain
