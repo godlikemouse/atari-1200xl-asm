@@ -5,6 +5,7 @@
 ; display screen items
 ;	shows picked up items at the top of the screen
 .proc display_screen_items
+	;clear_screen_items()
 
 	; key 1
 	display_screen_key #1, #$20, #$0
@@ -17,6 +18,21 @@
 
 	; key 4
 	display_screen_key #8, #$26, #$6
+	rts
+.endp
+
+;
+; clear screen items
+;
+.proc clear_screen_items
+
+	ldx #$0
+	lda #0
+loop
+	sta ITEM_SCREEN,x+
+	cpx #$7
+	bne loop
+
 	rts
 .endp
 

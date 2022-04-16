@@ -227,7 +227,8 @@ draw
 
 .proc new_game
 	mwa #0 PLAYER_SCOREL
-	mwa #0 ITEMS
+	mva #3 PLAYER_LIVES
+	mva #0 ITEMS
 	rts
 .endp
 

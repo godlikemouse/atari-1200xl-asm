@@ -12,7 +12,7 @@ build:
 	${CC} ${FLAGS} src/${NAME}.asm -o:${OUTFILE}
 
 run:
-	atari800 -vsync -run ${OUTFILE}
+	atari800 -vsync -video-accel -run ${OUTFILE}
 
 runalt:
 	./altirra ${OUTFILE} > /dev/null 2>&1 &

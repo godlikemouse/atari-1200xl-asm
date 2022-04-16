@@ -14,7 +14,6 @@ JVB=$41 ; Jump while vertical blank (JVB)
 antic5=5 ; ANTIC mode 5
 antic2=2 ; ANTIC mode 2
 
-	mva #3 PLAYER_LIVES
 	mwa #dlist SDLSTL ; move word takes care of high/low byte assignments
 	rts
 
