@@ -6,7 +6,6 @@
 
 ; TODO: add coin pickup sound
 ; TODO: add chest pickup sound
-; TODO: optimize add_score proc
 ; TODO: clean reset player after death
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction
