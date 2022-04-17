@@ -5,7 +5,7 @@
 ; display screen items
 ;	shows picked up items at the top of the screen
 .proc display_screen_items
-	;clear_screen_items()
+	clear_screen_items()
 
 	; key 1
 	display_screen_key #1, #$20, #$0
@@ -26,11 +26,11 @@
 ;
 .proc clear_screen_items
 
-	ldx #$0
 	lda #0
+	ldy #0
 loop
-	sta ITEM_SCREEN,x+
-	cpx #$7
+	sta ITEM_SCREEN,y+
+	cpy #8
 	bne loop
 
 	rts
@@ -104,7 +104,7 @@ done
 ;
 .proc display_player_score
 
-	ldy #27
+	ldy #22
 
 	; score is kept in 4 byte (nibble) per memory location
 

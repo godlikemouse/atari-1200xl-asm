@@ -109,7 +109,6 @@ loop
 	mva #46 SDMCTL ; single line resolution
 	mva #3 GRACTL ; enable PMG
 	mva #1 GRPRIOR ; give players priority
-	reset_player()
 	rts
 .endp
 
@@ -245,7 +244,7 @@ draw
 	display_player_lives()
 	enable_tilesprite_animation()
 	display_game_map()
-	clear_pmg()
+	reset_player()
 	draw_player()
 	store_tilex()
 	store_tiley()
