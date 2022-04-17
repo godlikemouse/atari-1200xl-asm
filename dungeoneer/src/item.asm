@@ -104,35 +104,25 @@ done
 ;
 .proc display_player_score
 
-	ldy #20
-
 	; score is kept in 4 byte (nibble) per memory location
+	ldy #20
+	ldx #0
 
-	; XXXN
-	; get lower nibble
-	lda PLAYER_SCOREL
+loop
+	; get lower nibble (XN)
+	lda PLAYER_SCOREL,x
 	and #$0f
 	display_number()
 
-	; XXNX
-	; get upper nibble
-	lda PLAYER_SCOREL
+	; get upper nibble (NX)
+	lda PLAYER_SCOREL,x
 	and #$f0
 	:4 lsr
 	display_number()
 
-	; XNXX
-	; get lower nibble
-	lda PLAYER_SCOREH
-	and #$0f
-	display_number()
-
-	; NXXX
-	; get upper nibble
-	lda PLAYER_SCOREH
-	and #$f0
-	:4 lsr
-	display_number()
+	inx
+	cpx #2
+	bne loop
 
 	rts
 
@@ -171,39 +161,39 @@ loop
 ; add lower nibble with overflow
 .proc add_lower_nibble
 
-	; store lower nibble (XXXN)
+	; store lower nibble (XN)
 	lda low,y
 	and #$0f
 	sta TMP2
 
-	; load score lower nibble (XXXN)
+	; load score lower nibble (XN)
 	lda PLAYER_SCOREL,y
 	and #$0f
 
-	; add to score nibble with carry (XXXN)
+	; add to score nibble with carry (XN)
 	add TMP2
 	add carry
 
-	; check for overflow (XXXN)
+	; check for overflow (XN)
 	cmp #10
 	bcc no_carry
 	jmp with_carry
 
 no_carry
-	; no carry, just store and move on (XXXN)
+	; no carry, just store and move on (XN)
 	sta TMP2
 	mva #0 carry ; no overflow
 	jmp done
 
 with_carry
-	; sub 10, then set the carry into next nibble (XXON)
+	; sub 10, then set the carry into next nibble (ON)
 	sub #10
 	sta TMP2
 	mva #1 carry ; overflow
 	jmp done
 
 done
-	; done with (XXXN), store in player score
+	; done with (XN), store in player score
 	lda PLAYER_SCOREL,y
 	and #$f0
 	ora TMP2
@@ -215,12 +205,12 @@ done
 ; add upper nibble with overflow
 .proc add_upper_nibble
 
-	; store higher nibble of score (XXNX)
+	; store higher nibble of score (NX)
 	and #$f0
 	:4 lsr
 	sta TMP2
 
-	; check high nibble for overflow (XONX)
+	; check high nibble for overflow (ONX)
 	lda low,y
 	and #$f0
 	:4 lsr
@@ -231,20 +221,20 @@ done
 	jmp with_carry
 
 no_carry
-	; no carry, just store and move on (XXNX)
+	; no carry, just store and move on (NX)
 	sta TMP2
 	mva #0 carry ; no overflow
 	jmp done
 
 with_carry
-	; sub 10, then set the carry into the next nibble (XONX)
+	; sub 10, then set the carry into the next nibble (ONX)
 	sub #10
 	sta TMP2
 	mva #1 carry ; overflow
 	jmp done
 
 done
-	; done with lower byte, store (XXNN)
+	; done with lower byte, store (NN)
 	lda PLAYER_SCOREL,y
 	and #$0f
 	sta TMP4
