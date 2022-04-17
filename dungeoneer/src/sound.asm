@@ -33,10 +33,12 @@ CHANNEL=FREQCTRL+1
 	cpx BGM_NOTE_SUSTAIN ; note sustain
 	bcc note_still_playing
 	mva #0 CHANNEL ; mute
+
 note_still_playing
 	cpx BGM_NOTE_SILENCE ; silence between notes
 	bcs play_note
 	jmp done
+
 play_note
 	mva #0 BGM_COUNTER
 	ldy BGM_DATA_INDEX
@@ -63,6 +65,7 @@ play_note
 	bne done
 
 	mva #0 BGM_DATA_INDEX
+
 done
 	rts
 .endp
@@ -169,7 +172,6 @@ exit
 
 continue
 	adb (COUNTER),y #1
-
 	cmp (SUSTAIN),y ; note sustain
 	bcc note_still_playing
 	mva #0 (CHANNEL),y ; mute
@@ -183,7 +185,6 @@ note_still_playing
 
 play_note
 	mva #0 (COUNTER),y
-
 	lda (INDEX),y
 	tay
 

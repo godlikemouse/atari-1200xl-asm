@@ -37,7 +37,6 @@ pmg_p2 = PMG + $300
 
 	ldx #$80
 	lda #0
-
 loop
 	sta pmg_p0,x
 	sta pmg_p1,x
@@ -86,7 +85,6 @@ pmg_p2 = PMG + $300
 	sta TMP6
 
 	ldy POSY
-
 loop
 	mva player_data,x pmg_p0,y
 	mva player_data+8,x pmg_p1,y
@@ -138,8 +136,8 @@ check
     adb PLAYANIM_OFFSET #$18
     cmp #$30
     bne done
-
     mva #0 PLAYANIM_OFFSET
+
 done
     rts
 .endp
@@ -150,7 +148,7 @@ done
 .proc animate_player_left
 
     jmp check
-
+	
 reset
     mva #$30 PLAYANIM_OFFSET
     draw_player()
@@ -171,8 +169,8 @@ timer
     adb PLAYANIM_OFFSET #$18
     cmp #$60
     bne done
-
 	mva #$30 PLAYANIM_OFFSET
+
 done
     rts
 .endp
@@ -181,6 +179,7 @@ done
 ; animate player reset
 ;	resets the player back to the first animation frame
 .proc animate_player_reset
+
 	mva #0 PLAYER_SPRITE
 	lda PLAYANIM_OFFSET
 	between #$0, #$30
@@ -188,8 +187,10 @@ done
 	bne left
 	mva #$0 PLAYANIM_OFFSET
 	jmp draw
+
 left
 	mva #$30 PLAYANIM_OFFSET
+
 draw
 	draw_player()
 	rts
@@ -332,6 +333,7 @@ exit
 	bne done
 	mva #0 INTRO_POSITION
 	display_game()
+
 done
 	rts
 .endp
@@ -352,6 +354,7 @@ done
 
 	mva #0 GAMEOVER_POSITION
 	display_mainmenu()
+
 done
 	rts
 .endp
@@ -364,7 +367,6 @@ addrl mva #0 TMP0
 addrh mva #0 TMP1
 
 	ldy #0
-
 loop
 	lda (TMP0),y
 	cmp #128
@@ -389,7 +391,6 @@ addrl mva #0 TMP0
 addrh mva #0 TMP1
 
 	ldy #0
-
 loop
 	lda (TMP0),y
 	cmp #128

@@ -6,16 +6,12 @@
 ;	shows picked up items at the top of the screen
 .proc display_screen_items
 	clear_screen_items()
-
 	; key 1
 	display_screen_key #1, #$20, #$0
-
 	; key 2
 	display_screen_key #2, #$22, #$2
-
 	; key 3
 	display_screen_key #4, #$24, #$4
-
 	; key 4
 	display_screen_key #8, #$26, #$6
 	rts
@@ -32,7 +28,6 @@ loop
 	sta ITEM_SCREEN,y+
 	cpy #8
 	bne loop
-
 	rts
 .endp
 
@@ -53,6 +48,7 @@ loop
 	sta ITEM_SCREEN, x-
 	dey
 	bne loop
+
 done
 	rts
 .endp
@@ -319,9 +315,11 @@ pickup
     ; if odd clear right
     iny
     jmp done
+
 even
     ; if even clear left
     dey
+
 done
     ; clear other tile
     lda #0
@@ -354,6 +352,7 @@ loop
 	adb TMP4 #2
 	dec TMP5
 	bne loop
+
 done
 	lda TMP2
 	rts
@@ -373,6 +372,7 @@ done
 	check_game_over()
 	reset_player()
 	display_player_lives()
+
 done
 	rts
 .endp
@@ -385,6 +385,7 @@ done
 	cmp #0
 	bne done
 	display_gameover()
+
 done
 	rts
 .endp

@@ -45,9 +45,11 @@
 
 	sta CHBAS
 	jmp done
+
 reset
 	mva TILESET_ADDRESS CHBAS
 	mva #0 TILESPRITE_INDEX
+
 done
 	rts
 .endp
@@ -65,14 +67,17 @@ done
     ldy TILEY
     cpy #0
     beq done
+
 lookup_loop
     adc #40
     sta TILEPTRL
     bcs carry_tileptrh
+
 cont
     dey
     bne lookup_loop
     ldy TILEX
+
 done
     lda (TILEPTRL),y
     sta ONTILE
@@ -209,7 +214,6 @@ dy mva #0 TMP3
 .proc display_mainmenu_map
 map=mainmenu.map
 	enable_tilesprite_animation()
-
 	render_map #<map, #>map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp
@@ -219,7 +223,6 @@ map=mainmenu.map
 ;
 .proc display_game_intro_map
 map=level1_map.intro
-
 	render_map #<map, #>map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp
@@ -229,7 +232,6 @@ map=level1_map.intro
 ;
 .proc display_game_map
 map=level1_map.map
-
 	render_map #<map, #>map, #<GAME_SCREEN, #>GAME_SCREEN
 	rts
 .endp
@@ -239,7 +241,6 @@ map=level1_map.map
 ;
 .proc display_gameover_map
 map=gameover.map
-
 	render_map #<gameover.map, #>gameover.map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp

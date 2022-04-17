@@ -23,6 +23,7 @@ dy=TMP3
 
 	; move player
 	dec POSX
+
 block
 	rts
 .endp
@@ -49,6 +50,7 @@ dy=TMP3
 
 	; move player
 	inc POSX
+
 block
 	rts
 .endp
@@ -76,6 +78,7 @@ dy=TMP3
 	; move player
 	dec POSY
 	clear_player_vertical()
+
 block
 	rts
 .endp
@@ -102,6 +105,7 @@ dy=TMP3
 
 	inc POSY
 	clear_player_vertical()
+	
 block
 	rts
 .endp

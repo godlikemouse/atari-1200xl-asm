@@ -5,12 +5,10 @@
 ; setup display list for screen
 ;
 .proc setup_game_screen
-
 blank8=$70 ; 8 blank lines
 blank7=$60 ; 7 blank lines
 LMS=$40 ; Load Memory Scan (LMS)
 JVB=$41 ; Jump while vertical blank (JVB)
-
 antic5=5 ; ANTIC mode 5
 antic2=2 ; ANTIC mode 2
 
@@ -31,11 +29,9 @@ dlist
 ; setup game over / menu screen
 ;
 .proc setup_menu_screen
-
 blank8=$70 ; 8 blank lines
 LMS=$40 ; Load Memory Scan (LMS)
 JVB=$41 ; Jump while vertical blank (JVB)
-
 antic5=5 ; ANTIC mode 5
 
 	mwa #dlist SDLSTL ; move word takes care of high/low byte assignments

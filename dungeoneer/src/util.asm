@@ -28,9 +28,11 @@
     lda #1
     sta TMP0
     jmp done
+
 fail
     lda #0
     sta TMP0
+
 done
     ;restore stack
     pla
