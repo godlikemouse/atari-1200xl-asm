@@ -269,7 +269,6 @@ screen2=TMP6
 loop
 	mva (map),y (screen),y
 	mva (map2),y (screen2),y
-
 	iny
 	cpy #240
 	bne loop

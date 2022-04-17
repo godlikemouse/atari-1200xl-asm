@@ -103,7 +103,6 @@ done
 	; score is kept in 4 byte (nibble) per memory location
 	ldy #20
 	ldx #0
-
 loop
 	; get lower nibble (XN)
 	lda PLAYER_SCOREL,x
@@ -119,7 +118,6 @@ loop
 	inx
 	cpx #2
 	bne loop
-
 	rts
 
 .proc display_number
@@ -194,7 +192,6 @@ done
 	and #$f0
 	ora TMP2
 	sta PLAYER_SCOREL,y
-
 	rts
 .endp
 
@@ -238,7 +235,6 @@ done
 	:4 asl
 	ora TMP4
 	sta PLAYER_SCOREL,y
-
 	rts
 .endp
 
