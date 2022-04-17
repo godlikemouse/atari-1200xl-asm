@@ -154,13 +154,14 @@ carry_tileptrh
     tile_is_key()
 	cmp #1
 	bne not_key
+	lda #1
 	jmp done
 
 not_key
 	tile_is_chest()
 	cmp #1
 	bne not_chest
-	add_score #$00, #$20
+	add_score #$20, #$00
 	lda #1
 	jmp done
 
@@ -168,7 +169,7 @@ not_chest
 	tile_is_coin()
 	cmp #1
 	bne done
-	add_score #$00, #$05
+	add_score #$05, #$00
 	lda #1
 
 done
