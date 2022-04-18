@@ -14,6 +14,7 @@ TILESPRITE_INDEX  = $00c9 ; the tile sprite index (0, 1, 2)
 TILESPRITE_ENABLE = $00ca ; enable tilesprite animation
 PLAYER_SPRITE     = $00cb ; the player sprite index
 PLAYANIM_OFFSET   = $00cc ; the player animation offset
+PLAYER_DEATH      = $00cd ; the player death flag
 ITEMS             = $00d0 ; the picked up player items
 PLAYER_LIVES      = $00d1 ; the player lives
 PLAYER_SCOREL     = $00d2 ; player score low byte

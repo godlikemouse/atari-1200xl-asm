@@ -148,7 +148,7 @@ done
 .proc animate_player_left
 
     jmp check
-	
+
 reset
     mva #$30 PLAYANIM_OFFSET
     draw_player()
@@ -159,7 +159,6 @@ check
     cmp #1
     bne reset
 
-timer
 	adb PLAYER_SPRITE #1
 	cmp #5
     bne done
@@ -357,6 +356,46 @@ done
 
 done
 	rts
+.endp
+
+;
+; animate player death
+;
+.proc render_player_death
+
+	lda PLAYER_DEATH
+	cmp #1
+	bne done
+
+    jmp check
+
+reset
+    mva #$60 PLAYANIM_OFFSET
+    draw_player()
+
+check
+    lda PLAYANIM_OFFSET
+    between #$60, #$c0
+    cmp #1
+    bne reset
+
+	adb PLAYER_SPRITE #1
+	cmp #30
+    bne done
+
+    mva #0 PLAYER_SPRITE
+    draw_player()
+    adb PLAYANIM_OFFSET #$18
+    cmp #$c0
+    bne done
+
+	; complete player death
+	check_game_over()
+	reset_player()
+	mva #0 PLAYER_DEATH
+
+done
+    rts
 .endp
 
 ;

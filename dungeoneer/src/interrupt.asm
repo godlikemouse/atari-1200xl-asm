@@ -33,6 +33,7 @@ vvblkd_interrupt
     render_mainmenu()
     render_intro()
     render_gameover()
+    render_player_death()
 	render_background_music()
     render_sfx #<SFX1, #>SFX1, #<AF1C, #>AF1C
     render_sfx #<SFX2, #>SFX2, #<AF2C, #>AF2C

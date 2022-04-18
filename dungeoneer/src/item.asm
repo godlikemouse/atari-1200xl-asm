@@ -287,7 +287,7 @@ pickup
 
     remove_playfield_item()
 	display_screen_items()
-	
+
 	rts
 .endp
 
@@ -364,9 +364,12 @@ done
 	mwa #death_sfx SFX1_ADDRL
 	mva #1 SFX1
 
+	lda PLAYER_DEATH
+	cmp #1
+	beq done
+	mva #1 PLAYER_DEATH
+
 	dec PLAYER_LIVES
-	check_game_over()
-	reset_player()
 	display_player_lives()
 
 done

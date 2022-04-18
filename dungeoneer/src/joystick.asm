@@ -105,7 +105,7 @@ dy=TMP3
 
 	inc POSY
 	clear_player_vertical()
-	
+
 block
 	rts
 .endp
@@ -123,6 +123,10 @@ NONE=$0f
 	lda DISPLAY_TYPE
 	cmp #2
 	bne done
+
+	lda PLAYER_DEATH
+	cmp #1
+	beq done
 
 	lda STICK0
 	cmp #LEFT
