@@ -160,6 +160,7 @@ carry_tileptrh
 	cmp #1
 	bne not_key
 	lda #1
+	play_key_sound()
 	jmp done
 
 not_key
@@ -168,6 +169,7 @@ not_key
 	bne not_chest
 	add_score #$20, #$00
 	lda #1
+	play_chest_sound()
 	jmp done
 
 not_chest
@@ -176,6 +178,8 @@ not_chest
 	bne done
 	add_score #$05, #$00
 	lda #1
+	play_coin_sound()
+	jmp done
 
 done
     rts

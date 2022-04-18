@@ -37,6 +37,20 @@ key_pickup_sfx
     .byte 15,%10100011,10,3
     .byte 0
 
+chest_pickup_sfx
+    .byte 35,%10100011,10,3
+    .byte 15,%10100011,10,3
+    .byte 35,%10100011,10,3
+    .byte 15,%10100011,10,3
+    .byte 0
+
+coin_pickup_sfx
+    .byte 25,%10100011,10,3
+    .byte 2,%10100011,10,3
+    .byte 25,%10100011,10,3
+    .byte 2,%10100011,10,3
+    .byte 0
+
 gameover_sfx
     .byte 1,%10100010,10,30
     .byte 156,%10100010,10,30

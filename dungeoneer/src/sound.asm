@@ -105,6 +105,30 @@ CHANNEL=FREQCTRL+1
 .endp
 
 ;
+; play chest pickup sound
+;
+.proc play_chest_sound
+	lda #0
+	sta SFX1_COUNTER
+	sta SFX1_DATA_INDEX
+	mwa #chest_pickup_sfx SFX1_ADDRL
+	mva #1 SFX1
+	rts
+.endp
+
+;
+; play chest pickup sound
+;
+.proc play_coin_sound
+	lda #0
+	sta SFX1_COUNTER
+	sta SFX1_DATA_INDEX
+	mwa #coin_pickup_sfx SFX1_ADDRL
+	mva #1 SFX1
+	rts
+.endp
+
+;
 ; play game over sound
 ;
 .proc play_gameover_sound
