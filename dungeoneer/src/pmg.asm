@@ -38,10 +38,10 @@ pmg_p2 = PMG + $300
 	ldx #$80
 	lda #0
 loop
+	dex
 	sta pmg_p0,x
 	sta pmg_p1,x
 	sta pmg_p2,x
-	dex
 	bne loop
 	rts
 .endp
