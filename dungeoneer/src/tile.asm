@@ -121,7 +121,14 @@ carry_tileptrh
 ;   if true, acc == 1, else acc == 0
 .proc tile_is_block
     lda ONTILE
-    between #$10, #$12
+    between #$10, #$14
+	cmp #1
+	beq done
+
+	; 90 - 94
+	lda ONTILE
+	between #$10+128, #$14+128
+done
     rts
 .endp
 
