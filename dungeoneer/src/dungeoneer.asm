@@ -5,7 +5,7 @@
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
 ; TODO: add door with key interaction
-; TODO: add door with key proxy interaction
+; TODO: add door with key proxy interaction (4, first direction player facing)
 ; TODO: add end of level interaction
 ; TODO: add transfer tile functionality
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5

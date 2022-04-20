@@ -101,7 +101,7 @@ done
 .proc display_player_score
 
 	; score is kept in 4 byte (nibble) per memory location
-	ldy #20
+	ldy #22
 	ldx #0
 loop
 	; get lower nibble (XN)
