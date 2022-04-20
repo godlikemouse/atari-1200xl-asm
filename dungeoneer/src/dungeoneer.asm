@@ -32,6 +32,6 @@
 	icl "data/menu_tileset.asm"
 	icl "data/player.asm"
 	icl "data/sound.asm"
-	icl "display/map.asm"
+	icl "display/level1.asm"
 	icl "display/gameover.asm"
 	icl "display/mainmenu.asm"

@@ -233,8 +233,8 @@ done
 ; reset player
 ;
 .proc reset_player
-	mva #$40 POSY
-	lda #$80
+	mva PLAYER_RESET_POSY POSY
+	lda PLAYER_RESET_POSX
 	sta POSX
 	sta HPOSP0
 	sta HPOSP1
