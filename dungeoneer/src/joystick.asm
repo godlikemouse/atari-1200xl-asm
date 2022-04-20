@@ -222,7 +222,7 @@ button_pressed
 
 start_new_game
 	new_game()
-	display_game_intro()
+	level1()
 	jmp done
 
 done
