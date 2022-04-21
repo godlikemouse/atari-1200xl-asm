@@ -226,6 +226,9 @@ draw
 	rts
 .endp
 
+;
+; new game
+;	sets up game reset
 .proc new_game
 	mwa #0 PLAYER_SCOREL
 	mva #3 PLAYER_LIVES

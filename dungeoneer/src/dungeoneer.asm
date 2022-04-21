@@ -4,6 +4,7 @@
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
+; TODO: add level loading by address
 ; TODO: add door with key interaction
 ; TODO: add door with key proxy interaction (4, first direction player facing)
 ; TODO: add end of level interaction
@@ -28,6 +29,7 @@
 	icl "item.asm"
 	icl "interrupt.asm"
 	icl "sound.asm"
+	icl "map.asm"
 	icl "level.asm"
 	icl "data/game_tileset.asm"
 	icl "data/menu_tileset.asm"
