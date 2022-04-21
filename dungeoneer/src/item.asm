@@ -292,6 +292,51 @@ pickup
 .endp
 
 ;
+; open door
+;
+.proc open_door
+dx=TMP2
+dy=TMP3
+
+	; bounding box for pickup
+
+	; top left
+	poke_position #0, #0
+	tile_is_proxy()
+	cmp #1
+	beq door_proxy
+
+	; top right
+	poke_position #7, #1
+	tile_is_proxy()
+	cmp #1
+	beq door_proxy
+
+	; bottom right
+	poke_position #7, #7
+	tile_is_proxy()
+	cmp #1
+	beq door_proxy
+
+	; bottom left
+	poke_position #0, #7
+	tile_is_proxy()
+	cmp #1
+	beq door_proxy
+
+	; block movement
+
+	rts
+
+door_proxy
+
+	; check for key
+	; check for next tile door
+
+	rts
+.endp
+
+;
 ; remove playfield item
 ;
 .proc remove_playfield_item

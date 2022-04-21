@@ -97,6 +97,8 @@ dy=TMP3
 	cmp #1
 	beq block
 
+	; add check for tile is locked door/proxy
+
 	; bottom right
 	poke_position #8, #9
 	tile_is_block()
@@ -145,12 +147,14 @@ move_left
 	can_move_left()
 	animate_player_left()
 	pickup_item()
+	open_door()
 	jmp store_posx
 
 move_right
 	can_move_right()
 	animate_player_right()
 	pickup_item()
+	open_door()
 	jmp store_posx
 
 move_up
@@ -158,6 +162,7 @@ move_up
 	draw_player()
 	animate_player_left()
 	pickup_item()
+	open_door()
 	jmp done
 
 move_down
@@ -165,6 +170,7 @@ move_down
 	draw_player()
 	animate_player_right()
 	pickup_item()
+	open_door()
 	jmp done
 
 move_none

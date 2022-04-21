@@ -202,6 +202,15 @@ done
 .endp
 
 ;
+; tile is proxy
+;
+.proc tile_is_proxy
+	lda ONTILE
+	between #52, #54
+	rts
+.endp
+
+;
 ; poke position
 ;	temporarily advances POSX, POSY and stores TILEX, TILEY and ONTILE
 ;	uses TMP2 (x), TMP3 (y)
