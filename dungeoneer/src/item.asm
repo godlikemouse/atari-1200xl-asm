@@ -7,13 +7,13 @@
 .proc display_screen_items
 	clear_screen_items()
 	; key 1
-	display_screen_key #1, #$20, #$0
+	display_screen_key #1, #$20, #$0 ; ITEMS (.......K)
 	; key 2
-	display_screen_key #2, #$22, #$2
+	display_screen_key #2, #$22, #$2 ; ITEMS  (......K.)
 	; key 3
-	display_screen_key #4, #$24, #$4
+	display_screen_key #4, #$24, #$4 ; ITEMS  (.....K..)
 	; key 4
-	display_screen_key #8, #$26, #$6
+	display_screen_key #8, #$26, #$6 ; ITEMS  (....K...)
 	rts
 .endp
 
@@ -292,13 +292,24 @@ pickup
 .endp
 
 ;
+; has key
+;	acc == 0 if false, else acc > 0
+.proc has_key(.byte key+1) .var
+key mva #0 TMP0
+
+	and ITEMS
+
+	rts
+.endp
+
+;
 ; open door
 ;
 .proc open_door
 dx=TMP2
 dy=TMP3
 
-	; bounding box for pickup
+	; bounding box for contact
 
 	; top left
 	poke_position #0, #0

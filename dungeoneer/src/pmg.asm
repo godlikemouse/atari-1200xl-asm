@@ -221,6 +221,8 @@ draw
 	display_game_intro_map()
 	mva #1 DISPLAY_TYPE
 	mva #50 INTRO_POSITION
+	mva #$30 POSY
+	clear_pmg()
 	rts
 .endp
 

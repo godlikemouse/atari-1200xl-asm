@@ -219,7 +219,116 @@ done
 	bne done
 
 	; tile is proxy, check lock
-	
+
+	; find locked door, tilex/tiley
+	find_locked_door()
+	cmp #1
+	bne done
+
+	; do we have a key
+	has_key #%00000001
+	cmp #0
+	beq locked
+
+	; unlock door
+	unlock_door()
+
+	jmp done
+
+locked
+	lda #1
+	rts
+
+done
+	lda #0
+	rts
+.endp
+
+;
+; unlock door
+;
+.proc unlock_door
+
+	; replace closed door with open door tile
+
+	ldy TILEX
+loop
+	lda (TILEPTRL), y-
+	cmp #64
+	bne loop
+	iny
+
+	lda #68
+	sta (TILEPTRL), y+
+	add #1
+	sta (TILEPTRL), y+
+	add #1
+	sta (TILEPTRL), y+
+	add #1
+	sta (TILEPTRL), y+
+.endp
+
+;
+; tile is locked door
+;	if true, acc == 1, else acc == 0
+.proc tile_is_locked_door
+	lda ONTILE
+	between #64, #68
+	rts
+.endp
+
+;
+; tile is exit
+;
+.proc tile_is_exit
+	lda ONTILE
+	sta $106
+	between #80, #82
+	rts
+.endp
+
+;
+; find locked door
+;	updates tilex, tiley with location
+;	if found acc == 1, else acc == 0
+.proc find_locked_door
+
+	; look south
+	inc TILEY
+	store_ontile()
+	tile_is_locked_door()
+	cmp #1
+	beq done
+	dec TILEY
+	store_ontile()
+
+	; look west
+	dec TILEX
+	store_ontile()
+	tile_is_locked_door()
+	cmp #1
+	beq done
+	inc TILEX
+	store_ontile()
+
+	; look north
+	dec TILEY
+	store_ontile()
+	tile_is_locked_door()
+	cmp #1
+	beq done
+	inc TILEY
+	store_ontile()
+
+	; look east
+	inc TILEX
+	store_ontile()
+	tile_is_locked_door()
+	cmp #1
+	beq done
+	dec TILEX
+	store_ontile()
+
 done
 	rts
 .endp
@@ -331,9 +440,16 @@ loop
 
 player_position
 	cmp #1
-	bne done
+	bne next_level
 	mva (attr),y+ PLAYER_RESET_POSX
 	mva (attr),y+ PLAYER_RESET_POSY
+	jmp loop
+
+next_level
+	cmp #2
+	bne done
+	mva (attr),y+ NEXT_LEVELL
+	mva (attr),y+ NEXT_LEVELH
 	jmp loop
 
 done
