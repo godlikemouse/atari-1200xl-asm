@@ -211,6 +211,20 @@ done
 .endp
 
 ;
+; tile is locked proxy
+;
+.proc tile_is_locked_proxy
+	tile_is_proxy()
+	cmp #1
+	bne done
+
+	; tile is proxy, check lock
+	
+done
+	rts
+.endp
+
+;
 ; poke position
 ;	temporarily advances POSX, POSY and stores TILEX, TILEY and ONTILE
 ;	uses TMP2 (x), TMP3 (y)
