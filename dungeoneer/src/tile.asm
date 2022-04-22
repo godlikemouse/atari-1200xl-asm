@@ -60,9 +60,9 @@ done
 .proc store_ontile
     ; calculate screen tile offset
     lda #>GAME_SCREEN
-    sta TILEPTRH
+    sta TILEPTR+1
     lda #<GAME_SCREEN
-    sta TILEPTRL
+    sta TILEPTR
 
     ldy TILEY
     cpy #0
@@ -70,7 +70,7 @@ done
 
 lookup_loop
     adc #40
-    sta TILEPTRL
+    sta TILEPTR
     bcs carry_tileptrh
 
 cont
@@ -79,13 +79,13 @@ cont
     ldy TILEX
 
 done
-    lda (TILEPTRL),y
+    lda (TILEPTR),y
     sta ONTILE
     rts
 
 carry_tileptrh
-    adb TILEPTRH #1
-    lda TILEPTRL
+    adb TILEPTR+1 #1
+    lda TILEPTR
     jmp cont
 .endp
 
@@ -96,8 +96,7 @@ carry_tileptrh
 	lda POSX
 	sec
 	sbc #52
-	lsr
-	lsr
+	:2 lsr
 	sta TILEX
 	rts
 .endp
@@ -109,9 +108,7 @@ carry_tileptrh
 	lda POSY
 	sec
 	sbc #24
-	lsr
-	lsr
-	lsr
+	:3 lsr
 	sta TILEY
 	rts
 .endp
@@ -253,19 +250,19 @@ done
 
 	ldy TILEX
 loop
-	lda (TILEPTRL), y-
+	lda (TILEPTR), y-
 	cmp #64
 	bne loop
 	iny
 
 	lda #68
-	sta (TILEPTRL), y+
+	sta (TILEPTR), y+
 	add #1
-	sta (TILEPTRL), y+
+	sta (TILEPTR), y+
 	add #1
-	sta (TILEPTRL), y+
+	sta (TILEPTR), y+
 	add #1
-	sta (TILEPTRL), y+
+	sta (TILEPTR), y+
 .endp
 
 ;
