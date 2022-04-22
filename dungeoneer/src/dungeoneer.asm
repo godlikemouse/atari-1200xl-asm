@@ -1,4 +1,6 @@
 ; Dungeoneer - A simple game in Atari 8-bit assembly
+; Based on the original 8bit MADS YouTube tutorial series by Ed Salisbury
+; https://www.youtube.com/playlist?list=PL7IgmhqRiwzEIVAOhZWnby6WPsQ8alFSI
 
 ; References:
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
@@ -37,3 +39,4 @@
 	icl "display/mainmenu.asm"
 	icl "display/level1.asm"
 	icl "display/level2.asm"
+	icl "display/level3.asm"
