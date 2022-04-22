@@ -18,8 +18,8 @@
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 66.12496152662358,
-                "y": 48.079409048938146
+                "x": 78.23945829485996,
+                "y": 48.20560172360727
             }
         },
         "level1_map.intro.tmx": {
@@ -82,6 +82,14 @@
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
+                "x": 81.0156971375808,
+                "y": 47.32225300092336
+            }
+        },
+        "level5_map.map.tmx": {
+            "scale": 7.9243902439024385,
+            "selectedLayer": 0,
+            "viewCenter": {
                 "x": 78.11326562019083,
                 "y": 48.079409048938146
             }
@@ -110,8 +118,9 @@
     ],
     "project": "dungeoneer.tiled-project",
     "recentFiles": [
-        "mainmenu.map.tmx",
+        "level4_map.map.tmx",
         "gameover.map.tmx",
+        "mainmenu.map.tmx",
         "menu_tileset.tsx",
         "game_tileset.tsx",
         "/home/godlikemouse/game_tileset.tsx"

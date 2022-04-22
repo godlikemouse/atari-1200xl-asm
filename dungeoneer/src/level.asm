@@ -41,6 +41,16 @@
     rts
 .endp
 
+.proc level5
+    mwa #level5_map.intro LEVEL_INTRO
+    mwa #level5_map.map LEVEL_MAP
+    mwa #background_music BGM_ADDR
+    mva #0 ITEMS
+
+    display_game_intro()
+    rts
+.endp
+
 ;
 ; exit level
 ;
