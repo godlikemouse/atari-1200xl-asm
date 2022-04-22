@@ -40,3 +40,4 @@
 	icl "display/level1.asm"
 	icl "display/level2.asm"
 	icl "display/level3.asm"
+	icl "display/level4.asm"

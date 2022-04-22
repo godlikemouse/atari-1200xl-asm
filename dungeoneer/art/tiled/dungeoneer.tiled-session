@@ -1,0 +1,124 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "/home/godlikemouse/game_tileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "game_tileset.tsx": {
+            "scaleInEditor": 3
+        },
+        "gameover.map.tmx": {
+            "scale": 7.9243902439024385,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 66.12496152662358,
+                "y": 48.079409048938146
+            }
+        },
+        "level1_map.intro.tmx": {
+            "scale": 6.534146341463415,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 96.26353116834639,
+                "y": 47.90220231429638
+            }
+        },
+        "level1_map.map.tmx": {
+            "scale": 6.545731707317073,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 95.940381928272,
+                "y": 47.81741965533302
+            }
+        },
+        "level2_map.intro.tmx": {
+            "scale": 6.534146341463415,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 96.1104889884285,
+                "y": 47.749160134378485
+            }
+        },
+        "level2_map.map.tmx": {
+            "scale": 6.534146341463415,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 78.20455393803658,
+                "y": 47.90220231429638
+            }
+        },
+        "level3_map.intro.tmx": {
+            "scale": 7.9243902439024385,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 78.61803631886737,
+                "y": 47.95321637426901
+            }
+        },
+        "level3_map.map.tmx": {
+            "scale": 7.9243902439024385,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 78.11326562019083,
+                "y": 48.079409048938146
+            }
+        },
+        "level4_map.intro.tmx": {
+            "scale": 7.9243902439024385,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 78.11326562019083,
+                "y": 48.079409048938146
+            }
+        },
+        "level4_map.map.tmx": {
+            "scale": 7.9243902439024385,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 78.11326562019083,
+                "y": 48.079409048938146
+            }
+        },
+        "mainmenu.map.tmx": {
+            "scale": 7.9243902439024385,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 78.11326562019083,
+                "y": 48.079409048938146
+            }
+        },
+        "menu_tileset.tsx": {
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "/home/godlikemouse/atari/code/asm/dungeoneer/art/tiled",
+    "last.imagePath": "/home/godlikemouse/atari/code/asm/dungeoneer/art",
+    "map.height": 12,
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 8,
+    "map.tileWidth": 4,
+    "map.width": 40,
+    "openFiles": [
+    ],
+    "project": "dungeoneer.tiled-project",
+    "recentFiles": [
+        "mainmenu.map.tmx",
+        "gameover.map.tmx",
+        "menu_tileset.tsx",
+        "game_tileset.tsx",
+        "/home/godlikemouse/game_tileset.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 8,
+        "width": 4
+    }
+}
