@@ -230,9 +230,10 @@ draw
 ; new game
 ;	sets up game reset
 .proc new_game
-	mwa #0 PLAYER_SCORE
+	mwa #0 PLAYER_SCOREL
 	mva #3 PLAYER_LIVES
 	mva #0 ITEMS
+	level1()
 	rts
 .endp
 

@@ -105,12 +105,12 @@ done
 	ldx #0
 loop
 	; get lower nibble (XN)
-	lda PLAYER_SCORE,x
+	lda PLAYER_SCOREL,x
 	and #$0f
 	display_number()
 
 	; get upper nibble (NX)
-	lda PLAYER_SCORE,x
+	lda PLAYER_SCOREL,x
 	and #$f0
 	:4 lsr
 	display_number()
@@ -161,7 +161,7 @@ loop
 	sta TMP2
 
 	; load score lower nibble (XN)
-	lda PLAYER_SCORE,y
+	lda PLAYER_SCOREL,y
 	and #$0f
 
 	; add to score nibble with carry (XN)
@@ -188,10 +188,10 @@ with_carry
 
 done
 	; done with (XN), store in player score
-	lda PLAYER_SCORE,y
+	lda PLAYER_SCOREL,y
 	and #$f0
 	ora TMP2
-	sta PLAYER_SCORE,y
+	sta PLAYER_SCOREL,y
 	rts
 .endp
 
@@ -228,13 +228,13 @@ with_carry
 
 done
 	; done with lower byte, store (NN)
-	lda PLAYER_SCORE,y
+	lda PLAYER_SCOREL,y
 	and #$0f
 	sta TMP4
 	lda TMP2
 	:4 asl
 	ora TMP4
-	sta PLAYER_SCORE,y
+	sta PLAYER_SCOREL,y
 	rts
 .endp
 
@@ -351,31 +351,34 @@ door_proxy
 ; remove playfield item
 ;
 .proc remove_playfield_item
+	; remember first encountered tile
+	ldy TILEX
+	lda (TILEPTRL),y
+	tax
+
     ; clear encountered tile
-    lda #0
-    ldy TILEX
-    sta (TILEPTRL), y
+    mva #0 (TILEPTRL),y
 
     ; remove ajoining tile
-    lda TILEX
+    ;lda TILEX
+	txa
     lsr
     bcc even
 
     ; determine which direction the other tile is in
-    beq even
+    ;beq even
 
     ; if odd clear right
-    iny
+    dey
     jmp done
 
 even
     ; if even clear left
-    dey
+    iny
 
 done
     ; clear other tile
-    lda #0
-    sta (TILEPTRL), y
+    mva #0 (TILEPTRL),y
     rts
 .endp
 
