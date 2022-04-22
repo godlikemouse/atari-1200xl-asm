@@ -105,12 +105,12 @@ done
 	ldx #0
 loop
 	; get lower nibble (XN)
-	lda PLAYER_SCOREL,x
+	lda PLAYER_SCORE,x
 	and #$0f
 	display_number()
 
 	; get upper nibble (NX)
-	lda PLAYER_SCOREL,x
+	lda PLAYER_SCORE,x
 	and #$f0
 	:4 lsr
 	display_number()
@@ -161,7 +161,7 @@ loop
 	sta TMP2
 
 	; load score lower nibble (XN)
-	lda PLAYER_SCOREL,y
+	lda PLAYER_SCORE,y
 	and #$0f
 
 	; add to score nibble with carry (XN)
@@ -188,10 +188,10 @@ with_carry
 
 done
 	; done with (XN), store in player score
-	lda PLAYER_SCOREL,y
+	lda PLAYER_SCORE,y
 	and #$f0
 	ora TMP2
-	sta PLAYER_SCOREL,y
+	sta PLAYER_SCORE,y
 	rts
 .endp
 
@@ -228,13 +228,13 @@ with_carry
 
 done
 	; done with lower byte, store (NN)
-	lda PLAYER_SCOREL,y
+	lda PLAYER_SCORE,y
 	and #$0f
 	sta TMP4
 	lda TMP2
 	:4 asl
 	ora TMP4
-	sta PLAYER_SCOREL,y
+	sta PLAYER_SCORE,y
 	rts
 .endp
 

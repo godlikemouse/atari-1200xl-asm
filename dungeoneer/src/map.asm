@@ -14,7 +14,7 @@
 ; display game intro map
 ;
 .proc display_game_intro_map
-	render_map LEVEL_INTROL, LEVEL_INTROH, #<MENU_SCREEN, #>MENU_SCREEN
+	render_map LEVEL_INTRO, LEVEL_INTRO+1, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp
 
@@ -22,8 +22,8 @@
 ; display game map
 ;
 .proc display_game_map
-	render_map LEVEL_MAPL, LEVEL_MAPH, #<GAME_SCREEN, #>GAME_SCREEN
-	load_map_attributes LEVEL_MAPL, LEVEL_MAPH
+	render_map LEVEL_MAP, LEVEL_MAP+1, #<GAME_SCREEN, #>GAME_SCREEN
+	load_map_attributes LEVEL_MAP, LEVEL_MAP+1
 	rts
 .endp
 
@@ -94,8 +94,8 @@ player_position
 next_level
 	cmp #2
 	bne done
-	mva (attr),y+ NEXT_LEVELL
-	mva (attr),y+ NEXT_LEVELH
+	mwa (attr),y+ NEXT_LEVEL
+	iny
 	jmp loop
 
 done

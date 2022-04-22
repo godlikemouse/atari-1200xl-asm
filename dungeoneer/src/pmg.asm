@@ -230,7 +230,7 @@ draw
 ; new game
 ;	sets up game reset
 .proc new_game
-	mwa #0 PLAYER_SCOREL
+	mwa #0 PLAYER_SCORE
 	mva #3 PLAYER_LIVES
 	mva #0 ITEMS
 	level1()
