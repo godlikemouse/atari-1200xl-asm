@@ -351,34 +351,31 @@ door_proxy
 ; remove playfield item
 ;
 .proc remove_playfield_item
-	; remember first encountered tile
-	ldy TILEX
-	lda (TILEPTRL),y
-	tax
-
     ; clear encountered tile
-    mva #0 (TILEPTRL),y
+    lda #0
+    ldy TILEX
+    sta (TILEPTRL), y
 
     ; remove ajoining tile
-    ;lda TILEX
-	txa
+    lda TILEX
     lsr
     bcc even
 
     ; determine which direction the other tile is in
-    ;beq even
+    beq even
 
     ; if odd clear right
-    dey
+    iny
     jmp done
 
 even
     ; if even clear left
-    iny
+    dey
 
 done
     ; clear other tile
-    mva #0 (TILEPTRL),y
+    lda #0
+    sta (TILEPTRL), y
     rts
 .endp
 

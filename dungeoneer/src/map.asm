@@ -5,8 +5,9 @@
 ; display main menu map
 ;
 .proc display_mainmenu_map
+map=mainmenu.map
 	enable_tilesprite_animation()
-	render_map #<mainmenu.map, #>mainmenu.map, #<MENU_SCREEN, #>MENU_SCREEN
+	render_map #<map, #>map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp
 
@@ -31,6 +32,7 @@
 ; display game over map
 ;
 .proc display_gameover_map
+map=gameover.map
 	render_map #<gameover.map, #>gameover.map, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp
@@ -73,7 +75,7 @@ mapl mva #0 TMP0
 maph mva #0 TMP1
 attr=TMP0
 
-	adw attr #480 ; start at end of visual map data
+	adw attr #480 ; start and end of visual map data
 
 	ldy #0
 loop

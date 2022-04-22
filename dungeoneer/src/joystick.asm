@@ -232,6 +232,7 @@ button_pressed
 
 start_new_game
 	new_game()
+	level1()
 	jmp done
 
 done

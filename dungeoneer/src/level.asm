@@ -2,17 +2,16 @@
 ;   level handling
 
 .proc level1
-    mwa #level1_map.intro LEVEL_INTRO
-    mwa #level1_map.map LEVEL_MAP
+    mwa level1_map.map LEVEL_MAPL
+    mwa level1_map.intro LEVEL_INTROL
 
     display_game_intro()
     rts
 .endp
 
 .proc level2
-    mwa #level2_map.intro LEVEL_INTRO
-    mwa #level2_map.map LEVEL_MAP
-    mva #0 ITEMS
+    mwa level2_map.map LEVEL_MAPL
+    mwa level2_map.intro LEVEL_INTROL
 
     display_game_intro()
     rts
