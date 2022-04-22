@@ -393,8 +393,7 @@ done
 	mva #8 TMP5
 loop
 	; check to see if item exists
-	lda ONTILE
-	between TMP3, TMP4
+	between TMP3, ONTILE, TMP4
 	cmp #1
 	beq done
 	; if not, shift left increase address and continue

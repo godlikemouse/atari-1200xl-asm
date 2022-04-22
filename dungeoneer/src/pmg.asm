@@ -122,8 +122,7 @@ reset
     draw_player()
 
 check
-    lda PLAYANIM_OFFSET
-    between #$0, #$30
+    between #$0, PLAYANIM_OFFSET, #$30
     cmp #1
     bne reset
 
@@ -154,8 +153,7 @@ reset
     draw_player()
 
 check
-    lda PLAYANIM_OFFSET
-    between #$30, #$60
+    between #$30, PLAYANIM_OFFSET, #$60
     cmp #1
     bne reset
 
@@ -180,8 +178,7 @@ done
 .proc animate_player_reset
 
 	mva #0 PLAYER_SPRITE
-	lda PLAYANIM_OFFSET
-	between #$0, #$30
+	between #$0, PLAYANIM_OFFSET, #$30
     cmp #1
 	bne left
 	mva #$0 PLAYANIM_OFFSET
@@ -380,8 +377,7 @@ reset
     draw_player()
 
 check
-    lda PLAYANIM_OFFSET
-    between #$60, #$c0
+    between #$60, PLAYANIM_OFFSET, #$c0
     cmp #1
     bne reset
 

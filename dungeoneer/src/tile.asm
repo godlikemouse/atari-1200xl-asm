@@ -117,14 +117,12 @@ carry_tileptrh
 ; tile is block
 ;   if true, acc == 1, else acc == 0
 .proc tile_is_block
-    lda ONTILE
-    between #$10, #$14
+    between #$10, ONTILE, #$14
 	cmp #1
 	beq done
 
 	; 90 - 94
-	lda ONTILE
-	between #$10+128, #$14+128
+	between #$10+128, ONTILE #$14+128
 done
     rts
 .endp
@@ -133,8 +131,7 @@ done
 ; tile is key
 ;  if true, acc == 1, else acc == 0
 .proc tile_is_key
-    lda ONTILE
-    between #$20, #$28
+    between #$20, ONTILE #$28
     rts
 .endp
 
@@ -142,8 +139,7 @@ done
 ; tile is chest
 ;	if true, acc == 1, else acc == 0
 .proc tile_is_chest
-	lda ONTILE
-	between #$28, #$2a
+	between #$28, ONTILE, #$2a
 	rts
 .endp
 
@@ -151,8 +147,7 @@ done
 ; tile is coin
 ;	if true, acc == 1, else acc == 0
 .proc tile_is_coin
-	lda ONTILE
-	between #$2a, #$2c
+	between #$2a, ONTILE, #$2c
 	rts
 .endp
 
@@ -193,8 +188,7 @@ done
 ; tile is death
 ;	if true, acc == 1, else acc == 0
 .proc tile_is_death
-	lda ONTILE
-	between #62, #64
+	between #$3e, ONTILE, #$40
 	rts
 .endp
 
@@ -202,8 +196,7 @@ done
 ; tile is proxy
 ;
 .proc tile_is_proxy
-	lda ONTILE
-	between #52, #54
+	between #$34, ONTILE, #$36
 	rts
 .endp
 
@@ -269,8 +262,7 @@ loop
 ; tile is locked door
 ;	if true, acc == 1, else acc == 0
 .proc tile_is_locked_door
-	lda ONTILE
-	between #64, #68
+	between #$40, ONTILE, #$44
 	rts
 .endp
 
@@ -278,9 +270,7 @@ loop
 ; tile is exit
 ;
 .proc tile_is_exit
-	lda ONTILE
-	sta $106
-	between #80, #82
+	between #$50, ONTILE, #$52
 	rts
 .endp
 
