@@ -99,7 +99,7 @@ CHANNEL=FREQCTRL+1
 	lda #0
 	sta SFX1_COUNTER
 	sta SFX1_DATA_INDEX
-	mwa #key_pickup_sfx SFX1_ADDRL
+	mwa #key_pickup_sfx SFX1_ADDR
 	mva #1 SFX1
 	rts
 .endp
@@ -111,7 +111,7 @@ CHANNEL=FREQCTRL+1
 	lda #0
 	sta SFX1_COUNTER
 	sta SFX1_DATA_INDEX
-	mwa #chest_pickup_sfx SFX1_ADDRL
+	mwa #chest_pickup_sfx SFX1_ADDR
 	mva #1 SFX1
 	rts
 .endp
@@ -123,7 +123,7 @@ CHANNEL=FREQCTRL+1
 	lda #0
 	sta SFX1_COUNTER
 	sta SFX1_DATA_INDEX
-	mwa #coin_pickup_sfx SFX1_ADDRL
+	mwa #coin_pickup_sfx SFX1_ADDR
 	mva #1 SFX1
 	rts
 .endp
@@ -135,7 +135,7 @@ CHANNEL=FREQCTRL+1
 	lda #0
 	sta SFX1_COUNTER
 	sta SFX1_DATA_INDEX
-	mwa #gameover_sfx SFX1_ADDRL
+	mwa #gameover_sfx SFX1_ADDR
 	mva #1 SFX1
 	rts
 .endp

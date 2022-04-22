@@ -418,7 +418,7 @@ done
 	tile_is_death()
 	cmp #1
 	bne done
-	mwa #death_sfx SFX1_ADDRL
+	mwa #death_sfx SFX1_ADDR
 	mva #1 SFX1
 
 	lda PLAYER_DEATH
