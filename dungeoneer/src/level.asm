@@ -4,6 +4,8 @@
 .proc level1
     mwa #level1_map.intro LEVEL_INTRO
     mwa #level1_map.map LEVEL_MAP
+    mwa #background_music BGM_ADDR
+    mva #0 ITEMS
 
     display_game_intro()
     rts
@@ -12,6 +14,7 @@
 .proc level2
     mwa #level2_map.intro LEVEL_INTRO
     mwa #level2_map.map LEVEL_MAP
+    mwa #background_music BGM_ADDR
     mva #0 ITEMS
 
     display_game_intro()
@@ -51,6 +54,7 @@
 
 exit
     ldy #0
+    play_exit_level_sound()
     jmp (NEXT_LEVEL)
 
 done

@@ -217,10 +217,12 @@ DOWN=$0d
 	jmp done
 
 move_up
+	play_mainmenu_item_sound()
 	mva #0 MENU_SELECTION
 	jmp done
 
 move_down
+	play_mainmenu_item_sound()
 	mva #1 MENU_SELECTION
 	jmp done
 

@@ -196,8 +196,11 @@ draw
 ; display main menu
 ;	displays the main menu screen
 .proc display_mainmenu
-	setup_pmg()
 	stop_background_music()
+	mwa #mainmenu_music BGM_ADDR
+	mva #1 AUDCTL ;N1234HHS
+	play_background_music()
+	setup_pmg()
 	setup_menu_screen()
 	setup_menu_tileset()
 	display_mainmenu_map()
@@ -213,6 +216,9 @@ draw
 ;	displays the game intro screen
 .proc display_game_intro
 	stop_background_music()
+	mva #$00 AUDCTL
+	mwa #intro_music BGM_ADDR
+	play_background_music()
 	setup_menu_screen()
 	setup_menu_tileset()
 	display_game_intro_map()
@@ -238,7 +244,10 @@ draw
 ; display game
 ; 	displays the game screen
 .proc display_game
-	setup_sound()
+	stop_background_music()
+	mva #$00 AUDCTL
+	mwa #background_music BGM_ADDR
+	play_background_music()
 	setup_game_screen()
 	setup_tileset()
 	setup_pmg()
@@ -252,7 +261,6 @@ draw
 	store_tilex()
 	store_tiley()
 	mva #2 DISPLAY_TYPE
-	play_background_music()
 	rts
 .endp
 

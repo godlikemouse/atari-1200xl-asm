@@ -256,6 +256,10 @@ loop
 	sta (TILEPTR), y+
 	add #1
 	sta (TILEPTR), y+
+
+	play_door_open_sound()
+
+	rts
 .endp
 
 ;

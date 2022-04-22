@@ -2,21 +2,6 @@
 ;	Background music and sound effect functionality
 
 ;
-; setup sound system
-;
-.proc setup_sound
-	mva #0 BGM_COUNTER
-	mva #0 BGM_DATA_INDEX
-	mva #1 BGM_ENABLE
-
-	mwa #background_music BGM_ADDRL
-
-	;N1234HHS
-	mva #%00000000 AUDCTL
-	rts
-.endp
-
-;
 ; render background music
 ;
 .proc render_background_music
@@ -42,25 +27,25 @@ note_still_playing
 play_note
 	mva #0 BGM_COUNTER
 	ldy BGM_DATA_INDEX
-	mva (BGM_ADDRL),y FREQCTRL
+	mva (BGM_ADDR),y FREQCTRL
 
 	; load audio control
 	iny
-	mva (BGM_ADDRL),y CHANNEL
+	mva (BGM_ADDR),y CHANNEL
 
 	; load note sustain
 	iny
-	mva (BGM_ADDRL),y BGM_NOTE_SUSTAIN
+	mva (BGM_ADDR),y BGM_NOTE_SUSTAIN
 
 	; load note silence interval
 	iny
-	mva (BGM_ADDRL),y BGM_NOTE_SILENCE
+	mva (BGM_ADDR),y BGM_NOTE_SILENCE
 
 	; prepare next note
 	iny
 	sty BGM_DATA_INDEX
 
-	lda (BGM_ADDRL),y
+	lda (BGM_ADDR),y
 	cmp #0 ; end play
 	bne done
 
@@ -129,6 +114,30 @@ CHANNEL=FREQCTRL+1
 .endp
 
 ;
+; play door open sound
+;
+.proc play_door_open_sound
+	lda #0
+	sta SFX1_COUNTER
+	sta SFX1_DATA_INDEX
+	mwa #door_open_sfx SFX1_ADDR
+	mva #1 SFX1
+	rts
+.endp
+
+;
+; play exit level sound
+;
+.proc play_exit_level_sound
+	lda #0
+	sta SFX1_COUNTER
+	sta SFX1_DATA_INDEX
+	mwa #exit_level_sfx SFX1_ADDR
+	mva #1 SFX1
+	rts
+.endp
+
+;
 ; play game over sound
 ;
 .proc play_gameover_sound
@@ -140,6 +149,17 @@ CHANNEL=FREQCTRL+1
 	rts
 .endp
 
+;
+; play menu item sound
+;
+.proc play_mainmenu_item_sound
+	lda #0
+	sta SFX1_COUNTER
+	sta SFX1_DATA_INDEX
+	mwa #mainmenu_item_sfx SFX1_ADDR
+	mva #1 SFX1
+	rts
+.endp
 
 ;
 ; render sfx
@@ -195,6 +215,10 @@ exit
 	rts
 
 continue
+	lda (INDEX),y
+	cmp #0
+	beq play_note
+
 	adb (COUNTER),y #1
 	cmp (SUSTAIN),y ; note sustain
 	bcc note_still_playing
