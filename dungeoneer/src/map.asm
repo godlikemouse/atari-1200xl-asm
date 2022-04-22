@@ -14,6 +14,7 @@
 ; display game intro map
 ;
 .proc display_game_intro_map
+	mva #4 GRPRIOR
 	render_map LEVEL_INTRO, LEVEL_INTRO+1, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp

@@ -64,7 +64,7 @@ done
     lda #<GAME_SCREEN
     sta TILEPTR
 
-    ldy TILEY
+	ldy TILEY
     cpy #0
     beq done
 
