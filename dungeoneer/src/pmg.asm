@@ -233,7 +233,7 @@ draw
 	mwa #0 PLAYER_SCORE
 	mva #3 PLAYER_LIVES
 	mva #0 ITEMS
-	level2()
+	level1()
 	rts
 .endp
 
