@@ -4,6 +4,7 @@
 ; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 ; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
+; TODO: refactor .macro between into .proc
 ; TODO: add door with key interaction
 ; TODO: add end of level interaction
 ; TODO: add transfer tile functionality
