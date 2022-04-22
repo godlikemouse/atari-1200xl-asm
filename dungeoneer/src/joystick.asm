@@ -10,13 +10,13 @@ dy=TMP3
 	; bounding box check
 
 	; top left
-	poke_position #-1, #0
+	peek_position #-1, #0
 	tile_is_block()
 	cmp #1
 	beq block
 
 	; bottom left
-	poke_position #-1, #8
+	peek_position #-1, #8
 	tile_is_block()
 	cmp #1
 	beq block
@@ -37,13 +37,13 @@ dy=TMP3
 	; bounding box check
 
 	; top right
-	poke_position #9, #0
+	peek_position #9, #0
 	tile_is_block()
 	cmp #1
 	beq block
 
 	;bottom right
-	poke_position #9, #8
+	peek_position #9, #8
 	tile_is_block()
 	cmp #1
 	beq block
@@ -64,13 +64,13 @@ dy=TMP3
 	; bounding box check
 
 	; top left
-	poke_position #0 #-1
+	peek_position #0 #-1
 	tile_is_block()
 	cmp #1
 	beq block
 
 	; top right
-	poke_position #8 #-1
+	peek_position #8 #-1
 	tile_is_block()
 	cmp #1
 	beq block
@@ -92,7 +92,7 @@ dy=TMP3
 	; bounding box check
 
 	; bottom left
-	poke_position #0, #9
+	peek_position #0, #9
 	tile_is_block()
 	cmp #1
 	beq block
@@ -102,7 +102,7 @@ dy=TMP3
 	beq block
 
 	; bottom right
-	poke_position #8, #9
+	peek_position #8, #9
 	tile_is_block()
 	cmp #1
 	beq block

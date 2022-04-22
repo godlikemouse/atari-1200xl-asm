@@ -251,28 +251,28 @@ dy=TMP3
 	; bounding box for pickup
 
 	; top left
-	poke_position #0, #0
+	peek_position #0, #0
 	tile_is_item()
 	cmp #1
 	beq pickup
 	check_player_death()
 
 	; top right
-	poke_position #7, #1
+	peek_position #7, #1
 	tile_is_item()
 	cmp #1
 	beq pickup
 	check_player_death()
 
 	; bottom right
-	poke_position #7, #7
+	peek_position #7, #7
 	tile_is_item()
 	cmp #1
 	beq pickup
 	check_player_death()
 
 	; bottom left
-	poke_position #0, #7
+	peek_position #0, #7
 	tile_is_item()
 	cmp #1
 	beq pickup
@@ -312,25 +312,25 @@ dy=TMP3
 	; bounding box for contact
 
 	; top left
-	poke_position #0, #0
+	peek_position #0, #0
 	tile_is_proxy()
 	cmp #1
 	beq door_proxy
 
 	; top right
-	poke_position #7, #1
+	peek_position #7, #1
 	tile_is_proxy()
 	cmp #1
 	beq door_proxy
 
 	; bottom right
-	poke_position #7, #7
+	peek_position #7, #7
 	tile_is_proxy()
 	cmp #1
 	beq door_proxy
 
 	; bottom left
-	poke_position #0, #7
+	peek_position #0, #7
 	tile_is_proxy()
 	cmp #1
 	beq door_proxy

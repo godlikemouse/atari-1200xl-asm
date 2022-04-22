@@ -321,10 +321,10 @@ done
 .endp
 
 ;
-; poke position
+; peek position
 ;	temporarily advances POSX, POSY and stores TILEX, TILEY and ONTILE
 ;	uses TMP2 (x), TMP3 (y)
-.proc poke_position (.byte dx+1, dy+1) .var
+.proc peek_position (.byte dx+1, dy+1) .var
 dx mva #0 TMP2
 dy mva #0 TMP3
 

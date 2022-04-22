@@ -24,25 +24,25 @@
 .proc exit_level
 
     ; top left
-    poke_position #0, #0
+    peek_position #0, #0
     tile_is_exit()
     cmp #1
     beq exit
 
     ; top right
-    poke_position #7, #1
+    peek_position #7, #1
     tile_is_exit()
     cmp #1
     beq exit
 
     ; bottom right
-    poke_position #7, #7
+    peek_position #7, #7
     tile_is_exit()
     cmp #1
     beq exit
 
     ; bottom left
-    poke_position #0, #7
+    peek_position #0, #7
     tile_is_exit()
     cmp #1
     beq exit
