@@ -51,6 +51,18 @@
     rts
 .endp
 
+.proc level5_mape1
+    mwa #level5_map.mape1 LEVEL_MAP
+    display_game()
+    rts
+.endp
+
+.proc level5_mapw1
+    mwa #level5_map.mapw1 LEVEL_MAP
+    display_game()
+    rts
+.endp
+
 ;
 ; exit level
 ;

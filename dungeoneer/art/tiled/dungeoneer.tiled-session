@@ -86,12 +86,28 @@
                 "y": 47.32225300092336
             }
         },
+        "level5_map.intro.tmx": {
+            "scale": 7.9243902439024385,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 78.11326562019083,
+                "y": 48.079409048938146
+            }
+        },
         "level5_map.map.tmx": {
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 78.11326562019083,
                 "y": 48.079409048938146
+            }
+        },
+        "level5_map.mape1.tmx": {
+            "scale": 7.9243902439024385,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 59.31055709449062,
+                "y": 47.95321637426901
             }
         },
         "mainmenu.map.tmx": {

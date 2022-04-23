@@ -34,6 +34,8 @@ generate_maps:
 	./art/tiled/tiled-import.py --source=./art/tiled/level4_map.map.csv --dest=./src/display/level4.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.intro.csv --dest=./src/display/level5.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.map.csv --dest=./src/display/level5.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.mape1.csv --dest=./src/display/level5.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.mapw1.csv --dest=./src/display/level5.asm
 
 generate_player:
 	cd art && ./player.py

@@ -94,9 +94,37 @@ load_player_position
 
 load_next_level
 	cmp #2
-	bne done
+	bne load_north_transition
 	mva (attr),y+ NEXT_LEVEL
 	mva (attr),y+ NEXT_LEVEL+1
+	jmp loop
+
+load_north_transition
+	cmp #3
+	bne load_east_transition
+	mva (attr),y+ LEVEL_TRANS_N
+	mva (attr),y+ LEVEL_TRANS_N+1
+	jmp loop
+
+load_east_transition
+	cmp #4
+	bne load_south_transition
+	mva (attr),y+ LEVEL_TRANS_E
+	mva (attr),y+ LEVEL_TRANS_E+1
+	jmp loop
+
+load_south_transition
+	cmp #5
+	bne load_west_transition
+	mva (attr),y+ LEVEL_TRANS_S
+	mva (attr),y+ LEVEL_TRANS_S+1
+	jmp loop
+
+load_west_transition
+	cmp #6
+	bne done
+	mva (attr),y+ LEVEL_TRANS_W
+	mva (attr),y+ LEVEL_TRANS_W+1
 	jmp loop
 
 done
