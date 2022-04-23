@@ -76,9 +76,9 @@ lookup_loop
 cont
     dey
     bne lookup_loop
-    ldy TILEX
 
 done
+	ldy TILEX
     lda (TILEPTR),y
     sta ONTILE
     rts
@@ -96,7 +96,7 @@ carry_tileptrh
 	lda POSX
 	sec
 	sbc #52
-	:2 lsr
+	:2 lsr ; divide by 4
 	sta TILEX
 	rts
 .endp
@@ -108,7 +108,7 @@ carry_tileptrh
 	lda POSY
 	sec
 	sbc #24
-	:3 lsr
+	:3 lsr ; divide by 8
 	sta TILEY
 	rts
 .endp
