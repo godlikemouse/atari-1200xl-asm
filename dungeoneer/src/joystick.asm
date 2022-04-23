@@ -179,6 +179,8 @@ post_move
 	pickup_item()
 	open_door()
 	exit_level()
+	transition_map_e()
+	transition_map_w()
 	jmp done
 
 store_posx

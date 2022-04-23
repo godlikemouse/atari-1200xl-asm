@@ -201,6 +201,48 @@ done
 .endp
 
 ;
+; tile is transition east
+;
+.proc tile_is_transition_e
+	lda ONTILE
+	cmp #$5e
+	bne done
+	lda #1
+
+done
+	rts
+.endp
+
+;
+; tile is transition west
+;
+.proc tile_is_transition_w
+	lda ONTILE
+	cmp #$5f
+	bne done
+	lda #1
+
+done
+	rts
+.endp
+
+;
+; tile is locked door
+;	if true, acc == 1, else acc == 0
+.proc tile_is_locked_door
+	between #$40, ONTILE, #$44
+	rts
+.endp
+
+;
+; tile is exit
+;
+.proc tile_is_exit
+	between #$50, ONTILE, #$52
+	rts
+.endp
+
+;
 ; tile is locked proxy
 ;
 .proc tile_is_locked_proxy
@@ -259,22 +301,6 @@ loop
 
 	play_door_open_sound()
 
-	rts
-.endp
-
-;
-; tile is locked door
-;	if true, acc == 1, else acc == 0
-.proc tile_is_locked_door
-	between #$40, ONTILE, #$44
-	rts
-.endp
-
-;
-; tile is exit
-;
-.proc tile_is_exit
-	between #$50, ONTILE, #$52
 	rts
 .endp
 

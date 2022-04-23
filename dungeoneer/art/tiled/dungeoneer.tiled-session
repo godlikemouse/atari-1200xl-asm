@@ -3,15 +3,18 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "level5_map.map.tmx",
     "expandedProjectPaths": [
+        "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "/home/godlikemouse/game_tileset.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "game_tileset.tsx": {
+            "scaleInDock": 4.8975,
             "scaleInEditor": 3
         },
         "gameover.map.tmx": {
@@ -90,24 +93,32 @@
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 78.11326562019083,
-                "y": 48.079409048938146
+                "x": 81.8990458602647,
+                "y": 47.89012003693445
             }
         },
         "level5_map.map.tmx": {
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 78.11326562019083,
-                "y": 48.079409048938146
+                "x": 76.34656817482305,
+                "y": 48.26869806094184
             }
         },
         "level5_map.mape1.tmx": {
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 59.31055709449062,
-                "y": 47.95321637426901
+                "x": 81.8990458602647,
+                "y": 47.89012003693445
+            }
+        },
+        "level5_map.mapw1.tmx": {
+            "scale": 7.3219512195121945,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 82.21852098600932,
+                "y": 48.00632911392405
             }
         },
         "mainmenu.map.tmx": {
@@ -119,10 +130,11 @@
             }
         },
         "menu_tileset.tsx": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "/home/godlikemouse/atari/code/asm/dungeoneer/art/tiled",
+    "last.exportedFilePath": "/home/jgraves/atari/asm/dungeoneer/art/tiled",
     "last.imagePath": "/home/godlikemouse/atari/code/asm/dungeoneer/art",
     "map.height": 12,
     "map.lastUsedExportFilter": "All Files (*)",
@@ -131,9 +143,17 @@
     "map.tileWidth": 4,
     "map.width": 40,
     "openFiles": [
+        "level5_map.intro.tmx",
+        "level5_map.map.tmx",
+        "level5_map.mapw1.tmx",
+        "level5_map.mape1.tmx"
     ],
     "project": "dungeoneer.tiled-project",
     "recentFiles": [
+        "level5_map.map.tmx",
+        "level5_map.intro.tmx",
+        "level5_map.mape1.tmx",
+        "level5_map.mapw1.tmx",
         "level4_map.map.tmx",
         "gameover.map.tmx",
         "mainmenu.map.tmx",

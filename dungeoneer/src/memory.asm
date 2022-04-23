@@ -70,6 +70,8 @@ LEVEL_TRANS_N     = $010c ; level transition north address
 LEVEL_TRANS_E     = $010e ; level transition east address
 LEVEL_TRANS_S     = $0110 ; level transition south address
 LEVEL_TRANS_W     = $0112 ; level transition west address
+LEVEL_TRANS_X     = $0114 ; level transition x
+LEVEL_TRANS_Y     = $0115 ; level transition y
 VTIMR1            = $0210 ; virtual Timer 1
 VVBLKD            = $0224 ; vertical Blank Interrupt Return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution

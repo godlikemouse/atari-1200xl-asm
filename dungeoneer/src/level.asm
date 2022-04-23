@@ -51,15 +51,58 @@
     rts
 .endp
 
+.proc level5_main
+    mwa #level5_map.map LEVEL_MAP
+    display_game()
+    rts
+.endp
+
 .proc level5_mape1
     mwa #level5_map.mape1 LEVEL_MAP
     display_game()
+
+    ; locate trans position
+    mva LEVEL_TRANS_X TILEX
+    mva LEVEL_TRANS_Y TILEY
+loop
+    dec TILEX
+    store_ontile()
+    lda ONTILE
+    cmp #$5f
+    bne loop
+
+    ; offset by 1 tile
+    inc TILEX
+    lda TILEX
+    :2 asl
+    add #52
+    sta PLAYER_RESET_POSX
+    reset_player()
     rts
 .endp
 
 .proc level5_mapw1
     mwa #level5_map.mapw1 LEVEL_MAP
     display_game()
+
+    ; locate trans position
+    mva LEVEL_TRANS_X TILEX
+    mva LEVEL_TRANS_Y TILEY
+loop
+    inc TILEX
+    store_ontile()
+    lda ONTILE
+    cmp #$5e
+    bne loop
+
+    ; offset by 1 tile
+    dec TILEX
+    dec TILEX
+    lda TILEX
+    :2 asl
+    add #52
+    sta PLAYER_RESET_POSX
+    reset_player()
     rts
 .endp
 

@@ -130,3 +130,59 @@ load_west_transition
 done
 	rts
 .endp
+
+;
+; transition map east
+;
+.proc transition_map_e
+
+	; top right
+	peek_position #7, #1
+	tile_is_transition_e()
+	cmp #1
+	beq transition
+
+	; bottom right
+	peek_position #7, #7
+	tile_is_transition_e()
+	cmp #1
+	beq transition
+
+	jmp done
+
+transition
+	mva TILEX LEVEL_TRANS_X
+	mva TILEY LEVEL_TRANS_Y
+	jmp (LEVEL_TRANS_E)
+
+done
+	rts
+.endp
+
+;
+; transition map west
+;
+.proc transition_map_w
+
+	; top left
+	peek_position #0, #0
+	tile_is_transition_w()
+	cmp #1
+	beq transition
+
+	; bottom left
+	peek_position #0, #7
+	tile_is_transition_w()
+	cmp #1
+	beq transition
+
+	jmp done
+
+transition
+	mva TILEX LEVEL_TRANS_X
+	mva TILEY LEVEL_TRANS_Y
+	jmp (LEVEL_TRANS_W)
+
+done
+	rts
+.endp
