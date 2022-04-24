@@ -151,8 +151,9 @@ done
 	jmp done
 
 transition
-	mva TILEX LEVEL_TRANS_X
-	mva TILEY LEVEL_TRANS_Y
+	mva POSX LEVEL_TRANS_X
+	mva POSY LEVEL_TRANS_Y
+	mva #4 LEVEL_TRANS_TYPE
 	jmp (LEVEL_TRANS_E)
 
 done
@@ -163,6 +164,8 @@ done
 ; transition map west
 ;
 .proc transition_map_w
+
+	; TODO: fix collision to match half blocks
 
 	; top left
 	peek_position #0, #0
@@ -179,8 +182,9 @@ done
 	jmp done
 
 transition
-	mva TILEX LEVEL_TRANS_X
-	mva TILEY LEVEL_TRANS_Y
+	mva POSX LEVEL_TRANS_X
+	mva POSY LEVEL_TRANS_Y
+	mva #6 LEVEL_TRANS_TYPE
 	jmp (LEVEL_TRANS_W)
 
 done

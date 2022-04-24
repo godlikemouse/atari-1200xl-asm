@@ -128,6 +128,10 @@ LEFT=$0b
 RIGHT=$07
 NONE=$0f
 
+	lda DISABLE_JOYSTICK
+	cmp #1
+	beq done
+
 	lda DISPLAY_TYPE
 	cmp #2
 	bne done

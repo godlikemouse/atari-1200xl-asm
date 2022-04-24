@@ -101,24 +101,24 @@
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 82.02523853493385,
-                "y": 48.079409048938146
+                "x": 70.22622345337028,
+                "y": 48.331794398276394
             }
         },
         "level5_map.mape1.tmx": {
-            "scale": 7.9243902439024385,
+            "scale": 8,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 82.02523853493385,
-                "y": 48.079409048938146
+                "x": 79.3125,
+                "y": 57
             }
         },
         "level5_map.mapw1.tmx": {
-            "scale": 7.3219512195121945,
+            "scale": 8,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 82.08194536975351,
-                "y": 48.07461692205196
+                "x": 80.3125,
+                "y": 57.125
             }
         },
         "mainmenu.map.tmx": {
@@ -134,7 +134,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "/home/jgraves/atari/asm/dungeoneer/art/tiled",
+    "last.exportedFilePath": "/home/godlikemouse/atari/code/asm/dungeoneer/art/tiled",
     "last.imagePath": "/home/godlikemouse/atari/code/asm/dungeoneer/art",
     "map.height": 12,
     "map.lastUsedExportFilter": "All Files (*)",

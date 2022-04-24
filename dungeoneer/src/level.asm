@@ -53,56 +53,26 @@
 
 .proc level5_main
     mwa #level5_map.map LEVEL_MAP
-    display_game()
+    display_game_map()
+    restore_player_trans()
     rts
 .endp
 
 .proc level5_mape1
+    mva #1 DISABLE_JOYSTICK
     mwa #level5_map.mape1 LEVEL_MAP
-    display_game()
-
-    ; locate trans position
-    mva LEVEL_TRANS_X TILEX
-    mva LEVEL_TRANS_Y TILEY
-loop
-    dec TILEX
-    store_ontile()
-    lda ONTILE
-    cmp #$5f
-    bne loop
-
-    ; offset by 1 tile
-    inc TILEX
-    lda TILEX
-    :2 asl
-    add #52
-    sta PLAYER_RESET_POSX
-    reset_player()
+    display_game_map()
+    restore_player_trans()
+    mva #0 DISABLE_JOYSTICK
     rts
 .endp
 
 .proc level5_mapw1
+    mva #1 DISABLE_JOYSTICK
     mwa #level5_map.mapw1 LEVEL_MAP
-    display_game()
-
-    ; locate trans position
-    mva LEVEL_TRANS_X TILEX
-    mva LEVEL_TRANS_Y TILEY
-loop
-    inc TILEX
-    store_ontile()
-    lda ONTILE
-    cmp #$5e
-    bne loop
-
-    ; offset by 1 tile
-    dec TILEX
-    dec TILEX
-    lda TILEX
-    :2 asl
-    add #52
-    sta PLAYER_RESET_POSX
-    reset_player()
+    display_game_map()
+    restore_player_trans()
+    mva #0 DISABLE_JOYSTICK
     rts
 .endp
 
@@ -141,6 +111,106 @@ exit
     ldy #0
     play_exit_level_sound()
     jmp (NEXT_LEVEL)
+
+done
+    rts
+.endp
+
+;
+; restore player trans e
+;
+.proc restore_player_trans_e
+    ; locate trans position
+
+    mva LEVEL_TRANS_Y POSY
+    sta PLAYER_RESET_POSY
+    posy_to_tiley()
+    sta TILEY
+
+    mva LEVEL_TRANS_X POSX
+    posx_to_tilex()
+    sta TILEX
+
+    ; find opposite transition tile
+    find_tilex_l TILEY, TILEX, #$5f
+    add #2 ; offset tile by 2 ->
+    sta TILEX
+
+    ; set new player position
+    tilex_to_posx()
+    sta PLAYER_RESET_POSX
+    reset_player()
+    draw_player()
+    rts
+.endp
+
+;
+; restore player trans w
+;
+.proc restore_player_trans_w
+
+    mva LEVEL_TRANS_Y POSY
+    sta PLAYER_RESET_POSY
+    posy_to_tiley()
+    sta TILEY
+
+    mva LEVEL_TRANS_X POSX
+    posx_to_tilex()
+    sta TILEX
+
+    ; find opposite transition tile
+    find_tilex_r TILEY, TILEX, #$5e
+    sub #2 ; offset tile by 2 <-
+    sta TILEX
+
+    ; set new player position
+    tilex_to_posx()
+    sta PLAYER_RESET_POSX
+    reset_player()
+    draw_player()
+    rts
+.endp
+
+;
+; restore player trans n
+;
+.proc restore_player_trans_n
+    rts
+.endp
+
+;
+; restore player trans s
+;
+.proc restore_player_trans_s
+    rts
+.endp
+
+;
+; restore player trans
+;   restores player position based on LEVEL_TRANS_TYPE
+.proc restore_player_trans
+    lda LEVEL_TRANS_TYPE
+    cmp #3
+    bne east
+    restore_player_trans_n()
+    jmp done
+
+east
+    cmp #4
+    bne south
+    restore_player_trans_e()
+    jmp done
+
+south
+    cmp #5
+    bne west
+    restore_player_trans_s()
+    jmp done
+
+west
+    cmp #6
+    bne done
+    restore_player_trans_w()
 
 done
     rts

@@ -1,6 +1,9 @@
 ; tile.asm
 ;   Map tile and related functionality
 
+TILEX_PIXEL_OFFSET=48 ; left overscan in pixels
+TILEY_PIXEL_OFFSET=24 ; top overscan in pixels + items screen in pixels
+
 ;
 ; setup tileset
 ;
@@ -58,35 +61,26 @@ done
 ; store on tile
 ;
 .proc store_ontile
-    ; calculate screen tile offset
-    lda #>GAME_SCREEN
-    sta TILEPTR+1
-    lda #<GAME_SCREEN
-    sta TILEPTR
 
-	ldy TILEY
-    cpy #0
-    beq done
+	mwa #GAME_SCREEN TILEPTR
 
-lookup_loop
-    adc #40
-    sta TILEPTR
-    bcs carry_tileptrh
+	; calculate screen tile offset
+	lda TILEY
+	cmp #0
+	beq continue
 
-cont
-    dey
-    bne lookup_loop
+	ldx #0
+offset
+	adw TILEPTR #40
+	inx
+	cpx TILEY
+	bne offset
 
-done
+continue
 	ldy TILEX
-    lda (TILEPTR),y
-    sta ONTILE
-    rts
-
-carry_tileptrh
-    adb TILEPTR+1 #1
-    lda TILEPTR
-    jmp cont
+	lda (TILEPTR),y
+	sta ONTILE
+	rts
 .endp
 
 ;
@@ -95,7 +89,7 @@ carry_tileptrh
 .proc store_tilex
 	lda POSX
 	sec
-	sbc #52
+	sbc #TILEX_PIXEL_OFFSET
 	:2 lsr ; divide by 4
 	sta TILEX
 	rts
@@ -106,8 +100,7 @@ carry_tileptrh
 ;
 .proc store_tiley
 	lda POSY
-	sec
-	sbc #24
+	sub #TILEY_PIXEL_OFFSET
 	:3 lsr ; divide by 8
 	sta TILEY
 	rts
