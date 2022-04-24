@@ -183,7 +183,9 @@ post_move
 	pickup_item()
 	open_door()
 	exit_level()
+	transition_map_n()
 	transition_map_e()
+	transition_map_s()
 	transition_map_w()
 	jmp done
 

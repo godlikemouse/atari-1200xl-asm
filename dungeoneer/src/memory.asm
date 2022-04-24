@@ -76,7 +76,6 @@ LEVEL_TRANS_Y     = $0115 ; level transition y
 LEVEL_TRANS_TYPE  = $0116 ; level transition type (3N, 4E, 5S, 6W)
 LEVEL_TRANS_VAR0  = $0117
 LEVEL_TRANS_VAR1  = $0118
-LEVEL_TRANS_VAR2  = $0119
 VTIMR1            = $0210 ; virtual Timer 1
 VVBLKD            = $0224 ; vertical Blank Interrupt Return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution

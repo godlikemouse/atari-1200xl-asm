@@ -194,11 +194,37 @@ done
 .endp
 
 ;
+; tile is transition north
+;
+.proc tile_is_transition_n
+	lda ONTILE
+	cmp #$5c
+	bne done
+	lda #1
+
+done
+	rts
+.endp
+
+;
 ; tile is transition east
 ;
 .proc tile_is_transition_e
 	lda ONTILE
 	cmp #$5e
+	bne done
+	lda #1
+
+done
+	rts
+.endp
+
+;
+; tile is transition south
+;
+.proc tile_is_transition_s
+	lda ONTILE
+	cmp #$5d
 	bne done
 	lda #1
 

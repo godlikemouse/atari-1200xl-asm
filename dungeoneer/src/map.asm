@@ -132,6 +132,35 @@ done
 .endp
 
 ;
+; transition map north
+;
+.proc transition_map_n
+
+	; top right
+	peek_position #7, #1
+	tile_is_transition_n()
+	cmp #1
+	beq transition
+	rts
+	; top left
+	peek_position #0, #0
+	tile_is_transition_n()
+	cmp #1
+	beq transition
+
+	jmp done
+
+transition
+	mva POSX LEVEL_TRANS_X
+	mva POSY LEVEL_TRANS_Y
+	mva #3 LEVEL_TRANS_TYPE
+	jmp (LEVEL_TRANS_N)
+
+done
+	rts
+.endp
+
+;
 ; transition map east
 ;
 .proc transition_map_e
@@ -161,11 +190,38 @@ done
 .endp
 
 ;
+; transition map south
+;
+.proc transition_map_s
+
+	; bottom right
+	peek_position #7, #7
+	tile_is_transition_s()
+	cmp #1
+	beq transition
+
+	; bottom left
+	peek_position #0, #7
+	tile_is_transition_s()
+	cmp #1
+	beq transition
+
+	jmp done
+
+transition
+	mva POSX LEVEL_TRANS_X
+	mva POSY LEVEL_TRANS_Y
+	mva #5 LEVEL_TRANS_TYPE
+	jmp (LEVEL_TRANS_S)
+
+done
+	rts
+.endp
+
+;
 ; transition map west
 ;
 .proc transition_map_w
-
-	; TODO: fix collision to match half blocks
 
 	; top left
 	peek_position #0, #0

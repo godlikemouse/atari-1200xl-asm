@@ -89,22 +89,21 @@ done
 
 
 ;
-; find tile x right
-;   finds the first matching TILEX in right direction using POSY for tile row
-.proc find_tilex_r (.byte tiley+1, from_tilex+1, find_tile+1) .var
+; find tilex
+;   finds the first matching TILEX using POSY for tile row
+.proc find_tilex (.byte tiley+1, find_tile+1) .var
 tiley mva #0 LEVEL_TRANS_VAR0
-from_tilex mva #0 LEVEL_TRANS_VAR1
-find_tile mva #0 LEVEL_TRANS_VAR2
+find_tile mva #0 LEVEL_TRANS_VAR1
 _tiley=LEVEL_TRANS_VAR0
-_from_tilex=LEVEL_TRANS_VAR1
-_find_tile=LEVEL_TRANS_VAR2
+_find_tile=LEVEL_TRANS_VAR1
 
     mwa #GAME_SCREEN TILEPTR
 
+    lda _tiley
+    cmp #0
+    beq continue
+
     ; set initial tile pointer pos to row offset
-    ldx #0
-    cpx _tiley
-    beq scan_limit ; skip offset if tiley zero
     ldx $ff
 offset
     adw TILEPTR #40
@@ -112,41 +111,19 @@ offset
     cpx _tiley
     bne offset
 
-scan_limit
-
-    ; set scan limit
-    ; scan from tilex position to #40
-    lda #40
-    sub _from_tilex
-    tax
-
-    ldy _from_tilex
-
+continue
+    ldy #40
 loop
+    dey
     lda (TILEPTR),y
     cmp _find_tile
-    bne next
-
-found
-    ; reuse variables to perform acc = 40 - x
-    mva #40 _from_tilex
-    txa
-    sta _find_tile
-    sbb _from_tilex _find_tile
-    lda _from_tilex
+    bne verify
+    tya
     jmp done
 
-next
-    iny
-    jmp check_limit
-
-check_limit
-    dex
-    cpx #$ff
-    beq not_found
-    jmp loop
-
-not_found
+verify
+    cpy #0
+    bne loop
     lda #-1
 
 done
@@ -154,54 +131,34 @@ done
 .endp
 
 ;
-; find tile x left
-;   finds the first matching TILEX in left direction using POSY for tile row
-.proc find_tilex_l (.byte tiley+1, from_tilex+1, find_tile+1) .var
-tiley mva #0 LEVEL_TRANS_VAR0
-from_tilex mva #0 LEVEL_TRANS_VAR1
-find_tile mva #0 LEVEL_TRANS_VAR2
-_tiley=LEVEL_TRANS_VAR0
-_from_tilex=LEVEL_TRANS_VAR1
-_find_tile=LEVEL_TRANS_VAR2
+; find tilex
+;   finds the first matching TILEY using POSX for tile row
+.proc find_tiley (.byte tilex+1, find_tile+1) .var
+tilex mva #0 LEVEL_TRANS_VAR0
+find_tile mva #0 LEVEL_TRANS_VAR1
+_tilex=LEVEL_TRANS_VAR0
+_find_tile=LEVEL_TRANS_VAR1
 
     mwa #GAME_SCREEN TILEPTR
 
+    ldy _tilex
+
     ; set initial tile pointer pos to row offset
     ldx #0
-    cpx _tiley
-    beq scan_limit ; skip offset if tiley zero
-    ldx #$ff
-offset
-    adw TILEPTR #40
-    inx
-    cpx _tiley
-    bne offset
-
-scan_limit
-
-    ldy _from_tilex
-
 loop
     lda (TILEPTR),y
     cmp _find_tile
-    bne next
+    beq found
+    adw TILEPTR #40
+    inx
+    cpx #12
+    bne loop
 
-found
-    ; reuse variables to perform acc = 40 - x
-    tya
+    lda #-1
     jmp done
 
-next
-    dey
-    jmp check_limit
-
-check_limit
-    cpy #$ff
-    beq not_found
-    jmp loop
-
-not_found
-    lda #-1
+found
+    txa
 
 done
     rts

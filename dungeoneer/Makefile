@@ -3,7 +3,7 @@ NAME=dungeoneer
 FLAGS=-l:${NAME}.lst -t:${NAME}.lab
 OUTFILE=${NAME}.xex
 
-all: clean generate_tiles generate_player generate_maps build runalt
+all: clean generate_tiles generate_player generate_maps build run
 
 clean:
 	rm -f *.lab *.lst *.obx
@@ -36,6 +36,8 @@ generate_maps:
 	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.map.csv --dest=./src/display/level5.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.mape1.csv --dest=./src/display/level5.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.mapw1.csv --dest=./src/display/level5.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.mapn1.csv --dest=./src/display/level5.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.maps1.csv --dest=./src/display/level5.asm
 
 generate_player:
 	cd art && ./player.py
