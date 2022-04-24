@@ -13,7 +13,7 @@
 ; TODO: add transfer tile functionality
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5
 
-	org $1000
+	org $0600
 
 	; main setup
 	setup_colors()

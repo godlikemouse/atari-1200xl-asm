@@ -201,8 +201,10 @@ done
 	cmp #$5c
 	bne done
 	lda #1
+	rts
 
 done
+	lda #0
 	rts
 .endp
 
@@ -214,8 +216,10 @@ done
 	cmp #$5e
 	bne done
 	lda #1
+	rts
 
 done
+	lda #0
 	rts
 .endp
 
@@ -227,8 +231,10 @@ done
 	cmp #$5d
 	bne done
 	lda #1
+	rts
 
 done
+	lda #0
 	rts
 .endp
 
@@ -240,8 +246,10 @@ done
 	cmp #$5f
 	bne done
 	lda #1
+	rts
 
 done
+	lda #0
 	rts
 .endp
 

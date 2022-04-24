@@ -1,6 +1,8 @@
 ; pmg.asm
 ;	Player Missile Graphics (PMG) specific routines
 
+	org $2000
+
 ;
 ; setup colors
 ;
@@ -236,7 +238,7 @@ draw
 	mwa #0 PLAYER_SCORE
 	mva #3 PLAYER_LIVES
 	mva #0 ITEMS
-	level1()
+	level5()
 	rts
 .endp
 
