@@ -382,16 +382,18 @@ done
 ;	temporarily advances POSX, POSY and stores TILEX, TILEY and ONTILE
 ;	uses TMP2 (x), TMP3 (y)
 .proc peek_position (.byte dx+1, dy+1) .var
-dx mva #0 TMP2
-dy mva #0 TMP3
+.var _dx .byte
+.var _dy .byte
+dx mva #0 _dx
+dy mva #0 _dy
 
-	adb POSX TMP2
-	adb POSY TMP3
+	adb POSX _dx
+	adb POSY _dy
 	store_tilex()
 	store_tiley()
 	store_ontile()
-	sbb POSX TMP2
-	sbb POSY TMP3
+	sbb POSX _dx
+	sbb POSY _dy
 	rts
 .endp
 

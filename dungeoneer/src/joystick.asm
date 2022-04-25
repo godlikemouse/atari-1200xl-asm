@@ -5,8 +5,6 @@
 ; can move left
 ;
 .proc can_move_left
-dx=TMP2
-dy=TMP3
 	; bounding box check
 
 	; top left
@@ -32,8 +30,6 @@ block
 ; can move right
 ;
 .proc can_move_right
-dx=TMP2
-dy=TMP3
 	; bounding box check
 
 	; top right
@@ -59,8 +55,6 @@ block
 ; can move up
 ;
 .proc can_move_up
-dx=TMP2
-dy=TMP3
 	; bounding box check
 
 	; top left
@@ -87,8 +81,6 @@ block
 ; can move down
 ;
 .proc can_move_down
-dx=TMP2
-dy=TMP3
 	; bounding box check
 
 	; bottom left
