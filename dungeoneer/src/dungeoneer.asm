@@ -1,14 +1,19 @@
 ; Dungeoneer - A simple game in Atari 8-bit assembly
+
+; References and citations
+;
 ; Based on the original 8bit MADS YouTube tutorial series by Ed Salisbury
 ; https://www.youtube.com/playlist?list=PL7IgmhqRiwzEIVAOhZWnby6WPsQ8alFSI
+;
+; Tile mapping and conversion handled by Tiled:
+;https://www.mapeditor.org/
+;
+; NTSC Color Palette:
+; https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 
-; References:
-; NTSC Color Palette: https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
-; PMG Memory Map: https://www.atarimagazines.com/compute/issue64/atari_animation.gif
 
 ; TODO: perform player reset placement before transition
 ; TODO: add door with key interaction
-; TODO: add end of level interaction
 ; TODO: add transfer tile functionality
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5
 

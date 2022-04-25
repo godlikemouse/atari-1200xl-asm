@@ -4,7 +4,6 @@
 ;
 ; between
 ;   compares low <= value < high
-;   stores temporarily TMP0,TMP6,TMP7,TMP8
 ;   result stored in acc
 .proc between (.byte low+1, value+1, high+1) .var
 .var _low .byte
