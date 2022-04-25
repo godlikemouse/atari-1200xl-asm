@@ -93,10 +93,10 @@ done
 ; find tilex
 ;   finds the first matching TILEX using POSY for tile row
 .proc find_tilex (.byte tiley+1, find_tile+1) .var
-tiley mva #0 LEVEL_TRANS_VAR0
-find_tile mva #0 LEVEL_TRANS_VAR1
-_tiley=LEVEL_TRANS_VAR0
-_find_tile=LEVEL_TRANS_VAR1
+.var _tiley .byte
+.var _find_tile .byte
+tiley mva #0 _tiley
+find_tile mva #0 _find_tile
 
     mwa #GAME_SCREEN TILEPTR
 
@@ -135,10 +135,10 @@ done
 ; find tilex
 ;   finds the first matching TILEY using POSX for tile row
 .proc find_tiley (.byte tilex+1, find_tile+1) .var
-tilex mva #0 LEVEL_TRANS_VAR0
-find_tile mva #0 LEVEL_TRANS_VAR1
-_tilex=LEVEL_TRANS_VAR0
-_find_tile=LEVEL_TRANS_VAR1
+.var _tilex .byte
+.var _find_tile .byte
+tilex mva #0 _tilex
+find_tile mva #0 _find_tile
 
     mwa #GAME_SCREEN TILEPTR
 

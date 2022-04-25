@@ -29,6 +29,6 @@ map
 
 attrs
 	.byte 1,$b7,$28 ; player pos x/y
-	.byte 2\.word level5 ; next level
+	.byte 2\.word level1 ; next level
 	.byte 0
 .endl
