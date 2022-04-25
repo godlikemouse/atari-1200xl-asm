@@ -72,21 +72,20 @@ loop
 ;	item_idx, the bit index in ITEMS
 ;	screen_idx, left to right position in ITEM_SCREEN
 .proc display_screen_key (.byte item_idx+1, charset_idx+1, screen_idx+1) .var
-item_idx mva #0 TMP0
-charset_idx mva #0 TMP1
-screen_idx mva #0 TMP2
-
-item_index=TMP0
-charset_index=TMP1
-screen_index=TMP2
+.var _item_idx .byte
+.var _charset_idx .byte
+.var _screen_idx .byte
+item_idx mva #0 _item_idx
+charset_idx mva #0 _charset_idx
+screen_idx mva #0 _screen_idx
 
 	lda ITEMS
-	and item_index
-	cmp item_index
+	and _item_idx
+	cmp _item_idx
 	bne done
 
-	lda charset_index
-	ldy screen_index
+	lda _charset_idx
+	ldy _screen_idx
 	sta ITEM_SCREEN,y+
 	add #1
 	sta ITEM_SCREEN,y
@@ -135,13 +134,16 @@ loop
 ; add to player score
 ;	score is stored in nibbles (ie. 0050 lbyte: 50, hbyte: 00)
 .proc add_score (.byte lbyte+1, hbyte+1) .var
-lbyte mva #0 TMP0
-hbyte mva #0 TMP1
-low=TMP0
-carry=TMP3
+.var _lbyte .byte
+.var _hbyte .byte
+.var _carry .byte
+.var _nibble .byte
+.var _temp .byte
+lbyte mva #0 _lbyte
+hbyte mva #0 _hbyte
 
 	ldy #0
-	mva #0 carry
+	mva #0 _carry
 loop
 	add_lower_nibble()
 	add_upper_nibble()
@@ -156,17 +158,17 @@ loop
 .proc add_lower_nibble
 
 	; store lower nibble (XN)
-	lda low,y
+	lda _lbyte,y
 	and #$0f
-	sta TMP2
+	sta _nibble
 
 	; load score lower nibble (XN)
 	lda PLAYER_SCORE,y
 	and #$0f
 
 	; add to score nibble with carry (XN)
-	add TMP2
-	add carry
+	add _nibble
+	add _carry
 
 	; check for overflow (XN)
 	cmp #10
@@ -175,22 +177,22 @@ loop
 
 no_carry
 	; no carry, just store and move on (XN)
-	sta TMP2
-	mva #0 carry ; no overflow
+	sta _nibble
+	mva #0 _carry ; no overflow
 	jmp done
 
 with_carry
 	; sub 10, then set the carry into next nibble (ON)
 	sub #10
-	sta TMP2
-	mva #1 carry ; overflow
+	sta _nibble
+	mva #1 _carry ; overflow
 	jmp done
 
 done
 	; done with (XN), store in player score
 	lda PLAYER_SCORE,y
 	and #$f0
-	ora TMP2
+	ora _nibble
 	sta PLAYER_SCORE,y
 	rts
 .endp
@@ -201,39 +203,39 @@ done
 	; store higher nibble of score (NX)
 	and #$f0
 	:4 lsr
-	sta TMP2
+	sta _nibble
 
 	; check high nibble for overflow (ONX)
-	lda low,y
+	lda _lbyte,y
 	and #$f0
 	:4 lsr
-	add carry ; overflow
-	add TMP2
+	add _carry ; overflow
+	add _nibble
 	cmp #10
 	bcc no_carry
 	jmp with_carry
 
 no_carry
 	; no carry, just store and move on (NX)
-	sta TMP2
-	mva #0 carry ; no overflow
+	sta _nibble
+	mva #0 _carry ; no overflow
 	jmp done
 
 with_carry
 	; sub 10, then set the carry into the next nibble (ONX)
 	sub #10
-	sta TMP2
-	mva #1 carry ; overflow
+	sta _nibble
+	mva #1 _carry ; overflow
 	jmp done
 
 done
 	; done with lower byte, store (NN)
 	lda PLAYER_SCORE,y
 	and #$0f
-	sta TMP4
-	lda TMP2
+	sta _temp
+	lda _nibble
 	:4 asl
-	ora TMP4
+	ora _temp
 	sta PLAYER_SCORE,y
 	rts
 .endp
@@ -246,8 +248,6 @@ done
 ; pickup item
 ;   determines if collision is with a pickup item
 .proc pickup_item
-dx=TMP2
-dy=TMP3
 	; bounding box for pickup
 
 	; top left
@@ -295,7 +295,8 @@ pickup
 ; has key
 ;	acc == 0 if false, else acc > 0
 .proc has_key(.byte key+1) .var
-key mva #0 TMP0
+.var _key .byte
+key mva #0 _key
 
 	and ITEMS
 
@@ -306,8 +307,6 @@ key mva #0 TMP0
 ; open door
 ;
 .proc open_door
-dx=TMP2
-dy=TMP3
 
 	; bounding box for contact
 
@@ -315,34 +314,27 @@ dy=TMP3
 	peek_position #0, #0
 	tile_is_proxy()
 	cmp #1
-	beq door_proxy
+	beq done
 
 	; top right
 	peek_position #7, #1
 	tile_is_proxy()
 	cmp #1
-	beq door_proxy
+	beq done
 
 	; bottom right
 	peek_position #7, #7
 	tile_is_proxy()
 	cmp #1
-	beq door_proxy
+	beq done
 
 	; bottom left
 	peek_position #0, #7
 	tile_is_proxy()
 	cmp #1
-	beq door_proxy
+	beq done
 
-	; block movement
-
-	rts
-
-door_proxy
-
-	; check for key
-	; check for next tile door
+done
 
 	rts
 .endp
@@ -385,28 +377,32 @@ done
 ;   retrives the item bit mask for an ONTILE item
 ;   stores bit in acc
 .proc get_item_bit
+.var _bit .byte
+.var _counter .byte
+.var _item_tile_low .byte
+.var _item_tile_high .byte
 
 	; stort inital address and bit values
-	mva #1 TMP2
-	mva #$20 TMP3
-	mva #$22 TMP4
-	mva #8 TMP5
+	mva #1 _bit
+	mva #$20 _item_tile_low
+	mva #$22 _item_tile_high
+	mva #8 _counter
 loop
 	; check to see if item exists
-	between TMP3, ONTILE, TMP4
+	between _item_tile_low, ONTILE, _item_tile_high
 	cmp #1
 	beq done
 	; if not, shift left increase address and continue
-	lda TMP2
+	lda _bit
 	asl
-	sta TMP2
-	adb TMP3 #2
-	adb TMP4 #2
-	dec TMP5
+	sta _bit
+	adb _item_tile_low #2
+	adb _item_tile_high #2
+	dec _counter
 	bne loop
 
 done
-	lda TMP2
+	lda _bit
 	rts
 .endp
 
