@@ -12,7 +12,7 @@
 ; https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
 
 
-; TODO: perform player reset placement before transition
+; TODO: add state scan to level transition
 ; TODO: add door with key interaction
 ; TODO: add transfer tile functionality
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5
