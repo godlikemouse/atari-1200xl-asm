@@ -31,6 +31,20 @@
     rts
 .endp
 
+.proc level3_main
+    mva #1 DISABLE_JOYSTICK
+    mwa #level3_map.map LEVEL_MAP
+    mwa LEVEL_MAP LEVEL_TRANS_MAP
+    rts
+.endp
+
+.proc level3_maps1
+    mva #1 DISABLE_JOYSTICK
+    mwa #level3_map.maps1 LEVEL_MAP
+    mwa LEVEL_MAP LEVEL_TRANS_MAP
+    rts
+.endp
+
 .proc level4
     mwa #level4_map.intro LEVEL_INTRO
     mwa #level4_map.map LEVEL_MAP
@@ -82,6 +96,13 @@
 .proc level5_maps1
     mva #1 DISABLE_JOYSTICK
     mwa #level5_map.maps1 LEVEL_MAP
+    mwa LEVEL_MAP LEVEL_TRANS_MAP
+    rts
+.endp
+
+.proc level5_maps1w1
+    mva #1 DISABLE_JOYSTICK
+    mwa #level5_map.maps1w1 LEVEL_MAP
     mwa LEVEL_MAP LEVEL_TRANS_MAP
     rts
 .endp

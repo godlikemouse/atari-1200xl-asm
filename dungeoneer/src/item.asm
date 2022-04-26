@@ -287,6 +287,7 @@ pickup
 
     remove_playfield_item()
 	display_screen_items()
+	add_score #$5, #$00
 
 	rts
 .endp

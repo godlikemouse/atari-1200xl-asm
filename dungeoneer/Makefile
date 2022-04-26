@@ -30,6 +30,7 @@ generate_maps:
 	./art/tiled/tiled-import.py --source=./art/tiled/level2_map.map.csv --dest=./src/display/level2.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level3_map.intro.csv --dest=./src/display/level3.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level3_map.map.csv --dest=./src/display/level3.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level3_map.maps1.csv --dest=./src/display/level3.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level4_map.intro.csv --dest=./src/display/level4.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level4_map.map.csv --dest=./src/display/level4.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.intro.csv --dest=./src/display/level5.asm
@@ -38,6 +39,7 @@ generate_maps:
 	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.mapw1.csv --dest=./src/display/level5.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.mapn1.csv --dest=./src/display/level5.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.maps1.csv --dest=./src/display/level5.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level5_map.maps1w1.csv --dest=./src/display/level5.asm
 
 generate_player:
 	cd art && ./player.py
