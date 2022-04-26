@@ -1,8 +1,6 @@
 ; pmg.asm
 ;	Player Missile Graphics (PMG) specific routines
 
-	org $2000
-
 ;
 ; setup colors
 ;
@@ -191,6 +189,7 @@ left
 
 draw
 	draw_player()
+
 	rts
 .endp
 
@@ -372,7 +371,7 @@ done
 .endp
 
 ;
-; animate player death
+; render player death
 ;
 .proc render_player_death
 

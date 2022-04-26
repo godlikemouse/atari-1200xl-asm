@@ -109,8 +109,8 @@
             "scale": 8,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 72.0625,
-                "y": 57
+                "x": 81.9375,
+                "y": 48
             }
         },
         "level5_map.mapn1.tmx": {
@@ -133,8 +133,8 @@
             "scale": 8,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 64.4375,
-                "y": 57
+                "x": 81.9375,
+                "y": 48
             }
         },
         "mainmenu.map.tmx": {
@@ -166,10 +166,10 @@
     ],
     "project": "dungeoneer.tiled-project",
     "recentFiles": [
-        "level5_map.map.tmx",
         "level5_map.intro.tmx",
         "level5_map.mape1.tmx",
         "level5_map.mapw1.tmx",
+        "level5_map.map.tmx",
         "level4_map.map.tmx",
         "gameover.map.tmx",
         "mainmenu.map.tmx",

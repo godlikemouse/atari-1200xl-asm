@@ -133,6 +133,8 @@ NONE=$0f
 	beq done
 
 	lda STICK0
+	cmp #NONE
+	beq move_none
 	cmp #LEFT
 	beq move_left
 	cmp #RIGHT
@@ -141,8 +143,6 @@ NONE=$0f
 	beq move_up
 	cmp #DOWN
 	beq move_down
-	cmp #NONE
-	beq move_none
 	rts
 
 move_left
@@ -199,20 +199,23 @@ done
 .proc read_mainmenu_joystick
 UP=$0e
 DOWN=$0d
+NONE=$0f
 
 	lda DISPLAY_TYPE
 	cmp #0
 	bne done
 
+	lda BTN0
+	cmp #0
+	beq button_pressed
+
 	lda STICK0
+	cmp #NONE
+	beq done
 	cmp #UP
 	beq move_up
 	cmp #DOWN
 	beq move_down
-
-	lda BTN0
-	cmp #0
-	beq button_pressed
 
 	jmp done
 

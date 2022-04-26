@@ -88,8 +88,17 @@ loop
 load_player_position
 	cmp #1
 	bne load_next_level
+
+	lda LEVEL_TRANS_MAP
+	cmp #0
+	bne transition_attributes
+
 	mva (attr),y+ PLAYER_RESET_POSX
 	mva (attr),y+ PLAYER_RESET_POSY
+	jmp loop
+
+transition_attributes
+	:2 iny
 	jmp loop
 
 load_next_level
@@ -141,7 +150,7 @@ done
 	tile_is_transition_n()
 	cmp #1
 	beq transition
-	rts
+
 	; top left
 	peek_position #0, #0
 	tile_is_transition_n()

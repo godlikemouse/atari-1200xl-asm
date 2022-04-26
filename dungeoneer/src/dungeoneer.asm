@@ -28,6 +28,8 @@
 
 	icl "memory.asm"
 	icl "dlist.asm"
+	org $2000
+	icl "level.asm"
 	icl "pmg.asm"
 	icl "joystick.asm"
 	icl "util.asm"
@@ -35,7 +37,6 @@
 	icl "interrupt.asm"
 	icl "sound.asm"
 	icl "map.asm"
-	icl "level.asm"
 	icl "tile.asm"
 	icl "data/game_tileset.asm"
 	icl "data/menu_tileset.asm"

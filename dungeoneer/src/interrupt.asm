@@ -25,6 +25,18 @@ vvblkd_interrupt
 ; vvblkd chain
 ;	method chains for VVBLKD interupts
 .local vvblkd_chain
+    mva #0 SKIP_FRAME
+
+    render_background_music()
+    render_sfx #<SFX1, #>SFX1, #<AF1C, #>AF1C
+    render_sfx #<SFX2, #>SFX2, #<AF2C, #>AF2C
+
+    transition_map()
+
+    lda SKIP_FRAME
+    cmp #1
+    jeq done
+
 	read_game_joystick()
     read_mainmenu_joystick()
 
@@ -34,9 +46,7 @@ vvblkd_interrupt
     render_intro()
     render_gameover()
     render_player_death()
-	render_background_music()
-    render_sfx #<SFX1, #>SFX1, #<AF1C, #>AF1C
-    render_sfx #<SFX2, #>SFX2, #<AF2C, #>AF2C
 
+done
 	jmp XITVBV
 .endl

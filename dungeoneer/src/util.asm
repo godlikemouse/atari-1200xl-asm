@@ -97,7 +97,7 @@ done
 tiley mva #0 _tiley
 find_tile mva #0 _find_tile
 
-    mwa #GAME_SCREEN TILEPTR
+    mwa LEVEL_TRANS_MAP TILEPTR
 
     lda _tiley
     cmp #0
@@ -139,7 +139,7 @@ done
 tilex mva #0 _tilex
 find_tile mva #0 _find_tile
 
-    mwa #GAME_SCREEN TILEPTR
+    mwa LEVEL_TRANS_MAP TILEPTR
 
     ldy _tilex
 
