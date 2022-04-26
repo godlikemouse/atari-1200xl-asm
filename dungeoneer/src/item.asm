@@ -251,7 +251,7 @@ done
 	; bounding box for pickup
 
 	; top left
-	peek_position #0, #0
+	peek_position #1, #1
 	tile_is_item()
 	cmp #1
 	beq pickup
@@ -272,7 +272,7 @@ done
 	check_player_death()
 
 	; bottom left
-	peek_position #0, #7
+	peek_position #1, #7
 	tile_is_item()
 	cmp #1
 	beq pickup

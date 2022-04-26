@@ -110,7 +110,7 @@ continue
 ; tile is block
 ;   if true, acc == 1, else acc == 0
 .proc tile_is_block
-    between #$10, ONTILE, #$14
+    between #$10, ONTILE, #$18
 	cmp #1
 	beq done
 
@@ -257,7 +257,7 @@ done
 ; tile is locked door
 ;	if true, acc == 1, else acc == 0
 .proc tile_is_locked_door
-	between #$40, ONTILE, #$44
+	between #$14, ONTILE, #$18
 	rts
 .endp
 
@@ -273,6 +273,13 @@ done
 ; tile is locked proxy
 ;
 .proc tile_is_locked_proxy
+	tile_is_locked_door()
+	cmp #1
+	bne proxy_check
+	mva #1 $11a
+	jmp direct
+
+proxy_check
 	tile_is_proxy()
 	cmp #1
 	bne done
@@ -284,6 +291,7 @@ done
 	cmp #1
 	bne done
 
+direct
 	; do we have a key
 	has_key #%00000001
 	cmp #0
@@ -313,11 +321,11 @@ done
 	ldy TILEX
 loop
 	lda (TILEPTR), y-
-	cmp #64
+	cmp #$14
 	bne loop
 	iny
 
-	lda #68
+	lda #$44
 	sta (TILEPTR), y+
 	add #1
 	sta (TILEPTR), y+

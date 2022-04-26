@@ -8,13 +8,21 @@
 	; bounding box check
 
 	; top left
-	peek_position #-1, #0
+	peek_position #-1, #1
+	tile_is_locked_proxy()
+	cmp #1
+	beq block
+
 	tile_is_block()
 	cmp #1
 	beq block
 
 	; bottom left
-	peek_position #-1, #8
+	peek_position #-1, #7
+	tile_is_locked_proxy()
+	cmp #1
+	beq block
+	
 	tile_is_block()
 	cmp #1
 	beq block
@@ -33,13 +41,21 @@ block
 	; bounding box check
 
 	; top right
-	peek_position #9, #0
+	peek_position #9, #1
+	tile_is_locked_proxy()
+	cmp #1
+	beq block
+
 	tile_is_block()
 	cmp #1
 	beq block
 
 	;bottom right
-	peek_position #9, #8
+	peek_position #9, #7
+	tile_is_locked_proxy()
+	cmp #1
+	beq block
+
 	tile_is_block()
 	cmp #1
 	beq block
@@ -59,12 +75,20 @@ block
 
 	; top left
 	peek_position #0 #-1
+	tile_is_locked_proxy()
+	cmp #1
+	beq block
+
 	tile_is_block()
 	cmp #1
 	beq block
 
 	; top right
 	peek_position #8 #-1
+	tile_is_locked_proxy()
+	cmp #1
+	beq block
+
 	tile_is_block()
 	cmp #1
 	beq block
@@ -84,22 +108,22 @@ block
 	; bounding box check
 
 	; bottom left
-	peek_position #0, #9
-	tile_is_block()
+	peek_position #0, #8
+	tile_is_locked_proxy()
 	cmp #1
 	beq block
 
-	tile_is_locked_proxy()
+	tile_is_block()
 	cmp #1
 	beq block
 
 	; bottom right
-	peek_position #8, #9
-	tile_is_block()
+	peek_position #8, #8
+	tile_is_locked_proxy()
 	cmp #1
 	beq block
 
-	tile_is_locked_proxy()
+	tile_is_block()
 	cmp #1
 	beq block
 
@@ -174,7 +198,6 @@ move_none
 post_move
 	pickup_item()
 	open_door()
-	exit_level()
 	transition_map_n()
 	transition_map_e()
 	transition_map_s()

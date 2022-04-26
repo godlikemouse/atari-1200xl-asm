@@ -31,6 +31,8 @@ vvblkd_interrupt
     render_sfx #<SFX1, #>SFX1, #<AF1C, #>AF1C
     render_sfx #<SFX2, #>SFX2, #<AF2C, #>AF2C
 
+    exit_level()
+
     transition_map()
 
     lda SKIP_FRAME

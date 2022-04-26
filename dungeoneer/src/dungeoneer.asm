@@ -6,15 +6,16 @@
 ; https://www.youtube.com/playlist?list=PL7IgmhqRiwzEIVAOhZWnby6WPsQ8alFSI
 ;
 ; Tile mapping and conversion handled by Tiled:
-;https://www.mapeditor.org/
+; https://www.mapeditor.org/
 ;
 ; NTSC Color Palette:
 ; https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
+;
+; Atari Memory Map:
+; https://www.atariarchives.org/mapping/memorymap.php
 
-
+; TODO: add item reset on death
 ; TODO: add state scan to level transition
-; TODO: add door with key interaction
-; TODO: add transfer tile functionality
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5
 
 	org $0600

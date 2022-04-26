@@ -29,7 +29,7 @@
             "scale": 6.534146341463415,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 96.26353116834639,
+                "x": 96.34005225830533,
                 "y": 47.90220231429638
             }
         },
@@ -37,7 +37,7 @@
             "scale": 6.545731707317073,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 95.940381928272,
+                "x": 96.01676758267351,
                 "y": 47.81741965533302
             }
         },
@@ -45,7 +45,7 @@
             "scale": 6.534146341463415,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 96.1104889884285,
+                "x": 96.18701007838746,
                 "y": 47.749160134378485
             }
         },
@@ -53,7 +53,7 @@
             "scale": 6.534146341463415,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 78.20455393803658,
+                "x": 78.28107502799551,
                 "y": 47.90220231429638
             }
         },
@@ -61,7 +61,7 @@
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 78.61803631886737,
+                "x": 78.68113265620192,
                 "y": 47.95321637426901
             }
         },
@@ -69,23 +69,23 @@
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 78.11326562019083,
-                "y": 48.079409048938146
+                "x": 78.1763619575254,
+                "y": 48.20560172360727
             }
         },
         "level4_map.intro.tmx": {
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 78.11326562019083,
-                "y": 48.079409048938146
+                "x": 78.1763619575254,
+                "y": 48.20560172360727
             }
         },
         "level4_map.map.tmx": {
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 81.0156971375808,
+                "x": 80.95260080024624,
                 "y": 47.32225300092336
             }
         },
@@ -109,32 +109,32 @@
             "scale": 8,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 81.9375,
-                "y": 48
+                "x": 52.9375,
+                "y": 47.75
             }
         },
         "level5_map.mapn1.tmx": {
             "scale": 7.292987804878049,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 78.08870866602567,
-                "y": 48.059863718071995
+                "x": 78.08870866602565,
+                "y": 48.128422724802476
             }
         },
         "level5_map.maps1.tmx": {
             "scale": 7.292987804878049,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 78.08870866602567,
-                "y": 48.059863718071995
+                "x": 71.64416203335982,
+                "y": 47.9913047113415
             }
         },
         "level5_map.mapw1.tmx": {
             "scale": 8,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 81.9375,
-                "y": 48
+                "x": 79.3125,
+                "y": 47.875
             }
         },
         "mainmenu.map.tmx": {
@@ -166,16 +166,18 @@
     ],
     "project": "dungeoneer.tiled-project",
     "recentFiles": [
-        "level5_map.intro.tmx",
+        "level4_map.map.tmx",
+        "level2_map.map.tmx",
+        "level5_map.maps1.tmx",
+        "level5_map.mapn1.tmx",
         "level5_map.mape1.tmx",
         "level5_map.mapw1.tmx",
         "level5_map.map.tmx",
-        "level4_map.map.tmx",
+        "level5_map.intro.tmx",
+        "level3_map.map.tmx",
+        "level1_map.map.tmx",
         "gameover.map.tmx",
-        "mainmenu.map.tmx",
-        "menu_tileset.tsx",
-        "game_tileset.tsx",
-        "/home/godlikemouse/game_tileset.tsx"
+        "mainmenu.map.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
