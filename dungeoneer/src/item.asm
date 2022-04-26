@@ -424,6 +424,10 @@ done
 	dec PLAYER_LIVES
 	display_player_lives()
 
+	; reset picked up items
+	mva #0 ITEMS
+	display_screen_items()
+
 done
 	rts
 .endp
@@ -434,8 +438,12 @@ done
 .proc check_game_over
 	lda PLAYER_LIVES
 	cmp #0
-	bne done
+	bne reload
 	display_gameover()
+	jmp done
+
+reload
+	reload_map()
 
 done
 	rts

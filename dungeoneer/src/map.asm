@@ -29,6 +29,14 @@
 .endp
 
 ;
+; reload map
+;
+.proc reload_map
+	render_map LEVEL_MAP, LEVEL_MAP+1, #<GAME_SCREEN, #>GAME_SCREEN
+	rts
+.endp
+
+;
 ; display game over map
 ;
 .proc display_gameover_map

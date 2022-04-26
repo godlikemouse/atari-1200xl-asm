@@ -14,7 +14,6 @@
 ; Atari Memory Map:
 ; https://www.atariarchives.org/mapping/memorymap.php
 
-; TODO: add item reset on death
 ; TODO: add state scan to level transition
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5
 
