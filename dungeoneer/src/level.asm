@@ -141,6 +141,7 @@
 exit
     ldy #0
     play_exit_level_sound()
+    mva #1 SKIP_FRAME
     jmp (NEXT_LEVEL)
 
 done

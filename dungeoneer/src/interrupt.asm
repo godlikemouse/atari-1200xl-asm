@@ -33,6 +33,10 @@ vvblkd_interrupt
 
     exit_level()
 
+    lda SKIP_FRAME
+    cmp #1
+    jeq done
+
     transition_map()
 
     lda SKIP_FRAME
