@@ -101,24 +101,24 @@
             "scale": 5.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 81.9090909090909,
-                "y": 47.90909090909091
+                "x": 82,
+                "y": 48
             }
         },
         "level5_map.map.tmx": {
             "scale": 5.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 75.9090909090909,
-                "y": 50.09090909090911
+                "x": 76,
+                "y": 50.18181818181818
             }
         },
         "level5_map.mape1.tmx": {
             "scale": 8,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 81.9375,
-                "y": 47.9375
+                "x": 82,
+                "y": 48
             }
         },
         "level5_map.mapn1.tmx": {
@@ -157,8 +157,8 @@
             "scale": 8,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 81.9375,
-                "y": 47.9375
+                "x": 82,
+                "y": 48
             }
         },
         "mainmenu.map.tmx": {
