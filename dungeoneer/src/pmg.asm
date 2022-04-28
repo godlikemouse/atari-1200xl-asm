@@ -74,6 +74,7 @@ pmg_p2 = PMG + $300
 ; draw player
 ;
 .proc draw_player
+.var _limit .byte
 pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
@@ -82,7 +83,7 @@ pmg_p2 = PMG + $300
 	ldx PLAYANIM_OFFSET
 	txa
 	add #8
-	sta TMP6
+	sta _limit
 
 	ldy POSY
 loop
@@ -94,7 +95,7 @@ loop
 
 	; verify offset limit
 	txa
-	cmp TMP6
+	cmp _limit
 	bne loop
 	rts
 .endp
@@ -103,10 +104,10 @@ loop
 ; setup pmg
 ;
 .proc setup_pmg
-	mva #>pmg PMBASE
-	mva #46 SDMCTL ; single line resolution
-	mva #3 GRACTL ; enable PMG
-	mva #1 GRPRIOR ; give players priority
+	mvx #>pmg PMBASE
+	mvx #46 SDMCTL ; single line resolution
+	mvx #3 GRACTL ; enable PMG
+	mvx #1 GRPRIOR ; give players priority
 	rts
 .endp
 
@@ -118,7 +119,7 @@ loop
     jmp check
 
 reset
-    mva #$0 PLAYANIM_OFFSET
+    mvx #$0 PLAYANIM_OFFSET
     draw_player()
 
 check
@@ -130,12 +131,12 @@ check
 	cmp #5
     bne done
 
-    mva #0 PLAYER_SPRITE
+    mvx #0 PLAYER_SPRITE
     draw_player()
     adb PLAYANIM_OFFSET #$18
     cmp #$30
     bne done
-    mva #0 PLAYANIM_OFFSET
+    mvx #0 PLAYANIM_OFFSET
 
 done
     rts
@@ -149,7 +150,7 @@ done
     jmp check
 
 reset
-    mva #$30 PLAYANIM_OFFSET
+    mvx #$30 PLAYANIM_OFFSET
     draw_player()
 
 check
@@ -161,12 +162,12 @@ check
 	cmp #5
     bne done
 
-    mva #0 PLAYER_SPRITE
+    mvx #0 PLAYER_SPRITE
     draw_player()
     adb PLAYANIM_OFFSET #$18
     cmp #$60
     bne done
-	mva #$30 PLAYANIM_OFFSET
+	mvx #$30 PLAYANIM_OFFSET
 
 done
     rts
@@ -177,15 +178,15 @@ done
 ;	resets the player back to the first animation frame
 .proc animate_player_reset
 
-	mva #0 PLAYER_SPRITE
+	mvx #0 PLAYER_SPRITE
 	between #$0, PLAYANIM_OFFSET, #$30
     cmp #1
 	bne left
-	mva #$0 PLAYANIM_OFFSET
+	mvx #$0 PLAYANIM_OFFSET
 	jmp draw
 
 left
-	mva #$30 PLAYANIM_OFFSET
+	mvx #$30 PLAYANIM_OFFSET
 
 draw
 	draw_player()
@@ -198,17 +199,17 @@ draw
 ;	displays the main menu screen
 .proc display_mainmenu
 	stop_background_music()
-	mwa #mainmenu_music BGM_ADDR
-	mva #1 AUDCTL ;N1234HHS
+	mwx #mainmenu_music BGM_ADDR
+	mvx #1 AUDCTL ;N1234HHS
 	play_background_music()
 	setup_pmg()
 	setup_menu_screen()
 	setup_menu_tileset()
 	display_mainmenu_map()
-	mva #3 GRACTL
-	mva #0 DISPLAY_TYPE
-	mva #0 MENU_SELECTION
-	mva #$0 PLAYANIM_OFFSET
+	mvx #3 GRACTL
+	mvx #0 DISPLAY_TYPE
+	mvx #0 MENU_SELECTION
+	mvx #$0 PLAYANIM_OFFSET
 	rts
 .endp
 
@@ -217,15 +218,15 @@ draw
 ;	displays the game intro screen
 .proc display_game_intro
 	stop_background_music()
-	mva #$00 AUDCTL
-	mwa #intro_music BGM_ADDR
+	mvx #$00 AUDCTL
+	mwx #intro_music BGM_ADDR
 	play_background_music()
 	setup_menu_screen()
 	setup_menu_tileset()
 	display_game_intro_map()
-	mva #1 DISPLAY_TYPE
-	mva #50 INTRO_POSITION
-	mva #$30 POSY
+	mvx #1 DISPLAY_TYPE
+	mvx #50 INTRO_POSITION
+	mvx #$30 POSY
 	clear_pmg()
 	rts
 .endp
