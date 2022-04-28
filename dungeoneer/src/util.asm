@@ -10,40 +10,26 @@
 .var _value .byte
 .var _high .byte
 .var _temp .byte
-low mva #0 _low
-value mva #0 _value
-high mva #0 _high
+low mvx #0 _low
+value mvx #0 _value
+high mvx #0 _high
 
-    ;save stack
-    txa
-    pha
+    ldx _value
 
-    lda _value
-    ldx _low
-    stx _temp
-
-    ;compare acc to low end
-    cmp _temp
+    ;compare value to low end
+    cpx _low
     bcc fail
 
-    ;compare acc to high end
-    ldx _high
-    stx _temp
-    cmp _temp
+    ;compare value to high end
+    cpx _high
     bcs fail
     lda #1
-    sta _temp
     jmp done
 
 fail
     lda #0
-    sta _temp
 
 done
-	;restore stack
-	pla
-	tax
-	lda _temp
 	rts
 .endp
 
@@ -94,13 +80,13 @@ done
 .proc find_tilex (.byte tiley+1, find_tile+1) .var
 .var _tiley .byte
 .var _find_tile .byte
-tiley mva #0 _tiley
-find_tile mva #0 _find_tile
+tiley mvx #0 _tiley
+find_tile mvx #0 _find_tile
 
-    mwa LEVEL_TRANS_MAP TILEPTR
+    mwx LEVEL_TRANS_MAP TILEPTR
 
-    lda _tiley
-    cmp #0
+    ldx _tiley
+    cpx #0
     beq continue
 
     ; set initial tile pointer pos to row offset
@@ -136,10 +122,10 @@ done
 .proc find_tiley (.byte tilex+1, find_tile+1) .var
 .var _tilex .byte
 .var _find_tile .byte
-tilex mva #0 _tilex
-find_tile mva #0 _find_tile
+tilex mvx #0 _tilex
+find_tile mvx #0 _find_tile
 
-    mwa LEVEL_TRANS_MAP TILEPTR
+    mwx LEVEL_TRANS_MAP TILEPTR
 
     ldy _tilex
 

@@ -8,8 +8,8 @@ TILEY_PIXEL_OFFSET=24 ; top overscan in pixels + items screen in pixels
 ; setup tileset
 ;
 .proc setup_tileset
-	mva #>GAME_TILESET1 TILESET_ADDRESS
-	mva TILESET_ADDRESS CHBAS
+	mvx #>GAME_TILESET1 TILESET_ADDRESS
+	mvx TILESET_ADDRESS CHBAS
 	rts
 .endp
 
@@ -17,8 +17,8 @@ TILEY_PIXEL_OFFSET=24 ; top overscan in pixels + items screen in pixels
 ; setup menu tileset
 ;
 .proc setup_menu_tileset
-	mva #>MENU_TILESET1 TILESET_ADDRESS
-	mva TILESET_ADDRESS CHBAS
+	mvx #>MENU_TILESET1 TILESET_ADDRESS
+	mvx TILESET_ADDRESS CHBAS
 	rts
 .endp
 
@@ -62,11 +62,11 @@ done
 ;
 .proc store_ontile
 
-	mwa #GAME_SCREEN TILEPTR
+	mwx #GAME_SCREEN TILEPTR
 
 	; calculate screen tile offset
-	lda TILEY
-	cmp #0
+	ldx TILEY
+	cpx #0
 	beq continue
 
 	ldx #0
@@ -392,8 +392,8 @@ done
 .proc peek_position (.byte dx+1, dy+1) .var
 .var _dx .byte
 .var _dy .byte
-dx mva #0 _dx
-dy mva #0 _dy
+dx mvx #0 _dx
+dy mvx #0 _dy
 
 	adb POSX _dx
 	adb POSY _dy
@@ -409,9 +409,9 @@ dy mva #0 _dy
 ; enable tile sprite animation
 ;
 .proc enable_tilesprite_animation
-	mva #$ff TILESPRITE
-	mva #0 TILESPRITE_INDEX
-	mva #1 TILESPRITE_ENABLE
+	mvx #$ff TILESPRITE
+	mvx #0 TILESPRITE_INDEX
+	mvx #1 TILESPRITE_ENABLE
 	rts
 .endp
 
@@ -419,6 +419,6 @@ dy mva #0 _dy
 ; disable tile sprite animation
 ;
 .proc disable_tilesprite_animation
-	mva #0 TILESPRITE_ENABLE
+	mvx #0 TILESPRITE_ENABLE
 	rts
 .endp

@@ -12,7 +12,7 @@ JVB=$41 ; jump vertical black (JVB)
 DLI=$80 ; display list interrupt
 ANTIC5=$05 ; ANTIC mode 5
 
-	mwa #dlist SDLSTL ; move word takes care of high/low byte assignments
+	mwx #dlist SDLSTL ; move word takes care of high/low byte assignments
 	rts
 
 ; display list
@@ -39,7 +39,7 @@ JVB=$41 ; jump vertical blank (JVB)
 DLI=$80 ; display list interrupt
 ANTIC5=5 ; ANTIC mode 5
 
-	mwa #dlist SDLSTL ; move word takes care of high/low byte assignments
+	mwx #dlist SDLSTL ; move word takes care of high/low byte assignments
 	rts
 
 ; display list

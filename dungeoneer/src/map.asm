@@ -48,10 +48,10 @@
 ; render map
 ;	renders map data to destination screen
 .proc render_map(.byte mapl+1, maph+1, screenl+1, screenh+1) .var
-mapl mva #0 TMP0
-maph mva #0 TMP1
-screenl mva #0 TMP2
-screenh mva #0 TMP3
+mapl mvx #0 TMP0
+maph mvx #0 TMP1
+screenl mvx #0 TMP2
+screenh mvx #0 TMP3
 
 map=TMP0
 screen=TMP2
@@ -59,8 +59,8 @@ map2=TMP4
 screen2=TMP6
 
 	; setup 240 byte offset src/dest
-	mwa map map2
-	mwa screen screen2
+	mwx map map2
+	mwx screen screen2
 	adw map2 #240
 	adw screen2 #240
 
@@ -78,8 +78,8 @@ loop
 ; load map attributes
 ;
 .proc load_map_attributes (.byte mapl+1, maph+1) .var
-mapl mva #0 TMP0
-maph mva #0 TMP1
+mapl mvx #0 TMP0
+maph mvx #0 TMP1
 attr=TMP0
 
 	adw attr #480 ; start at end of visual map data

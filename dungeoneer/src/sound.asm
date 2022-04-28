@@ -8,8 +8,8 @@
 FREQCTRL=AF4C
 CHANNEL=FREQCTRL+1
 
-	lda BGM_ENABLE
-	cmp #1
+	ldx BGM_ENABLE
+	cpx #1
 	bne done
 
 	inc BGM_COUNTER
@@ -25,7 +25,7 @@ note_still_playing
 	jmp done
 
 play_note
-	mva #0 BGM_COUNTER
+	mvx #0 BGM_COUNTER
 	ldy BGM_DATA_INDEX
 	mva (BGM_ADDR),y FREQCTRL
 
@@ -49,7 +49,7 @@ play_note
 	cmp #0 ; end play
 	bne done
 
-	mva #0 BGM_DATA_INDEX
+	mvx #0 BGM_DATA_INDEX
 
 done
 	rts
@@ -61,9 +61,9 @@ done
 .proc stop_background_music
 FREQCTRL=AF4C
 CHANNEL=FREQCTRL+1
-	lda #0
-	sta BGM_ENABLE
-	sta CHANNEL
+	ldx #0
+	stx BGM_ENABLE
+	stx CHANNEL
 	rts
 .endp
 
@@ -71,9 +71,9 @@ CHANNEL=FREQCTRL+1
 ; enable background music
 ;
 .proc play_background_music
-	mva #0 BGM_COUNTER
-	mva #0 BGM_DATA_INDEX
-	mva #1 BGM_ENABLE
+	mvx #0 BGM_COUNTER
+	mvx #0 BGM_DATA_INDEX
+	mvx #1 BGM_ENABLE
 	rts
 .endp
 
@@ -81,11 +81,11 @@ CHANNEL=FREQCTRL+1
 ; play key pickup sound
 ;
 .proc play_key_sound
-	lda #0
-	sta SFX1_COUNTER
-	sta SFX1_DATA_INDEX
-	mwa #key_pickup_sfx SFX1_ADDR
-	mva #1 SFX1
+	ldx #0
+	stx SFX1_COUNTER
+	stx SFX1_DATA_INDEX
+	mwx #key_pickup_sfx SFX1_ADDR
+	mvx #1 SFX1
 	rts
 .endp
 
@@ -93,11 +93,11 @@ CHANNEL=FREQCTRL+1
 ; play chest pickup sound
 ;
 .proc play_chest_sound
-	lda #0
-	sta SFX1_COUNTER
-	sta SFX1_DATA_INDEX
-	mwa #chest_pickup_sfx SFX1_ADDR
-	mva #1 SFX1
+	ldx #0
+	stx SFX1_COUNTER
+	stx SFX1_DATA_INDEX
+	mwx #chest_pickup_sfx SFX1_ADDR
+	mvx #1 SFX1
 	rts
 .endp
 
@@ -105,11 +105,11 @@ CHANNEL=FREQCTRL+1
 ; play chest pickup sound
 ;
 .proc play_coin_sound
-	lda #0
-	sta SFX1_COUNTER
-	sta SFX1_DATA_INDEX
-	mwa #coin_pickup_sfx SFX1_ADDR
-	mva #1 SFX1
+	ldx #0
+	stx SFX1_COUNTER
+	stx SFX1_DATA_INDEX
+	mwx #coin_pickup_sfx SFX1_ADDR
+	mvx #1 SFX1
 	rts
 .endp
 
@@ -117,11 +117,11 @@ CHANNEL=FREQCTRL+1
 ; play door open sound
 ;
 .proc play_door_open_sound
-	lda #0
-	sta SFX1_COUNTER
-	sta SFX1_DATA_INDEX
-	mwa #door_open_sfx SFX1_ADDR
-	mva #1 SFX1
+	ldx #0
+	stx SFX1_COUNTER
+	stx SFX1_DATA_INDEX
+	mwx #door_open_sfx SFX1_ADDR
+	mvx #1 SFX1
 	rts
 .endp
 
@@ -129,11 +129,11 @@ CHANNEL=FREQCTRL+1
 ; play exit level sound
 ;
 .proc play_exit_level_sound
-	lda #0
-	sta SFX1_COUNTER
-	sta SFX1_DATA_INDEX
-	mwa #exit_level_sfx SFX1_ADDR
-	mva #1 SFX1
+	ldx #0
+	stx SFX1_COUNTER
+	stx SFX1_DATA_INDEX
+	mwx #exit_level_sfx SFX1_ADDR
+	mvx #1 SFX1
 	rts
 .endp
 
@@ -141,11 +141,11 @@ CHANNEL=FREQCTRL+1
 ; play game over sound
 ;
 .proc play_gameover_sound
-	lda #0
-	sta SFX1_COUNTER
-	sta SFX1_DATA_INDEX
-	mwa #gameover_sfx SFX1_ADDR
-	mva #1 SFX1
+	ldx #0
+	stx SFX1_COUNTER
+	stx SFX1_DATA_INDEX
+	mwx #gameover_sfx SFX1_ADDR
+	mvx #1 SFX1
 	rts
 .endp
 
@@ -153,11 +153,11 @@ CHANNEL=FREQCTRL+1
 ; play menu item sound
 ;
 .proc play_mainmenu_item_sound
-	lda #0
-	sta SFX1_COUNTER
-	sta SFX1_DATA_INDEX
-	mwa #mainmenu_item_sfx SFX1_ADDR
-	mva #1 SFX1
+	ldx #0
+	stx SFX1_COUNTER
+	stx SFX1_DATA_INDEX
+	mwx #mainmenu_item_sfx SFX1_ADDR
+	mvx #1 SFX1
 	rts
 .endp
 
@@ -165,10 +165,10 @@ CHANNEL=FREQCTRL+1
 ; render sfx
 ; 	render sound effects
 .proc render_sfx (.byte regl+1, regh+1, ctrll+1, ctrlh+1) .var
-regl mva #0 TMP0
-regh mva #0 TMP1
-ctrll mva #0 TMP2
-ctrlh mva #0 TMP3
+regl mvx #0 TMP0
+regh mvx #0 TMP1
+ctrll mvx #0 TMP2
+ctrlh mvx #0 TMP3
 
 SFX=TMP0
 FREQCTRL=TMP2
@@ -180,12 +180,12 @@ SILENCE=TMP12
 CHANNEL=TMP14
 
 	; adjust offsets
-	mwa SFX SOUND
-	mwa SFX COUNTER
-	mwa SFX INDEX
-	mwa SFX SUSTAIN
-	mwa SFX SILENCE
-	mwa FREQCTRL CHANNEL
+	mwx SFX SOUND
+	mwx SFX COUNTER
+	mwx SFX INDEX
+	mwx SFX SUSTAIN
+	mwx SFX SILENCE
+	mwx FREQCTRL CHANNEL
 
 	adw SOUND #1
 	adw COUNTER #3
