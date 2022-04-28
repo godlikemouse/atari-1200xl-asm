@@ -13,12 +13,9 @@
 
     ;setup VVBLKD interrupt chain
 vvblkd_interrupt
-	lda #<vvblkd_chain
-	sta VVBLKD
-	lda #>vvblkd_chain
-	sta VVBLKD+1
-
+    mwx #vvblkd_chain VVBLKD
     rts
+    
 .endp
 
 ;
@@ -32,6 +29,18 @@ vvblkd_interrupt
     render_sfx #<SFX2, #>SFX2, #<AF2C, #>AF2C
 
     exit_level()
+
+    ldx SKIP_FRAME
+    cpx #1
+    jeq done
+
+    transition_map()
+
+    ldx SKIP_FRAME
+    cpx #1
+    jeq done
+
+	restore_key_state()
 
     ldx SKIP_FRAME
     cpx #1

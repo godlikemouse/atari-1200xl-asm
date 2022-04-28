@@ -234,6 +234,7 @@ done
     mvx #0 LEVEL_TRANS_MAP
     mvx #0 DISABLE_JOYSTICK
     mvx #1 RESTORE_KEY
+    mvx #1 SKIP_FRAME
 done
     rts
 .endp
@@ -285,6 +286,7 @@ continue
     cpy #240
     bne loop
     mvx #0 RESTORE_KEY
+    mvx #1 SKIP_FRAME
 
 done
 	rts

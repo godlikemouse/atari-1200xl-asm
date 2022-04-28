@@ -26,10 +26,7 @@
 	enable_interrupts()
 	display_mainmenu()
 
-main
-	transition_map()
-	restore_key_state()
-	jmp main
+	jmp *
 
 	icl "memory.asm"
 	icl "dlist.asm"
