@@ -195,61 +195,61 @@ done
 
 ;
 ; tile is transition north
-;
+;	if true, x ==1, else x == 0
 .proc tile_is_transition_n
 	ldx ONTILE
 	cpx #$5c
 	bne done
-	lda #1
+	ldx #1
 	rts
 
 done
-	lda #0
+	ldx #0
 	rts
 .endp
 
 ;
 ; tile is transition east
-;
+;	if true, x ==1, else x == 0
 .proc tile_is_transition_e
 	ldx ONTILE
 	cpx #$5e
 	bne done
-	lda #1
+	ldx #1
 	rts
 
 done
-	lda #0
+	ldx #0
 	rts
 .endp
 
 ;
 ; tile is transition south
-;
+;	if true, x ==1, else x == 0
 .proc tile_is_transition_s
 	ldx ONTILE
 	cpx #$5d
 	bne done
-	lda #1
+	ldx #1
 	rts
 
 done
-	lda #0
+	ldx #0
 	rts
 .endp
 
 ;
 ; tile is transition west
-;
+;	if true, x ==1, else x == 0
 .proc tile_is_transition_w
 	ldx ONTILE
 	cpx #$5f
 	bne done
-	lda #1
+	ldx #1
 	rts
 
 done
-	lda #0
+	ldx #0
 	rts
 .endp
 

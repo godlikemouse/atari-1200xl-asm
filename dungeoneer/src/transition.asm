@@ -93,129 +93,73 @@ done
 .endp
 
 ;
-; transition map north
-;
-.proc transition_map_n
+; check transition
+;   checks for transition interactions
+.proc check_transition
 
-	; top right
-	peek_position #7, #1
-	tile_is_transition_n()
-	cmp #1
-	beq transition
+    ; top right
+    peek_position #7, #1
+    tile_is_transition_n()
+    cpx #1
+    beq transition_n
+    tile_is_transition_e()
+	cpx #1
+	beq transition_e
 
-	; top left
-	peek_position #0, #0
-	tile_is_transition_n()
-	cmp #1
-	beq transition
+    ; top left
+    peek_position #0, #0
+    tile_is_transition_n()
+    cpx #1
+    beq transition_n
+    tile_is_transition_w()
+	cpx #1
+	beq transition_w
 
-	jmp done
-
-transition
-	mvx POSX LEVEL_TRANS_X
-	mvx POSY LEVEL_TRANS_Y
-	mvx #3 LEVEL_TRANS_TYPE
-	jmp (LEVEL_TRANS_N)
-
-done
-	rts
-.endp
-
-;
-; transition map east
-;
-.proc transition_map_e
-
-	; top right
-	peek_position #7, #1
-	tile_is_transition_e()
-	cmp #1
-	beq transition
-
-	; bottom right
+    ; bottom right
 	peek_position #7, #7
-	tile_is_transition_e()
-	cmp #1
-	beq transition
+	tile_is_transition_s()
+	cpx #1
+	beq transition_s
+    tile_is_transition_e()
+	cpx #1
+	beq transition_e
 
-	jmp done
+    ; bottom left
+	peek_position #0, #7
+	tile_is_transition_w()
+	cpx #1
+	beq transition_w
+    tile_is_transition_s()
+	cpx #1
+	beq transition_s
 
-transition
+    jmp done
+
+transition_n
+    mvx POSX LEVEL_TRANS_X
+    mvx POSY LEVEL_TRANS_Y
+    mvx #3 LEVEL_TRANS_TYPE
+    jmp (LEVEL_TRANS_N)
+
+transition_e
 	mvx POSX LEVEL_TRANS_X
 	mvx POSY LEVEL_TRANS_Y
 	mvx #4 LEVEL_TRANS_TYPE
 	jmp (LEVEL_TRANS_E)
 
-done
-	rts
-.endp
+transition_w
+	mvx POSX LEVEL_TRANS_X
+	mvx POSY LEVEL_TRANS_Y
+	mvx #6 LEVEL_TRANS_TYPE
+	jmp (LEVEL_TRANS_W)
 
-;
-; transition map south
-;
-.proc transition_map_s
-
-	; bottom right
-	peek_position #7, #7
-	tile_is_transition_s()
-	cmp #1
-	beq transition
-
-	; bottom left
-	peek_position #0, #7
-	tile_is_transition_s()
-	cmp #1
-	beq transition
-
-	jmp done
-
-transition
+transition_s
 	mvx POSX LEVEL_TRANS_X
 	mvx POSY LEVEL_TRANS_Y
 	mvx #5 LEVEL_TRANS_TYPE
 	jmp (LEVEL_TRANS_S)
 
 done
-	rts
-.endp
-
-;
-; transition map west
-;
-.proc transition_map_w
-
-	; top left
-	peek_position #0, #0
-	tile_is_transition_w()
-	cmp #1
-	beq transition
-
-	; bottom left
-	peek_position #0, #7
-	tile_is_transition_w()
-	cmp #1
-	beq transition
-
-	jmp done
-
-transition
-	mvx POSX LEVEL_TRANS_X
-	mvx POSY LEVEL_TRANS_Y
-	mvx #6 LEVEL_TRANS_TYPE
-	jmp (LEVEL_TRANS_W)
-
-done
-	rts
-.endp
-
-;
-; check transition
-;
-.proc check_transition
-    transition_map_n()
-    transition_map_e()
-    transition_map_s()
-    transition_map_w()
     rts
 .endp
 
@@ -255,6 +199,7 @@ done
     cmp #1
     bne done
 
+    ; check all tiles for key and remove
     ldy #0
 loop
     lda GAME_SCREEN,y
