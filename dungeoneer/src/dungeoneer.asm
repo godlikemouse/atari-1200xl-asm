@@ -26,7 +26,10 @@
 	enable_interrupts()
 	display_mainmenu()
 
-	jmp *
+main
+	transition_map()
+	restore_key_state()
+	jmp main
 
 	icl "memory.asm"
 	icl "dlist.asm"
@@ -39,6 +42,7 @@
 	icl "interrupt.asm"
 	icl "sound.asm"
 	icl "map.asm"
+	icl "transition.asm"
 	icl "tile.asm"
 	icl "data/game_tileset.asm"
 	icl "data/menu_tileset.asm"

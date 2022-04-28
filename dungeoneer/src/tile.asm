@@ -197,8 +197,8 @@ done
 ; tile is transition north
 ;
 .proc tile_is_transition_n
-	lda ONTILE
-	cmp #$5c
+	ldx ONTILE
+	cpx #$5c
 	bne done
 	lda #1
 	rts
@@ -212,8 +212,8 @@ done
 ; tile is transition east
 ;
 .proc tile_is_transition_e
-	lda ONTILE
-	cmp #$5e
+	ldx ONTILE
+	cpx #$5e
 	bne done
 	lda #1
 	rts
@@ -227,8 +227,8 @@ done
 ; tile is transition south
 ;
 .proc tile_is_transition_s
-	lda ONTILE
-	cmp #$5d
+	ldx ONTILE
+	cpx #$5d
 	bne done
 	lda #1
 	rts
@@ -242,8 +242,8 @@ done
 ; tile is transition west
 ;
 .proc tile_is_transition_w
-	lda ONTILE
-	cmp #$5f
+	ldx ONTILE
+	cpx #$5f
 	bne done
 	lda #1
 	rts

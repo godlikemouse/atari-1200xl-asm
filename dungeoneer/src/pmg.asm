@@ -287,25 +287,25 @@ draw
 play_item=MENU_SCREEN + 160 + 16
 exit_item=MENU_SCREEN + 240 + 16
 
-	lda DISPLAY_TYPE
-	cmp #0
+	ldx DISPLAY_TYPE
+	cpx #0
 	bne exit
 
-	lda MENU_SELECTION
-	cmp #0
+	ldx MENU_SELECTION
+	cpx #0
 	bne select_exit
 	highlight_menu_item #<play_item, #>play_item
 	restore_menu_item #<exit_item, #>exit_item
-	mva #48 POSY
+	mvx #48 POSY
 	jmp done
 
 select_exit
 	highlight_menu_item #<exit_item, #>exit_item
 	restore_menu_item #<play_item, #>play_item
-	mva #64 POSY
+	mvx #64 POSY
 
 done
-	mva #90 POSX
+	mvx #90 POSX
 	ldx POSX
 	stx HPOSP0
 	stx HPOSP1
@@ -323,26 +323,26 @@ exit
 ;
 .proc render_intro
 
-	lda DISPLAY_TYPE
-	cmp #1
+	ldx DISPLAY_TYPE
+	cpx #1
 	bne done
 
-	lda INTRO_POSITION
-	sta POSX
-	sta HPOSP0
-	sta HPOSP1
-	sta HPOSP2
-	sta HPOSP3
+	ldx INTRO_POSITION
+	stx POSX
+	stx HPOSP0
+	stx HPOSP1
+	stx HPOSP2
+	stx HPOSP3
 	inc INTRO_POSITION
 
 	clear_pmg()
 	draw_player()
 	animate_player_right()
 
-	lda INTRO_POSITION
-	cmp #200
+	ldx INTRO_POSITION
+	cpx #200
 	bne done
-	mva #0 INTRO_POSITION
+	mvx #0 INTRO_POSITION
 	display_game()
 
 done
@@ -354,16 +354,16 @@ done
 ;
 .proc render_gameover
 
-	lda DISPLAY_TYPE
-	cmp #3
+	ldx DISPLAY_TYPE
+	cpx #3
 	bne done
 
 	inc GAMEOVER_POSITION
-	lda GAMEOVER_POSITION
-	cmp #255
+	ldx GAMEOVER_POSITION
+	cpx #255
 	bne done
 
-	mva #0 GAMEOVER_POSITION
+	mvx #0 GAMEOVER_POSITION
 	display_mainmenu()
 
 done
@@ -375,14 +375,14 @@ done
 ;
 .proc render_player_death
 
-	lda PLAYER_DEATH
-	cmp #1
+	ldx PLAYER_DEATH
+	cpx #1
 	bne done
 
     jmp check
 
 reset
-    mva #$60 PLAYANIM_OFFSET
+    mvx #$60 PLAYANIM_OFFSET
     draw_player()
 
 check
@@ -404,7 +404,7 @@ check
 	check_game_over()
 	reset_player()
 
-	mva #0 PLAYER_DEATH
+	mvx #0 PLAYER_DEATH
 
 done
     rts
@@ -414,8 +414,8 @@ done
 ; highlight a menu item
 ;
 .proc highlight_menu_item (.byte addrl+1, addrh+1) .var
-addrl mva #0 TMP0
-addrh mva #0 TMP1
+addrl mvx #0 TMP0
+addrh mvx #0 TMP1
 
 	ldy #0
 loop
@@ -438,8 +438,8 @@ continue
 ; restore menu item
 ;
 .proc restore_menu_item (.byte addrl+1, addrh+1) .var
-addrl mva #0 TMP0
-addrh mva #0 TMP1
+addrl mvx #0 TMP0
+addrh mvx #0 TMP1
 
 	ldy #0
 loop

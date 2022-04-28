@@ -25,7 +25,7 @@ vvblkd_interrupt
 ; vvblkd chain
 ;	method chains for VVBLKD interupts
 .local vvblkd_chain
-    mva #0 SKIP_FRAME
+    mvx #0 SKIP_FRAME
 
     render_background_music()
     render_sfx #<SFX1, #>SFX1, #<AF1C, #>AF1C
@@ -33,14 +33,8 @@ vvblkd_interrupt
 
     exit_level()
 
-    lda SKIP_FRAME
-    cmp #1
-    jeq done
-
-    transition_map()
-
-    lda SKIP_FRAME
-    cmp #1
+    ldx SKIP_FRAME
+    cpx #1
     jeq done
 
 	read_game_joystick()

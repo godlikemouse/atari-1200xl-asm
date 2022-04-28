@@ -22,7 +22,7 @@
 	tile_is_locked_proxy()
 	cmp #1
 	beq block
-	
+
 	tile_is_block()
 	cmp #1
 	beq block
@@ -198,10 +198,7 @@ move_none
 post_move
 	pickup_item()
 	open_door()
-	transition_map_n()
-	transition_map_e()
-	transition_map_s()
-	transition_map_w()
+	check_transition()
 	jmp done
 
 store_posx
