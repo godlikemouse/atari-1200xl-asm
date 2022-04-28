@@ -5,10 +5,10 @@
 ; setup player transition
 ;   routes to the correct transition proc
 .proc setup_player_trans
+    ; determine if trans type is even or odd
     lda LEVEL_TRANS_TYPE
-    and #1
-    cmp #1 ; odd 3N, 5S
-    bne even ; even 4E, 6W
+    lsr
+    bcc even
 
 odd
     setup_player_trans_v()
@@ -27,13 +27,15 @@ done
 .proc setup_player_trans_v
     ; locate trans position
 
-    mva LEVEL_TRANS_X PLAYER_RESET_POSX
+    ldx LEVEL_TRANS_X
+    stx POSX
+    stx PLAYER_RESET_POSX
     posx_to_tilex()
     sta TILEX
 
     ; find opposite transition tile
-    lda LEVEL_TRANS_TYPE
-    cmp #3
+    ldx LEVEL_TRANS_TYPE
+    cpx #3
     bne south
 
 north
@@ -60,14 +62,15 @@ done
 ;   sets up the player transition position
 .proc setup_player_trans_h
 
-    mva LEVEL_TRANS_Y POSY
-    sta PLAYER_RESET_POSY
+    ldx LEVEL_TRANS_Y
+    stx POSY
+    stx PLAYER_RESET_POSY
     posy_to_tiley()
     sta TILEY
 
     ; find opposite transition tile
-    lda LEVEL_TRANS_TYPE
-    cmp #4
+    ldx LEVEL_TRANS_TYPE
+    cpx #4
     bne west
 
 east
@@ -109,9 +112,9 @@ done
 	jmp done
 
 transition
-	mva POSX LEVEL_TRANS_X
-	mva POSY LEVEL_TRANS_Y
-	mva #3 LEVEL_TRANS_TYPE
+	mvx POSX LEVEL_TRANS_X
+	mvx POSY LEVEL_TRANS_Y
+	mvx #3 LEVEL_TRANS_TYPE
 	jmp (LEVEL_TRANS_N)
 
 done
@@ -138,9 +141,9 @@ done
 	jmp done
 
 transition
-	mva POSX LEVEL_TRANS_X
-	mva POSY LEVEL_TRANS_Y
-	mva #4 LEVEL_TRANS_TYPE
+	mvx POSX LEVEL_TRANS_X
+	mvx POSY LEVEL_TRANS_Y
+	mvx #4 LEVEL_TRANS_TYPE
 	jmp (LEVEL_TRANS_E)
 
 done
@@ -167,9 +170,9 @@ done
 	jmp done
 
 transition
-	mva POSX LEVEL_TRANS_X
-	mva POSY LEVEL_TRANS_Y
-	mva #5 LEVEL_TRANS_TYPE
+	mvx POSX LEVEL_TRANS_X
+	mvx POSY LEVEL_TRANS_Y
+	mvx #5 LEVEL_TRANS_TYPE
 	jmp (LEVEL_TRANS_S)
 
 done
@@ -196,9 +199,9 @@ done
 	jmp done
 
 transition
-	mva POSX LEVEL_TRANS_X
-	mva POSY LEVEL_TRANS_Y
-	mva #6 LEVEL_TRANS_TYPE
+	mvx POSX LEVEL_TRANS_X
+	mvx POSY LEVEL_TRANS_Y
+	mvx #6 LEVEL_TRANS_TYPE
 	jmp (LEVEL_TRANS_W)
 
 done
@@ -220,17 +223,17 @@ done
 ; transition map
 ;
 .proc transition_map
-    lda LEVEL_TRANS_MAP
-    cmp #0
+    ldx LEVEL_TRANS_MAP
+    cpx #0
     beq done
 
     setup_player_trans()
     display_game_map()
     reset_player()
 
-    mva #0 LEVEL_TRANS_MAP
-    mva #0 DISABLE_JOYSTICK
-    mva #1 RESTORE_KEY
+    mvx #0 LEVEL_TRANS_MAP
+    mvx #0 DISABLE_JOYSTICK
+    mvx #1 RESTORE_KEY
 done
     rts
 .endp
@@ -241,8 +244,8 @@ done
 ;   uses current acc to compare
 .proc restore_key_state
 
-    lda RESTORE_KEY
-    cmp #1
+    ldx RESTORE_KEY
+    cpx #1
     bne done
 
     ; do we have a key
@@ -281,7 +284,7 @@ continue
     iny
     cpy #240
     bne loop
-    mva #0 RESTORE_KEY
+    mvx #0 RESTORE_KEY
 
 done
 	rts
