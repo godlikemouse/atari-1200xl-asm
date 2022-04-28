@@ -2,93 +2,78 @@
 ;   map transition functionality
 
 ;
-; setup player transition
-;   routes to the correct transition proc
+; setup player trans
+;   sets up the player transition position
 .proc setup_player_trans
-    ; determine if trans type is even or odd
-    lda LEVEL_TRANS_TYPE
-    lsr
-    bcc even
 
-odd
-    setup_player_trans_v()
-    jmp done
+    ; find opposite transition tile
+    ldx LEVEL_TRANS_TYPE
+    cpx #3
+    beq north
+    cpx #4
+    beq east
+    cpx #5
+    beq south
+    cpx #6
+    beq west
 
-even
-    setup_player_trans_h()
-
-done
-    rts
-.endp
-
-;
-; setup player trans vertical
-;   sets up the player position
-.proc setup_player_trans_v
     ; locate trans position
-
+north
     ldx LEVEL_TRANS_X
     stx POSX
     stx PLAYER_RESET_POSX
     posx_to_tilex()
     sta TILEX
-
-    ; find opposite transition tile
-    ldx LEVEL_TRANS_TYPE
-    cpx #3
-    bne south
-
-north
     find_tiley TILEX, #$5d
-    sub #2 ; offset tile by 2
-    jmp done
-
-south
-    find_tiley TILEX, #$5c
-    add #2 ; offset tile by 2
-
-done
+    sub #2 ; offset tile by 2 <-
     sta TILEY
-
     ; set new player position
     tiley_to_posy()
     sta PLAYER_RESET_POSY
+    jmp done
 
-    rts
-.endp
-
-;
-; setup player transition horizontal
-;   sets up the player transition position
-.proc setup_player_trans_h
-
+east
     ldx LEVEL_TRANS_Y
     stx POSY
     stx PLAYER_RESET_POSY
     posy_to_tiley()
     sta TILEY
-
-    ; find opposite transition tile
-    ldx LEVEL_TRANS_TYPE
-    cpx #4
-    bne west
-
-east
     find_tilex TILEY, #$5f
     add #2 ; offset tile by 2 ->
+    sta TILEX
+    ; set new player position
+    tilex_to_posx()
+    sta PLAYER_RESET_POSX
+    jmp done
+
+south
+    ldx LEVEL_TRANS_X
+    stx POSX
+    stx PLAYER_RESET_POSX
+    posx_to_tilex()
+    sta TILEX
+    find_tiley TILEX, #$5c
+    add #2 ; offset tile by 2 ->
+    sta TILEY
+    ; set new player position
+    tiley_to_posy()
+    sta PLAYER_RESET_POSY
     jmp done
 
 west
+    ldx LEVEL_TRANS_Y
+    stx POSY
+    stx PLAYER_RESET_POSY
+    posy_to_tiley()
+    sta TILEY
     find_tilex TILEY, #$5e
     sub #2 ; offset tile by 2 <-
-
-done
     sta TILEX
-
     ; set new player position
     tilex_to_posx()
     sta PLAYER_RESET_POSX
 
+done
     rts
 .endp
 
@@ -165,7 +150,7 @@ done
 
 ;
 ; transition map
-;
+;   handles map transition
 .proc transition_map
     ldx LEVEL_TRANS_MAP
     cpx #0
