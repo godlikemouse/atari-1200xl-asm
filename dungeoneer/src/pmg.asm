@@ -395,7 +395,7 @@ check
 	cmp #30
     bne done
 
-    mva #0 PLAYER_SPRITE
+    mvx #0 PLAYER_SPRITE
     draw_player()
     adb PLAYANIM_OFFSET #$18
     cmp #$c0

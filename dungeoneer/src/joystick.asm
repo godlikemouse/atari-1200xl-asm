@@ -240,12 +240,20 @@ NONE=$0f
 	jmp done
 
 move_up
+	ldx MENU_SELECTION
+	cpx #1
+	bne up_skip_sound
 	play_mainmenu_item_sound()
+up_skip_sound
 	mvx #0 MENU_SELECTION
 	jmp done
 
 move_down
+	ldx MENU_SELECTION
+	cpx #0
+	bne down_skip_sound
 	play_mainmenu_item_sound()
+down_skip_sound
 	mvx #1 MENU_SELECTION
 	jmp done
 
