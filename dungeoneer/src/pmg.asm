@@ -234,9 +234,9 @@ draw
 ; new game
 ;	sets up game reset
 .proc new_game
-	mwa #0 PLAYER_SCORE
-	mva #3 PLAYER_LIVES
-	mva #0 ITEMS
+	mwx #0 PLAYER_SCORE
+	mvx #3 PLAYER_LIVES
+	mvx #0 ITEMS
 	level1()
 	rts
 .endp
@@ -246,8 +246,8 @@ draw
 ; 	displays the game screen
 .proc display_game
 	stop_background_music()
-	mva #$00 AUDCTL
-	mwa #background_music BGM_ADDR
+	mvx #$00 AUDCTL
+	mwx #background_music BGM_ADDR
 	play_background_music()
 	setup_game_screen()
 	setup_tileset()
@@ -261,7 +261,7 @@ draw
 	draw_player()
 	store_tilex()
 	store_tiley()
-	mva #2 DISPLAY_TYPE
+	mvx #2 DISPLAY_TYPE
 	rts
 .endp
 
@@ -276,7 +276,7 @@ draw
 	display_gameover_map()
 	stop_background_music()
 	play_gameover_sound()
-	mva #3 DISPLAY_TYPE
+	mvx #3 DISPLAY_TYPE
 	rts
 .endp
 
