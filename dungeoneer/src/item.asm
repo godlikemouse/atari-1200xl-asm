@@ -139,11 +139,11 @@ loop
 .var _carry .byte
 .var _nibble .byte
 .var _temp .byte
-lbyte mva #0 _lbyte
-hbyte mva #0 _hbyte
+lbyte mvx #0 _lbyte
+hbyte mvx #0 _hbyte
 
 	ldy #0
-	mva #0 _carry
+	mvx #0 _carry
 loop
 	add_lower_nibble()
 	add_upper_nibble()
@@ -178,14 +178,14 @@ loop
 no_carry
 	; no carry, just store and move on (XN)
 	sta _nibble
-	mva #0 _carry ; no overflow
+	mvx #0 _carry ; no overflow
 	jmp done
 
 with_carry
 	; sub 10, then set the carry into next nibble (ON)
 	sub #10
 	sta _nibble
-	mva #1 _carry ; overflow
+	mvx #1 _carry ; overflow
 	jmp done
 
 done
@@ -218,14 +218,14 @@ done
 no_carry
 	; no carry, just store and move on (NX)
 	sta _nibble
-	mva #0 _carry ; no overflow
+	mvx #0 _carry ; no overflow
 	jmp done
 
 with_carry
 	; sub 10, then set the carry into the next nibble (ONX)
 	sub #10
 	sta _nibble
-	mva #1 _carry ; overflow
+	mvx #1 _carry ; overflow
 	jmp done
 
 done
@@ -384,10 +384,10 @@ done
 .var _item_tile_high .byte
 
 	; stort inital address and bit values
-	mva #1 _bit
-	mva #$20 _item_tile_low
-	mva #$22 _item_tile_high
-	mva #8 _counter
+	mvx #1 _bit
+	mvx #$20 _item_tile_low
+	mvx #$22 _item_tile_high
+	mvx #8 _counter
 loop
 	; check to see if item exists
 	between _item_tile_low, ONTILE, _item_tile_high
@@ -414,19 +414,19 @@ done
 	tile_is_death()
 	cmp #1
 	bne done
-	mwa #death_sfx SFX1_ADDR
-	mva #1 SFX1
+	mwx #death_sfx SFX1_ADDR
+	mvx #1 SFX1
 
-	lda PLAYER_DEATH
-	cmp #1
+	ldx PLAYER_DEATH
+	cpx #1
 	beq done
-	mva #1 PLAYER_DEATH
+	mvx #1 PLAYER_DEATH
 
 	dec PLAYER_LIVES
 	display_player_lives()
 
 	; reset picked up items
-	mva #0 ITEMS
+	mvx #0 ITEMS
 	display_screen_items()
 
 done
@@ -437,8 +437,8 @@ done
 ; check game over
 ;	checks for game over state
 .proc check_game_over
-	lda PLAYER_LIVES
-	cmp #0
+	ldx PLAYER_LIVES
+	cpx #0
 	bne reload
 	display_gameover()
 	jmp done
