@@ -223,16 +223,13 @@ continue
     iny
     cpy #240
     bne loop
-    jmp skip
+    jmp done
 
 replace_key
     tile_to_tileptr KEY_POSX, KEY_POSY
     ldy #0
     mva #$20 (TILEPTR),y+
     mva #$21 (TILEPTR),y
-
-skip
-    mvx #1 SKIP_FRAME
 
 done
     mvx #0 RESTORE_KEY
@@ -293,8 +290,6 @@ loop
 
     cpy _count
     bne loop
-
-    mvx #1 SKIP_FRAME
 
 done
     mvx #0 RESTORE_COIN

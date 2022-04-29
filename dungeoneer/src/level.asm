@@ -23,19 +23,13 @@
     rts
 .endp
 
-.proc level3_setup
-    reset_coin_state #<level3_map.maps1 #>level3_map.maps1
-    mwx #0 SEQUENCE
-    rts
-.endp
-
 .proc level3
     mwx #level3_map.intro LEVEL_INTRO
     mwx #level3_map.map LEVEL_MAP
     mwx #background_music BGM_ADDR
-    mvx #0 ITEMS
     mvx #1 LEVEL_HAS_KEY
-    mwx #level3_setup SEQUENCE
+    mvx #0 ITEMS
+    reset_coin_state #<level3_map.maps1 #>level3_map.maps1
 
     display_game_intro()
     rts
@@ -68,26 +62,23 @@
     display_game_intro()
     rts
 .endp
-
 .proc level5
+
     mwx #level5_map.intro LEVEL_INTRO
     mwx #level5_map.map LEVEL_MAP
     mwx #background_music BGM_ADDR
     mvx #0 ITEMS
     mvx #0 LEVEL_HAS_KEY
-    mwx #level5_setup SEQUENCE
 
-    display_game_intro()
-    rts
-.endp
-
-.proc level5_setup
     reset_coin_state #<level5_map.map #>level5_map.map
     reset_coin_state #<level5_map.mape1 #>level5_map.mape1
     reset_coin_state #<level5_map.mapw1 #>level5_map.mapw1
     reset_coin_state #<level5_map.mapn1 #>level5_map.mapn1
     reset_coin_state #<level5_map.maps1w1 #>level5_map.maps1w1
-    mvx #0 SEQUENCE
+
+    mvx LEVEL_HAS_KEY $121
+
+    display_game_intro()
     rts
 .endp
 
@@ -200,20 +191,5 @@ loop
     dex
     bne loop
 
-    rts
-.endp
-
-;
-; sequence eventhandler
-;   handles event sequences
-.proc sequence_event_handler
-
-    ldx SEQUENCE
-    cpx #0
-    beq done
-
-    jmp (SEQUENCE)
-
-done
     rts
 .endp
