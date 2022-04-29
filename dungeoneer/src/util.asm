@@ -149,3 +149,37 @@ found
 done
     rts
 .endp
+
+.proc tile_to_map (.byte tilex+1, tiley+1) .var
+.var _tilex .byte
+.var _tiley .byte
+tilex mva #0 _tilex
+tiley mva #0 _tiley
+
+    mwa GAME_SCREEN TILEPTR
+
+    ; advance to row
+    ldx _tiley
+    cpx #0
+    beq continue
+
+row_loop
+    adw TILEPTR #40
+    dex
+    bne row_loop
+
+continue
+
+    ;advance to column
+    ldx _tilex
+    cpx #0
+    beq done
+
+column_loop
+    adw TILEPTR #1
+    dex
+    bne column_loop
+
+done
+    rts
+.endp

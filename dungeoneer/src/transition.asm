@@ -163,6 +163,7 @@ done
     mvx #0 LEVEL_TRANS_MAP
     mvx #0 DISABLE_JOYSTICK
     mvx #1 RESTORE_KEY
+    mvx #1 RESTORE_COIN
     mvx #1 SKIP_FRAME
 done
     rts
@@ -215,9 +216,72 @@ continue
     iny
     cpy #240
     bne loop
+
     mvx #0 RESTORE_KEY
     mvx #1 SKIP_FRAME
 
 done
 	rts
+.endp
+
+;
+; restore coin state
+;
+.proc restore_coin_state
+.var _tilex .byte
+.var _tiley .byte
+.var _count .byte
+
+    ldx RESTORE_COIN
+    cpx #1
+    bne done
+
+    ; find level in memory location
+    mwx LEVEL_MAP TMP0
+
+    ; find level in memory location
+    ldy #0
+    mwx LEVEL_MAP TMP0
+    adw TMP0 #480 ; offset to coin state location
+	lda (TMP0),y
+	cmp #7 ; validate
+	bne continue
+
+    iny ; move to count
+    mva (TMP0),y _count
+
+    iny ; move to first coin state slot
+loop
+    ; verify slot contains a value
+    lda (TMP0),y+ ; tilex
+    cmp #$ff
+    beq continue
+
+    ; restore coin state
+    dey
+    mva (TMP0),y+ _tilex
+    mva (TMP0),y+ _tiley
+
+    ; find location on map
+    tile_to_map _tilex, _tiley
+    mwx TILEPTR $11c
+    tya
+    tax
+    ldy #0
+    lda #0
+    sta (TILEPTR),y+
+    sta (TILEPTR),y
+    txa
+    tay
+
+    ;dec _count
+    ;bne loop
+
+    mvx #1 SKIP_FRAME
+
+continue
+    mvx #0 RESTORE_COIN
+
+done
+    rts
 .endp

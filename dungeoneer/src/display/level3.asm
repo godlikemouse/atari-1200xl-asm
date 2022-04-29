@@ -48,6 +48,7 @@ maps1
 	.byte $00,$00,$00,$00,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$92,$92,$92,$92,$92,$92,$92,$92,$92,$92,$92,$92,$92,$92,$92,$92,$31,$31,$31,$31,$31,$31,$31
 
 maps1_attrs
+	.byte 7,8,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; count, coin state
 	.byte 1,$b7,$28 ; player pos x/y
 	.byte 3\.word level3_main ; north transition
 	.byte 0

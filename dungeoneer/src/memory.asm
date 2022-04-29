@@ -77,6 +77,7 @@ LEVEL_TRANS_TYPE  = $0116 ; level transition type (3N, 4E, 5S, 6W)
 LEVEL_TRANS_MAP   = $0117 ; level transition map address
 SKIP_FRAME        = $0119 ; skip frame
 RESTORE_KEY       = $011a ; restore key flag
+RESTORE_COIN      = $011b ; restore coin flag
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution

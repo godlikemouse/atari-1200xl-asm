@@ -15,7 +15,7 @@
 vvblkd_interrupt
     mwx #vvblkd_chain VVBLKD
     rts
-    
+
 .endp
 
 ;
@@ -40,7 +40,13 @@ vvblkd_interrupt
     cpx #1
     jeq done
 
-	restore_key_state()
+    restore_key_state()
+
+    ldx SKIP_FRAME
+    cpx #1
+    jeq done
+
+    restore_coin_state()
 
     ldx SKIP_FRAME
     cpx #1

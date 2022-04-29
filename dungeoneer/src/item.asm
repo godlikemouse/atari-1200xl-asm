@@ -288,6 +288,7 @@ pickup
     remove_playfield_item()
 	display_screen_items()
 	add_score #$5, #$00
+	update_coin_state TILEX, TILEY
 
 	rts
 .endp
