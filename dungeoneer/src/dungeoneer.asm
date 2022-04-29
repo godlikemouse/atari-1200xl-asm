@@ -29,6 +29,8 @@ main
 	sequence_event_handler()
 	sequence_sound_handler()
 	transition_map_handler()
+	restore_key_state()
+    restore_coin_state()
 	jmp main
 
 	icl "memory.asm"

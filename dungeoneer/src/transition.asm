@@ -164,9 +164,6 @@ done
     stx RESTORE_KEY
     stx RESTORE_COIN
 
-    restore_key_state()
-    restore_coin_state()
-
     ldx #0
     stx LEVEL_TRANS_MAP
     stx DISABLE_JOYSTICK
