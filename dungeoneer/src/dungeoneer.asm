@@ -14,8 +14,8 @@
 ; Atari Memory Map:
 ; https://www.atariarchives.org/mapping/memorymap.php
 
+; TODO: add clean black frame to transition for items restoration
 ; TODO: add enemies
-; TODO: add state scan to level transition
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5
 
 	org $0600

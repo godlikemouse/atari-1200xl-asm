@@ -78,6 +78,10 @@ LEVEL_TRANS_MAP   = $0117 ; level transition map address
 SKIP_FRAME        = $0119 ; skip frame
 RESTORE_KEY       = $011a ; restore key flag
 RESTORE_COIN      = $011b ; restore coin flag
+SEQUENCE          = $011c ; sequence pointer
+LEVEL_HAS_KEY     = $011d ; level has key flag
+KEY_POSX          = $011e ; key position x
+KEY_POSY          = $011f ; key position y
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution

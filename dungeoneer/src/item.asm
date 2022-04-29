@@ -281,14 +281,12 @@ done
 	rts
 
 pickup
-	get_item_bit()
-	ora ITEMS
-	sta ITEMS
+	;get_item_bit()
+	;ora ITEMS
+	;sta ITEMS
 
     remove_playfield_item()
 	display_screen_items()
-	add_score #$5, #$00
-	update_coin_state TILEX, TILEY
 
 	rts
 .endp
@@ -440,12 +438,12 @@ done
 .proc check_game_over
 	ldx PLAYER_LIVES
 	cpx #0
-	bne reload
+	bne replace_key
 	display_gameover()
 	jmp done
 
-reload
-	reload_map()
+replace_key
+	mvx #1 RESTORE_KEY
 
 done
 	rts

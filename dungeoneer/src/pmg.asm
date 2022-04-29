@@ -406,6 +406,7 @@ check
 	reset_player()
 
 	mvx #0 PLAYER_DEATH
+	mvx #1 RESTORE_COIN
 
 done
     rts

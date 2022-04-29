@@ -62,6 +62,12 @@ vvblkd_interrupt
     render_gameover()
     render_player_death()
 
+    sequence_handler()
+
+    ldx SKIP_FRAME
+    cpx #1
+    jeq done
+
 done
 	jmp XITVBV
 .endl

@@ -29,14 +29,6 @@
 .endp
 
 ;
-; reload map
-;
-.proc reload_map
-	render_map LEVEL_MAP, LEVEL_MAP+1, #<GAME_SCREEN, #>GAME_SCREEN
-	rts
-.endp
-
-;
 ; display game over map
 ;
 .proc display_gameover_map
@@ -146,12 +138,19 @@ load_west_transition
 
 load_coin_state
 	cmp #7
-	bne done
+	bne load_key_position
 	lda (attr),y+ ; count
 coin_loop
 	iny ; skip bytes by count
 	sub #1
 	bne coin_loop
+	jmp loop
+
+load_key_position
+	cmp #8
+	bne done
+	mva (attr),y+ KEY_POSX
+	mva (attr),y+ KEY_POSY
 	jmp loop
 
 done
@@ -166,8 +165,6 @@ done
 .var _tiley .byte
 tilex mvx #0 _tilex
 tiley mvx #0 _tiley
-
-	mvx #0 $11c
 
 	; find level in memory location
 	ldy #0

@@ -150,13 +150,16 @@ done
     rts
 .endp
 
-.proc tile_to_map (.byte tilex+1, tiley+1) .var
+;
+; tile to tileptr
+;   updates TILEPTR to the coordinates of args tilex, tiley
+.proc tile_to_tileptr (.byte tilex+1, tiley+1) .var
 .var _tilex .byte
 .var _tiley .byte
 tilex mva #0 _tilex
 tiley mva #0 _tiley
 
-    mwa GAME_SCREEN TILEPTR
+    mwa #GAME_SCREEN TILEPTR
 
     ; advance to row
     ldx _tiley

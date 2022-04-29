@@ -31,6 +31,7 @@ attrs
 	.byte 1,$b3,$28 ; player pos x/y
 	.byte 2\.word level4 ; next level
 	.byte 5\.word level3_maps1 ; south transition
+	.byte 8,4,9 ; key position
 	.byte 0
 
 maps1

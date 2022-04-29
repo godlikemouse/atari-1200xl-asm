@@ -151,7 +151,9 @@ done
     tile_is_key()
 	cmp #1
 	bne not_key
+	add_score #$5, #$00
 	lda #1
+	sta ITEMS
 	play_key_sound()
 	jmp done
 
@@ -160,6 +162,7 @@ not_key
 	cmp #1
 	bne not_chest
 	add_score #$20, #$00
+	update_coin_state TILEX, TILEY
 	lda #1
 	play_chest_sound()
 	jmp done
@@ -169,6 +172,7 @@ not_chest
 	cmp #1
 	bne done
 	add_score #$05, #$00
+	update_coin_state TILEX, TILEY
 	lda #1
 	play_coin_sound()
 	jmp done

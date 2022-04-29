@@ -30,5 +30,6 @@ map
 attrs
 	.byte 1,$b7,$28 ; player pos x/y
 	.byte 2\.word level3 ; next level
+	.byte 8,4,2 ; key position
 	.byte 0
 .endl

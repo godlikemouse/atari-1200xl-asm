@@ -160,11 +160,13 @@ done
     display_game_map()
     reset_player()
 
-    mvx #0 LEVEL_TRANS_MAP
-    mvx #0 DISABLE_JOYSTICK
-    mvx #1 RESTORE_KEY
-    mvx #1 RESTORE_COIN
-    mvx #1 SKIP_FRAME
+    ldx #0
+    stx LEVEL_TRANS_MAP
+    stx DISABLE_JOYSTICK
+    ldx #1
+    stx RESTORE_KEY
+    stx RESTORE_COIN
+    stx SKIP_FRAME
 done
     rts
 .endp
@@ -177,13 +179,17 @@ done
 
     ldx RESTORE_KEY
     cpx #1
+    bne exit
+
+    ldx LEVEL_HAS_KEY
+    cpx #1
     bne done
 
     ; do we have a key
     lda ITEMS
     and #1
     cmp #1
-    bne done
+    bne replace_key
 
     ; check all tiles for key and remove
     ldy #0
@@ -216,11 +222,21 @@ continue
     iny
     cpy #240
     bne loop
+    jmp skip
 
-    mvx #0 RESTORE_KEY
+replace_key
+    tile_to_tileptr KEY_POSX, KEY_POSY
+    ldy #0
+    mva #$20 (TILEPTR),y+
+    mva #$21 (TILEPTR),y
+
+skip
     mvx #1 SKIP_FRAME
 
 done
+    mvx #0 RESTORE_KEY
+
+exit
 	rts
 .endp
 
@@ -234,7 +250,7 @@ done
 
     ldx RESTORE_COIN
     cpx #1
-    bne done
+    bne exit
 
     ; find level in memory location
     mwx LEVEL_MAP TMP0
@@ -245,17 +261,18 @@ done
     adw TMP0 #480 ; offset to coin state location
 	lda (TMP0),y
 	cmp #7 ; validate
-	bne continue
+	bne done
 
     iny ; move to count
     mva (TMP0),y _count
+    adb #2 _count
 
     iny ; move to first coin state slot
 loop
     ; verify slot contains a value
     lda (TMP0),y+ ; tilex
     cmp #$ff
-    beq continue
+    beq done
 
     ; restore coin state
     dey
@@ -263,8 +280,7 @@ loop
     mva (TMP0),y+ _tiley
 
     ; find location on map
-    tile_to_map _tilex, _tiley
-    mwx TILEPTR $11c
+    tile_to_tileptr _tilex, _tiley
     tya
     tax
     ldy #0
@@ -274,14 +290,14 @@ loop
     txa
     tay
 
-    ;dec _count
-    ;bne loop
+    cpy _count
+    bne loop
 
     mvx #1 SKIP_FRAME
 
-continue
+done
     mvx #0 RESTORE_COIN
 
-done
+exit
     rts
 .endp
