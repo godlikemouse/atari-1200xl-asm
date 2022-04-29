@@ -22,11 +22,24 @@ vvblkd_interrupt
 ; vvblkd chain
 ;	method chains for VVBLKD interupts
 .local vvblkd_chain
+    ; save stack
+    pha
+    txa
+    pha
+    tya
+    pha
+
     mvx #0 SKIP_FRAME
 
     render_background_music()
     render_sfx #<SFX1, #>SFX1, #<AF1C, #>AF1C
     render_sfx #<SFX2, #>SFX2, #<AF2C, #>AF2C
+
+    sequence_handler()
+
+    ldx SKIP_FRAME
+    cpx #1
+    jeq done
 
     exit_level()
 
@@ -62,12 +75,13 @@ vvblkd_interrupt
     render_gameover()
     render_player_death()
 
-    sequence_handler()
-
-    ldx SKIP_FRAME
-    cpx #1
-    jeq done
-
 done
+    ; restore stack
+    pla
+    tay
+    pla
+    tax
+    pla
+
 	jmp XITVBV
 .endl

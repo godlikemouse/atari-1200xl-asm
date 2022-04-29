@@ -202,15 +202,14 @@ map = mapl
     adw TMP0 #480
 
     ldy #0
-    iny ; marker
 
     iny ; count
-    lda (TMP0),y
+    lda (TMP0),y+
     tax
 
     lda #$ff
 loop
-    sta (TMP0),y
+    sta (TMP0),y+
     dex
     bne loop
 
