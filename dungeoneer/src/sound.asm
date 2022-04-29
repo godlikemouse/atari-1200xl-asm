@@ -300,3 +300,18 @@ complete
 done
 	rts
 .endp
+
+;
+; sequence sound handler
+;	handles sound sequencing
+.proc sequence_sound_handler
+	ldx RTCLOCK
+	cpx CLOCK_PREV
+	beq done
+	stx CLOCK_PREV
+	render_background_music()
+	render_sfx #<SFX1, #>SFX1, #<AF1C, #>AF1C
+	render_sfx #<SFX2, #>SFX2, #<AF2C, #>AF2C
+done
+	rts
+.endp

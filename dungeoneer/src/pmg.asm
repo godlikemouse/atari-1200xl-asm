@@ -14,16 +14,16 @@ peach=$3c
 blue=$80
 
 	; character set colors
-	mva #gray COLOR0        ; %01
-	mva #light_gray COLOR1  ; %10
-	mva #brown COLOR2       ; %11
-	mva #green COLOR3       ; %11 (inverse)
-	mva #black COLOR4       ; %00
+	mvx #gray COLOR0        ; %01
+	mvx #light_gray COLOR1  ; %10
+	mvx #brown COLOR2       ; %11
+	mvx #green COLOR3       ; %11 (inverse)
+	mvx #black COLOR4       ; %00
 
 	; player-missile colors
-	mva #blue PCOLR0
-	mva #brown PCOLR1
-	mva #peach PCOLR2
+	mvx #blue PCOLR0
+	mvx #brown PCOLR1
+	mvx #peach PCOLR2
 	rts
 .endp
 

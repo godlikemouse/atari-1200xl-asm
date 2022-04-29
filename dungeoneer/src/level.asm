@@ -25,8 +25,6 @@
 
 .proc level3_setup
     reset_coin_state #<level3_map.maps1 #>level3_map.maps1
-
-    mvx #1 SKIP_FRAME
     mwx #0 SEQUENCE
     rts
 .endp
@@ -37,7 +35,6 @@
     mwx #background_music BGM_ADDR
     mvx #0 ITEMS
     mvx #1 LEVEL_HAS_KEY
-
     mwx #level3_setup SEQUENCE
 
     display_game_intro()
@@ -78,7 +75,6 @@
     mwx #background_music BGM_ADDR
     mvx #0 ITEMS
     mvx #0 LEVEL_HAS_KEY
-
     mwx #level5_setup SEQUENCE
 
     display_game_intro()
@@ -89,18 +85,9 @@
     reset_coin_state #<level5_map.map #>level5_map.map
     reset_coin_state #<level5_map.mape1 #>level5_map.mape1
     reset_coin_state #<level5_map.mapw1 #>level5_map.mapw1
-
-    mvx #1 SKIP_FRAME
-    mwx #level5_setup2 SEQUENCE
-    rts
-.endp
-
-.proc level5_setup2
     reset_coin_state #<level5_map.mapn1 #>level5_map.mapn1
     reset_coin_state #<level5_map.maps1w1 #>level5_map.maps1w1
-
-    mvx #1 SKIP_FRAME
-    mwx #0 SEQUENCE
+    mvx #0 SEQUENCE
     rts
 .endp
 
@@ -217,9 +204,9 @@ loop
 .endp
 
 ;
-; sequence handler
-;   handles sequence jumps
-.proc sequence_handler
+; sequence eventhandler
+;   handles event sequences
+.proc sequence_event_handler
 
     ldx SEQUENCE
     cpx #0

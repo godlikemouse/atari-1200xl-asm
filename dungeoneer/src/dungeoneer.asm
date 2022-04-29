@@ -25,7 +25,12 @@
 	enable_interrupts()
 	display_mainmenu()
 
-	jmp *
+	; main loop
+main
+	sequence_event_handler()
+	sequence_sound_handler()
+	transition_map_handler()
+	jmp main
 
 	icl "memory.asm"
 	icl "dlist.asm"

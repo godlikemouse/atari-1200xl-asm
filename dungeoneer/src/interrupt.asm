@@ -31,35 +31,7 @@ vvblkd_interrupt
 
     mvx #0 SKIP_FRAME
 
-    render_background_music()
-    render_sfx #<SFX1, #>SFX1, #<AF1C, #>AF1C
-    render_sfx #<SFX2, #>SFX2, #<AF2C, #>AF2C
-
-    sequence_handler()
-
-    ldx SKIP_FRAME
-    cpx #1
-    jeq done
-
     exit_level()
-
-    ldx SKIP_FRAME
-    cpx #1
-    jeq done
-
-    transition_map()
-
-    ldx SKIP_FRAME
-    cpx #1
-    jeq done
-
-    restore_key_state()
-
-    ldx SKIP_FRAME
-    cpx #1
-    jeq done
-
-    restore_coin_state()
 
     ldx SKIP_FRAME
     cpx #1

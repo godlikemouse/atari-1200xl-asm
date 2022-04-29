@@ -149,9 +149,9 @@ done
 .endp
 
 ;
-; transition map
+; transition map handler
 ;   handles map transition
-.proc transition_map
+.proc transition_map_handler()
     ldx LEVEL_TRANS_MAP
     cpx #0
     beq done
@@ -160,13 +160,17 @@ done
     display_game_map()
     reset_player()
 
-    ldx #0
-    stx LEVEL_TRANS_MAP
-    stx DISABLE_JOYSTICK
     ldx #1
     stx RESTORE_KEY
     stx RESTORE_COIN
-    stx SKIP_FRAME
+
+    restore_key_state()
+    restore_coin_state()
+
+    ldx #0
+    stx LEVEL_TRANS_MAP
+    stx DISABLE_JOYSTICK
+
 done
     rts
 .endp
