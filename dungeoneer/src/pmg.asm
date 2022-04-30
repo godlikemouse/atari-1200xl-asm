@@ -28,6 +28,17 @@ blue=$80
 .endp
 
 ;
+; changes tile colors
+;
+.proc bump_colors
+	adb COLOR0 #4
+	adb COLOR1 #4
+	adb COLOR3 #4
+	adb COLOR4 #4
+	rts
+.endp
+
+;
 ; clear pmg
 ;
 .proc clear_pmg
@@ -270,6 +281,7 @@ draw
 ; display game over
 ;	displays the game over screen
 .proc display_gameover
+	setup_colors()
 	clear_pmg()
 	setup_menu_screen()
 	setup_menu_tileset()

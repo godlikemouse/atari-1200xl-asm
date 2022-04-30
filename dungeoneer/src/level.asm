@@ -130,6 +130,11 @@
     rts
 .endp
 
+.proc level6
+    bump_colors()
+    level1()
+.endp
+
 ;
 ; exit level
 ;
