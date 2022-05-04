@@ -29,6 +29,7 @@
 
 	; move player
 	dec POSX
+	tile_is_empty()
 
 block
 	rts
@@ -62,6 +63,7 @@ block
 
 	; move player
 	inc POSX
+	tile_is_empty()
 
 block
 	rts
@@ -96,6 +98,7 @@ block
 	; move player
 	dec POSY
 	clear_player_vertical()
+	tile_is_empty()
 
 block
 	rts
@@ -129,6 +132,7 @@ block
 
 	inc POSY
 	clear_player_vertical()
+	tile_is_empty()
 
 block
 	rts

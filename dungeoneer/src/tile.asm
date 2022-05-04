@@ -107,10 +107,22 @@ continue
 .endp
 
 ;
+; tile is empty
+;
+.proc tile_is_empty
+	lda ONTILE
+	cmp #0
+	bne done
+	mvx #1 GRPRIOR
+done
+	rts
+.endp
+
+;
 ; tile is block
 ;   if true, acc == 1, else acc == 0
 .proc tile_is_block
-    between #$10, ONTILE, #$18
+    between #$10, ONTILE, #$20
 	cmp #1
 	beq done
 
@@ -194,6 +206,10 @@ done
 ;
 .proc tile_is_proxy
 	between #$34, ONTILE, #$36
+	cmp #1
+	bne done
+	mvx #8 GRPRIOR
+done
 	rts
 .endp
 
@@ -280,7 +296,6 @@ done
 	tile_is_locked_door()
 	cmp #1
 	bne proxy_check
-	mva #1 $11a
 	jmp direct
 
 proxy_check

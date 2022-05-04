@@ -37,16 +37,16 @@
             "scale": 5.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 81.45454545454547,
-                "y": 48.545454545454554
+                "x": 81.63636363636365,
+                "y": 48.72727272727273
             }
         },
         "level1_map.map.tmx": {
-            "scale": 8,
+            "scale": 5.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 62,
-                "y": 40.125
+                "x": 74.9090909090909,
+                "y": 56.90909090909091
             }
         },
         "level2_map.intro.tmx": {
@@ -54,7 +54,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 80.95931317655841,
-                "y": 47.596117954460624
+                "y": 47.749160134378485
             }
         },
         "level2_map.map.tmx": {
@@ -77,8 +77,8 @@
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 63.096337334564495,
-                "y": 48.331794398276394
+                "x": 75.96799015081565,
+                "y": 49.08895044629117
             }
         },
         "level3_map.maps1.tmx": {
@@ -86,7 +86,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 82.03688708951869,
-                "y": 48.10076473234369
+                "y": 48.248313090418364
             }
         },
         "level4_map.intro.tmx": {
@@ -101,8 +101,8 @@
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 81.89904586026472,
-                "y": 48.079409048938146
+                "x": 77.73468759618345,
+                "y": 54.38904278239459
             }
         },
         "level5_map.intro.tmx": {
@@ -158,7 +158,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 82.03688708951869,
-                "y": 48.10076473234369
+                "y": 48.248313090418364
             }
         },
         "level5_map.mapw1.tmx": {
@@ -205,6 +205,7 @@
     ],
     "project": "dungeoneer.tiled-project",
     "recentFiles": [
+        "level4_map.map.tmx",
         "level5_map.intro.tmx",
         "congratulations.intro.tmx",
         "level1_map.map.tmx",
@@ -212,7 +213,6 @@
         "level3_map.maps1.tmx",
         "level5_map.maps1.tmx",
         "level5_map.mapn1.tmx",
-        "level4_map.map.tmx",
         "level5_map.maps1w1.tmx",
         "level5_map.map.tmx",
         "level5_map.mapw1.tmx",
