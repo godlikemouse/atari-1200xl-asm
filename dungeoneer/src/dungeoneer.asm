@@ -15,7 +15,6 @@
 ; https://www.atariarchives.org/mapping/memorymap.php
 
 ; TODO: add enemies
-; TODO: add external level loading
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5
 
 	org $0600
