@@ -249,7 +249,7 @@ draw
 	mwx #0 PLAYER_SCORE
 	mvx #3 PLAYER_LIVES
 	mvx #0 ITEMS
-	level5()
+	level1()
 	rts
 .endp
 

@@ -13,6 +13,14 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "congratulations.intro.tmx": {
+            "scale": 6.777439024390243,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 77.90553306342781,
+                "y": 48.10076473234369
+            }
+        },
         "game_tileset.tsx": {
             "scaleInDock": 4.8975,
             "scaleInEditor": 3
@@ -38,7 +46,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 62,
-                "y": 70.125
+                "y": 40.125
             }
         },
         "level2_map.intro.tmx": {
@@ -54,7 +62,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 82.03060843598357,
-                "y": 48.055244494214264
+                "y": 48.208286674132125
             }
         },
         "level3_map.intro.tmx": {
@@ -197,6 +205,8 @@
     ],
     "project": "dungeoneer.tiled-project",
     "recentFiles": [
+        "level5_map.intro.tmx",
+        "congratulations.intro.tmx",
         "level1_map.map.tmx",
         "level2_map.map.tmx",
         "level3_map.maps1.tmx",
@@ -206,9 +216,7 @@
         "level5_map.maps1w1.tmx",
         "level5_map.map.tmx",
         "level5_map.mapw1.tmx",
-        "level5_map.mape1.tmx",
-        "level5_map.intro.tmx",
-        "gameover.map.tmx"
+        "level5_map.mape1.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
