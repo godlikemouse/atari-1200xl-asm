@@ -249,7 +249,7 @@ draw
 	mwx #0 PLAYER_SCORE
 	mvx #3 PLAYER_LIVES
 	mvx #0 ITEMS
-	level1()
+	level5()
 	rts
 .endp
 
@@ -356,6 +356,15 @@ exit
 	cpx #200
 	bne done
 	mvx #0 INTRO_POSITION
+
+	ldx LEVEL_MAP
+	cpx #0
+	bne start_game
+	bump_colors()
+	level1()
+	jmp done
+
+start_game
 	display_game()
 
 done

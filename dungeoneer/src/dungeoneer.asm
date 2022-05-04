@@ -57,3 +57,4 @@ main
 	icl "display/level3.asm"
 	icl "display/level4.asm"
 	icl "display/level5.asm"
+	icl "display/congratulations.asm"

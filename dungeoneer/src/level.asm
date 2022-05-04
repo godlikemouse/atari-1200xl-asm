@@ -62,6 +62,7 @@
     display_game_intro()
     rts
 .endp
+
 .proc level5
 
     mwx #level5_map.intro LEVEL_INTRO
@@ -130,9 +131,13 @@
     rts
 .endp
 
-.proc level6
-    bump_colors()
-    level1()
+.proc congratulations
+    mwx #congratulations_map.intro LEVEL_INTRO
+    mvx #0 LEVEL_MAP
+    mvx #0 ITEMS
+    mvx #0 LEVEL_HAS_KEY
+
+    display_game_intro()
 .endp
 
 ;
