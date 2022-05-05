@@ -1,6 +1,9 @@
 ; level.asm
 ;   level handling
 
+;
+; level 1
+;   handles level 1 loading
 .proc level1
     mwx #level1_map.intro LEVEL_INTRO
     mwx #level1_map.map LEVEL_MAP
@@ -12,6 +15,9 @@
     rts
 .endp
 
+;
+; level 2
+;   handles level 2 loading
 .proc level2
     mwx #level2_map.intro LEVEL_INTRO
     mwx #level2_map.map LEVEL_MAP
@@ -23,6 +29,9 @@
     rts
 .endp
 
+;
+; level 3
+;   handles level 3 loading
 .proc level3
     mwx #level3_map.intro LEVEL_INTRO
     mwx #level3_map.map LEVEL_MAP
@@ -35,6 +44,9 @@
     rts
 .endp
 
+;
+; level 3 main
+;   handles level 3 transition loading
 .proc level3_main
     mvx #1 DISABLE_JOYSTICK
     mwx #level3_map.map LEVEL_MAP
@@ -44,6 +56,9 @@
     rts
 .endp
 
+;
+; level 3 map south 1
+;   handles level 3 south 1 transition loading
 .proc level3_maps1
     mvx #1 DISABLE_JOYSTICK
     mwx #level3_map.maps1 LEVEL_MAP
@@ -52,6 +67,9 @@
     rts
 .endp
 
+;
+; level 4
+;   handles level 4 loading
 .proc level4
     mwx #level4_map.intro LEVEL_INTRO
     mwx #level4_map.map LEVEL_MAP
@@ -63,6 +81,9 @@
     rts
 .endp
 
+;
+; level 5
+;   handles level 5 loading
 .proc level5
     mwx #level5_map.intro LEVEL_INTRO
     mwx #level5_map.map LEVEL_MAP
@@ -80,6 +101,9 @@
     rts
 .endp
 
+;
+; level 5 main
+;   handles level 5 transition loading
 .proc level5_main
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.map LEVEL_MAP
@@ -88,6 +112,9 @@
     rts
 .endp
 
+;
+; level 5 map east 1
+;   handles level 5 map east 1 loading
 .proc level5_mape1
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.mape1 LEVEL_MAP
@@ -96,6 +123,9 @@
     rts
 .endp
 
+;
+; level 5 map west 1
+;   handles level 5 map west 1 loading
 .proc level5_mapw1
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.mapw1 LEVEL_MAP
@@ -104,6 +134,9 @@
     rts
 .endp
 
+;
+; level 5 map north 1
+;   handles level map 5 north 1 loading
 .proc level5_mapn1
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.mapn1 LEVEL_MAP
@@ -112,6 +145,9 @@
     rts
 .endp
 
+;
+; level 5 map south 1
+;   handles level 5 map south 1 loading
 .proc level5_maps1
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.maps1 LEVEL_MAP
@@ -120,6 +156,9 @@
     rts
 .endp
 
+;
+; level 5 map south 1 west 1
+;   handles level map 5 south 1 west 1 loading
 .proc level5_maps1w1
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.maps1w1 LEVEL_MAP
@@ -128,6 +167,9 @@
     rts
 .endp
 
+;
+; congratulations
+;   handles congratulations level loading
 .proc congratulations
     mwx #congratulations_map.intro LEVEL_INTRO
     mvx #0 LEVEL_MAP
