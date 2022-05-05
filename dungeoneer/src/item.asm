@@ -53,6 +53,9 @@ done
 	rts
 .endp
 
+;
+; clear player lives
+;
 .proc clear_player_lives
 	ldx #$27
 	ldy #6
