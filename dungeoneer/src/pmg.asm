@@ -39,7 +39,7 @@ blue=$80
 .endp
 
 ;
-; clear pmg
+; clear player pmg
 ;
 .proc clear_player_pmg
 pmg_p0 = PMG + $200
