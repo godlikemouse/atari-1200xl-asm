@@ -285,6 +285,6 @@ done
 	stx HPOSP0
 	stx HPOSP1
 	stx HPOSP2
-	clear_pmg()
+	clear_player_pmg()
 	rts
 .endp

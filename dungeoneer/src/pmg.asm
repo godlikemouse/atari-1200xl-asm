@@ -41,7 +41,7 @@ blue=$80
 ;
 ; clear pmg
 ;
-.proc clear_pmg
+.proc clear_player_pmg
 pmg_p0 = PMG + $200
 pmg_p1 = PMG + $280
 pmg_p2 = PMG + $300
@@ -238,7 +238,7 @@ draw
 	mvx #1 DISPLAY_TYPE
 	mvx #50 INTRO_POSITION
 	mvx #$30 POSY
-	clear_pmg()
+	clear_player_pmg()
 	rts
 .endp
 
@@ -282,7 +282,7 @@ draw
 ;	displays the game over screen
 .proc display_gameover
 	setup_colors()
-	clear_pmg()
+	clear_player_pmg()
 	setup_menu_screen()
 	setup_menu_tileset()
 	enable_tilesprite_animation()
@@ -324,7 +324,7 @@ done
 	stx HPOSP1
 	stx HPOSP2
 	stx HPOSP3
-	clear_pmg()
+	clear_player_pmg()
 	draw_player()
 
 exit
@@ -348,7 +348,7 @@ exit
 	stx HPOSP3
 	inc INTRO_POSITION
 
-	clear_pmg()
+	clear_player_pmg()
 	draw_player()
 	animate_player_right()
 
