@@ -64,7 +64,6 @@
 .endp
 
 .proc level5
-
     mwx #level5_map.intro LEVEL_INTRO
     mwx #level5_map.map LEVEL_MAP
     mwx #background_music BGM_ADDR
@@ -76,8 +75,6 @@
     reset_coin_state #<level5_map.mapw1 #>level5_map.mapw1
     reset_coin_state #<level5_map.mapn1 #>level5_map.mapn1
     reset_coin_state #<level5_map.maps1w1 #>level5_map.maps1w1
-
-    mvx LEVEL_HAS_KEY $121
 
     display_game_intro()
     rts
@@ -138,6 +135,7 @@
     mvx #0 LEVEL_HAS_KEY
 
     display_game_intro()
+    rts
 .endp
 
 ;
