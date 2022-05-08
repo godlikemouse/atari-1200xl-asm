@@ -14,7 +14,7 @@
 ; display game intro map
 ;
 .proc display_game_intro_map
-	mva #4 GRPRIOR
+	mva #4+16 GRPRIOR
 	render_map LEVEL_INTRO, LEVEL_INTRO+1, #<MENU_SCREEN, #>MENU_SCREEN
 	rts
 .endp
@@ -148,9 +148,16 @@ coin_loop
 
 load_key_position
 	cmp #8
-	bne done
+	bne load_enemy_position
 	mva (attr),y+ KEY_POSX
 	mva (attr),y+ KEY_POSY
+	jmp loop
+
+load_enemy_position
+	cmp #9
+	bne done
+	mva (attr),y+ ENEMY_POSX
+	mva (attr),y+ ENEMY_POSY
 	jmp loop
 
 done

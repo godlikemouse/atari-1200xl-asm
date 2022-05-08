@@ -3,7 +3,7 @@ NAME=dungeoneer
 FLAGS=-l:${NAME}.lst -t:${NAME}.lab
 OUTFILE=${NAME}.xex
 
-all: clean generate_tiles generate_player generate_maps build run
+all: clean generate_tiles generate_player generate_enemy generate_maps build run
 
 clean:
 	rm -f *.lab *.lst *.obx
@@ -44,3 +44,6 @@ generate_maps:
 
 generate_player:
 	cd art && ./player.py
+
+generate_enemy:
+	cd art && ./enemy.py

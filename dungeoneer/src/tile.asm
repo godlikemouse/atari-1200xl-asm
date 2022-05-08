@@ -107,13 +107,36 @@ continue
 .endp
 
 ;
+; store enemy tile y
+;
+.proc store_enemy_tilex
+	lda ENEMY_POSX
+	sec
+	sbc #TILEY_PIXEL_OFFSET
+	:2 lsr ; divide by 4
+	sta TILEX
+	rts
+.endp
+
+;
+; store enemy tiley
+;
+.proc store_enemy_tiley
+	lda ENEMY_POSY
+	sub #TILEY_PIXEL_OFFSET
+	:3 lsr ; divide by 8
+	sta TILEY
+	rts
+.endp
+
+;
 ; tile is empty
 ;
 .proc tile_is_empty
 	lda ONTILE
 	cmp #0
 	bne done
-	mvx #1 GRPRIOR
+	mvx #1+16 GRPRIOR
 done
 	rts
 .endp
@@ -127,7 +150,7 @@ done
 	beq done
 
 	; 90 - 94
-	between #$10+128, ONTILE #$14+128
+	between #$10+128, ONTILE #$20+128
 done
     rts
 .endp
@@ -208,7 +231,7 @@ done
 	between #$34, ONTILE, #$36
 	cmp #1
 	bne done
-	mvx #8 GRPRIOR
+	mvx #8+16 GRPRIOR
 done
 	rts
 .endp
@@ -421,6 +444,27 @@ dy mvx #0 _dy
 	store_ontile()
 	sbb POSX _dx
 	sbb POSY _dy
+	rts
+.endp
+
+;
+; peek enemy position
+;	temporarily advances ENEMY_POSX, ENEMY_POSY and stores TILEX, TILEY and ONTILE
+;	uses TMP2 (x), TMP3 (y)
+.proc peek_enemy_position (.byte dx+1, dy+1) .var
+.var _dx .byte
+.var _dy .byte
+dx mvx #0 _dx
+dy mvx #0 _dy
+
+	adb ENEMY_POSX _dx
+	adb ENEMY_POSY _dy
+
+	store_enemy_tilex()
+	store_enemy_tiley()
+	store_ontile()
+	sbb ENEMY_POSX _dx
+	sbb ENEMY_POSY _dy
 	rts
 .endp
 

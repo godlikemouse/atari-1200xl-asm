@@ -47,6 +47,7 @@ vvblkd_interrupt
     render_gameover()
     render_player_death()
 
+    render_enemy()
 done
     ; restore stack
     pla

@@ -30,5 +30,6 @@ map
 attrs
 	.byte $01,$af,$36 ; player pos x/y
 	.byte $02\.word level2 ; next level
+	.byte $09,$80,$36 ; enemy pos x/y
 	.byte $00 ; end
 .endl

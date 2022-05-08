@@ -58,6 +58,21 @@ loop
 .endp
 
 ;
+; clear enemy pmg
+;
+.proc clear_enemy_pmg
+missile = PMG + $180
+
+	ldx #$80
+	lda #0
+loop
+	dex
+	sta missile,x
+	bne loop
+	rts
+.endp
+
+;
 ; clear player vertical repaint
 ;
 .proc clear_player_vertical
@@ -112,13 +127,31 @@ loop
 .endp
 
 ;
+; draw enemy
+;
+.proc draw_enemy
+missle = PMG + $180
+
+	ldy ENEMY_POSY
+	ldx #0
+loop
+	mva enemy_data,x missle,y
+	iny
+	inx
+	cpx #8
+	bne loop
+	rts
+.endp
+
+;
 ; setup pmg
 ;
 .proc setup_pmg
 	mvx #>pmg PMBASE
-	mvx #46 SDMCTL ; single line resolution
+	mvx #46 SDMCTL ; double line resolution
 	mvx #3 GRACTL ; enable PMG
-	mvx #1 GRPRIOR ; give players priority
+	mvx #1+16 GRPRIOR ; give players priority
+	mvx #0 SIZEM
 	rts
 .endp
 
@@ -431,6 +464,169 @@ check
 
 done
     rts
+.endp
+
+;
+; render enemy
+;
+.proc render_enemy
+_move_count=8
+
+	; render only on game screen
+	ldx DISPLAY_TYPE
+	cpx #2
+	bne hide_enemy
+
+	; check for currently in motion
+	ldx ENEMY_MOVE_INDEX
+	cpx #0
+	bne direction_chosen_mid
+
+	; choose a direction
+	lda ENEMY_DIR_X
+	ora ENEMY_DIR_Y
+	cmp #0
+	bne direction_chosen_mid
+	lda RNDNUM
+	:6 lsr
+
+	sta $127
+
+	; debug only - remove
+	;lda #2
+
+move_north
+	cmp #0
+	bne move_east
+	mvx #0 ENEMY_DIR_X
+	mvx #-1 ENEMY_DIR_Y
+	mvx #_move_count ENEMY_MOVE_INDEX
+	jmp direction_chosen_mid
+
+move_east
+	; move every other frame
+	cmp #1
+	bne move_south
+	mvx #1 ENEMY_DIR_X
+	mvx #0 ENEMY_DIR_Y
+	mvx #_move_count ENEMY_MOVE_INDEX
+	jmp direction_chosen_mid
+
+hide_enemy
+	clear_enemy_pmg()
+	ldx #0
+	stx ENEMY_POSX
+	stx ENEMY_POSY
+	rts
+
+direction_chosen_mid
+	jmp direction_chosen
+
+done_mid
+	rts
+
+move_south
+	cmp #2
+	bne move_west
+	mvx #0 ENEMY_DIR_X
+	mvx #1 ENEMY_DIR_Y
+	mvx #_move_count ENEMY_MOVE_INDEX
+	jmp direction_chosen
+
+move_west
+	mvx #-1 ENEMY_DIR_X
+	mvx #0 ENEMY_DIR_Y
+	mvx #_move_count ENEMY_MOVE_INDEX
+
+direction_chosen
+	; move in direction for 8 positions
+	dec ENEMY_MOVE_INDEX
+	lda ENEMY_MOVE_INDEX
+	and #1
+	;bmi hold
+	bne move
+	jmp done
+
+;hold
+;	ldx ENEMY_MOVE_INDEX
+;	cpx #-120
+;	bne done
+;	mvx #_move_count ENEMY_MOVE_INDEX
+;	ldx #0
+;	stx ENEMY_DIR_X
+;	stx ENEMY_DIR_Y
+;	jmp done
+
+move
+	enemy_move_blocked()
+	cmp #1
+	beq reset
+
+	adb ENEMY_POSX ENEMY_DIR_X
+	adb ENEMY_POSY ENEMY_DIR_Y
+	update_enemy_posx()
+
+	; hold for 1 second
+	clear_enemy_pmg()
+	draw_enemy()
+	jmp done
+
+reset
+	ldx #0
+	stx ENEMY_MOVE_INDEX
+	stx ENEMY_DIR_X
+	stx ENEMY_DIR_Y
+
+done
+	rts
+.endp
+
+;
+; enemy move blocked
+;
+.proc enemy_move_blocked
+
+	; north
+	peek_enemy_position #4 #-1
+	tile_is_block()
+	cmp #1
+	beq done
+
+	; east
+	peek_enemy_position #8 #4
+	tile_is_block()
+	cmp #1
+	beq done
+
+	; south
+	peek_enemy_position #4 #8
+	tile_is_block()
+	cmp #1
+	beq done
+
+	; west
+	peek_enemy_position #-1 #4
+	tile_is_block()
+	cmp #1
+	beq done
+
+done
+	rts
+.endp
+
+;
+; set enemy pos
+;	sets the enmy position
+.proc update_enemy_posx
+	lda ENEMY_POSX
+	sta HPOMS3
+	adc #2
+	sta HPOMS2
+	adc #2
+	sta HPOMS1
+	adc #2
+	sta HPOMS0
+	rts
 .endp
 
 ;

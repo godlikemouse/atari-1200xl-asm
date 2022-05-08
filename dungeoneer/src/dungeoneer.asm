@@ -13,6 +13,9 @@
 ;
 ; Atari Memory Map:
 ; https://www.atariarchives.org/mapping/memorymap.php
+;
+; PMG Memory Map:
+; https://www.atariarchives.org/mapping/appendix7.php
 
 ; TODO: add enemies
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5
@@ -48,6 +51,7 @@ main
 	icl "data/game_tileset.asm"
 	icl "data/menu_tileset.asm"
 	icl "data/player.asm"
+	icl "data/enemy.asm"
 	icl "data/sound.asm"
 	icl "display/gameover.asm"
 	icl "display/mainmenu.asm"

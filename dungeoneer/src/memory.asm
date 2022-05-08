@@ -84,6 +84,11 @@ LEVEL_HAS_KEY     = $011d ; level has key flag
 KEY_POSX          = $011e ; key position x
 KEY_POSY          = $011f ; key position y
 CLOCK_PREV        = $0120 ; previous clock interval
+ENEMY_POSX        = $0121 ; enemy position y
+ENEMY_POSY        = $0122 ; enemy position y
+ENEMY_DIR_X       = $0123 ; enmey direction x
+ENEMY_DIR_Y       = $0124 ; enemy direction y
+ENEMY_MOVE_INDEX  = $0125 ; enemy move index
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution
@@ -100,6 +105,7 @@ PCOLR0            = $02c0 ; color for player-missile 0
 PCOLR1            = $02c1 ; color for Player-missile 1
 PCOLR2            = $02c2 ; color for player-missile 2
 PCOLR3            = $02c3 ; color for player-missile 3
+PCOLR4            = $02c4 ; color for player-missile 4
 CHBAS             = $02f4 ; character base register
 GAME_SCREEN       = $4000 ; game screen buffer
 ITEM_SCREEN       = $41e0 ; item screen buffer
@@ -115,6 +121,13 @@ HPOSP0            = $d000 ; horizontal position of player 0
 HPOSP1            = $d001 ; horizontal position of player 1
 HPOSP2            = $d002 ; horizontal position of player 2
 HPOSP3            = $d003 ; horizontal position of player 3
+HPOMS0            = $d004 ; horizontal position of missile 0
+HPOMS1            = $d005 ; horizontal position of missile 1
+HPOMS2            = $d006 ; horizontal position of missile 2
+HPOMS3            = $d007 ; horizontal position of missile 3
+SIZEM             = $d00c ; missile size
+GRAFM             = $d011 ; missile graphics
+COLPF3            = $d019 ; player 5 color
 GRACTL            = $d01d ; enable/disable pmg
 AF1C              = $d200 ; FFFFFFFF ; F=Frequency
 AC1C              = $d201 ; NNNvVVVV ; N=Noise, v=Volume only, V=Volume
@@ -133,6 +146,7 @@ AC4C              = $d207 ; NNNvVVVV ; N=Noise, v=Volume only V=Volume
 ; HH=Channel 1, Channel 2 Highpass Filters
 ; S=64Khz to 15kHz
 AUDCTL            = $d208 ; N1234HHS
+RNDNUM            = $d20a ; random number
 PACTL             = $d302 ; joystick port control
 PMBASE            = $d407 ; player missile graphics base address
 WSYNC             = $d40a ; wait sync
