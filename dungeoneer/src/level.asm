@@ -176,6 +176,15 @@
     mvx #0 ITEMS
     mvx #0 LEVEL_HAS_KEY
 
+    ldx ENEMY_SPEED_RES
+    cpx #0
+    bne increase_speed
+    jmp display
+
+increase_speed
+    dec ENEMY_SPEED_RES
+
+display
     display_game_intro()
     rts
 .endp

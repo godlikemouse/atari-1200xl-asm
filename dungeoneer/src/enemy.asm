@@ -62,12 +62,23 @@ done
 	cpx #0
 	beq hide_enemy
 
+	; show spider initially
+	lda ENEMY_DIR_X
+	ora ENEMY_DIR_Y
+	cmp #0
+	beq init
+
+setup
 	; check for currently in motion
 	ldx ENEMY_MOVE_INDEX
 	cpx #0
 	bne direction_chosen
 	enemy_choose_direction()
 	jmp direction_chosen
+
+init
+	draw_player()
+	jmp setup
 
 hide_enemy
 	clear_enemy_pmg()
@@ -78,14 +89,15 @@ hide_enemy
 	rts
 
 direction_chosen
-	; move in direction for 8 positions
-	dec ENEMY_MOVE_INDEX
+	; wait until enemy speed resistance has elapsed
+	inc ENEMY_MOVE_INDEX
 	lda ENEMY_MOVE_INDEX
-	and #1
-	bne move
+	cmp ENEMY_SPEED_RES
+	beq move
 	jmp done
 
 move
+	mvx #0 ENEMY_MOVE_INDEX
 	enemy_move_blocked()
 	cmp #1
 	beq reset
@@ -113,7 +125,6 @@ done
 ; enemy choose direction
 ;
 .proc enemy_choose_direction
-_move_count=8
 
 	; choose a direction
 	lda ENEMY_DIR_X
@@ -128,7 +139,6 @@ move_north
 	bne move_east
 	mvx #0 ENEMY_DIR_X
 	mvx #-1 ENEMY_DIR_Y
-	mvx #_move_count ENEMY_MOVE_INDEX
 	jmp done
 
 move_east
@@ -136,7 +146,6 @@ move_east
 	bne move_south
 	mvx #1 ENEMY_DIR_X
 	mvx #0 ENEMY_DIR_Y
-	mvx #_move_count ENEMY_MOVE_INDEX
 	jmp done
 
 move_south
@@ -144,13 +153,11 @@ move_south
 	bne move_west
 	mvx #0 ENEMY_DIR_X
 	mvx #1 ENEMY_DIR_Y
-	mvx #_move_count ENEMY_MOVE_INDEX
 	jmp done
 
 move_west
 	mvx #-1 ENEMY_DIR_X
 	mvx #0 ENEMY_DIR_Y
-	mvx #_move_count ENEMY_MOVE_INDEX
 
 done
 	rts

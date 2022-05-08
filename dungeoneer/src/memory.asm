@@ -2,6 +2,7 @@
 ;   Contains hardware related memory locations
 
 RTCLOCK           = $0014 ; internal realtime clock
+ATTRACT           = $004d ; attraction mode / screensaver
 POSX              = $00c0 ; player x position on screen
 POSY              = $00c1 ; player y position on screen
 TILEX             = $00c2 ; the x tile position
@@ -90,7 +91,8 @@ ENEMY_DIR_X       = $0123 ; enmey direction x
 ENEMY_DIR_Y       = $0124 ; enemy direction y
 ENEMY_MOVE_INDEX  = $0125 ; enemy move index
 ENEMY_SPRITE      = $0126 ; the enemy sprite index
-ENEMANIM_OFFSET   = $0127 ; the ebemy animation offset
+ENEMANIM_OFFSET   = $0127 ; the enemy animation offset
+ENEMY_SPEED_RES   = $0128 ; the enemy movement speed resistance
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution

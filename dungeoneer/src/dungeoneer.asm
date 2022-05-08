@@ -17,13 +17,14 @@
 ; PMG Memory Map:
 ; https://www.atariarchives.org/mapping/appendix7.php
 
-; TODO: add adjustable enemy movement speed
-; TODO: increase spider speed on end game
-; TODO: implement joystick nw 10, sw 9, ne 6, se 5
+; TODO: add extra life gain
+; TODO: add how to play
+; TODO: add credit screen
 
 	org $0600
 
 	; main setup
+	mvx #0 ATTRACT
 	setup_colors()
 	enable_interrupts()
 	display_mainmenu()

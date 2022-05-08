@@ -31,10 +31,10 @@ blue=$80
 ; changes tile colors
 ;
 .proc bump_colors
-	adb COLOR0 #4
-	adb COLOR1 #4
-	adb COLOR3 #4
-	adb COLOR4 #4
+	adb COLOR0 #2
+	adb COLOR1 #2
+	adb COLOR3 #2
+	adb COLOR4 #2
 	rts
 .endp
 
@@ -283,6 +283,7 @@ draw
 	mwx #0 PLAYER_SCORE
 	mvx #3 PLAYER_LIVES
 	mvx #0 ITEMS
+	mvx #4 ENEMY_SPEED_RES
 	level1()
 	rts
 .endp
