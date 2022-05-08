@@ -17,6 +17,7 @@
 ; PMG Memory Map:
 ; https://www.atariarchives.org/mapping/appendix7.php
 
+; TODO: fix enemy clear pmg on level load
 ; TODO: fix enemy tile_is_block
 ; TODO: add spider animation
 ; TODO: add adjustable enemy movement speed
@@ -44,6 +45,7 @@ main
 	org $2000
 	icl "level.asm"
 	icl "pmg.asm"
+	icl "enemy.asm"
 	icl "joystick.asm"
 	icl "util.asm"
 	icl "item.asm"

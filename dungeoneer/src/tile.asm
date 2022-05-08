@@ -156,6 +156,31 @@ done
 .endp
 
 ;
+; tile is enemy block
+;   if true, acc == 1, else acc == 0
+.proc tile_is_enemy_block
+    between #$10, ONTILE, #$20
+	cmp #1
+	beq done
+
+	; 90 - 94
+	between #$10+128, ONTILE #$20+128
+	cmp #1
+	beq done
+
+	; proxy
+	between #$34, ONTILE, #$36
+	cmp #1
+	beq done
+
+	; traps
+	between #$3e, ONTILE, #$40
+
+done
+    rts
+.endp
+
+;
 ; tile is key
 ;  if true, acc == 1, else acc == 0
 .proc tile_is_key
@@ -482,40 +507,5 @@ dy mvx #0 _dy
 ;
 .proc disable_tilesprite_animation
 	mvx #0 TILESPRITE_ENABLE
-	rts
-.endp
-
-;
-; check enemy player collision
-;
-.proc check_enemy_player_collision
-
-	ldx PLAYER_DEATH
-	cpx #0
-	bne done
-
-	ldx M0PCOL
-	cpx #0
-	bne hit
-
-	ldx M1PCOL
-	cpx #0
-	bne hit
-
-	ldx M2PCOL
-	cpx #0
-	bne hit
-
-	ldx M3PCOL
-	cpx #0
-	bne hit
-
-	jmp done
-
-hit
-	player_died()
-
-done
-	mvx #0 HITCLR
 	rts
 .endp
