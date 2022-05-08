@@ -35,6 +35,7 @@ map_attrs
 	.byte 4\.word level5_mape1 ; east transition
 	.byte 5\.word level5_maps1 ; south transition
 	.byte 6\.word level5_mapw1 ; west transition
+	.byte 9,0,0 ; enemy pos x/y
 	.byte 0
 
 mape1
@@ -74,6 +75,7 @@ mapw1
 mapw1_attrs
 	.byte 7,24,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; count, coin state
 	.byte 4\.word level5_main ; east transition
+	.byte 9,$4e,$52 ; enemy pos x/y
 	.byte 0
 
 mapn1
@@ -93,6 +95,7 @@ mapn1
 mapn1_attrs
 	.byte 7,16,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; count, coin state
 	.byte 5\.word level5_main ; south transition
+	.byte 9,$68,$2e ; enemy pos x/y
 	.byte 0
 
 maps1
@@ -112,6 +115,7 @@ maps1
 maps1_attrs
 	.byte 3\.word level5_main ; north transition
 	.byte 6\.word level5_maps1w1 ; west transition
+	.byte 9,0,0 ; enemy pos x/y
 	.byte 0
 
 maps1w1
@@ -131,6 +135,7 @@ maps1w1
 maps1w1_attrs
 	.byte 7,18,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; count, coin state
 	.byte 4\.word level5_maps1 ; east transition
+	.byte 9,0,0 ; enemy pos x/y
 	.byte 0
 
 .endl
