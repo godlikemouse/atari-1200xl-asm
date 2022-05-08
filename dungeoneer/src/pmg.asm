@@ -73,6 +73,24 @@ loop
 .endp
 
 ;
+; clear enemy vertical repaint
+;
+.proc clear_enemy_vertical
+missile = PMG + $180
+
+	; clear top and bottom enemy row
+	lda ENEMY_POSY
+	tay
+	dey
+	add #8
+	tax
+	lda #0
+	sta missile,x
+	sta missile,y
+	rts
+.endp
+
+;
 ; clear player vertical repaint
 ;
 .proc clear_player_vertical
@@ -282,7 +300,7 @@ draw
 	mwx #0 PLAYER_SCORE
 	mvx #3 PLAYER_LIVES
 	mvx #0 ITEMS
-	level1()
+	level5()
 	rts
 .endp
 
@@ -470,92 +488,38 @@ done
 ; render enemy
 ;
 .proc render_enemy
-_move_count=8
 
 	; render only on game screen
 	ldx DISPLAY_TYPE
 	cpx #2
 	bne hide_enemy
 
+	ldx ENEMY_POSX
+	cpx #0
+	beq hide_enemy
+
 	; check for currently in motion
 	ldx ENEMY_MOVE_INDEX
 	cpx #0
-	bne direction_chosen_mid
-
-	; choose a direction
-	lda ENEMY_DIR_X
-	ora ENEMY_DIR_Y
-	cmp #0
-	bne direction_chosen_mid
-	lda RNDNUM
-	:6 lsr
-
-	sta $127
-
-	; debug only - remove
-	;lda #2
-
-move_north
-	cmp #0
-	bne move_east
-	mvx #0 ENEMY_DIR_X
-	mvx #-1 ENEMY_DIR_Y
-	mvx #_move_count ENEMY_MOVE_INDEX
-	jmp direction_chosen_mid
-
-move_east
-	; move every other frame
-	cmp #1
-	bne move_south
-	mvx #1 ENEMY_DIR_X
-	mvx #0 ENEMY_DIR_Y
-	mvx #_move_count ENEMY_MOVE_INDEX
-	jmp direction_chosen_mid
+	bne direction_chosen
+	enemy_choose_direction()
+	jmp direction_chosen
 
 hide_enemy
 	clear_enemy_pmg()
 	ldx #0
 	stx ENEMY_POSX
 	stx ENEMY_POSY
+	update_enemy_posx()
 	rts
-
-direction_chosen_mid
-	jmp direction_chosen
-
-done_mid
-	rts
-
-move_south
-	cmp #2
-	bne move_west
-	mvx #0 ENEMY_DIR_X
-	mvx #1 ENEMY_DIR_Y
-	mvx #_move_count ENEMY_MOVE_INDEX
-	jmp direction_chosen
-
-move_west
-	mvx #-1 ENEMY_DIR_X
-	mvx #0 ENEMY_DIR_Y
-	mvx #_move_count ENEMY_MOVE_INDEX
 
 direction_chosen
 	; move in direction for 8 positions
 	dec ENEMY_MOVE_INDEX
 	lda ENEMY_MOVE_INDEX
 	and #1
-	;bmi hold
 	bne move
 	jmp done
-
-;hold
-;	ldx ENEMY_MOVE_INDEX
-;	cpx #-120
-;	bne done
-;	mvx #_move_count ENEMY_MOVE_INDEX
-;	ldx #0
-;	stx ENEMY_DIR_X
-;	stx ENEMY_DIR_Y
-;	jmp done
 
 move
 	enemy_move_blocked()
@@ -564,10 +528,9 @@ move
 
 	adb ENEMY_POSX ENEMY_DIR_X
 	adb ENEMY_POSY ENEMY_DIR_Y
-	update_enemy_posx()
 
-	; hold for 1 second
-	clear_enemy_pmg()
+	update_enemy_posx()
+	clear_enemy_vertical()
 	draw_enemy()
 	jmp done
 
@@ -582,33 +545,113 @@ done
 .endp
 
 ;
-; enemy move blocked
+; enemy choose direction
 ;
+.proc enemy_choose_direction
+_move_count=8
+
+	; choose a direction
+	lda ENEMY_DIR_X
+	ora ENEMY_DIR_Y
+	cmp #0
+	bne done
+	lda RNDNUM
+	:6 lsr
+
+move_north
+	cmp #0
+	bne move_east
+	mvx #0 ENEMY_DIR_X
+	mvx #-1 ENEMY_DIR_Y
+	mvx #_move_count ENEMY_MOVE_INDEX
+	jmp done
+
+move_east
+	cmp #1
+	bne move_south
+	mvx #1 ENEMY_DIR_X
+	mvx #0 ENEMY_DIR_Y
+	mvx #_move_count ENEMY_MOVE_INDEX
+	jmp done
+
+move_south
+	cmp #2
+	bne move_west
+	mvx #0 ENEMY_DIR_X
+	mvx #1 ENEMY_DIR_Y
+	mvx #_move_count ENEMY_MOVE_INDEX
+	jmp done
+
+move_west
+	mvx #-1 ENEMY_DIR_X
+	mvx #0 ENEMY_DIR_Y
+	mvx #_move_count ENEMY_MOVE_INDEX
+
+done
+	rts
+.endp
+
+;
+; enemy move blocked
+;	returns acc == 1 if true, else acc == 0
 .proc enemy_move_blocked
 
-	; north
-	peek_enemy_position #4 #-1
+	jmp north
+
+exit
+	rts
+
+north
+	ldx ENEMY_DIR_Y
+	cpx #-1
+	bne south
+	peek_enemy_position #0 #-1
+	tile_is_block()
+	cmp #1
+	beq exit
+	peek_enemy_position #7 #-1
+	tile_is_block()
+	cmp #1
+	beq exit
+
+south
+	cpx #1
+	bne east
+	peek_enemy_position #0 #8
+	tile_is_block()
+	cmp #1
+	beq exit
+	peek_enemy_position #7 #8
+	tile_is_block()
+	cmp #1
+	beq exit
+
+east
+	ldx ENEMY_DIR_X
+	cpx #1
+	bne west
+	peek_enemy_position #8 #0
+	tile_is_block()
+	cmp #1
+	beq done
+	peek_enemy_position #8 #7
 	tile_is_block()
 	cmp #1
 	beq done
 
-	; east
-	peek_enemy_position #8 #4
+west
+	cpx #-1
+	bne done
+	peek_enemy_position #-1 #0
+	tile_is_block()
+	cmp #1
+	beq done
+	peek_enemy_position #-1 #7
 	tile_is_block()
 	cmp #1
 	beq done
 
-	; south
-	peek_enemy_position #4 #8
-	tile_is_block()
-	cmp #1
-	beq done
-
-	; west
-	peek_enemy_position #-1 #4
-	tile_is_block()
-	cmp #1
-	beq done
+	lda #0
 
 done
 	rts
@@ -620,11 +663,11 @@ done
 .proc update_enemy_posx
 	lda ENEMY_POSX
 	sta HPOMS3
-	adc #2
+	add #2
 	sta HPOMS2
-	adc #2
+	add #2
 	sta HPOMS1
-	adc #2
+	add #2
 	sta HPOMS0
 	rts
 .endp

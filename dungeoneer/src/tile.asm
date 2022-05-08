@@ -112,7 +112,7 @@ continue
 .proc store_enemy_tilex
 	lda ENEMY_POSX
 	sec
-	sbc #TILEY_PIXEL_OFFSET
+	sbc #TILEX_PIXEL_OFFSET
 	:2 lsr ; divide by 4
 	sta TILEX
 	rts
@@ -459,7 +459,6 @@ dy mvx #0 _dy
 
 	adb ENEMY_POSX _dx
 	adb ENEMY_POSY _dy
-
 	store_enemy_tilex()
 	store_enemy_tiley()
 	store_ontile()
@@ -483,5 +482,40 @@ dy mvx #0 _dy
 ;
 .proc disable_tilesprite_animation
 	mvx #0 TILESPRITE_ENABLE
+	rts
+.endp
+
+;
+; check enemy player collision
+;
+.proc check_enemy_player_collision
+
+	ldx PLAYER_DEATH
+	cpx #0
+	bne done
+
+	ldx M0PCOL
+	cpx #0
+	bne hit
+
+	ldx M1PCOL
+	cpx #0
+	bne hit
+
+	ldx M2PCOL
+	cpx #0
+	bne hit
+
+	ldx M3PCOL
+	cpx #0
+	bne hit
+
+	jmp done
+
+hit
+	player_died()
+
+done
+	mvx #0 HITCLR
 	rts
 .endp

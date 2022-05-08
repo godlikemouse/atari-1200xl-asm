@@ -17,7 +17,10 @@
 ; PMG Memory Map:
 ; https://www.atariarchives.org/mapping/appendix7.php
 
-; TODO: add enemies
+; TODO: fix enemy tile_is_block
+; TODO: add spider animation
+; TODO: add adjustable enemy movement speed
+; TODO: increase spider speed on end game
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5
 
 	org $0600
@@ -33,6 +36,7 @@ main
 	transition_map_handler()
 	restore_key_state()
     restore_coin_state()
+	check_enemy_player_collision()
 	jmp main
 
 	icl "memory.asm"

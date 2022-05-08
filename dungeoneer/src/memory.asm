@@ -125,10 +125,15 @@ HPOMS0            = $d004 ; horizontal position of missile 0
 HPOMS1            = $d005 ; horizontal position of missile 1
 HPOMS2            = $d006 ; horizontal position of missile 2
 HPOMS3            = $d007 ; horizontal position of missile 3
+M0PCOL            = $d008 ; missile 0 to player collision
+M1PCOL            = $d009 ; missile 1 to player collision
+M2PCOL            = $d00a ; missile 2 to player collision
+M3PCOL            = $d00b ; missile 3 to player collision
 SIZEM             = $d00c ; missile size
 GRAFM             = $d011 ; missile graphics
 COLPF3            = $d019 ; player 5 color
 GRACTL            = $d01d ; enable/disable pmg
+HITCLR            = $d01e ; hit clear register
 AF1C              = $d200 ; FFFFFFFF ; F=Frequency
 AC1C              = $d201 ; NNNvVVVV ; N=Noise, v=Volume only, V=Volume
 AF2C              = $d202 ; FFFFFFFF ; F=Frequency

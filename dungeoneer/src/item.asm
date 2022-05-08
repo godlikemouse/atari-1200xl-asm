@@ -416,6 +416,16 @@ done
 	tile_is_death()
 	cmp #1
 	bne done
+	player_died()
+
+done
+	rts
+.endp
+
+;
+; player died
+;
+.proc player_died
 	mwx #death_sfx SFX1_ADDR
 	mvx #1 SFX1
 
