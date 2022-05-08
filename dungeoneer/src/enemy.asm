@@ -2,6 +2,52 @@
 ;   handles enemy functinoality (player 5 - missile)
 
 ;
+; draw enemy
+;	combining 4 missiles into player 5
+.proc draw_enemy
+.var _limit .byte
+missle = PMG + $180
+
+	; load animation offset and set limit
+	ldx ENEMANIM_OFFSET
+	txa
+	add #8
+	sta _limit
+
+	ldy ENEMY_POSY
+loop
+	mva enemy_data,x missle,y
+	iny
+	inx
+
+	; verify offset limit
+	txa
+	cmp _limit
+	bne loop
+	rts
+.endp
+
+;
+; animate enemy
+;
+.proc animate_enemy
+
+	adb ENEMY_SPRITE #1
+	cmp #5
+    bne done
+
+    mvx #0 ENEMY_SPRITE
+    draw_enemy()
+    adb ENEMANIM_OFFSET #$08
+    cmp #$10
+    bne done
+    mvx #0 ENEMANIM_OFFSET
+
+done
+    rts
+.endp
+
+;
 ; render enemy
 ;
 .proc render_enemy
@@ -44,6 +90,7 @@ move
 	cmp #1
 	beq reset
 
+    animate_enemy()
 	adb ENEMY_POSX ENEMY_DIR_X
 	adb ENEMY_POSY ENEMY_DIR_Y
 

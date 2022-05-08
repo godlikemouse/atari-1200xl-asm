@@ -17,7 +17,6 @@
 ; PMG Memory Map:
 ; https://www.atariarchives.org/mapping/appendix7.php
 
-; TODO: add spider animation
 ; TODO: add adjustable enemy movement speed
 ; TODO: increase spider speed on end game
 ; TODO: implement joystick nw 10, sw 9, ne 6, se 5

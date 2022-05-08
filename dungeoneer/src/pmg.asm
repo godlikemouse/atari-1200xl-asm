@@ -145,23 +145,6 @@ loop
 .endp
 
 ;
-; draw enemy
-;
-.proc draw_enemy
-missle = PMG + $180
-
-	ldy ENEMY_POSY
-	ldx #0
-loop
-	mva enemy_data,x missle,y
-	iny
-	inx
-	cpx #8
-	bne loop
-	rts
-.endp
-
-;
 ; setup pmg
 ;
 .proc setup_pmg

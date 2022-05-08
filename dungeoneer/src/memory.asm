@@ -89,6 +89,8 @@ ENEMY_POSY        = $0122 ; enemy position y
 ENEMY_DIR_X       = $0123 ; enmey direction x
 ENEMY_DIR_Y       = $0124 ; enemy direction y
 ENEMY_MOVE_INDEX  = $0125 ; enemy move index
+ENEMY_SPRITE      = $0126 ; the enemy sprite index
+ENEMANIM_OFFSET   = $0127 ; the ebemy animation offset
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution
