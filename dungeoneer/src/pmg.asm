@@ -299,6 +299,7 @@ draw
 	stx PLAYER_SCORE
 	stx ITEMS
 	stx WIN_COUNT
+	stx LIFE_GAIN
 	mvx #3 PLAYER_LIVES
 	mvx #4 ENEMY_SPEED_RES
 	level1()
@@ -317,6 +318,7 @@ draw
 	setup_tileset()
 	setup_pmg()
 	display_screen_items()
+	display_win_count()
 	display_player_score()
 	display_player_lives()
 	enable_tilesprite_animation()

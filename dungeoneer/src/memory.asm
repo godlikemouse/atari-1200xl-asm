@@ -95,6 +95,8 @@ ENEMANIM_OFFSET   = $0127 ; the enemy animation offset
 ENEMY_SPEED_RES   = $0128 ; the enemy movement speed resistance
 MENU_BTN_COUNT    = $0129 ; the menu button counter
 WIN_COUNT         = $012a ; the game win counter
+LIFE_GAIN         = $012b ; life gain counter
+EXCLUSIVE_SFX     = $012c ; exclusive sfx flag
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution
@@ -115,7 +117,7 @@ PCOLR4            = $02c4 ; color for player-missile 4
 CHBAS             = $02f4 ; character base register
 GAME_SCREEN       = $4000 ; game screen buffer
 ITEM_SCREEN       = $41e0 ; item screen buffer
-MENU_SCREEN       = $41fc ; game over / main menu screen address
+MENU_SCREEN       = $4208 ; game over / main menu screen address
 PMG               = $4400 ; player missile graphics buffer
 GAME_TILESET1     = $5000 ; tileset1 sprite address
 GAME_TILESET2     = $5400 ; tileset2 sprite address

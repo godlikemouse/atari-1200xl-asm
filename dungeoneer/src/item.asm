@@ -8,7 +8,6 @@
 	clear_screen_items()
 	; key 1
 	display_screen_key #1, #$20, #$0 ; ITEMS (.......K)
-	display_win_count()
 	rts
 .endp
 
@@ -21,14 +20,29 @@
 	ldy #0
 loop
 	sta ITEM_SCREEN,y+
-	cpy #8
+	cpy #2
+	bne loop
+	rts
+.endp
+
+;
+; clear player lives
+;
+.proc clear_player_lives
+	ldx #$27
+	ldy #6
+	lda #0
+loop
+	sta ITEM_SCREEN, x-
+	sta ITEM_SCREEN, x-
+	dey
 	bne loop
 	rts
 .endp
 
 ;
 ; display player lives
-;
+;	displays player lives
 .proc display_player_lives
 	clear_player_lives()
 
@@ -67,21 +81,6 @@ loop
 	bne loop
 
 done
-	rts
-.endp
-
-;
-; clear player lives
-;
-.proc clear_player_lives
-	ldx #$27
-	ldy #6
-	lda #0
-loop
-	sta ITEM_SCREEN, x-
-	sta ITEM_SCREEN, x-
-	dey
-	bne loop
 	rts
 .endp
 
@@ -172,6 +171,7 @@ loop
 	bne loop
 
 	display_player_score()
+	check_extra_life()
 	rts
 
 ; add lower nibble with overflow
@@ -474,6 +474,48 @@ done
 
 replace_key
 	mvx #1 RESTORE_KEY
+
+done
+	rts
+.endp
+
+;
+; check extra life
+;	checks score and life gain to add extra lives
+.proc check_extra_life
+	ldx PLAYER_SCORE+1
+	ldy LIFE_GAIN
+
+life_400
+	; life at 400
+	cpy #0
+	bne life_800
+	cpx #4
+	bcc done
+	jmp gain_life
+
+life_800
+	; life at 800
+	cpy #1
+	bne life_1600
+	cpx #8
+	bcc done
+	jmp gain_life
+
+life_1600
+	; life at 1600
+	cpy #2
+	bne done
+	cpx #16
+	bcc done
+	jmp gain_life
+
+gain_life
+	inc PLAYER_LIVES
+	inc LIFE_GAIN
+	play_gain_life_sound()
+	display_player_lives()
+	rts
 
 done
 	rts

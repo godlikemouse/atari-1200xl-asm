@@ -130,18 +130,6 @@ continue
 .endp
 
 ;
-; tile is empty
-;
-.proc tile_is_empty
-	lda ONTILE
-	cmp #0
-	bne done
-	mvx #1+16 GRPRIOR
-done
-	rts
-.endp
-
-;
 ; tile is block
 ;   if true, acc == 1, else acc == 0
 .proc tile_is_block
@@ -256,7 +244,6 @@ done
 	between #$34, ONTILE, #$36
 	cmp #1
 	bne done
-	mvx #8+16 GRPRIOR
 done
 	rts
 .endp
@@ -267,8 +254,21 @@ done
 .proc tile_is_wall_pasthrough
 	between #$32, ONTILE, #$34
 	cmp #1
-	bne done
+	beq below
+
+	tile_is_proxy()
+	cmp #1
+	beq below
+	bne above
+
+below
 	mvx #8+16 GRPRIOR
+	jmp done
+
+above
+	mvx #1+16 GRPRIOR
+	jmp done
+
 done
 	rts
 .endp

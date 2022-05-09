@@ -18,6 +18,7 @@
 ; https://www.atariarchives.org/mapping/appendix7.php
 
 ; TODO: add extra life gain
+; TODO: fix attract screensaver
 
 	org $0600
 
