@@ -301,7 +301,7 @@ draw
 	stx WIN_COUNT
 	mvx #3 PLAYER_LIVES
 	mvx #4 ENEMY_SPEED_RES
-	congratulations()
+	level1()
 	rts
 .endp
 
