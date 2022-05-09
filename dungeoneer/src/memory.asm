@@ -93,6 +93,7 @@ ENEMY_MOVE_INDEX  = $0125 ; enemy move index
 ENEMY_SPRITE      = $0126 ; the enemy sprite index
 ENEMANIM_OFFSET   = $0127 ; the enemy animation offset
 ENEMY_SPEED_RES   = $0128 ; the enemy movement speed resistance
+MENU_BTN_COUNT    = $0129 ; the menu button counter
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution

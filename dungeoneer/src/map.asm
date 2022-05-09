@@ -11,6 +11,15 @@
 .endp
 
 ;
+; display how to play map
+;
+.proc display_howtoplay_map
+	enable_tilesprite_animation()
+	render_map #<howtoplay.map, #>howtoplay.map, #<MENU_SCREEN, #>MENU_SCREEN
+	rts
+.endp
+
+;
 ; display game intro map
 ;
 .proc display_game_intro_map

@@ -224,10 +224,15 @@ done
 UP=$0e
 DOWN=$0d
 NONE=$0f
+delay=30
 
 	ldx DISPLAY_TYPE
 	cpx #0
 	bne done
+
+	ldx MENU_BTN_COUNT
+	cpx #0
+	bne delay_button
 
 	ldx BTN0
 	cpx #0
@@ -245,6 +250,10 @@ NONE=$0f
 
 move_up
 	ldx MENU_SELECTION
+	; skip on how to screen
+	cpx #2
+	beq done
+
 	cpx #1
 	bne up_skip_sound
 	play_mainmenu_item_sound()
@@ -254,6 +263,10 @@ up_skip_sound
 
 move_down
 	ldx MENU_SELECTION
+	; skip on how to screen
+	cpx #2
+	beq done
+
 	cpx #0
 	bne down_skip_sound
 	play_mainmenu_item_sound()
@@ -263,13 +276,35 @@ down_skip_sound
 
 button_pressed
 	ldx MENU_SELECTION
+
 	cpx #0
-	beq start_new_game
+	beq selection_newgame
+
+	cpx #1
+	beq selection_howtoplay
+
+	cpx #2
+	beq selection_mainmenu
+
 	jmp done
 
-start_new_game
-	new_game()
+selection_howtoplay
+	display_howtoplay()
+	mvx #delay MENU_BTN_COUNT
 	jmp done
+
+selection_newgame
+	new_game()
+	mvx #delay MENU_BTN_COUNT
+	jmp done
+
+selection_mainmenu
+	display_mainmenu()
+	mvx #delay MENU_BTN_COUNT
+	jmp done
+
+delay_button
+	dec MENU_BTN_COUNT
 
 done
 	rts

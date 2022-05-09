@@ -53,3 +53,29 @@ dlist
 	.byte JVB
 	.word dlist
 .endp
+
+;
+; setup game over / menu screen
+;
+.proc setup_mainmenu_screen
+BLANK8=$70 ; 8 blank lines
+LMS=$40 ; load memory scan (LMS)
+JVB=$41 ; jump vertical blank (JVB)
+DLI=$80 ; display list interrupt
+ANTIC5=5 ; ANTIC mode 5
+ANTIC2=2 ; ANTIC mode 2
+
+	mwx #dlist SDLSTL ; move word takes care of high/low byte assignments
+	rts
+
+; display list
+dlist
+	.byte BLANK8, BLANK8, BLANK8
+	.byte ANTIC5 + LMS
+	.word MENU_SCREEN
+	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
+	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
+	.byte DLI + ANTIC2
+	.byte JVB
+	.word dlist
+.endp

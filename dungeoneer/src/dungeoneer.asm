@@ -18,8 +18,6 @@
 ; https://www.atariarchives.org/mapping/appendix7.php
 
 ; TODO: add extra life gain
-; TODO: add how to play
-; TODO: add credit screen
 
 	org $0600
 
@@ -59,6 +57,7 @@ main
 	icl "data/sound.asm"
 	icl "display/gameover.asm"
 	icl "display/mainmenu.asm"
+	icl "display/howtoplay.asm"
 	icl "display/level1.asm"
 	icl "display/level2.asm"
 	icl "display/level3.asm"

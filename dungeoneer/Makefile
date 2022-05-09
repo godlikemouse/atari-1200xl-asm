@@ -23,6 +23,7 @@ generate_tiles:
 
 generate_maps:
 	./art/tiled/tiled-import.py --source=./art/tiled/mainmenu.map.csv --dest=./src/display/mainmenu.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/howtoplay.map.csv --dest=./src/display/howtoplay.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/gameover.map.csv --dest=./src/display/gameover.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level1_map.intro.csv --dest=./src/display/level1.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level1_map.map.csv --dest=./src/display/level1.asm

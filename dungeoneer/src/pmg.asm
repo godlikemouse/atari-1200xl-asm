@@ -248,12 +248,28 @@ draw
 	mvx #1 AUDCTL ;N1234HHS
 	play_background_music()
 	setup_pmg()
-	setup_menu_screen()
+	setup_mainmenu_screen()
 	setup_menu_tileset()
 	display_mainmenu_map()
 	mvx #3 GRACTL
 	mvx #0 DISPLAY_TYPE
 	mvx #0 MENU_SELECTION
+	mvx #$0 PLAYANIM_OFFSET
+	rts
+.endp
+
+;
+; how to play
+;	displays the how to play screen
+.proc display_howtoplay
+	stop_background_music()
+	setup_pmg()
+	setup_menu_screen()
+	setup_menu_tileset()
+	display_howtoplay_map()
+	mvx #3 GRACTL
+	mvx #0 DISPLAY_TYPE
+	mvx #2 MENU_SELECTION
 	mvx #$0 PLAYANIM_OFFSET
 	rts
 .endp
@@ -332,8 +348,8 @@ draw
 ; render main menu
 ;	handles selection / animation of main menu
 .proc render_mainmenu
-play_item=MENU_SCREEN + 160 + 16
-exit_item=MENU_SCREEN + 240 + 16
+new_game_item=MENU_SCREEN + 160 + 14
+how_to_play_item=MENU_SCREEN + 240 + 14
 
 	ldx DISPLAY_TYPE
 	cpx #0
@@ -341,16 +357,30 @@ exit_item=MENU_SCREEN + 240 + 16
 
 	ldx MENU_SELECTION
 	cpx #0
-	bne select_exit
-	highlight_menu_item #<play_item, #>play_item
-	restore_menu_item #<exit_item, #>exit_item
+	beq selection_newgame
+
+	cpx #1
+	beq selection_howtoplay
+
+	cpx #2
+	beq selection_mainmenu
+
+	jmp done
+
+selection_newgame
+	highlight_menu_item #<new_game_item, #>new_game_item
+	restore_menu_item #<how_to_play_item, #>how_to_play_item
 	mvx #48 POSY
 	jmp done
 
-select_exit
-	highlight_menu_item #<exit_item, #>exit_item
-	restore_menu_item #<play_item, #>play_item
+selection_howtoplay
+	highlight_menu_item #<how_to_play_item, #>how_to_play_item
+	restore_menu_item #<new_game_item, #>new_game_item
 	mvx #64 POSY
+	jmp done
+
+selection_mainmenu
+	mvx #104 POSY
 
 done
 	mvx #90 POSX
@@ -487,7 +517,7 @@ less_than
 
 continue
 	iny
-	cpy #8
+	cpy #22
 	bne loop
 	rts
 .endp
@@ -511,7 +541,7 @@ greater_than
 
 continue
 	iny
-	cpy #8
+	cpy #22
 	bne loop
 	rts
 .endp
