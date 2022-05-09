@@ -32,7 +32,7 @@ wingame_music
     .byte 162,%10100010,10,10
     .byte 144,%10100010,10,10
     .byte 128,%10100010,20,30
-    .byte 1,%10100010,20,45
+    .byte 1,%10100010,20,49
     .byte 0
 
 background_music
