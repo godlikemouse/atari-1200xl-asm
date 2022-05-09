@@ -48,6 +48,16 @@ done
 .endp
 
 ;
+; reset enemy
+; 	resets enemy chosen direction
+.proc reset_enemy
+	ldx #0
+	stx ENEMY_DIR_X
+	stx ENEMY_DIR_Y
+	rts
+.endp
+
+;
 ; render enemy
 ;
 .proc render_enemy
@@ -77,7 +87,7 @@ setup
 	jmp direction_chosen
 
 init
-	draw_player()
+	draw_enemy()
 	jmp setup
 
 hide_enemy
@@ -90,6 +100,13 @@ hide_enemy
 
 direction_chosen
 	; wait until enemy speed resistance has elapsed
+
+	; quick zero check first
+	ldx ENEMY_SPEED_RES
+	cpx #0
+	beq move
+
+	; normal check
 	inc ENEMY_MOVE_INDEX
 	lda ENEMY_MOVE_INDEX
 	cmp ENEMY_SPEED_RES

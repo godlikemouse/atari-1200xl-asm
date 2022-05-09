@@ -322,6 +322,7 @@ draw
 	enable_tilesprite_animation()
 	display_game_map()
 	reset_player()
+	reset_enemy()
 	draw_player()
 	store_tilex()
 	store_tiley()

@@ -18,8 +18,6 @@
 ; https://www.atariarchives.org/mapping/appendix7.php
 
 ; TODO: add extra life gain
-; TODO: fix spider invisible on win game issue
-; TODO: fix spider slow after fourth win issue
 
 	org $0600
 
