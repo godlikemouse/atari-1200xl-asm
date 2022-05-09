@@ -6,22 +6,15 @@
 ;   sets up the player transition position
 .proc setup_player_trans
 
-    ; find opposite transition tile
-    ldx LEVEL_TRANS_TYPE
-    cpx #3
-    beq north
-    cpx #4
-    beq east
-    cpx #5
-    beq south
-    cpx #6
-    beq west
+    jmp direction
 
     ; locate trans position
 north
     ldx LEVEL_TRANS_X
     stx POSX
     stx PLAYER_RESET_POSX
+    ; search from mid line
+    adb POSX #4
     posx_to_tilex()
     sta TILEX
     find_tiley TILEX, #$5d
@@ -36,6 +29,8 @@ east
     ldx LEVEL_TRANS_Y
     stx POSY
     stx PLAYER_RESET_POSY
+    ; search from mid line
+    adb POSY #4
     posy_to_tiley()
     sta TILEY
     find_tilex TILEY, #$5f
@@ -46,10 +41,25 @@ east
     sta PLAYER_RESET_POSX
     jmp done
 
+direction
+    ; find opposite transition tile
+    ldx LEVEL_TRANS_TYPE
+    cpx #3
+    beq north
+    cpx #4
+    beq east
+    cpx #5
+    beq south
+    cpx #6
+    beq west
+    jmp done
+
 south
     ldx LEVEL_TRANS_X
     stx POSX
     stx PLAYER_RESET_POSX
+    ; search from mid line
+    adb POSX #4
     posx_to_tilex()
     sta TILEX
     find_tiley TILEX, #$5c
@@ -64,6 +74,8 @@ west
     ldx LEVEL_TRANS_Y
     stx POSY
     stx PLAYER_RESET_POSY
+    ; search from mid line
+    adb POSY #4
     posy_to_tiley()
     sta TILEY
     find_tilex TILEY, #$5e
@@ -82,38 +94,26 @@ done
 ;   checks for transition interactions
 .proc check_transition
 
-    ; top right
-    peek_position #7, #1
-    tile_is_transition_n()
-    cpx #1
-    beq transition_n
+    ; east
+    peek_position #7, #4
     tile_is_transition_e()
 	cpx #1
 	beq transition_e
 
-    ; top left
-    peek_position #0, #0
-    tile_is_transition_n()
-    cpx #1
-    beq transition_n
+    ;west
+    peek_position #0, #4
     tile_is_transition_w()
 	cpx #1
 	beq transition_w
 
-    ; bottom right
-	peek_position #7, #7
-	tile_is_transition_s()
+    ; north
+    peek_position #4, #0
+    tile_is_transition_n()
 	cpx #1
-	beq transition_s
-    tile_is_transition_e()
-	cpx #1
-	beq transition_e
+	beq transition_n
 
-    ; bottom left
-	peek_position #0, #7
-	tile_is_transition_w()
-	cpx #1
-	beq transition_w
+    ; south
+    peek_position #4, #7
     tile_is_transition_s()
 	cpx #1
 	beq transition_s
