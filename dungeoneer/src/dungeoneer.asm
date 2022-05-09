@@ -18,6 +18,10 @@
 ; https://www.atariarchives.org/mapping/appendix7.php
 
 ; TODO: add extra life gain
+; TODO: fix spider invisible on win game issue
+; TODO: fix spider slow after fourth win issue
+; TODO: add pass behind for secret walls
+; TODO: fix win sound timing
 
 	org $0600
 
