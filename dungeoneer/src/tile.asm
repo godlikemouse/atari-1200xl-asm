@@ -261,6 +261,9 @@ done
 	rts
 .endp
 
+;
+; tile is wall passthrough
+;
 .proc tile_is_wall_pasthrough
 	between #$32, ONTILE, #$34
 	cmp #1
