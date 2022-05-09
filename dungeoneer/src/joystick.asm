@@ -29,6 +29,7 @@
 
 	; move player
 	dec POSX
+	tile_is_wall_pasthrough()
 	tile_is_empty()
 
 block
@@ -63,6 +64,7 @@ block
 
 	; move player
 	inc POSX
+	tile_is_wall_pasthrough()
 	tile_is_empty()
 
 block
@@ -98,6 +100,7 @@ block
 	; move player
 	dec POSY
 	clear_player_vertical()
+	tile_is_wall_pasthrough()
 	tile_is_empty()
 
 block
@@ -132,6 +135,7 @@ block
 
 	inc POSY
 	clear_player_vertical()
+	tile_is_wall_pasthrough()
 	tile_is_empty()
 
 block

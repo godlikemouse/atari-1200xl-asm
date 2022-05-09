@@ -261,6 +261,15 @@ done
 	rts
 .endp
 
+.proc tile_is_wall_pasthrough
+	between #$32, ONTILE, #$34
+	cmp #1
+	bne done
+	mvx #8+16 GRPRIOR
+done
+	rts
+.endp
+
 ;
 ; tile is transition north
 ;	if true, x ==1, else x == 0
