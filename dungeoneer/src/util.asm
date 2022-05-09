@@ -112,6 +112,10 @@ verify
     bne loop
     lda #-1
 
+    ; fallback try one row down
+    inc _tiley
+    find_tilex _tiley, _find_tile
+
 done
     rts
 .endp
