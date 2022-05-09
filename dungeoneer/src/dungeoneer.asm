@@ -17,12 +17,9 @@
 ; PMG Memory Map:
 ; https://www.atariarchives.org/mapping/appendix7.php
 
-; TODO: fix attract screensaver
-
 	org $0600
 
 	; main setup
-	mvx #0 ATTRACT
 	setup_colors()
 	enable_interrupts()
 	display_mainmenu()
@@ -34,6 +31,7 @@ main
 	restore_key_state()
     restore_coin_state()
 	check_enemy_player_collision()
+	mvx #0 ATTRACT
 	jmp main
 
 	icl "memory.asm"
