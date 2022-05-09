@@ -176,6 +176,14 @@
     mvx #0 ITEMS
     mvx #0 LEVEL_HAS_KEY
 
+    ldx WIN_COUNT
+    cpx #4
+    bne increment_win
+    jmp speed
+increment_win
+    inc WIN_COUNT
+
+speed
     ldx ENEMY_SPEED_RES
     cpx #0
     bne increase_speed
