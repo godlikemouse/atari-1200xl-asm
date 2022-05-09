@@ -280,7 +280,6 @@ draw
 .proc display_game_intro
 	stop_background_music()
 	mvx #$00 AUDCTL
-	mwx #intro_music BGM_ADDR
 	play_background_music()
 	setup_menu_screen()
 	setup_menu_tileset()
@@ -302,7 +301,7 @@ draw
 	stx WIN_COUNT
 	mvx #3 PLAYER_LIVES
 	mvx #4 ENEMY_SPEED_RES
-	level1()
+	congratulations()
 	rts
 .endp
 

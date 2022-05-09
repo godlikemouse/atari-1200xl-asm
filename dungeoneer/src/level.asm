@@ -6,8 +6,8 @@
 ;   handles level 1 loading
 .proc level1
     mwx #level1_map.intro LEVEL_INTRO
+    mwx #intro_music BGM_ADDR
     mwx #level1_map.map LEVEL_MAP
-    mwx #background_music BGM_ADDR
     mvx #0 ITEMS
     mvx #1 LEVEL_HAS_KEY
 
@@ -20,8 +20,8 @@
 ;   handles level 2 loading
 .proc level2
     mwx #level2_map.intro LEVEL_INTRO
+    mwx #intro_music BGM_ADDR
     mwx #level2_map.map LEVEL_MAP
-    mwx #background_music BGM_ADDR
     mvx #0 ITEMS
     mvx #1 LEVEL_HAS_KEY
 
@@ -34,8 +34,8 @@
 ;   handles level 3 loading
 .proc level3
     mwx #level3_map.intro LEVEL_INTRO
+    mwx #intro_music BGM_ADDR
     mwx #level3_map.map LEVEL_MAP
-    mwx #background_music BGM_ADDR
     mvx #1 LEVEL_HAS_KEY
     mvx #0 ITEMS
     reset_coin_state #<level3_map.maps1 #>level3_map.maps1
@@ -72,8 +72,8 @@
 ;   handles level 4 loading
 .proc level4
     mwx #level4_map.intro LEVEL_INTRO
+    mwx #intro_music BGM_ADDR
     mwx #level4_map.map LEVEL_MAP
-    mwx #background_music BGM_ADDR
     mvx #0 ITEMS
     mvx #0 LEVEL_HAS_KEY
 
@@ -86,8 +86,8 @@
 ;   handles level 5 loading
 .proc level5
     mwx #level5_map.intro LEVEL_INTRO
+    mwx #intro_music BGM_ADDR
     mwx #level5_map.map LEVEL_MAP
-    mwx #background_music BGM_ADDR
     mvx #0 ITEMS
     mvx #0 LEVEL_HAS_KEY
 
@@ -172,6 +172,7 @@
 ;   handles congratulations level loading
 .proc congratulations
     mwx #congratulations_map.intro LEVEL_INTRO
+    mwx #wingame_music BGM_ADDR
     mvx #0 LEVEL_MAP
     mvx #0 ITEMS
     mvx #0 LEVEL_HAS_KEY
