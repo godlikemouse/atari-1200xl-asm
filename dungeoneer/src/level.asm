@@ -1,6 +1,8 @@
 ; level.asm
 ;   level handling
 
+    org $2000
+
 ;
 ; level 1
 ;   handles level 1 loading

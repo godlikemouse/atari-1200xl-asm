@@ -81,17 +81,11 @@ CHANNEL=FREQCTRL+1
 ; play key pickup sound
 ;
 .proc play_key_sound
-	ldx EXCLUSIVE_SFX
-	cpx #1
-	beq done
-
 	ldx #0
 	stx SFX1_COUNTER
 	stx SFX1_DATA_INDEX
 	mwx #key_pickup_sfx SFX1_ADDR
 	mvx #1 SFX1
-
-done
 	rts
 .endp
 
@@ -99,17 +93,11 @@ done
 ; play chest pickup sound
 ;
 .proc play_chest_sound
-	ldx EXCLUSIVE_SFX
-	cpx #1
-	beq done
-
 	ldx #0
 	stx SFX1_COUNTER
 	stx SFX1_DATA_INDEX
 	mwx #chest_pickup_sfx SFX1_ADDR
 	mvx #1 SFX1
-
-done
 	rts
 .endp
 
@@ -117,17 +105,11 @@ done
 ; play chest pickup sound
 ;
 .proc play_coin_sound
-	ldx EXCLUSIVE_SFX
-	cpx #1
-	beq done
-
 	ldx #0
 	stx SFX1_COUNTER
 	stx SFX1_DATA_INDEX
 	mwx #coin_pickup_sfx SFX1_ADDR
 	mvx #1 SFX1
-
-done
 	rts
 .endp
 
@@ -148,10 +130,10 @@ done
 ;
 .proc play_exit_level_sound
 	ldx #0
-	stx SFX1_COUNTER
-	stx SFX1_DATA_INDEX
-	mwx #exit_level_sfx SFX1_ADDR
-	mvx #1 SFX1
+	stx SFX2_COUNTER
+	stx SFX2_DATA_INDEX
+	mwx #exit_level_sfx SFX2_ADDR
+	mvx #1 SFX2
 	rts
 .endp
 
@@ -184,11 +166,10 @@ done
 ;
 .proc play_gain_life_sound
 	ldx #0
-	stx SFX1_COUNTER
-	stx SFX1_DATA_INDEX
-	mwx #gain_life_sfx SFX1_ADDR
-	mvx #1 SFX1
-	mvx #1 EXCLUSIVE_SFX
+	stx SFX2_COUNTER
+	stx SFX2_DATA_INDEX
+	mwx #gain_life_sfx SFX2_ADDR
+	mvx #1 SFX2
 	rts
 .endp
 
@@ -327,7 +308,6 @@ complete
 	mva #0 (COUNTER),y
 	mva #0 (INDEX),y
 	mva #0 (SFX),y
-	mvx #0 EXCLUSIVE_SFX
 
 done
 	rts

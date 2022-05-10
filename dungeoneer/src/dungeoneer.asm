@@ -36,7 +36,6 @@ main
 
 	icl "memory.asm"
 	icl "dlist.asm"
-	org $2000
 	icl "level.asm"
 	icl "pmg.asm"
 	icl "enemy.asm"
