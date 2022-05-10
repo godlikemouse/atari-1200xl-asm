@@ -415,6 +415,10 @@ loop
 
 	play_door_open_sound()
 
+	; remove key from inventory
+	mvx #0 ITEMS
+	display_screen_items()
+
 	rts
 .endp
 
