@@ -12,6 +12,7 @@ green=$c4
 brown=$24
 peach=$3c
 blue=$80
+dark_brown=$f2
 
 	; character set colors
 	mvx #gray COLOR0        ; %01
@@ -22,7 +23,7 @@ blue=$80
 
 	; player-missile colors
 	mvx #blue PCOLR0
-	mvx #brown PCOLR1
+	mvx #dark_brown PCOLR1
 	mvx #peach PCOLR2
 	rts
 .endp
