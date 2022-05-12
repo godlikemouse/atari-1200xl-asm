@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "level1_map.map.tmx",
+    "activeFile": "credits.map.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -18,6 +18,14 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 77.90553306342782,
+                "y": 48.248313090418364
+            }
+        },
+        "credits.map.tmx": {
+            "scale": 6.777439024390243,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 82.03688708951869,
                 "y": 48.248313090418364
             }
         },
@@ -42,11 +50,11 @@
             }
         },
         "howtoplay.map.tmx": {
-            "scale": 8.660060975609754,
+            "scale": 4,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 77.9440239394473,
-                "y": 66.05034324942793
+                "x": 62.75,
+                "y": 14.5
             }
         },
         "level1_map.intro.tmx": {
@@ -61,8 +69,8 @@
             "scale": 7.6328,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 82.27649093386438,
-                "y": 51.09527303217693
+                "x": 81.8834503720784,
+                "y": 48.081962058484436
             }
         },
         "level2_map.intro.tmx": {
@@ -77,7 +85,7 @@
             "scale": 6.534146341463415,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 104.22172452407614,
+                "x": 82.03060843598357,
                 "y": 48.055244494214264
             }
         },
@@ -101,8 +109,8 @@
             "scale": 6.777439024390243,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 82.18443544759336,
-                "y": 48.248313090418364
+                "x": 82.03688708951869,
+                "y": 48.10076473234369
             }
         },
         "level4_map.intro.tmx": {
@@ -117,7 +125,7 @@
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 82.15143120960298,
+                "x": 81.89904586026472,
                 "y": 48.079409048938146
             }
         },
@@ -149,8 +157,8 @@
             "scale": 9.0812,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 81.04655772364886,
-                "y": 59.793859842311576
+                "x": 81.92749856847111,
+                "y": 48.01127604281372
             }
         },
         "level5_map.maps1.tmx": {
@@ -158,7 +166,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 81.99657204966348,
-                "y": 40.998286024831735
+                "y": 48.128422724802476
             }
         },
         "level5_map.maps1e1.tmx": {
@@ -173,8 +181,8 @@
             "scale": 5.6159,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 145.12366673195748,
-                "y": 66.24049573532292
+                "x": 82.08835627415017,
+                "y": 48.07777916273439
             }
         },
         "level5_map.mapw1.tmx": {
@@ -189,8 +197,8 @@
             "scale": 7.9243902439024385,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 77.86088027085258,
-                "y": 76.85133887349954
+                "x": 77.86088027085259,
+                "y": 31.421975992613117
             }
         },
         "menu_tileset.tsx": {
@@ -217,22 +225,23 @@
         "level5_map.maps1.tmx",
         "level3_map.maps1.tmx",
         "level2_map.map.tmx",
-        "level1_map.map.tmx"
+        "level1_map.map.tmx",
+        "credits.map.tmx"
     ],
     "project": "dungeoneer.tiled-project",
     "recentFiles": [
-        "level5_map.mape1.tmx",
-        "level5_map.maps1w1.tmx",
-        "level4_map.map.tmx",
-        "level5_map.mapn1.tmx",
-        "level5_map.maps1.tmx",
-        "level3_map.maps1.tmx",
-        "level1_map.map.tmx",
-        "level3_map.map.tmx",
+        "howtoplay.map.tmx",
         "level2_map.map.tmx",
-        "gameover.map.tmx",
-        "level1_map.intro.tmx",
-        "level2_map.intro.tmx"
+        "level3_map.maps1.tmx",
+        "level5_map.maps1.tmx",
+        "level5_map.mapn1.tmx",
+        "level4_map.map.tmx",
+        "level5_map.maps1w1.tmx",
+        "level5_map.mape1.tmx",
+        "level5_map.intro.tmx",
+        "level5_map.map.tmx",
+        "level5_map.mapw1.tmx",
+        "level1_map.map.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

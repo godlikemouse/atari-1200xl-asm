@@ -55,6 +55,7 @@ main
 	icl "display/gameover.asm"
 	icl "display/mainmenu.asm"
 	icl "display/howtoplay.asm"
+	icl "display/credits.asm"
 	icl "display/level1.asm"
 	icl "display/level2.asm"
 	icl "display/level3.asm"

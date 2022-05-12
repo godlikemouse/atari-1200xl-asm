@@ -19,7 +19,7 @@ ANTIC5=$05 ; ANTIC mode 5
 dlist
 	.byte BLANK8, BLANK8, BLANK7
 	.byte DLI + LMS + ANTIC5
-	.word item_screen
+	.word ITEM_SCREEN
 	.byte DLI + LMS + ANTIC5
 	.word GAME_SCREEN
 	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
@@ -63,7 +63,6 @@ LMS=$40 ; load memory scan (LMS)
 JVB=$41 ; jump vertical blank (JVB)
 DLI=$80 ; display list interrupt
 ANTIC5=5 ; ANTIC mode 5
-ANTIC2=2 ; ANTIC mode 2
 
 	mwx #dlist SDLSTL ; move word takes care of high/low byte assignments
 	rts
@@ -75,7 +74,7 @@ dlist
 	.word MENU_SCREEN
 	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
 	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
-	.byte DLI + ANTIC2
+	.byte DLI + ANTIC5
 	.byte JVB
 	.word dlist
 .endp

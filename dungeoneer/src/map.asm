@@ -20,6 +20,15 @@
 .endp
 
 ;
+; display credits map
+;
+.proc display_credits_map
+	enable_tilesprite_animation()
+	render_map #<credits.map, #>credits.map, #<MENU_SCREEN, #>MENU_SCREEN
+	rts
+.endp
+
+;
 ; display game intro map
 ;
 .proc display_game_intro_map

@@ -7,7 +7,6 @@ TILEPTR           = $00c0 ; the tile pointer
 TILESET_ADDRESS   = $00c2 ; the animating tileset address
 ITEMS             = $00c4 ; the picked up player items (XXXXKKKK)
 PLAYER_SCORE      = $00c5 ; player score
-MENU_SELECTION    = $00c6 ; selected menu item
 DISPLAY_TYPE      = $00c7 ; screen display type
 INTRO_POSITION    = $00c8 ; intro screen player x position
 GAMEOVER_POSITION = $00c9 ; game over position
@@ -96,6 +95,8 @@ PLAYER_RESET_POSX = $0137 ; the player reset posx
 PLAYER_RESET_POSY = $0138 ; the player reset posy
 PLAYER_LIVES      = $0139 ; the player lives
 DISABLE_JOYSTICK  = $013a ; disable joystick flag
+PREV_MENU_SELECT  = $013b ; previous menu selection
+MENU_SELECTION    = $013c ; selected menu item
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution

@@ -252,9 +252,11 @@ draw
 	setup_menu_tileset()
 	display_mainmenu_map()
 	mvx #3 GRACTL
-	mvx #0 DISPLAY_TYPE
-	mvx #0 MENU_SELECTION
-	mvx #$0 PLAYANIM_OFFSET
+	ldx #0
+	stx DISPLAY_TYPE
+	stx MENU_SELECTION
+	stx PLAYANIM_OFFSET
+	mvx #-1 PREV_MENU_SELECT
 	rts
 .endp
 
@@ -269,7 +271,23 @@ draw
 	display_howtoplay_map()
 	mvx #3 GRACTL
 	mvx #0 DISPLAY_TYPE
-	mvx #2 MENU_SELECTION
+	mvx #3 MENU_SELECTION
+	mvx #$0 PLAYANIM_OFFSET
+	rts
+.endp
+
+;
+; credits
+;	displays the credits screen
+.proc display_credits
+	stop_background_music()
+	setup_pmg()
+	setup_menu_screen()
+	setup_menu_tileset()
+	display_credits_map()
+	mvx #3 GRACTL
+	mvx #0 DISPLAY_TYPE
+	mvx #3 MENU_SELECTION
 	mvx #$0 PLAYANIM_OFFSET
 	rts
 .endp
@@ -354,10 +372,15 @@ draw
 .proc render_mainmenu
 new_game_item=MENU_SCREEN + 160 + 14
 how_to_play_item=MENU_SCREEN + 240 + 14
+credits_item=MENU_SCREEN + 320 + 14
 
 	ldx DISPLAY_TYPE
 	cpx #0
 	bne exit
+
+	restore_menu_item #<new_game_item, #>new_game_item
+	restore_menu_item #<how_to_play_item, #>how_to_play_item
+	restore_menu_item #<credits_item, #>credits_item
 
 	ldx MENU_SELECTION
 	cpx #0
@@ -367,24 +390,12 @@ how_to_play_item=MENU_SCREEN + 240 + 14
 	beq selection_howtoplay
 
 	cpx #2
+	beq selection_credits
+
+	cpx #3
 	beq selection_mainmenu
 
 	jmp done
-
-selection_newgame
-	highlight_menu_item #<new_game_item, #>new_game_item
-	restore_menu_item #<how_to_play_item, #>how_to_play_item
-	mvx #48 POSY
-	jmp done
-
-selection_howtoplay
-	highlight_menu_item #<how_to_play_item, #>how_to_play_item
-	restore_menu_item #<new_game_item, #>new_game_item
-	mvx #64 POSY
-	jmp done
-
-selection_mainmenu
-	mvx #104 POSY
 
 done
 	mvx #90 POSX
@@ -398,6 +409,26 @@ done
 
 exit
 	rts
+
+selection_newgame
+	highlight_menu_item #<new_game_item, #>new_game_item
+	mvx #48 POSY
+	jmp done
+
+selection_howtoplay
+	highlight_menu_item #<how_to_play_item, #>how_to_play_item
+	mvx #64 POSY
+	jmp done
+
+selection_credits
+	highlight_menu_item #<credits_item, #>credits_item
+	mvx #80 POSY
+	jmp done
+
+selection_mainmenu
+	mvx #104 POSY
+	jmp done
+
 .endp
 
 ;

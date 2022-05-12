@@ -142,11 +142,11 @@ block
 ; read game joystick
 ;	handle player movement
 .proc read_game_joystick
-UP=$0e
-DOWN=$0d
-LEFT=$0b
-RIGHT=$07
-NONE=$0f
+_up=$0e
+_down=$0d
+_left=$0b
+_right=$07
+_none=$0f
 
 	ldx DISABLE_JOYSTICK
 	cpx #1
@@ -161,15 +161,15 @@ NONE=$0f
 	beq done
 
 	ldx STICK0
-	cpx #NONE
+	cpx #_none
 	beq move_none
-	cpx #LEFT
+	cpx #_left
 	beq move_left
-	cpx #RIGHT
+	cpx #_right
 	beq move_right
-	cpx #UP
+	cpx #_up
 	beq move_up
-	cpx #DOWN
+	cpx #_down
 	beq move_down
 	rts
 
@@ -221,10 +221,12 @@ done
 ; read main menu joystick
 ;	handle menu selection
 .proc read_mainmenu_joystick
-UP=$0e
-DOWN=$0d
-NONE=$0f
-delay=30
+_up=$0e
+_down=$0d
+_none=$0f
+_delay=15
+_min=0
+_max=2
 
 	ldx DISPLAY_TYPE
 	cpx #0
@@ -239,39 +241,60 @@ delay=30
 	beq button_pressed
 
 	ldx STICK0
-	cpx #NONE
+	cpx #_none
 	beq done
-	cpx #UP
+	cpx #_up
 	beq move_up
-	cpx #DOWN
+	cpx #_down
 	beq move_down
 
 	jmp done
 
+done
+	rts
+
 move_up
 	ldx MENU_SELECTION
-	; skip on how to screen
-	cpx #2
+
+	; wrap check
+	cpx #_min
 	beq done
 
-	cpx #1
-	bne up_skip_sound
+	; skip on how to/credit screen
+	cpx #3
+	beq done
+
+	cpx PREV_MENU_SELECT
+	beq up_skip_sound
 	play_mainmenu_item_sound()
 up_skip_sound
-	mvx #0 MENU_SELECTION
+	mvx MENU_SELECTION PREV_MENU_SELECT
+	dec MENU_SELECTION
+	mvx #_delay MENU_BTN_COUNT
 	jmp done
 
 move_down
 	ldx MENU_SELECTION
-	; skip on how to screen
-	cpx #2
+
+	; wrap check
+	cpx #_max
 	beq done
 
-	cpx #0
-	bne down_skip_sound
+	; skip on how to screen
+	cpx #3
+	beq done
+
+	cpx PREV_MENU_SELECT
+	beq down_skip_sound
 	play_mainmenu_item_sound()
 down_skip_sound
-	mvx #1 MENU_SELECTION
+	mvx MENU_SELECTION PREV_MENU_SELECT
+	inc MENU_SELECTION
+	mvx #_delay MENU_BTN_COUNT
+	jmp done
+
+delay_button
+	dec MENU_BTN_COUNT
 	jmp done
 
 button_pressed
@@ -284,30 +307,33 @@ button_pressed
 	beq selection_howtoplay
 
 	cpx #2
+	beq selection_credits
+
+	cpx #3
 	beq selection_mainmenu
 
 	jmp done
 
 selection_howtoplay
 	display_howtoplay()
-	mvx #delay MENU_BTN_COUNT
+	mvx #_delay MENU_BTN_COUNT
 	jmp done
 
 selection_newgame
 	new_game()
-	mvx #delay MENU_BTN_COUNT
+	mvx #_delay MENU_BTN_COUNT
 	jmp done
 
 selection_mainmenu
 	display_mainmenu()
-	mvx #delay MENU_BTN_COUNT
+	mvx #_delay MENU_BTN_COUNT
 	jmp done
 
-delay_button
-	dec MENU_BTN_COUNT
+selection_credits
+	display_credits()
+	mvx #_delay MENU_BTN_COUNT
+	jmp done
 
-done
-	rts
 .endp
 
 ;
