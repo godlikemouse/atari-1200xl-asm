@@ -46,6 +46,11 @@ generate_maps:
 	./art/tiled/tiled-import.py --source=./art/tiled/level6_map.map.csv --dest=./src/display/level6.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level6_map.mapn1.csv --dest=./src/display/level6.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/level6_map.maps1.csv --dest=./src/display/level6.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level6_map.maps1w1.csv --dest=./src/display/level6.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level6_map.maps1e1.csv --dest=./src/display/level6.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level6_map.maps1e1s2.csv --dest=./src/display/level6.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level6_map.maps1w1s2.csv --dest=./src/display/level6.asm
+	./art/tiled/tiled-import.py --source=./art/tiled/level6_map.maps1s2.csv --dest=./src/display/level6.asm
 	./art/tiled/tiled-import.py --source=./art/tiled/congratulations.intro.csv --dest=./src/display/congratulations.asm
 
 generate_player:

@@ -217,6 +217,61 @@
 .endp
 
 ;
+; level 6 map south 1 west 1
+;   handles level map 6 south 1 west 1 loading
+.proc level6_maps1w1
+    mvx #1 DISABLE_JOYSTICK
+    mwx #level6_map.maps1w1 LEVEL_MAP
+    mwx LEVEL_MAP LEVEL_TRANS_MAP
+    mvx #0 LEVEL_HAS_KEY
+    rts
+.endp
+
+;
+; level 6 map south 1 east 1
+;   handles level map 6 south 1 east 1 loading
+.proc level6_maps1e1
+    mvx #1 DISABLE_JOYSTICK
+    mwx #level6_map.maps1e1 LEVEL_MAP
+    mwx LEVEL_MAP LEVEL_TRANS_MAP
+    mvx #0 LEVEL_HAS_KEY
+    rts
+.endp
+
+;
+; level 6 map south 1 east 1 south 2
+;   handles level map 6 south 1 east 1 south 2 loading
+.proc level6_maps1e1s2
+    mvx #1 DISABLE_JOYSTICK
+    mwx #level6_map.maps1e1s2 LEVEL_MAP
+    mwx LEVEL_MAP LEVEL_TRANS_MAP
+    mvx #0 LEVEL_HAS_KEY
+    rts
+.endp
+
+;
+; level 6 map south 1 west 1 south 2
+;   handles level map 6 south 1 west 1 south 2 loading
+.proc level6_maps1w1s2
+    mvx #1 DISABLE_JOYSTICK
+    mwx #level6_map.maps1w1s2 LEVEL_MAP
+    mwx LEVEL_MAP LEVEL_TRANS_MAP
+    mvx #0 LEVEL_HAS_KEY
+    rts
+.endp
+
+;
+; level 6 map south 1 south 2
+;   handles level map 6 south 1 south 2 loading
+.proc level6_maps1s2
+    mvx #1 DISABLE_JOYSTICK
+    mwx #level6_map.maps1s2 LEVEL_MAP
+    mwx LEVEL_MAP LEVEL_TRANS_MAP
+    mvx #0 LEVEL_HAS_KEY
+    rts
+.endp
+
+;
 ; congratulations
 ;   handles congratulations level loading
 .proc congratulations
