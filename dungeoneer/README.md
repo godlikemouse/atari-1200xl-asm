@@ -17,10 +17,10 @@ To build the executable (xex) program, issue the following make command.
 
 To run the executable in an emulator, feel free to use one of the supplied run targets.  The default emulator is atari800.
 
-    make run
+The following will run the executable in the [atari800](https://atari800.github.io/) emulator.
 
-This will run the executable in the [atari800](https://atari800.github.io/) emulator.
+    make run
+    
+The following will run the executable in the Altirra emulator using the [altirra](https://www.virtualdub.org/altirra.html) shell script under wine.
 
     make runalt
-
-This will run the executable in the Altirra emulator using the [altirra](https://www.virtualdub.org/altirra.html) shell script under wine.
