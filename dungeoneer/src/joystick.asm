@@ -224,7 +224,7 @@ done
 _up=$0e
 _down=$0d
 _none=$0f
-_delay=15
+_delay=10
 _min=0
 _max=2
 

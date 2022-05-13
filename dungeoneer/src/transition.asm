@@ -159,6 +159,7 @@ done
     setup_player_trans()
     mvx #0 ENEMY_POSX
     mvx #0 ENEMY_POSY
+    clear_enemy_pmg()
     display_game_map()
     reset_player()
 

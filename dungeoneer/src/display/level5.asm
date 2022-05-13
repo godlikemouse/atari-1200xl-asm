@@ -30,7 +30,7 @@ map
 map_attrs
 	.byte 7,2,$ff,$ff ; count, coin state
 	.byte 1,$80,$40 ; player pos x/y
-	.byte 2\.word congratulations ; next level
+	.byte 2\.word level6 ; next level
 	.byte 3\.word level5_mapn1 ; north transition
 	.byte 4\.word level5_mape1 ; east transition
 	.byte 5\.word level5_maps1 ; south transition
