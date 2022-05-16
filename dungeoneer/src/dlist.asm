@@ -5,27 +5,37 @@
 ; setup display list for screen
 ;
 .proc setup_game_screen
-BLANK8=$70 ; 8 blank lines
-BLANK7=$60 ; 7 blank lines
-LMS=$40 ; load memory scan (LMS)
-JVB=$41 ; jump vertical black (JVB)
-DLI=$80 ; display list interrupt
-ANTIC5=$05 ; ANTIC mode 5
+_antic5=$05 ; ANTIC mode 5
+_blank8=$70 ; 8 blank lines
+_blank7=$60 ; 7 blank lines
+_lms=$40 ; load memory scan (LMS)
+_jvb=$41 ; jump vertical black (JVB)
+_dli=$80 ; display list interrupt
 
 	mwx #dlist SDLSTL ; move word takes care of high/low byte assignments
 	rts
 
 ; display list
 dlist
-	.byte BLANK8, BLANK8, BLANK7
-	.byte DLI + LMS + ANTIC5
+	.byte _blank8
+	.byte _blank8
+	.byte _blank7
+	.byte _dli + _lms + _antic5
 	.word ITEM_SCREEN
-	.byte DLI + LMS + ANTIC5
+	.byte _dli + _lms + _antic5
 	.word GAME_SCREEN
-	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
-	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
-	.byte DLI + ANTIC5
-	.byte JVB
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _jvb
 	.word dlist
 .endp
 
@@ -33,24 +43,34 @@ dlist
 ; setup game over / menu screen
 ;
 .proc setup_menu_screen
-BLANK8=$70 ; 8 blank lines
-LMS=$40 ; load memory scan (LMS)
-JVB=$41 ; jump vertical blank (JVB)
-DLI=$80 ; display list interrupt
-ANTIC5=5 ; ANTIC mode 5
+_antic5=5 ; ANTIC mode 5
+_blank8=$70 ; 8 blank lines
+_lms=$40 ; load memory scan (LMS)
+_jvb=$41 ; jump vertical blank (JVB)
+_dli=$80 ; display list interrupt
 
 	mwx #dlist SDLSTL ; move word takes care of high/low byte assignments
 	rts
 
 ; display list
 dlist
-	.byte BLANK8, BLANK8, BLANK8
-	.byte ANTIC5 + LMS
+	.byte _blank8
+	.byte _blank8
+	.byte _blank8
+	.byte _antic5 + _lms
 	.word MENU_SCREEN
-	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
-	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
-	.byte DLI + ANTIC5
-	.byte JVB
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _jvb
 	.word dlist
 .endp
 
@@ -58,23 +78,33 @@ dlist
 ; setup game over / menu screen
 ;
 .proc setup_mainmenu_screen
-BLANK8=$70 ; 8 blank lines
-LMS=$40 ; load memory scan (LMS)
-JVB=$41 ; jump vertical blank (JVB)
-DLI=$80 ; display list interrupt
-ANTIC5=5 ; ANTIC mode 5
+_antic5=5 ; ANTIC mode 5
+_blank8=$70 ; 8 blank lines
+_lms=$40 ; load memory scan (LMS)
+_jvb=$41 ; jump vertical blank (JVB)
+_dli=$80 ; display list interrupt
 
 	mwx #dlist SDLSTL ; move word takes care of high/low byte assignments
 	rts
 
 ; display list
 dlist
-	.byte BLANK8, BLANK8, BLANK8
-	.byte ANTIC5 + LMS
+	.byte _blank8
+	.byte _blank8
+	.byte _blank8
+	.byte _antic5 + _lms
 	.word MENU_SCREEN
-	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
-	.byte DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5, DLI + ANTIC5
-	.byte DLI + ANTIC5
-	.byte JVB
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _dli + _antic5
+	.byte _jvb
 	.word dlist
 .endp
