@@ -11,7 +11,6 @@ def usage():
     print("\t\tSource tiled csv file.")
     print("\t--dest")
     print("\t\tDestination asm file.")
-    print("\t--high-bytes")
     exit(1)
 
 source_file = None
