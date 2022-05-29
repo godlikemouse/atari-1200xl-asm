@@ -22,6 +22,14 @@
 	; main setup
 	setup_colors()
 	enable_interrupts()
+	setup_pmg()
+
+	; delay initialization until after first vblank
+init_delay
+	ldx VBLANK_LOADED
+	cpx #1
+	bne init_delay
+
 	display_mainmenu()
 
 	; main loop

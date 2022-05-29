@@ -2,7 +2,7 @@
 ;   Contains interrupt related functionality
 
 ;
-; eanble interrupts
+; enable interrupts
 ;   sets up the interrupt chain
 .proc enable_interrupts
     ; enable interrupt
@@ -13,10 +13,28 @@
 
     ;setup VVBLKD interrupt chain
 vvblkd_interrupt
-    mwx #vvblkd_chain VVBLKD
+    mwx #vvblkd_init VVBLKD
     rts
-
 .endp
+
+;
+; vvblkd init
+;   first vblank initialization
+.local vvblkd_init
+    ; save stack
+    pha
+    txa
+    pha
+
+    mvx #1 VBLANK_LOADED
+    mwx #vvblkd_chain VVBLKD
+
+    pla
+    tax
+    pla
+    
+    jmp XITVBV
+.endl
 
 ;
 ; vvblkd chain
