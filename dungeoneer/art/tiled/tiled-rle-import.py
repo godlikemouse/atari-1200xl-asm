@@ -42,13 +42,12 @@ for i in range(len(sys.argv)):
 if source_file is None or dest_file is None:
     usage()
 
-# Read in the source asm file
 
 # Utilize byte type structure:
 #   $ff standard RLE
-#   $fe 2 byte repetition RLE
+#   $fe 2 byte RLE
 #   example: $ff,$37,$01 - uses standard RLE to encode 55 tiles of tile 1
-#   example: $fe,$20,$05,$06 - uses non-standard REL to enocde 32 tiles
+#   example: $fe,$20,$05,$06 - uses 2 byte RLE to enocde 32 tiles
 #                               of sequence 5,6
 
 # format and convert value to hex
@@ -92,7 +91,7 @@ while index < (len(input_array)):
             count = 0
 
             # scan until non-same value found
-            while value == next and index < len(input_array):
+            while value == next and index + 1 < len(input_array):
                 index = index + 1
                 count = count + 1
                 next = input_array[index]
@@ -176,7 +175,10 @@ dest.write(output)
 dest.close()
 
 compressed_size = len(output_array)
-print(f"RLE compression: {original_size}B to {compressed_size}B, compression ratio of ~{int((compressed_size/original_size)*100)}%")
+ratio = 100-((compressed_size/original_size)*100)
+ratio_string = "{0:.2f}".format(ratio)
+print(f"RLE compression: {original_size} to {compressed_size} bytes, ", end="")
+print(f"compression ratio {ratio_string}%")
 printv(output_bytes)
 
 csv.close()
