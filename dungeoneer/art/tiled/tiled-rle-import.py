@@ -175,10 +175,9 @@ dest.write(output)
 dest.close()
 
 compressed_size = len(output_array)
-ratio = 100-((compressed_size/original_size)*100)
-ratio_string = "{0:.2f}".format(ratio)
+ratio = "{0:.2f}".format(100-((compressed_size/original_size)*100))
 print(f"RLE compression: {original_size} to {compressed_size} bytes, ", end="")
-print(f"compression ratio {ratio_string}%")
+print(f"compression {ratio}%")
 printv(output_bytes)
 
 csv.close()
