@@ -186,3 +186,16 @@ column_loop
 done
     rts
 .endp
+
+;
+; initialize zeropage
+;   resets zeropage
+.proc initialize_zeropage
+    lda #0
+    tax
+loop
+    sta TILEPTR,x
+    inx
+    bpl loop
+    rts
+.endp

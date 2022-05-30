@@ -20,6 +20,7 @@
 	org $0600
 
 	; main setup
+	initialize_zeropage()
 	setup_colors()
 	enable_interrupts()
 	setup_pmg()
