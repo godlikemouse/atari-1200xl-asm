@@ -194,8 +194,10 @@ done
     lda #0
     tax
 loop
-    sta TILEPTR,x
+    sta $c0,x
+    sta $100,x
     inx
-    bpl loop
+    cpx #$40
+    bne loop
     rts
 .endp
