@@ -1,22 +1,5 @@
 ; Dungeoneer - A simple game in Atari 8-bit assembly
 
-; References and citations
-;
-; Based on the original 8bit MADS YouTube tutorial series by Ed Salisbury
-; https://www.youtube.com/playlist?list=PL7IgmhqRiwzEIVAOhZWnby6WPsQ8alFSI
-;
-; Tile mapping and conversion handled by Tiled:
-; https://www.mapeditor.org/
-;
-; NTSC Color Palette:
-; https://atariage.com/forums/uploads/monthly_10_2015/post-6369-0-47505700-1443889945.png
-;
-; Atari Memory Map:
-; https://www.atariarchives.org/mapping/memorymap.php
-;
-; PMG Memory Map:
-; https://www.atariarchives.org/mapping/appendix7.php
-
 	org $0600
 
 	; main setup
