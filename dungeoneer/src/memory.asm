@@ -97,7 +97,8 @@ PLAYER_LIVES      = $0139 ; the player lives
 DISABLE_JOYSTICK  = $013a ; disable joystick flag
 PREV_MENU_SELECT  = $013b ; previous menu selection
 MENU_SELECTION    = $013c ; selected menu item
-VBLANK_LOADED     = $013d
+VBLANK_LOADED     = $013d ; first vblank rendered flag
+VBLANK_SKIP       = $013e ; skip vblank events flag
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution

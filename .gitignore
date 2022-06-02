@@ -1,5 +1,8 @@
-#ignore generated files
+# ignore generated files
 *.obx
 *.xex
 *.lab
 *.lst
+
+# ignore tiled session files
+*.tiled-session

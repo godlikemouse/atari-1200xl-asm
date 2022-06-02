@@ -156,9 +156,12 @@ done
     cpx #0
     beq done
 
+    mvx #1 VBLANK_SKIP
+
     setup_player_trans()
-    mvx #0 ENEMY_POSX
-    mvx #0 ENEMY_POSY
+    ldx #0
+    stx ENEMY_POSX
+    stx ENEMY_POSY
     clear_enemy_pmg()
     display_game_map()
     reset_player()
@@ -295,7 +298,9 @@ loop
     bne loop
 
 done
-    mvx #0 RESTORE_COIN
+    ldx #0
+    stx RESTORE_COIN
+    stx VBLANK_SKIP
 
 exit
     rts

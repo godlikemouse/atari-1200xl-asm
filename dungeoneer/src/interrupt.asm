@@ -32,7 +32,7 @@ vvblkd_interrupt
     pla
     tax
     pla
-    
+
     jmp XITVBV
 .endl
 
@@ -47,13 +47,17 @@ vvblkd_interrupt
     tya
     pha
 
+    ldx VBLANK_SKIP
+    cpx #1
+    beq done
+
     mvx #0 SKIP_FRAME
 
     exit_level()
 
     ldx SKIP_FRAME
     cpx #1
-    jeq done
+    beq done
 
 	read_game_joystick()
     read_mainmenu_joystick()

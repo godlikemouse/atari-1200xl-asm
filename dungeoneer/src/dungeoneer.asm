@@ -20,8 +20,8 @@ init_delay
 main
 	sequence_sound_handler()
 	transition_map_handler()
+	restore_coin_state()
 	restore_key_state()
-    restore_coin_state()
 	check_enemy_player_collision()
 	mvx #0 ATTRACT
 	jmp main
