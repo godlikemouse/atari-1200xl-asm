@@ -85,6 +85,40 @@ loop
 .endp
 
 ;
+; render rle map
+; 	renders map data to destination screen using rle
+.proc render_rle_map(.byte mapl+1, maph+1, screenl+1, screenh+1) .var)
+mapl mvx #0 TMP0
+maph mvx #0 TMP1
+screenl mvx #0 TMP2
+screenh mvx #0 TMP3
+
+map=TMP0
+screen=TMP2
+
+	ldy #0
+loop
+	; read a byte
+	lda (map),y
+
+check_rle
+	cmp #$ff
+	bne check_rle_2
+
+check_rle_2
+	cmp #$fe
+	bne standard
+
+standard
+	
+
+continue
+	adw map, #1
+	adw screen, #1
+	rts
+.endp
+
+;
 ; load map attributes
 ;
 .proc load_map_attributes (.byte mapl+1, maph+1) .var

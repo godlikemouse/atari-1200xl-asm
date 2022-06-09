@@ -91,7 +91,7 @@ while index < (len(input_array)):
             count = 0
 
             # scan until non-same value found
-            while value == next and index + 1 < len(input_array):
+            while value == next and index + 1 < len(input_array) && count < 255:
                 index = index + 1
                 count = count + 1
                 next = input_array[index]
