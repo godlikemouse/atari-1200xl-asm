@@ -91,7 +91,7 @@ while index < (len(input_array)):
             count = 0
 
             # scan until non-same value found
-            while value == next and index + 1 < len(input_array) && count < 255:
+            while value == next and index + 1 < len(input_array) and count < 255:
                 index = index + 1
                 count = count + 1
                 next = input_array[index]
@@ -177,7 +177,7 @@ dest.close()
 compressed_size = len(output_array)
 ratio = "{0:.2f}".format(100-((compressed_size/original_size)*100))
 print(f"RLE compression: {original_size} to {compressed_size} bytes, ", end="")
-print(f"compression {ratio}%")
+print(f"\tcompression {ratio}%,\t {mapname}")
 printv(output_bytes)
 
 csv.close()
