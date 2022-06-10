@@ -87,7 +87,10 @@ loop
 ;
 ; render rle map
 ; 	renders map data to destination screen using rle
-.proc render_rle_map(.byte mapl+1, maph+1, screenl+1, screenh+1) .var)
+.proc render_rle_map(.byte mapl+1, maph+1, screenl+1, screenh+1) .var
+.var _count .word
+.var _b1 .byte
+.var _b2 .byte
 mapl mvx #0 TMP0
 maph mvx #0 TMP1
 screenl mvx #0 TMP2
@@ -96,26 +99,127 @@ screenh mvx #0 TMP3
 map=TMP0
 screen=TMP2
 
+	mvx #0 _count
 	ldy #0
 loop
 	; read a byte
 	lda (map),y
 
 check_rle
-	cmp #$ff
+	decode_rle()
+	cpx #1
 	bne check_rle_2
+	jmp continue
 
 check_rle_2
-	cmp #$fe
+	decode_rle_2()
+	cpx #1
 	bne standard
+	jmp continue
 
 standard
-	
+	; non-rle
+	sta (screen),y
 
 continue
-	adw map, #1
-	adw screen, #1
+	; increment map/screen pointers
+	adw map #1
+	adw screen #1
+
+	; check limit
+	adw _count #1
+	cpw _count #480+1
+	bne loop
+
 	rts
+
+;
+; decode rle 1 byte
+;	uses acc as type byte
+.proc decode_rle
+
+	jmp check
+
+invalid
+	ldx #0
+	rts
+
+check
+	; single byte rle
+	cmp #$ff
+	bne invalid
+
+	; second byte contains rle length
+	adw map #1
+	lda (map),y
+	tax
+
+	; third byte contains value
+	adw map #1
+	lda (map),y
+
+	; perform rle decode and copy
+loop
+	sta (screen),y
+	adw screen #1
+	adw _count #1
+	dex
+	bne loop
+	sta (screen),y
+	adw screen #1
+	adw _count #1
+	ldx #1
+	rts
+.endp
+
+;
+; decode rle 2 byte
+;	uses x as rle length
+.proc decode_rle_2
+
+	jmp check
+
+invalid
+	ldx #0
+	rts
+
+check
+	; double byte rle
+	cmp #$fe
+	bne invalid
+
+	; second byte contains rle length
+	adw map #1
+	lda (map),y
+	tax
+
+	; third byte contains value 1
+	adw map #1
+	lda (map),y
+	sta _b1
+
+	; forth byte contains value 2
+	adw map #1
+	lda (map),y
+	sta _b2
+	; perform rel 2 byte decode and copy
+loop
+	mva _b1 (screen),y
+	adw screen #1
+	mva _b2 (screen),y
+	adw screen #1
+	adw _count #2
+	dex
+	bne loop
+	mva _b1 (screen),y
+	adw screen #1
+	mva _b2 (screen),y
+	adw screen #1
+	adw _count #2
+	ldx #1
+	rts
+.endp
+
 .endp
 
 ;
