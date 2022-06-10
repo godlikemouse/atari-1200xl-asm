@@ -316,6 +316,7 @@ draw
 .proc new_game
 	ldx #0
 	stx PLAYER_SCORE
+	stx PLAYER_SCORE+1
 	stx ITEMS
 	stx WIN_COUNT
 	stx LIFE_GAIN
