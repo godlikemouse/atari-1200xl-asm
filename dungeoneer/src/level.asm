@@ -10,6 +10,7 @@
     mwx #level1_map.intro LEVEL_INTRO
     mwx #intro_music BGM_ADDR
     mwx #level1_map.map LEVEL_MAP
+    mwx #level1_map.attrs LEVEL_ATTRS
     mvx #0 ITEMS
     mvx #1 LEVEL_HAS_KEY
 

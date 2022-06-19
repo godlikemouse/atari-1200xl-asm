@@ -257,12 +257,13 @@ exit
     bne exit
 
     ; find level in memory location
-    mwx LEVEL_MAP TMP0
+    ;mwx LEVEL_MAP TMP0
+    mwx LEVEL_ATTRS TMP0
 
     ; find level in memory location
     ldy #0
-    mwx LEVEL_MAP TMP0
-    adw TMP0 #480 ; offset to coin state location
+    ;mwx LEVEL_MAP TMP0
+    ;adw TMP0 #480 ; offset to coin state location
 	lda (TMP0),y
 	cmp #7 ; validate
 	bne done

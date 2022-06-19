@@ -6,7 +6,9 @@
 ;
 .proc display_mainmenu_map
 	enable_tilesprite_animation()
-	render_map #<mainmenu.map, #>mainmenu.map, #<MENU_SCREEN, #>MENU_SCREEN
+	mvx #0 SCREEN_LOADED
+	render_rle_map #<mainmenu.map, #>mainmenu.map, #<MENU_SCREEN, #>MENU_SCREEN
+	mvx #1 SCREEN_LOADED
 	rts
 .endp
 
@@ -15,7 +17,9 @@
 ;
 .proc display_howtoplay_map
 	enable_tilesprite_animation()
-	render_map #<howtoplay.map, #>howtoplay.map, #<MENU_SCREEN, #>MENU_SCREEN
+	mvx #0 SCREEN_LOADED
+	render_rle_map #<howtoplay.map, #>howtoplay.map, #<MENU_SCREEN, #>MENU_SCREEN
+	mvx #1 SCREEN_LOADED
 	rts
 .endp
 
@@ -24,7 +28,9 @@
 ;
 .proc display_credits_map
 	enable_tilesprite_animation()
-	render_map #<credits.map, #>credits.map, #<MENU_SCREEN, #>MENU_SCREEN
+	mvx #0 SCREEN_LOADED
+	render_rle_map #<credits.map, #>credits.map, #<MENU_SCREEN, #>MENU_SCREEN
+	mvx #1 SCREEN_LOADED
 	rts
 .endp
 
@@ -33,7 +39,9 @@
 ;
 .proc display_game_intro_map
 	mva #4+16 GRPRIOR
-	render_map LEVEL_INTRO, LEVEL_INTRO+1, #<MENU_SCREEN, #>MENU_SCREEN
+	mvx #0 SCREEN_LOADED
+	render_rle_map LEVEL_INTRO, LEVEL_INTRO+1, #<MENU_SCREEN, #>MENU_SCREEN
+	mvx #1 SCREEN_LOADED
 	rts
 .endp
 
@@ -41,8 +49,10 @@
 ; display game map
 ;
 .proc display_game_map
-	render_map LEVEL_MAP, LEVEL_MAP+1, #<GAME_SCREEN, #>GAME_SCREEN
-	load_map_attributes LEVEL_MAP, LEVEL_MAP+1
+	mvx #0 SCREEN_LOADED
+	render_rle_map LEVEL_MAP, LEVEL_MAP+1, #<GAME_SCREEN, #>GAME_SCREEN
+	load_rle_map_attributes LEVEL_ATTRS, LEVEL_ATTRS+1
+	mvx #1 SCREEN_LOADED
 	rts
 .endp
 
@@ -50,7 +60,9 @@
 ; display game over map
 ;
 .proc display_gameover_map
-	render_map #<gameover.map, #>gameover.map, #<MENU_SCREEN, #>MENU_SCREEN
+	mvx #0 SCREEN_LOADED
+	render_rle_map #<gameover.map, #>gameover.map, #<MENU_SCREEN, #>MENU_SCREEN
+	mvx #1 SCREEN_LOADED
 	rts
 .endp
 
@@ -99,36 +111,37 @@ screenh mvx #0 TMP3
 map=TMP0
 screen=TMP2
 
-	mvx #0 _count
+	mwx #0 _count
 	ldy #0
 loop
 	; read a byte
 	lda (map),y
-
 check_rle
 	decode_rle()
 	cpx #1
-	bne check_rle_2
-	jmp continue
-
-check_rle_2
-	decode_rle_2()
-	cpx #1
+	;bne check_rle_2
 	bne standard
 	jmp continue
+
+;check_rle_2
+;	decode_rle_2()
+;	cpx #1
+;	bne standard
+;	jmp continue
 
 standard
 	; non-rle
 	sta (screen),y
+    adw _count #1
 
-continue
-	; increment map/screen pointers
+    ; increment map/screen pointers
 	adw map #1
 	adw screen #1
 
+continue
+
 	; check limit
-	adw _count #1
-	cpw _count #480+1
+	cpw _count #480
 	bne loop
 
 	rts
@@ -159,16 +172,20 @@ check
 	lda (map),y
 
 	; perform rle decode and copy
+    dex
 loop
 	sta (screen),y
+    tay
 	adw screen #1
 	adw _count #1
+    tya
+    ldy #0
 	dex
 	bne loop
-	sta (screen),y
-	adw screen #1
-	adw _count #1
-	ldx #1
+	;sta (screen),y
+	;adw screen #1
+	;adw _count #1
+    ldx #1
 	rts
 .endp
 
@@ -211,11 +228,13 @@ loop
 	adw _count #2
 	dex
 	bne loop
-	mva _b1 (screen),y
-	adw screen #1
-	mva _b2 (screen),y
-	adw screen #1
-	adw _count #2
+
+    adw map #1
+	;mva _b1 (screen),y
+	;adw screen #1
+	;mva _b2 (screen),y
+	;adw screen #1
+	;adw _count #2
 	ldx #1
 	rts
 .endp
@@ -231,6 +250,104 @@ maph mvx #0 TMP1
 attr=TMP0
 
 	adw attr #480 ; start at end of visual map data
+
+	ldy #0
+loop
+	lda (attr),y+
+
+	; check for done
+	cmp #0
+	bne load_player_position
+	jmp done
+
+load_player_position
+	cmp #1
+	bne load_next_level
+
+	lda LEVEL_TRANS_MAP
+	cmp #0
+	bne transition_attributes
+
+	mva (attr),y+ PLAYER_RESET_POSX
+	mva (attr),y+ PLAYER_RESET_POSY
+	jmp loop
+
+transition_attributes
+	:2 iny
+	jmp loop
+
+load_next_level
+	cmp #2
+	bne load_north_transition
+	mva (attr),y+ NEXT_LEVEL
+	mva (attr),y+ NEXT_LEVEL+1
+	jmp loop
+
+load_north_transition
+	cmp #3
+	bne load_east_transition
+	mva (attr),y+ LEVEL_TRANS_N
+	mva (attr),y+ LEVEL_TRANS_N+1
+	jmp loop
+
+load_east_transition
+	cmp #4
+	bne load_south_transition
+	mva (attr),y+ LEVEL_TRANS_E
+	mva (attr),y+ LEVEL_TRANS_E+1
+	jmp loop
+
+load_south_transition
+	cmp #5
+	bne load_west_transition
+	mva (attr),y+ LEVEL_TRANS_S
+	mva (attr),y+ LEVEL_TRANS_S+1
+	jmp loop
+
+load_west_transition
+	cmp #6
+	bne load_coin_state
+	mva (attr),y+ LEVEL_TRANS_W
+	mva (attr),y+ LEVEL_TRANS_W+1
+	jmp loop
+
+load_coin_state
+	cmp #7
+	bne load_key_position
+	lda (attr),y+ ; count
+coin_loop
+	iny ; skip bytes by count
+	sub #1
+	bne coin_loop
+	jmp loop
+
+load_key_position
+	cmp #8
+	bne load_enemy_position
+	mva (attr),y+ KEY_POSX
+	mva (attr),y+ KEY_POSY
+	jmp loop
+
+load_enemy_position
+	cmp #9
+	bne done
+	mva (attr),y+ ENEMY_POSX
+	mva (attr),y+ ENEMY_POSY
+	jmp loop
+
+done
+	rts
+.endp
+
+;
+; load map attributes
+;
+.proc load_rle_map_attributes (.byte attrh+1, attrl+1) .var
+attrl mvx #0 TMP0
+attrh mvx #0 TMP1
+attr=TMP0
+
+	;adw attr #480 ; start at end of visual map data
 
 	ldy #0
 loop

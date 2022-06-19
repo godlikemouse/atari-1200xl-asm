@@ -53,6 +53,7 @@ SFX3_COUNTER      = $00f8 ; sfx3 counter
 SFX3_DATA_INDEX   = $00f9 ; sfx3 data index
 SFX3_NOTE_SUSTAIN = $00fa ; sfx3 note sustain
 SFX3_NOTE_SILENCE = $00fb ; sfx3 note silence
+LEVEL_ATTRS       = $00fd
 LEVEL_TRANS_N     = $010c ; level transition north address
 LEVEL_TRANS_E     = $010e ; level transition east address
 LEVEL_TRANS_S     = $0110 ; level transition south address
@@ -99,6 +100,7 @@ PREV_MENU_SELECT  = $013b ; previous menu selection
 MENU_SELECTION    = $013c ; selected menu item
 VBLANK_LOADED     = $013d ; first vblank rendered flag
 VBLANK_SKIP       = $013e ; skip vblank events flag
+SCREEN_LOADED     = $013f
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution

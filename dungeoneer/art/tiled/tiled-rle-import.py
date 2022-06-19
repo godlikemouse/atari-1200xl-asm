@@ -13,6 +13,8 @@ def usage():
     print("\t\tSource tiled csv file.")
     print("\t--dest")
     print("\t\tDestination (compressed) asm file.")
+    print("\t--byte")
+    print("\t\tByte length compression, valid values 1 or 2 (default: 2)")
     print("\t --verbose")
     print("\t\tTurns on verbose RLE output")
     print("\t--help")
@@ -25,6 +27,8 @@ def usage():
 source_file = None
 dest_file = None
 verbose = False
+byte_length = 2
+
 for i in range(len(sys.argv)):
     argv = sys.argv[i]
     if argv.startswith("--source="):
@@ -32,6 +36,9 @@ for i in range(len(sys.argv)):
 
     if argv.startswith("--dest="):
         dest_file = os.path.abspath(argv.split("=").pop())
+
+    if argv.startswith("--byte="):
+        byte_length = os.path.abspath(argv.split("=").pop())
 
     if argv == "--help":
         usage();
@@ -101,19 +108,21 @@ while index < (len(input_array)):
                 # too short for RLE
                 printv("Don't use RLE, too short:", count, value, next)
                 printv(f"Output RAW: {hex(value)}")
-                index = original_index + 1
+                index = original_index - 2
                 output_array.append(hex(value))
             else:
                 # use RLE
+                if index + 1 == len(input_array) and next == value:
+                    count = count + 1
+                else:
+                    index = index - 1
+
                 printv(f"Standard RLE: $ff,{hex(count)},{hex(value)}")
                 output_array.append("$ff")
                 output_array.append(hex(count))
                 output_array.append(hex(value))
 
-            # done, step back for iteration
-            index = index - 1
-
-        elif index + 2 < len(input_array):
+        elif index + 2 < len(input_array) and byte_length == 2:
             count = 0
             next = input_array[index+1]
             v = value

@@ -20,7 +20,7 @@
 	ldy #0
 loop
 	sta ITEM_SCREEN,y+
-	cpy #2
+	cpy #15
 	bne loop
 	rts
 .endp

@@ -380,6 +380,10 @@ credits_item=MENU_SCREEN + 320 + 14
 	cpx #0
 	bne exit
 
+	ldx SCREEN_LOADED
+	cpx #1
+	bne exit
+
 	restore_menu_item #<new_game_item, #>new_game_item
 	restore_menu_item #<how_to_play_item, #>how_to_play_item
 	restore_menu_item #<credits_item, #>credits_item
@@ -442,6 +446,10 @@ selection_mainmenu
 	cpx #1
 	bne done
 
+	ldx SCREEN_LOADED
+	cpx #1
+	bne done
+
 	ldx INTRO_POSITION
 	stx POSX
 	stx HPOSP0
@@ -481,6 +489,10 @@ done
 	ldx DISPLAY_TYPE
 	cpx #3
 	bne done
+
+	;ldx SCREEN_LOADED
+	;cpx #1
+	;bne done
 
 	inc GAMEOVER_POSITION
 	ldx GAMEOVER_POSITION
