@@ -322,7 +322,7 @@ draw
 	stx LIFE_GAIN
 	mvx #3 PLAYER_LIVES
 	mvx #4 ENEMY_SPEED_RES
-	level1()
+	level3()
 	rts
 .endp
 

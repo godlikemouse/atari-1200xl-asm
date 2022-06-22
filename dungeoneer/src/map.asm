@@ -342,7 +342,7 @@ done
 ;
 ; load map attributes
 ;
-.proc load_rle_map_attributes (.byte attrh+1, attrl+1) .var
+.proc load_rle_map_attributes (.byte attrl+1, attrh+1) .var
 attrl mvx #0 TMP0
 attrh mvx #0 TMP1
 attr=TMP0

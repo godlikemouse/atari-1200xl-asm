@@ -158,6 +158,8 @@ done
 
     mvx #1 VBLANK_SKIP
 
+    mvx #0 SCREEN_LOADED
+
     setup_player_trans()
     ldx #0
     stx ENEMY_POSX
@@ -169,6 +171,7 @@ done
     ldx #1
     stx RESTORE_KEY
     stx RESTORE_COIN
+    stx SCREEN_LOADED
 
     ldx #0
     stx LEVEL_TRANS_MAP

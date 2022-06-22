@@ -89,9 +89,10 @@ while index < (len(input_array)):
     value = input_array[index]
 
     printv("Beginning run from:", index, input_array[index::])
-    if index+1 < len(input_array):
+    if index + 1 < len(input_array):
         # determine next byte structure
-        next = input_array[index+1]
+        next = input_array[index + 1]
+        original_index = index
 
         if value == next:
             printv("Use RLE:", value, next)
@@ -102,13 +103,12 @@ while index < (len(input_array)):
                 index = index + 1
                 count = count + 1
                 next = input_array[index]
-                original_index = index
 
             if count < 3:
                 # too short for RLE
-                printv("Don't use RLE, too short:", count, value, next)
+                printv("Don't use RLE, too short:", count, value)
                 printv(f"Output RAW: {hex(value)}")
-                index = original_index - 2
+                index = original_index
                 output_array.append(hex(value))
             else:
                 # use RLE
@@ -124,7 +124,7 @@ while index < (len(input_array)):
 
         elif index + 2 < len(input_array) and byte_length == 2:
             count = 0
-            next = input_array[index+1]
+            next = input_array[index + 1]
             v = value
             n = next
             original_index = index
@@ -153,8 +153,13 @@ while index < (len(input_array)):
 
         else:
             # end of the road, write out directly
-            printv("Non-RLE, write raw:", value)
+            printv("Non-RLE, write raw:", value, hex(value))
             output_array.append(hex(value))
+            index = original_index
+    else:
+        # end of the road, write out directly
+        printv("Non-RLE, write raw:", value, hex(value))
+        output_array.append(hex(value))
 
     index = index + 1
 

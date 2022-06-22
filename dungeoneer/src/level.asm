@@ -25,6 +25,7 @@
     mwx #level2_map.intro LEVEL_INTRO
     mwx #intro_music BGM_ADDR
     mwx #level2_map.map LEVEL_MAP
+    mwx #level2_map.attrs LEVEL_ATTRS
     mvx #0 ITEMS
     mvx #1 LEVEL_HAS_KEY
 
@@ -39,6 +40,7 @@
     mwx #level3_map.intro LEVEL_INTRO
     mwx #intro_music BGM_ADDR
     mwx #level3_map.map LEVEL_MAP
+    mwx #level3_map.attrs LEVEL_ATTRS
     mvx #1 LEVEL_HAS_KEY
     mvx #0 ITEMS
     reset_coin_state #<level3_map.maps1 #>level3_map.maps1
@@ -53,6 +55,7 @@
 .proc level3_main
     mvx #1 DISABLE_JOYSTICK
     mwx #level3_map.map LEVEL_MAP
+    mwx #level3_map.attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #1 LEVEL_HAS_KEY
 
@@ -65,6 +68,7 @@
 .proc level3_maps1
     mvx #1 DISABLE_JOYSTICK
     mwx #level3_map.maps1 LEVEL_MAP
+    mwx #level3_map.maps1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #0 LEVEL_HAS_KEY
     rts
@@ -77,6 +81,7 @@
     mwx #level4_map.intro LEVEL_INTRO
     mwx #intro_music BGM_ADDR
     mwx #level4_map.map LEVEL_MAP
+    mwx #level4_map.attrs LEVEL_ATTRS
     mvx #0 ITEMS
     mvx #0 LEVEL_HAS_KEY
 
@@ -91,6 +96,7 @@
     mwx #level5_map.intro LEVEL_INTRO
     mwx #intro_music BGM_ADDR
     mwx #level5_map.map LEVEL_MAP
+    mwx #level5_map.attrs LEVEL_ATTRS
     mvx #0 ITEMS
     mvx #0 LEVEL_HAS_KEY
 
@@ -111,6 +117,7 @@
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.map LEVEL_MAP
     mwx LEVEL_MAP LEVEL_TRANS_MAP
+    mwx #level5_map.attrs LEVEL_ATTRS
     mvx #0 LEVEL_HAS_KEY
     rts
 .endp
@@ -121,6 +128,7 @@
 .proc level5_mape1
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.mape1 LEVEL_MAP
+    mwx #level5_map.mape1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #1 LEVEL_HAS_KEY
     rts
@@ -132,6 +140,7 @@
 .proc level5_mapw1
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.mapw1 LEVEL_MAP
+    mwx #level5_map.mapw1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #0 LEVEL_HAS_KEY
     rts
@@ -143,6 +152,7 @@
 .proc level5_mapn1
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.mapn1 LEVEL_MAP
+    mwx #level5_map.mapn1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #0 LEVEL_HAS_KEY
     rts
@@ -154,6 +164,7 @@
 .proc level5_maps1
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.maps1 LEVEL_MAP
+    mwx #level5_map.maps1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #0 LEVEL_HAS_KEY
     rts
@@ -165,6 +176,7 @@
 .proc level5_maps1w1
     mvx #1 DISABLE_JOYSTICK
     mwx #level5_map.maps1w1 LEVEL_MAP
+    mwx #level5_map.maps1w1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #0 LEVEL_HAS_KEY
     rts
@@ -177,6 +189,7 @@
     mwx #level6_map.intro LEVEL_INTRO
     mwx #intro_music BGM_ADDR
     mwx #level6_map.map LEVEL_MAP
+    mwx #level6_map.attrs LEVEL_ATTRS
     mvx #0 ITEMS
     mvx #1 LEVEL_HAS_KEY
 
@@ -196,6 +209,7 @@
 .proc level6_main
     mvx #1 DISABLE_JOYSTICK
     mwx #level6_map.map LEVEL_MAP
+    mwx #level6_map.attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #1 LEVEL_HAS_KEY
     rts
@@ -207,6 +221,7 @@
 .proc level6_mapn1
     mvx #1 DISABLE_JOYSTICK
     mwx #level6_map.mapn1 LEVEL_MAP
+    mwx #level6_map.mapn1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #0 LEVEL_HAS_KEY
     rts
@@ -218,6 +233,7 @@
 .proc level6_maps1
     mvx #1 DISABLE_JOYSTICK
     mwx #level6_map.maps1 LEVEL_MAP
+    mwx #level6_map.maps1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #0 LEVEL_HAS_KEY
     rts
@@ -229,6 +245,7 @@
 .proc level6_maps1w1
     mvx #1 DISABLE_JOYSTICK
     mwx #level6_map.maps1w1 LEVEL_MAP
+    mwx #level6_map.maps1w1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #0 LEVEL_HAS_KEY
     rts
@@ -240,6 +257,7 @@
 .proc level6_maps1e1
     mvx #1 DISABLE_JOYSTICK
     mwx #level6_map.maps1e1 LEVEL_MAP
+    mwx #level6_map.maps1e1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mvx #0 LEVEL_HAS_KEY
     rts
