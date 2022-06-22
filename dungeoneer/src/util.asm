@@ -83,7 +83,8 @@ done
 tiley mvx #0 _tiley
 find_tile mvx #0 _find_tile
 
-    mwx LEVEL_TRANS_MAP TILEPTR
+    ;mwx LEVEL_TRANS_MAP TILEPTR
+    mwx #GAME_SCREEN TILEPTR
 
     ldx _tiley
     cpx #0
@@ -125,7 +126,8 @@ done
 tilex mvx #0 _tilex
 find_tile mvx #0 _find_tile
 
-    mwx LEVEL_TRANS_MAP TILEPTR
+    ;mwx LEVEL_TRANS_MAP TILEPTR
+    mwx #GAME_SCREEN TILEPTR
 
     ldy _tilex
 
