@@ -22,33 +22,33 @@ generate_tiles:
 	cd art && ./tileset.py menu_tileset menu_data
 
 generate_maps:
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/mainmenu.map.csv --dest=./src/display/mainmenu.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/howtoplay.map.csv --dest=./src/display/howtoplay.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/credits.map.csv --dest=./src/display/credits.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/gameover.map.csv --dest=./src/display/gameover.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level1_map.intro.csv --dest=./src/display/level1.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level1_map.map.csv --dest=./src/display/level1.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level2_map.intro.csv --dest=./src/display/level2.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level2_map.map.csv --dest=./src/display/level2.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level3_map.intro.csv --dest=./src/display/level3.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level3_map.map.csv --dest=./src/display/level3.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level3_map.maps1.csv --dest=./src/display/level3.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level4_map.intro.csv --dest=./src/display/level4.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level4_map.map.csv --dest=./src/display/level4.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.intro.csv --dest=./src/display/level5.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.map.csv --dest=./src/display/level5.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.mape1.csv --dest=./src/display/level5.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.mapw1.csv --dest=./src/display/level5.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.mapn1.csv --dest=./src/display/level5.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.maps1.csv --dest=./src/display/level5.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.maps1w1.csv --dest=./src/display/level5.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.intro.csv --dest=./src/display/level6.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.map.csv --dest=./src/display/level6.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.mapn1.csv --dest=./src/display/level6.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.maps1.csv --dest=./src/display/level6.asm --byte=1 --verbose
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.maps1w1.csv --dest=./src/display/level6.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.maps1e1.csv --dest=./src/display/level6.asm --byte=1
-	./art/tiled/tiled-rle-import.py --source=./art/tiled/congratulations.intro.csv --dest=./src/display/congratulations.asm --byte=1
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/mainmenu.map.csv --dest=./src/display/mainmenu.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/howtoplay.map.csv --dest=./src/display/howtoplay.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/credits.map.csv --dest=./src/display/credits.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/gameover.map.csv --dest=./src/display/gameover.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level1_map.intro.csv --dest=./src/display/level1.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level1_map.map.csv --dest=./src/display/level1.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level2_map.intro.csv --dest=./src/display/level2.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level2_map.map.csv --dest=./src/display/level2.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level3_map.intro.csv --dest=./src/display/level3.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level3_map.map.csv --dest=./src/display/level3.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level3_map.maps1.csv --dest=./src/display/level3.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level4_map.intro.csv --dest=./src/display/level4.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level4_map.map.csv --dest=./src/display/level4.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.intro.csv --dest=./src/display/level5.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.map.csv --dest=./src/display/level5.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.mape1.csv --dest=./src/display/level5.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.mapw1.csv --dest=./src/display/level5.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.mapn1.csv --dest=./src/display/level5.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.maps1.csv --dest=./src/display/level5.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level5_map.maps1w1.csv --dest=./src/display/level5.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.intro.csv --dest=./src/display/level6.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.map.csv --dest=./src/display/level6.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.mapn1.csv --dest=./src/display/level6.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.maps1.csv --dest=./src/display/level6.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.maps1w1.csv --dest=./src/display/level6.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/level6_map.maps1e1.csv --dest=./src/display/level6.asm --byte=2
+	./art/tiled/tiled-rle-import.py --source=./art/tiled/congratulations.intro.csv --dest=./src/display/congratulations.asm --byte=2
 
 generate_player:
 	cd art && ./player.py

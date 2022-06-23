@@ -28,6 +28,7 @@ main
 
 	icl "memory.asm"
 	icl "dlist.asm"
+	org $2000
 	icl "level.asm"
 	icl "pmg.asm"
 	icl "enemy.asm"
@@ -39,10 +40,10 @@ main
 	icl "map.asm"
 	icl "transition.asm"
 	icl "tile.asm"
-	icl "data/game_tileset.asm"
-	icl "data/menu_tileset.asm"
 	icl "data/player.asm"
 	icl "data/enemy.asm"
+	icl "data/game_tileset.asm"
+	icl "data/menu_tileset.asm"
 	icl "data/sound.asm"
 	icl "display/gameover.asm"
 	icl "display/mainmenu.asm"
