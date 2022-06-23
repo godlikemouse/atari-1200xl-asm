@@ -182,9 +182,6 @@ loop
     ldy #0
 	dex
 	bne loop
-	;sta (screen),y
-	;adw screen #1
-	;adw _count #1
     ldx #1
 	rts
 .endp
@@ -448,7 +445,8 @@ tiley mvx #0 _tiley
 
 	; find level in memory location
 	ldy #0
-	mwx LEVEL_MAP TMP0
+	;mwx LEVEL_MAP TMP0
+	mwx LEVEL_ATTRS TMP0
 
 	; store only left most tilex position of item
 	lda ONTILE
@@ -458,7 +456,7 @@ tiley mvx #0 _tiley
 	sbb _tilex #1
 
 even
-	adw TMP0 #480 ; offset to coin state location
+	;adw TMP0 #480 ; offset to coin state location
 	lda (TMP0),y
 	cmp #7 ; validate
 	bne done

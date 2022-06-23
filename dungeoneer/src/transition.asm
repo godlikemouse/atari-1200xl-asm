@@ -159,12 +159,12 @@ done
     mvx #1 VBLANK_SKIP
     mvx #0 SCREEN_LOADED
 
-    display_game_map()
-    setup_player_trans()
     ldx #0
     stx ENEMY_POSX
     stx ENEMY_POSY
     clear_enemy_pmg()
+    display_game_map()
+    setup_player_trans()
     reset_player()
 
     ldx #1
