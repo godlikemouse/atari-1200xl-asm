@@ -325,6 +325,7 @@ display
 
 exit
     play_exit_level_sound()
+    clear_screen()
     jmp (NEXT_LEVEL)
 
 done

@@ -7,7 +7,7 @@
 .proc display_mainmenu_map
 	enable_tilesprite_animation()
 	mvx #0 SCREEN_LOADED
-	render_rle_map #<mainmenu.map, #>mainmenu.map, #<MENU_SCREEN, #>MENU_SCREEN
+	render_map #<mainmenu.map, #>mainmenu.map, #<MENU_SCREEN, #>MENU_SCREEN
 	mvx #1 SCREEN_LOADED
 	rts
 .endp
@@ -18,7 +18,7 @@
 .proc display_howtoplay_map
 	enable_tilesprite_animation()
 	mvx #0 SCREEN_LOADED
-	render_rle_map #<howtoplay.map, #>howtoplay.map, #<MENU_SCREEN, #>MENU_SCREEN
+	render_map #<howtoplay.map, #>howtoplay.map, #<MENU_SCREEN, #>MENU_SCREEN
 	mvx #1 SCREEN_LOADED
 	rts
 .endp
@@ -29,7 +29,7 @@
 .proc display_credits_map
 	enable_tilesprite_animation()
 	mvx #0 SCREEN_LOADED
-	render_rle_map #<credits.map, #>credits.map, #<MENU_SCREEN, #>MENU_SCREEN
+	render_map #<credits.map, #>credits.map, #<MENU_SCREEN, #>MENU_SCREEN
 	mvx #1 SCREEN_LOADED
 	rts
 .endp
@@ -40,7 +40,7 @@
 .proc display_game_intro_map
 	mva #4+16 GRPRIOR
 	mvx #0 SCREEN_LOADED
-	render_rle_map LEVEL_INTRO, LEVEL_INTRO+1, #<MENU_SCREEN, #>MENU_SCREEN
+	render_map LEVEL_INTRO, LEVEL_INTRO+1, #<MENU_SCREEN, #>MENU_SCREEN
 	mvx #1 SCREEN_LOADED
 	rts
 .endp
@@ -50,7 +50,7 @@
 ;
 .proc display_game_map
 	mvx #0 SCREEN_LOADED
-	render_rle_map LEVEL_MAP, LEVEL_MAP+1, #<GAME_SCREEN, #>GAME_SCREEN
+	render_map LEVEL_MAP, LEVEL_MAP+1, #<GAME_SCREEN, #>GAME_SCREEN
 	load_map_attributes LEVEL_ATTRS, LEVEL_ATTRS+1
 	mvx #1 SCREEN_LOADED
 	rts
@@ -61,45 +61,15 @@
 ;
 .proc display_gameover_map
 	mvx #0 SCREEN_LOADED
-	render_rle_map #<gameover.map, #>gameover.map, #<MENU_SCREEN, #>MENU_SCREEN
+	render_map #<gameover.map, #>gameover.map, #<MENU_SCREEN, #>MENU_SCREEN
 	mvx #1 SCREEN_LOADED
 	rts
 .endp
 
 ;
 ; render map
-;	renders map data to destination screen
+; 	renders map data to destination screen using rle if available
 .proc render_map(.byte mapl+1, maph+1, screenl+1, screenh+1) .var
-mapl mvx #0 TMP0
-maph mvx #0 TMP1
-screenl mvx #0 TMP2
-screenh mvx #0 TMP3
-
-map=TMP0
-screen=TMP2
-map2=TMP4
-screen2=TMP6
-
-	; setup 240 byte offset src/dest
-	mwx map map2
-	mwx screen screen2
-	adw map2 #240
-	adw screen2 #240
-
-	ldy #0
-loop
-	mva (map),y (screen),y
-	mva (map2),y (screen2),y
-	iny
-	cpy #240
-	bne loop
-	rts
-.endp
-
-;
-; render rle map
-; 	renders map data to destination screen using rle
-.proc render_rle_map(.byte mapl+1, maph+1, screenl+1, screenh+1) .var
 .var _count .word
 .var _b1 .byte
 .var _b2 .byte
@@ -116,18 +86,18 @@ screen=TMP2
 loop
 	; read a byte
 	lda (map),y
+
 check_rle
 	decode_rle()
 	cpx #1
-	;bne check_rle_2
-	bne standard
+	bne check_rle_2
 	jmp continue
 
-;check_rle_2
-;	decode_rle_2()
-;	cpx #1
-;	bne standard
-;	jmp continue
+check_rle_2
+	decode_rle_2()
+	cpx #1
+	bne standard
+	jmp continue
 
 standard
 	; non-rle
@@ -139,7 +109,6 @@ standard
 	adw screen #1
 
 continue
-
 	; check limit
 	cpw _count #480
 	bne loop
@@ -216,22 +185,17 @@ check
 	adw map #1
 	lda (map),y
 	sta _b2
+
 	; perform rel 2 byte decode and copy
 loop
-	mva _b1 (screen),y
-	adw screen #1
+	mva _b1 (screen),y+
 	mva _b2 (screen),y
-	adw screen #1
+	ldy #0
+	adw screen #2
 	adw _count #2
 	dex
 	bne loop
-
     adw map #1
-	;mva _b1 (screen),y
-	;adw screen #1
-	;mva _b2 (screen),y
-	;adw screen #1
-	;adw _count #2
 	ldx #1
 	rts
 .endp

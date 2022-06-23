@@ -74,6 +74,20 @@ loop
 .endp
 
 ;
+; clear screen
+;	clears the current screen
+.proc clear_screen
+	lda #0
+	ldy #240
+loop
+	dey
+	sta GAME_SCREEN,y
+	sta GAME_SCREEN+240,y
+	bne loop
+	rts
+.endp
+
+;
 ; clear enemy vertical repaint
 ;
 .proc clear_enemy_vertical
@@ -539,6 +553,7 @@ check
 	; complete player death
 	check_game_over()
 	reset_player()
+	clear_player_pmg()
 
 	mvx #0 PLAYER_DEATH
 	mvx #1 RESTORE_COIN
