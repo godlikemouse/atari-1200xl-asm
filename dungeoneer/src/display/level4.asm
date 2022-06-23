@@ -10,4 +10,5 @@ attrs
 	.byte 2\.word level5 ; next level
 	.byte 9,0,0 ; enemy pos x/y
 	.byte 0
+
 .endl

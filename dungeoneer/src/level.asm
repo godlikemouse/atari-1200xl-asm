@@ -43,7 +43,7 @@
     mwx #level3_map.attrs LEVEL_ATTRS
     mvx #1 LEVEL_HAS_KEY
     mvx #0 ITEMS
-    reset_coin_state #<level3_map.maps1 #>level3_map.maps1
+    reset_coin_state #<level3_map.maps1_attrs #>level3_map.maps1_attrs
 
     display_game_intro()
     rts
@@ -100,11 +100,11 @@
     mvx #0 ITEMS
     mvx #0 LEVEL_HAS_KEY
 
-    reset_coin_state #<level5_map.map #>level5_map.map
-    reset_coin_state #<level5_map.mape1 #>level5_map.mape1
-    reset_coin_state #<level5_map.mapw1 #>level5_map.mapw1
-    reset_coin_state #<level5_map.mapn1 #>level5_map.mapn1
-    reset_coin_state #<level5_map.maps1w1 #>level5_map.maps1w1
+    reset_coin_state #<level5_map.attrs #>level5_map.attrs
+    reset_coin_state #<level5_map.mape1_attrs #>level5_map.mape1_attrs
+    reset_coin_state #<level5_map.mapw1_attrs #>level5_map.mapw1_attrs
+    reset_coin_state #<level5_map.mapn1_attrs #>level5_map.mapn1_attrs
+    reset_coin_state #<level5_map.maps1w1_attrs #>level5_map.maps1w1_attrs
 
     display_game_intro()
     rts
@@ -193,11 +193,11 @@
     mvx #0 ITEMS
     mvx #1 LEVEL_HAS_KEY
 
-    reset_coin_state #<level6_map.map #>level6_map.map
-    reset_coin_state #<level6_map.mapn1 #>level6_map.mapn1
-    reset_coin_state #<level6_map.maps1 #>level6_map.maps1
-    reset_coin_state #<level6_map.maps1e1 #>level6_map.maps1e1
-    reset_coin_state #<level6_map.maps1w1 #>level6_map.maps1w1
+    reset_coin_state #<level6_map.attrs #>level6_map.attrs
+    reset_coin_state #<level6_map.mapn1_attrs #>level6_map.mapn1_attrs
+    reset_coin_state #<level6_map.maps1_attrs #>level6_map.maps1_attrs
+    reset_coin_state #<level6_map.maps1e1_attrs #>level6_map.maps1e1_attrs
+    reset_coin_state #<level6_map.maps1w1_attrs #>level6_map.maps1w1_attrs
 
     display_game_intro()
     rts
@@ -336,22 +336,20 @@ done
 ;
 ; reset coin state
 ;   resets current coin state for a map
-.proc reset_coin_state (.byte mapl+1, maph+1) .var
-mapl mvx #0 TMP0
-maph mvx #0 TMP1
-map = mapl
-
-    adw TMP0 #480
+.proc reset_coin_state (.byte attrl+1, attrh+1) .var
+attrl mvx #0 TMP0
+attrh mvx #0 TMP1
+attr=TMP0
 
     ldy #0
 
     iny ; count
-    lda (TMP0),y+
+    lda (attr),y+
     tax
 
     lda #$ff
 loop
-    sta (TMP0),y+
+    sta (attr),y+
     dex
     bne loop
 

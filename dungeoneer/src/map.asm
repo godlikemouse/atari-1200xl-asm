@@ -51,7 +51,7 @@
 .proc display_game_map
 	mvx #0 SCREEN_LOADED
 	render_rle_map LEVEL_MAP, LEVEL_MAP+1, #<GAME_SCREEN, #>GAME_SCREEN
-	load_rle_map_attributes LEVEL_ATTRS, LEVEL_ATTRS+1
+	load_map_attributes LEVEL_ATTRS, LEVEL_ATTRS+1
 	mvx #1 SCREEN_LOADED
 	rts
 .endp
@@ -241,110 +241,10 @@ loop
 ;
 ; load map attributes
 ;
-.proc load_map_attributes (.byte mapl+1, maph+1) .var
-mapl mvx #0 TMP0
-maph mvx #0 TMP1
-attr=TMP0
-
-	adw attr #480 ; start at end of visual map data
-
-	ldy #0
-loop
-	lda (attr),y+
-
-	; check for done
-	cmp #0
-	bne load_player_position
-	jmp done
-
-load_player_position
-	cmp #1
-	bne load_next_level
-
-	lda LEVEL_TRANS_MAP
-	cmp #0
-	bne transition_attributes
-
-	mva (attr),y+ PLAYER_RESET_POSX
-	mva (attr),y+ PLAYER_RESET_POSY
-	jmp loop
-
-transition_attributes
-	:2 iny
-	jmp loop
-
-load_next_level
-	cmp #2
-	bne load_north_transition
-	mva (attr),y+ NEXT_LEVEL
-	mva (attr),y+ NEXT_LEVEL+1
-	jmp loop
-
-load_north_transition
-	cmp #3
-	bne load_east_transition
-	mva (attr),y+ LEVEL_TRANS_N
-	mva (attr),y+ LEVEL_TRANS_N+1
-	jmp loop
-
-load_east_transition
-	cmp #4
-	bne load_south_transition
-	mva (attr),y+ LEVEL_TRANS_E
-	mva (attr),y+ LEVEL_TRANS_E+1
-	jmp loop
-
-load_south_transition
-	cmp #5
-	bne load_west_transition
-	mva (attr),y+ LEVEL_TRANS_S
-	mva (attr),y+ LEVEL_TRANS_S+1
-	jmp loop
-
-load_west_transition
-	cmp #6
-	bne load_coin_state
-	mva (attr),y+ LEVEL_TRANS_W
-	mva (attr),y+ LEVEL_TRANS_W+1
-	jmp loop
-
-load_coin_state
-	cmp #7
-	bne load_key_position
-	lda (attr),y+ ; count
-coin_loop
-	iny ; skip bytes by count
-	sub #1
-	bne coin_loop
-	jmp loop
-
-load_key_position
-	cmp #8
-	bne load_enemy_position
-	mva (attr),y+ KEY_POSX
-	mva (attr),y+ KEY_POSY
-	jmp loop
-
-load_enemy_position
-	cmp #9
-	bne done
-	mva (attr),y+ ENEMY_POSX
-	mva (attr),y+ ENEMY_POSY
-	jmp loop
-
-done
-	rts
-.endp
-
-;
-; load map attributes
-;
-.proc load_rle_map_attributes (.byte attrl+1, attrh+1) .var
+.proc load_map_attributes (.byte attrl+1, attrh+1) .var
 attrl mvx #0 TMP0
 attrh mvx #0 TMP1
 attr=TMP0
-
-	;adw attr #480 ; start at end of visual map data
 
 	ldy #0
 loop
@@ -445,7 +345,6 @@ tiley mvx #0 _tiley
 
 	; find level in memory location
 	ldy #0
-	;mwx LEVEL_MAP TMP0
 	mwx LEVEL_ATTRS TMP0
 
 	; store only left most tilex position of item
@@ -456,7 +355,6 @@ tiley mvx #0 _tiley
 	sbb _tilex #1
 
 even
-	;adw TMP0 #480 ; offset to coin state location
 	lda (TMP0),y
 	cmp #7 ; validate
 	bne done
