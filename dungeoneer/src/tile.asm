@@ -163,6 +163,11 @@ done
 
 	; traps
 	between #$3e, ONTILE, #$40
+	cmp #1
+	beq done
+
+	; transition
+	between #$5c, ONTILE, #$60
 
 done
     rts
