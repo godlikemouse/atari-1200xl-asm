@@ -6,7 +6,7 @@
 ;	combining 4 missiles into player 5
 .proc draw_enemy
 .var _limit .byte
-missle = PMG + $180
+missile = PMG + $180
 
 	; load animation offset and set limit
 	ldx ENEMANIM_OFFSET
@@ -16,7 +16,7 @@ missle = PMG + $180
 
 	ldy ENEMY_POSY
 loop
-	mva enemy_data,x missle,y
+	mva enemy_data,x missile,y
 	iny
 	inx
 
@@ -87,6 +87,9 @@ setup
 	jmp direction_chosen
 
 init
+	ldx #0
+	stx ENEMANIM_OFFSET
+	stx ENEMY_MOVE_INDEX
 	draw_enemy()
 	jmp setup
 

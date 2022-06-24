@@ -1,7 +1,6 @@
 ; Dungeoneer - A simple game in Atari 8-bit assembly
 
 ; todo: fix door open state after collecting key
-; todo: fix spider blank state on game win
 
 	org $0600
 
