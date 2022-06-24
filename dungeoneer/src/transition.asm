@@ -172,6 +172,7 @@ done
     reset_player()
 
     ldx #1
+    stx RESTORE_DOOR
     stx RESTORE_KEY
     stx RESTORE_COIN
     stx SCREEN_LOADED
@@ -308,4 +309,41 @@ done
 
 exit
     rts
+.endp
+
+;
+; restore door state
+;
+.proc restore_door_state
+
+    ldx RESTORE_DOOR
+    cpx #1
+    bne exit
+
+    ldx LEVEL_HAS_DOOR
+    cpx #1
+    bne done
+
+    ; check all tiles for closed door
+    ldy #0
+    mwx #GAME_SCREEN TILEPTR
+loop
+    lda (TILEPTR),y
+    cmp #$14
+    beq found
+    adw TILEPTR #1
+
+    jmp loop
+
+found
+    mva #$44 (TILEPTR),y+
+    mva #$45 (TILEPTR),y+
+    mva #$46 (TILEPTR),y+
+    mva #$47 (TILEPTR),y
+
+done
+    mvx #0 RESTORE_KEY
+
+exit
+	rts
 .endp

@@ -10,7 +10,7 @@ attrs
 	.byte 2\.word level4 ; next level
 	.byte 5\.word level3_maps1 ; south transition
 	.byte 8,4,9 ; key position
-	.byte 9,$3f,$32 ; enemy pos x/y
+	;.byte 9,$3f,$32 ; enemy pos x/y
 	.byte 0
 
 maps1

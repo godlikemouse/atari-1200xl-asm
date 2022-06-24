@@ -401,6 +401,7 @@ done
 .proc unlock_door
 
 	; replace closed door with open door tile
+	mvx #1 DOOR_OPENED
 
 	ldy TILEX
 loop
