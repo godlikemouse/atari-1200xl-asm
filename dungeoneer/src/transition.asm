@@ -13,12 +13,11 @@ north
     ldx LEVEL_TRANS_X
     stx POSX
     stx PLAYER_RESET_POSX
-    ; search from mid line
-    adb POSX #4
-    posx_to_tilex()
-    sta TILEX
+    ; search from previous tile
+    ldx LEVEL_TRANS_TX
+    stx TILEX
     find_tiley TILEX, #$5d
-    sub #2 ; offset tile by 2 <-
+    sub #1 ; offset tile by 2 ↑
     sta TILEY
     ; set new player position
     tiley_to_posy()
@@ -29,12 +28,11 @@ east
     ldx LEVEL_TRANS_Y
     stx POSY
     stx PLAYER_RESET_POSY
-    ; search from mid line
-    adb POSY #4
-    posy_to_tiley()
-    sta TILEY
+    ; search from previous tile
+    ldx LEVEL_TRANS_TY
+    stx TILEY
     find_tilex TILEY, #$5f
-    add #2 ; offset tile by 2 ->
+    add #2 ; offset tile by 2 →
     sta TILEX
     ; set new player position
     tilex_to_posx()
@@ -58,12 +56,11 @@ south
     ldx LEVEL_TRANS_X
     stx POSX
     stx PLAYER_RESET_POSX
-    ; search from mid line
-    adb POSX #4
-    posx_to_tilex()
-    sta TILEX
+    ; search from previous tile
+    ldx LEVEL_TRANS_TX
+    stx TILEX
     find_tiley TILEX, #$5c
-    add #2 ; offset tile by 2 ->
+    add #1 ; offset tile by 1 ↓
     sta TILEY
     ; set new player position
     tiley_to_posy()
@@ -74,12 +71,11 @@ west
     ldx LEVEL_TRANS_Y
     stx POSY
     stx PLAYER_RESET_POSY
-    ; search from mid line
-    adb POSY #4
-    posy_to_tiley()
-    sta TILEY
+    ; search from previous tile
+    ldx LEVEL_TRANS_TY
+    stx TILEY
     find_tilex TILEY, #$5e
-    sub #2 ; offset tile by 2 <-
+    sub #2 ; offset tile by 2 ←
     sta TILEX
     ; set new player position
     tilex_to_posx()
@@ -123,26 +119,34 @@ done
 transition_n
     mvx POSX LEVEL_TRANS_X
     mvx POSY LEVEL_TRANS_Y
+    mvx TILEX LEVEL_TRANS_TX
+    mvx TILEY LEVEL_TRANS_TY
     mvx #3 LEVEL_TRANS_TYPE
     jmp (LEVEL_TRANS_N)
 
 transition_e
-	mvx POSX LEVEL_TRANS_X
-	mvx POSY LEVEL_TRANS_Y
-	mvx #4 LEVEL_TRANS_TYPE
-	jmp (LEVEL_TRANS_E)
+    mvx POSX LEVEL_TRANS_X
+    mvx POSY LEVEL_TRANS_Y
+    mvx TILEX LEVEL_TRANS_TX
+    mvx TILEY LEVEL_TRANS_TY
+    mvx #4 LEVEL_TRANS_TYPE
+    jmp (LEVEL_TRANS_E)
 
 transition_w
-	mvx POSX LEVEL_TRANS_X
-	mvx POSY LEVEL_TRANS_Y
-	mvx #6 LEVEL_TRANS_TYPE
-	jmp (LEVEL_TRANS_W)
+    mvx POSX LEVEL_TRANS_X
+    mvx POSY LEVEL_TRANS_Y
+    mvx TILEX LEVEL_TRANS_TX
+    mvx TILEY LEVEL_TRANS_TY
+    mvx #6 LEVEL_TRANS_TYPE
+    jmp (LEVEL_TRANS_W)
 
 transition_s
-	mvx POSX LEVEL_TRANS_X
-	mvx POSY LEVEL_TRANS_Y
-	mvx #5 LEVEL_TRANS_TYPE
-	jmp (LEVEL_TRANS_S)
+    mvx POSX LEVEL_TRANS_X
+    mvx POSY LEVEL_TRANS_Y
+    mvx TILEX LEVEL_TRANS_TX
+    mvx TILEY LEVEL_TRANS_TY
+    mvx #5 LEVEL_TRANS_TYPE
+    jmp (LEVEL_TRANS_S)
 
 done
     rts

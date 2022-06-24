@@ -1,6 +1,7 @@
 ; Dungeoneer - A simple game in Atari 8-bit assembly
 
 ; todo: fix door open state after collecting key
+; todo: fix spider blank state on game win
 
 	org $0600
 
@@ -9,6 +10,7 @@
 	setup_colors()
 	enable_interrupts()
 	setup_pmg()
+	clear_screen()
 
 	; delay initialization until after first vblank
 init_delay
