@@ -3,6 +3,8 @@
 
 RTCLOCK           = $0014 ; internal realtime clock
 ATTRACT           = $004d ; attraction mode / screensaver
+DINDEX            = $0057 ; display mode index
+SAVMSC            = $0058 ; screen memory lower address
 TILEPTR           = $00c0 ; the tile pointer
 TILESET_ADDRESS   = $00c2 ; the animating tileset address
 ITEMS             = $00c4 ; the picked up player items (XXXXKKKK)

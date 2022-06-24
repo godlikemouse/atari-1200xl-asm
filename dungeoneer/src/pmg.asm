@@ -2,6 +2,20 @@
 ;	Player Missile Graphics (PMG) specific routines
 
 ;
+; init screen
+;	sets up the initial screen removing garble display
+.proc init_screen
+	lda #0
+	ldy #$ff
+	mwx #0 DINDEX
+loop
+	dey
+	sta (SAVMSC),y
+	bne loop
+	rts
+.endp
+
+;
 ; setup colors
 ;
 .proc setup_colors

@@ -6,10 +6,10 @@
 
 	; main setup
 	initialize_zeropage()
+	init_screen()
 	setup_colors()
 	enable_interrupts()
 	setup_pmg()
-	clear_screen()
 
 	; delay initialization until after first vblank
 init_delay
