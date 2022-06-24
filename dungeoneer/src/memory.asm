@@ -3,6 +3,8 @@
 
 RTCLOCK           = $0014 ; internal realtime clock
 ATTRACT           = $004d ; attraction mode / screensaver
+DINDEX            = $0057 ; display mode index
+SAVMSC            = $0058 ; screen memory lower address
 TILEPTR           = $00c0 ; the tile pointer
 TILESET_ADDRESS   = $00c2 ; the animating tileset address
 ITEMS             = $00c4 ; the picked up player items (XXXXKKKK)
@@ -53,6 +55,7 @@ SFX3_COUNTER      = $00f8 ; sfx3 counter
 SFX3_DATA_INDEX   = $00f9 ; sfx3 data index
 SFX3_NOTE_SUSTAIN = $00fa ; sfx3 note sustain
 SFX3_NOTE_SILENCE = $00fb ; sfx3 note silence
+LEVEL_ATTRS       = $00fd
 LEVEL_TRANS_N     = $010c ; level transition north address
 LEVEL_TRANS_E     = $010e ; level transition east address
 LEVEL_TRANS_S     = $0110 ; level transition south address
@@ -61,7 +64,7 @@ LEVEL_TRANS_X     = $0114 ; level transition x
 LEVEL_TRANS_Y     = $0115 ; level transition y
 LEVEL_TRANS_TYPE  = $0116 ; level transition type (3N, 4E, 5S, 6W)
 LEVEL_TRANS_MAP   = $0117 ; level transition map address
-SKIP_FRAME        = $0119 ; skip frame
+SKIP_FRAME        = $0119 ; skip frame flag
 RESTORE_KEY       = $011a ; restore key flag
 RESTORE_COIN      = $011b ; restore coin flag
 SEQUENCE          = $011c ; sequence pointer
@@ -99,6 +102,9 @@ PREV_MENU_SELECT  = $013b ; previous menu selection
 MENU_SELECTION    = $013c ; selected menu item
 VBLANK_LOADED     = $013d ; first vblank rendered flag
 VBLANK_SKIP       = $013e ; skip vblank events flag
+SCREEN_LOADED     = $013f ; screen loaded flag
+LEVEL_TRANS_TX    = $0140 ; level transition tile x
+LEVEL_TRANS_TY    = $0141 ; level transition tile y
 VTIMR1            = $0210 ; virtual timer 1
 VVBLKD            = $0224 ; vertical blank interrupt return
 SDMCTL            = $022f ; pm resolution 46 ($2E) = double line resolution

@@ -47,6 +47,10 @@ vvblkd_interrupt
     tya
     pha
 
+    ldx SCREEN_LOADED
+    cpx #1
+    bne done
+
     ldx VBLANK_SKIP
     cpx #1
     beq done
@@ -68,7 +72,6 @@ vvblkd_interrupt
     render_intro()
     render_gameover()
     render_player_death()
-
     render_enemy()
 done
     ; restore stack

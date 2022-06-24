@@ -2,6 +2,20 @@
 ;	Player Missile Graphics (PMG) specific routines
 
 ;
+; init screen
+;	sets up the initial screen removing garble display
+.proc init_screen
+	lda #0
+	ldy #$ff
+	mwx #0 DINDEX
+loop
+	dey
+	sta (SAVMSC),y
+	bne loop
+	rts
+.endp
+
+;
 ; setup colors
 ;
 .proc setup_colors
@@ -69,6 +83,20 @@ missile = PMG + $180
 loop
 	dex
 	sta missile,x
+	bne loop
+	rts
+.endp
+
+;
+; clear screen
+;	clears the current screen
+.proc clear_screen
+	lda #0
+	ldy #240
+loop
+	dey
+	sta GAME_SCREEN,y
+	sta GAME_SCREEN+240,y
 	bne loop
 	rts
 .endp
@@ -380,6 +408,10 @@ credits_item=MENU_SCREEN + 320 + 14
 	cpx #0
 	bne exit
 
+	ldx SCREEN_LOADED
+	cpx #1
+	bne exit
+
 	restore_menu_item #<new_game_item, #>new_game_item
 	restore_menu_item #<how_to_play_item, #>how_to_play_item
 	restore_menu_item #<credits_item, #>credits_item
@@ -442,6 +474,10 @@ selection_mainmenu
 	cpx #1
 	bne done
 
+	ldx SCREEN_LOADED
+	cpx #1
+	bne done
+
 	ldx INTRO_POSITION
 	stx POSX
 	stx HPOSP0
@@ -481,6 +517,10 @@ done
 	ldx DISPLAY_TYPE
 	cpx #3
 	bne done
+
+	;ldx SCREEN_LOADED
+	;cpx #1
+	;bne done
 
 	inc GAMEOVER_POSITION
 	ldx GAMEOVER_POSITION
@@ -527,6 +567,7 @@ check
 	; complete player death
 	check_game_over()
 	reset_player()
+	clear_player_pmg()
 
 	mvx #0 PLAYER_DEATH
 	mvx #1 RESTORE_COIN
