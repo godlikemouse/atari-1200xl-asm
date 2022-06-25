@@ -17,7 +17,7 @@ north
     ldx LEVEL_TRANS_TX
     stx TILEX
     find_tiley TILEX, #$5d
-    sub #1 ; offset tile by 2 ↑
+    sub #1 ; offset tile by 1 ↑
     sta TILEY
     ; set new player position
     tiley_to_posy()
@@ -161,11 +161,12 @@ done
     beq done
 
     mvx #1 VBLANK_SKIP
-    mvx #0 SCREEN_LOADED
 
     ldx #0
     stx ENEMY_POSX
     stx ENEMY_POSY
+    stx SCREEN_LOADED
+
     clear_enemy_pmg()
     display_game_map()
     setup_player_trans()
@@ -338,6 +339,7 @@ loop
     lda (TILEPTR),y+
     cmp #$14
     beq found
+
     cpy #240
     bne loop
 
@@ -346,8 +348,8 @@ loop
     beq done
 
     adw TILEPTR #240
-    ldy #0
     mvx #1 _count
+    ldy #0
     jmp loop
 
 found
