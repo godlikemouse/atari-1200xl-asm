@@ -17,7 +17,7 @@ north
     ldx LEVEL_TRANS_TX
     stx TILEX
     find_tiley TILEX, #$5d
-    sub #1 ; offset tile by 2 ↑
+    sub #1 ; offset tile by 1 ↑
     sta TILEY
     ; set new player position
     tiley_to_posy()
@@ -161,17 +161,19 @@ done
     beq done
 
     mvx #1 VBLANK_SKIP
-    mvx #0 SCREEN_LOADED
 
     ldx #0
     stx ENEMY_POSX
     stx ENEMY_POSY
+    stx SCREEN_LOADED
+
     clear_enemy_pmg()
     display_game_map()
     setup_player_trans()
     reset_player()
 
     ldx #1
+    stx RESTORE_DOOR
     stx RESTORE_KEY
     stx RESTORE_COIN
     stx SCREEN_LOADED
@@ -189,6 +191,7 @@ done
 ;	restore key item state after screen transitions
 ;   uses current acc to compare
 .proc restore_key_state
+.var _count .byte
 
     ldx RESTORE_KEY
     cpx #1
@@ -198,43 +201,43 @@ done
     cpx #1
     bne done
 
+    ldx DOOR_OPENED
+    cpx #1
+    beq remove_key
+
     ; do we have a key
     lda ITEMS
     and #1
     cmp #1
     bne replace_key
 
+remove_key
     ; check all tiles for key and remove
     ldy #0
+    sty _count
+    mwx #GAME_SCREEN TILEPTR
 loop
-    lda GAME_SCREEN,y
+    lda (TILEPTR),y+
     cmp #$20
-	bne next
-	mva #0 GAME_SCREEN,y
-	jmp next_2
+	beq found
 
-next
-	cmp #$21
-	bne upper
-    mva #0 GAME_SCREEN,y
-
-upper
-    lda GAME_SCREEN+240,y
-    cmp #$20
-	bne next_2
-	mva #0 GAME_SCREEN+240,y
-	jmp continue
-
-next_2
-    lda GAME_SCREEN+240,y
-	cmp #$21
-	bne continue
-    mva #0 GAME_SCREEN+240,y
-
-continue
-    iny
     cpy #240
     bne loop
+
+    ldx _count
+    cpx #1
+    beq done
+
+    mvx #1 _count
+    adw TILEPTR #240
+    ldy #0
+    jmp loop
+
+found
+    dey
+    lda #0
+    sta (TILEPTR),y+
+    sta (TILEPTR),y
     jmp done
 
 replace_key
@@ -308,4 +311,57 @@ done
 
 exit
     rts
+.endp
+
+;
+; restore door state
+;
+.proc restore_door_state
+.var _count .byte
+
+    ldx RESTORE_DOOR
+    cpx #1
+    bne exit
+
+    ldx LEVEL_HAS_DOOR
+    cpx #1
+    bne done
+
+    ldx DOOR_OPENED
+    cpx #1
+    bne done
+
+    ; check all tiles for closed door
+    ldy #0
+    sty _count
+    mwx #GAME_SCREEN TILEPTR
+loop
+    lda (TILEPTR),y+
+    cmp #$14
+    beq found
+
+    cpy #240
+    bne loop
+
+    ldx _count
+    cpx #1
+    beq done
+
+    adw TILEPTR #240
+    mvx #1 _count
+    ldy #0
+    jmp loop
+
+found
+    dey
+    mva #$44 (TILEPTR),y+
+    mva #$45 (TILEPTR),y+
+    mva #$46 (TILEPTR),y+
+    mva #$47 (TILEPTR),y
+
+done
+    mvx #0 RESTORE_DOOR
+
+exit
+	rts
 .endp

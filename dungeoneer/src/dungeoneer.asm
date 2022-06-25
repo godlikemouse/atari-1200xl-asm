@@ -23,6 +23,7 @@ init_delay
 main
 	sequence_sound_handler()
 	transition_map_handler()
+	restore_door_state()
 	restore_coin_state()
 	restore_key_state()
 	check_enemy_player_collision()

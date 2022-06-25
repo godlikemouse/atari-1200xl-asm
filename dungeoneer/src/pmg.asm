@@ -19,14 +19,14 @@ loop
 ; setup colors
 ;
 .proc setup_colors
-black=$00
-gray=$06
-light_gray=$0a
-green=$c4
-brown=$24
-peach=$3c
-blue=$80
-dark_brown=$f2
+black = $00
+gray = $06
+light_gray = $0a
+green = $c4
+brown = $24
+peach = $3c
+blue = $80
+dark_brown = $f2
 
 	; character set colors
 	mvx #gray COLOR0        ; %01
@@ -298,10 +298,12 @@ draw
 	setup_menu_screen()
 	setup_menu_tileset()
 	display_howtoplay_map()
-	mvx #3 GRACTL
-	mvx #0 DISPLAY_TYPE
-	mvx #3 MENU_SELECTION
-	mvx #$0 PLAYANIM_OFFSET
+	ldx #3
+	stx GRACTL
+	stx MENU_SELECTION
+	ldx #0
+	stx DISPLAY_TYPE
+	stx PLAYANIM_OFFSET
 	rts
 .endp
 
@@ -314,10 +316,12 @@ draw
 	setup_menu_screen()
 	setup_menu_tileset()
 	display_credits_map()
-	mvx #3 GRACTL
-	mvx #0 DISPLAY_TYPE
-	mvx #3 MENU_SELECTION
-	mvx #$0 PLAYANIM_OFFSET
+	ldx #3
+	stx GRACTL
+	stx MENU_SELECTION
+	ldx #0
+	stx DISPLAY_TYPE
+	stx PLAYANIM_OFFSET
 	rts
 .endp
 
@@ -326,7 +330,7 @@ draw
 ;	displays the game intro screen
 .proc display_game_intro
 	stop_background_music()
-	mvx #$00 AUDCTL
+	mvx #0 AUDCTL
 	play_background_music()
 	setup_menu_screen()
 	setup_menu_tileset()
@@ -359,7 +363,7 @@ draw
 ; 	displays the game screen
 .proc display_game
 	stop_background_music()
-	mvx #$00 AUDCTL
+	mvx #0 AUDCTL
 	mwx #background_music BGM_ADDR
 	play_background_music()
 	setup_game_screen()
@@ -517,10 +521,6 @@ done
 	ldx DISPLAY_TYPE
 	cpx #3
 	bne done
-
-	;ldx SCREEN_LOADED
-	;cpx #1
-	;bne done
 
 	inc GAMEOVER_POSITION
 	ldx GAMEOVER_POSITION
