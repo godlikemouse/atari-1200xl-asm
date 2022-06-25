@@ -19,14 +19,14 @@ loop
 ; setup colors
 ;
 .proc setup_colors
-black=$00
-gray=$06
-light_gray=$0a
-green=$c4
-brown=$24
-peach=$3c
-blue=$80
-dark_brown=$f2
+black = $00
+gray = $06
+light_gray = $0a
+green = $c4
+brown = $24
+peach = $3c
+blue = $80
+dark_brown = $f2
 
 	; character set colors
 	mvx #gray COLOR0        ; %01
@@ -330,7 +330,7 @@ draw
 ;	displays the game intro screen
 .proc display_game_intro
 	stop_background_music()
-	mvx #$00 AUDCTL
+	mvx #0 AUDCTL
 	play_background_music()
 	setup_menu_screen()
 	setup_menu_tileset()
@@ -363,7 +363,7 @@ draw
 ; 	displays the game screen
 .proc display_game
 	stop_background_music()
-	mvx #$00 AUDCTL
+	mvx #0 AUDCTL
 	mwx #background_music BGM_ADDR
 	play_background_music()
 	setup_game_screen()
