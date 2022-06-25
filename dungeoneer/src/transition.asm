@@ -199,12 +199,17 @@ done
     cpx #1
     bne done
 
+    ldx DOOR_OPENED
+    cpx #1
+    beq remove_key
+
     ; do we have a key
     lda ITEMS
     and #1
     cmp #1
     bne replace_key
 
+remove_key
     ; check all tiles for key and remove
     ldy #0
 loop
@@ -315,6 +320,7 @@ exit
 ; restore door state
 ;
 .proc restore_door_state
+.var _count .byte
 
     ldx RESTORE_DOOR
     cpx #1
@@ -324,25 +330,39 @@ exit
     cpx #1
     bne done
 
+    ldx DOOR_OPENED
+    cpx #1
+    bne done
+
     ; check all tiles for closed door
     ldy #0
+    sty _count
     mwx #GAME_SCREEN TILEPTR
 loop
-    lda (TILEPTR),y
+    lda (TILEPTR),y+
     cmp #$14
     beq found
-    adw TILEPTR #1
+    cpy #240
+    bne loop
 
+    ldx _count
+    cpx #1
+    beq done
+
+    adw TILEPTR #240
+    ldy #0
+    mvx #1 _count
     jmp loop
 
 found
+    dey
     mva #$44 (TILEPTR),y+
     mva #$45 (TILEPTR),y+
     mva #$46 (TILEPTR),y+
     mva #$47 (TILEPTR),y
 
 done
-    mvx #0 RESTORE_KEY
+    mvx #0 RESTORE_DOOR
 
 exit
 	rts

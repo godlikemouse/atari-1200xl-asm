@@ -63,7 +63,9 @@
     mwx #level3_map.map LEVEL_MAP
     mwx #level3_map.attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
-    mvx #1 LEVEL_HAS_KEY
+    ldx #1
+    stx LEVEL_HAS_KEY
+    stx LEVEL_HAS_DOOR
 
     rts
 .endp
@@ -76,7 +78,9 @@
     mwx #level3_map.maps1 LEVEL_MAP
     mwx #level3_map.maps1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
-    mvx #0 LEVEL_HAS_KEY
+    ldx #0
+    stx LEVEL_HAS_KEY
+    stx LEVEL_HAS_DOOR
     rts
 .endp
 
@@ -128,7 +132,9 @@
     mwx #level5_map.map LEVEL_MAP
     mwx LEVEL_MAP LEVEL_TRANS_MAP
     mwx #level5_map.attrs LEVEL_ATTRS
-    mvx #0 LEVEL_HAS_KEY
+    ldx #0
+    stx LEVEL_HAS_KEY
+    stx LEVEL_HAS_DOOR
     rts
 .endp
 
@@ -136,11 +142,13 @@
 ; level 5 map east 1
 ;   handles level 5 map east 1 loading
 .proc level5_mape1
-    mvx #1 DISABLE_JOYSTICK
+    ldx #1
+    stx DISABLE_JOYSTICK
+    stx LEVEL_HAS_KEY
     mwx #level5_map.mape1 LEVEL_MAP
     mwx #level5_map.mape1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
-    mvx #1 LEVEL_HAS_KEY
+    mvx #0 LEVEL_HAS_DOOR
     rts
 .endp
 
@@ -152,7 +160,9 @@
     mwx #level5_map.mapw1 LEVEL_MAP
     mwx #level5_map.mapw1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
-    mvx #0 LEVEL_HAS_KEY
+    ldx #0
+    stx LEVEL_HAS_KEY
+    stx LEVEL_HAS_DOOR
     rts
 .endp
 
@@ -164,7 +174,9 @@
     mwx #level5_map.mapn1 LEVEL_MAP
     mwx #level5_map.mapn1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
-    mvx #0 LEVEL_HAS_KEY
+    ldx #0
+    stx LEVEL_HAS_KEY
+    stx LEVEL_HAS_DOOR
     rts
 .endp
 
@@ -172,7 +184,9 @@
 ; level 5 map south 1
 ;   handles level 5 map south 1 loading
 .proc level5_maps1
-    mvx #1 DISABLE_JOYSTICK
+    ldx #1
+    stx DISABLE_JOYSTICK
+    stx LEVEL_HAS_DOOR
     mwx #level5_map.maps1 LEVEL_MAP
     mwx #level5_map.maps1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
@@ -188,7 +202,9 @@
     mwx #level5_map.maps1w1 LEVEL_MAP
     mwx #level5_map.maps1w1_attrs LEVEL_ATTRS
     mwx LEVEL_MAP LEVEL_TRANS_MAP
-    mvx #0 LEVEL_HAS_KEY
+    ldx #0
+    stx LEVEL_HAS_KEY
+    stx LEVEL_HAS_DOOR
     rts
 .endp
 
