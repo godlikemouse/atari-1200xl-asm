@@ -190,6 +190,7 @@ done
 ;	restore key item state after screen transitions
 ;   uses current acc to compare
 .proc restore_key_state
+.var _count .byte
 
     ldx RESTORE_KEY
     cpx #1
@@ -212,35 +213,30 @@ done
 remove_key
     ; check all tiles for key and remove
     ldy #0
+    sty _count
+    mwx #GAME_SCREEN TILEPTR
 loop
-    lda GAME_SCREEN,y
+    lda (TILEPTR),y+
     cmp #$20
-	bne next
-	mva #0 GAME_SCREEN,y
-	jmp next_2
+	beq found
 
-next
-	cmp #$21
-	bne upper
-    mva #0 GAME_SCREEN,y
-
-upper
-    lda GAME_SCREEN+240,y
-    cmp #$20
-	bne next_2
-	mva #0 GAME_SCREEN+240,y
-	jmp continue
-
-next_2
-    lda GAME_SCREEN+240,y
-	cmp #$21
-	bne continue
-    mva #0 GAME_SCREEN+240,y
-
-continue
-    iny
     cpy #240
     bne loop
+
+    ldx _count
+    cpx #1
+    beq done
+
+    mvx #1 _count
+    adw TILEPTR #240
+    ldy #0
+    jmp loop
+
+found
+    dey
+    lda #0
+    sta (TILEPTR),y+
+    sta (TILEPTR),y
     jmp done
 
 replace_key
