@@ -298,10 +298,12 @@ draw
 	setup_menu_screen()
 	setup_menu_tileset()
 	display_howtoplay_map()
-	mvx #3 GRACTL
-	mvx #0 DISPLAY_TYPE
-	mvx #3 MENU_SELECTION
-	mvx #$0 PLAYANIM_OFFSET
+	ldx #3
+	stx GRACTL
+	stx MENU_SELECTION
+	ldx #0
+	stx DISPLAY_TYPE
+	stx PLAYANIM_OFFSET
 	rts
 .endp
 
@@ -314,10 +316,12 @@ draw
 	setup_menu_screen()
 	setup_menu_tileset()
 	display_credits_map()
-	mvx #3 GRACTL
-	mvx #0 DISPLAY_TYPE
-	mvx #3 MENU_SELECTION
-	mvx #$0 PLAYANIM_OFFSET
+	ldx #3
+	stx GRACTL
+	stx MENU_SELECTION
+	ldx #0
+	stx DISPLAY_TYPE
+	stx PLAYANIM_OFFSET
 	rts
 .endp
 
@@ -517,10 +521,6 @@ done
 	ldx DISPLAY_TYPE
 	cpx #3
 	bne done
-
-	;ldx SCREEN_LOADED
-	;cpx #1
-	;bne done
 
 	inc GAMEOVER_POSITION
 	ldx GAMEOVER_POSITION
