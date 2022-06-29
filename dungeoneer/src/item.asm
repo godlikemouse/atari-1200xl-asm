@@ -301,10 +301,6 @@ done
 	rts
 
 pickup
-	;get_item_bit()
-	;ora ITEMS
-	;sta ITEMS
-
     remove_playfield_item()
 	display_screen_items()
 

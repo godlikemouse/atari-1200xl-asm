@@ -177,7 +177,7 @@ done
 ; tile is key
 ;  if true, acc == 1, else acc == 0
 .proc tile_is_key
-    between #$20, ONTILE #$28
+    between #$20, ONTILE, #$28
     rts
 .endp
 

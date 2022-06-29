@@ -142,11 +142,11 @@ block
 ; read game joystick
 ;	handle player movement
 .proc read_game_joystick
-_up=$0e
-_down=$0d
-_left=$0b
-_right=$07
-_none=$0f
+up = $0e
+down = $0d
+left=  $0b
+right = $07
+none = $0f
 
 	ldx DISABLE_JOYSTICK
 	cpx #1
@@ -161,15 +161,15 @@ _none=$0f
 	beq done
 
 	ldx STICK0
-	cpx #_none
+	cpx #none
 	beq move_none
-	cpx #_left
+	cpx #left
 	beq move_left
-	cpx #_right
+	cpx #right
 	beq move_right
-	cpx #_up
+	cpx #up
 	beq move_up
-	cpx #_down
+	cpx #down
 	beq move_down
 	rts
 
@@ -221,12 +221,12 @@ done
 ; read main menu joystick
 ;	handle menu selection
 .proc read_mainmenu_joystick
-_up=$0e
-_down=$0d
-_none=$0f
-_delay=10
-_min=0
-_max=2
+up = $0e
+down = $0d
+none = $0f
+delay = 10
+min = 0
+max = 2
 
 	ldx DISPLAY_TYPE
 	cpx #0
@@ -241,11 +241,11 @@ _max=2
 	beq button_pressed
 
 	ldx STICK0
-	cpx #_none
+	cpx #none
 	beq done
-	cpx #_up
+	cpx #up
 	beq move_up
-	cpx #_down
+	cpx #down
 	beq move_down
 
 	jmp done
@@ -257,7 +257,7 @@ move_up
 	ldx MENU_SELECTION
 
 	; wrap check
-	cpx #_min
+	cpx #min
 	beq done
 
 	; skip on how to/credit screen
@@ -270,14 +270,14 @@ move_up
 up_skip_sound
 	mvx MENU_SELECTION PREV_MENU_SELECT
 	dec MENU_SELECTION
-	mvx #_delay MENU_BTN_COUNT
+	mvx #delay MENU_BTN_COUNT
 	jmp done
 
 move_down
 	ldx MENU_SELECTION
 
 	; wrap check
-	cpx #_max
+	cpx #max
 	beq done
 
 	; skip on how to screen
@@ -290,7 +290,7 @@ move_down
 down_skip_sound
 	mvx MENU_SELECTION PREV_MENU_SELECT
 	inc MENU_SELECTION
-	mvx #_delay MENU_BTN_COUNT
+	mvx #delay MENU_BTN_COUNT
 	jmp done
 
 delay_button
@@ -316,22 +316,22 @@ button_pressed
 
 selection_howtoplay
 	display_howtoplay()
-	mvx #_delay MENU_BTN_COUNT
+	mvx #delay MENU_BTN_COUNT
 	jmp done
 
 selection_newgame
 	new_game()
-	mvx #_delay MENU_BTN_COUNT
+	mvx #delay MENU_BTN_COUNT
 	jmp done
 
 selection_mainmenu
 	display_mainmenu()
-	mvx #_delay MENU_BTN_COUNT
+	mvx #delay MENU_BTN_COUNT
 	jmp done
 
 selection_credits
 	display_credits()
-	mvx #_delay MENU_BTN_COUNT
+	mvx #delay MENU_BTN_COUNT
 	jmp done
 
 .endp
