@@ -63,6 +63,23 @@ done
 .endp
 
 ;
+; clear win count
+;	removes the crowns from the item screen
+.proc clear_win_count
+
+	lda #0
+	ldx #$04
+	ldy #$04
+loop
+	sta ITEM_SCREEN, x+
+	sta ITEM_SCREEN, x+
+	dey
+	bne loop
+
+	rts
+.endp
+
+;
 ; display win count
 ;	displays a crown for each win up to 4
 .proc display_win_count

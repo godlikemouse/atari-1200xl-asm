@@ -354,6 +354,7 @@ draw
 	stx LIFE_GAIN
 	mvx #3 PLAYER_LIVES
 	mvx #4 ENEMY_SPEED_RES
+	clear_win_count()
 	level1()
 	rts
 .endp
