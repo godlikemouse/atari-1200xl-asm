@@ -1,5 +1,7 @@
 # Dungeoneer
 
+![Image](https://github.com/user-attachments/assets/31d34995-698f-4fd2-8ab1-72c6a6271c06)
+
 Dungeoneer is a simple game developed using Atari 6502 assembler [MADS](https://mads.atari8.info/).
 
 ![](https://user-images.githubusercontent.com/7003154/168381603-66ec68b3-56f0-4b62-8a17-526e7b7cdcb3.png)
